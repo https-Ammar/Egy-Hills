@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  text-transform: capitalize !important;
+}
+
+nav.navbar.navbar-expand-lg.bg-white.shadow-sm.py-3 {
+  border-radius: 70px;
+  z-index: 99;
+}
+
+.h-100.w-100.bg-header {
+  background-color: #0000005d;
+  color: white;
+}
+
+h2.elementor-heading-title.elementor-size-default {
+  font-size: 90px;
+  font-weight: 700;
+  line-height: 1.06em;
+  letter-spacing: -2px;
+}
+
+a.btn.btn-warning.fw-bold {
+  border-radius: 30px;
+  background: #e4ed64;
+  color: white;
+  border: navajowhite;
+}
+
+.border.rounded-5.p-4 h5 {
+  font-size: x-large;
+  line-height: 1.2307692308;
+  letter-spacing: 0;
+  padding: 0;
+  margin: 0;
+}
+.fs-1.mb-3 svg {
+  width: 25px;
+  height: 25px;
+}
+
+section.py-5.bg-white {
+  border-radius: 110px;
+  margin-top: -15vh;
+  z-index: 999999999;
+}
+
+.container.h-100.d-flex.flex-column.justify-content-center.align-items-start {
+  z-index: 99999999;
+}
+
+@media screen and (max-width: 991px) {
+  section.py-5.bg-white {
+    border-radius: 50px !important;
+  }
+
+  h2.elementor-heading-title.elementor-size-default {
+    font-size: xxx-large;
+  }
+}
