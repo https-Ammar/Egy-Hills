@@ -49,9 +49,17 @@ section.py-5.bg-white {
   z-index: 999999999;
 }
 
-.container.h-100.d-flex.flex-column.justify-content-center.align-items-start {
-  z-index: 99999999;
+/*  */
+
+.cover_img {
+  height: 40vh;
+  background-size: cover;
+  border-radius: 15px;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
+
+/*  */
 
 @media screen and (max-width: 991px) {
   section.py-5.bg-white {
