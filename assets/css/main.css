@@ -59,6 +59,47 @@ section.py-5.bg-white {
   background-position: center center;
 }
 
+.link_card {
+  color: red;
+  font-style: normal;
+
+  line-height: 20px;
+  text-transform: capitalize;
+  display: inline-block;
+  transition: all 0.4s;
+  padding: 14px 16px;
+  border: 1px solid red;
+  border-radius: 44px;
+  text-decoration: none;
+  width: 35%;
+  text-align: center;
+}
+h5.card-title.mt-3 {
+  color: var(--ztc-text-text-2);
+  font-family: var(--ztc-family-font1);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 20px;
+  text-transform: capitalize;
+  display: inline-block;
+  transition: all 0.4s;
+}
+
+/*  */
+
+/*  */
+.d-flex.align-items-center.gap-3 p {
+  margin: 0;
+}
+
+span.icon_span {
+  width: 75px;
+  height: 75px;
+  background: red;
+  border-radius: 50%;
+}
+
 /*  */
 
 @media screen and (max-width: 991px) {
