@@ -1,24 +1,1608 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modern Footer Example</title>
-    <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>TerraSpace - Premium Real Estate Solutions</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/main.css">
 
 </head>
+<style>
+    .icon {
+        font-size: 2rem;
+    }
+
+    .btn-dark {
+        padding: 0.75rem 1.5rem;
+    }
+</style>
+<style>
+    .stats-number {
+        font-size: 48px;
+        font-weight: bold;
+    }
+
+    .border-end-custom {
+        border-right: 1px solid #dee2e6;
+    }
+
+    .info-box {
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+
+    .info-box p {
+        margin-bottom: 0.5rem;
+        color: #555;
+    }
+
+    .info-box .stats-number {
+        color: #000;
+    }
+
+    .property-images img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+
+    /*  */
+    .service-card {
+        transition: 0.3s;
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .icon-box {
+        background-color: #f2f2eb;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .icon-box img {
+        width: 30px;
+    }
+
+    .arrow-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: #1c1f23;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .section-bg {
+        background-color: #f8f8f2;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .faq-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    .faq-description {
+        max-width: 400px;
+    }
+
+    .faq-container {
+        padding: 60px 0;
+    }
+
+    .btn-dark {
+        background-color: #1f2a37;
+        border: none;
+    }
+</style>
+<style>
+    /* Base Styles */
+    :root {
+        --primary-color: #5A89B0;
+        --primary-dark: #476d8f;
+        --primary-light: #7aa0c1;
+        --secondary-color: #2D3748;
+        --accent-color: #E2E8F0;
+        --text-dark: #1A202C;
+        --text-light: #F7FAFC;
+        --success-color: #48BB78;
+        --warning-color: #F6AD55;
+        --error-color: #F56565;
+        --neutral-100: #F7FAFC;
+        --neutral-200: #EDF2F7;
+        --neutral-300: #E2E8F0;
+        --neutral-400: #CBD5E0;
+        --neutral-500: #A0AEC0;
+        --neutral-600: #718096;
+        --neutral-700: #4A5568;
+        --neutral-800: #2D3748;
+        --neutral-900: #1A202C;
+
+        --spacing-xs: 4px;
+        --spacing-sm: 8px;
+        --spacing-md: 16px;
+        --spacing-lg: 24px;
+        --spacing-xl: 32px;
+        --spacing-xxl: 48px;
+        --spacing-xxxl: 64px;
+
+        --border-radius-sm: 4px;
+        --border-radius-md: 8px;
+        --border-radius-lg: 16px;
+
+        --transition-fast: 150ms ease;
+        --transition-normal: 300ms ease;
+        --transition-slow: 500ms ease;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        color: var(--text-dark);
+        line-height: 1.5;
+        overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    h3 {
+        font-size: 2rem;
+    }
+
+    p {
+        line-height: 1.6;
+    }
+
+    a {
+        color: var(--primary-color);
+        transition: color var(--transition-fast);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--primary-dark);
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    .btn {
+        padding: var(--spacing-sm) var(--spacing-lg);
+        border-radius: var(--border-radius-md);
+        font-weight: 500;
+        transition: all var(--transition-normal);
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .btn-primary:hover {
+        background-color: var(--primary-dark);
+        border-color: var(--primary-dark);
+    }
+
+    .btn-outline {
+        background-color: transparent;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+    }
+
+    .btn-outline:hover {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+    }
+
+    .btn-dark {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+        color: var(--text-light);
+    }
+
+    .btn-dark:hover {
+        background-color: var(--neutral-700);
+        border-color: var(--neutral-700);
+    }
+
+    .section-padding {
+        padding: var(--spacing-xxl) 0;
+    }
+
+    .section-title {
+        margin-bottom: var(--spacing-xl);
+        position: relative;
+    }
+
+    .section-title:after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 80px;
+        height: 4px;
+        background-color: var(--primary-color);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn var(--transition-normal) forwards;
+    }
+
+    /* Components */
+    /* Header Styles */
+    .navbar {
+        padding: var(--spacing-md) 0;
+        transition: all var(--transition-normal);
+    }
+
+    .navbar-scrolled {
+        background-color: var(--text-light);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: var(--spacing-sm) 0;
+    }
+
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--text-dark);
+    }
+
+    .navbar-brand img {
+        height: 32px;
+        margin-right: var(--spacing-sm);
+    }
+
+    .nav-link {
+        font-weight: 500;
+        color: var(--text-dark);
+        margin: 0 var(--spacing-md);
+        position: relative;
+    }
+
+    .nav-link:after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--primary-color);
+        transition: width var(--transition-normal);
+    }
+
+    .nav-link:hover:after,
+    .nav-link.active:after {
+        width: 100%;
+    }
+
+    .navbar-cta {
+        background-color: var(--secondary-color);
+        color: var(--text-light);
+        padding: var(--spacing-sm) var(--spacing-lg);
+        border-radius: var(--border-radius-md);
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        transition: all var(--transition-normal);
+    }
+
+    .navbar-cta:hover {
+        background-color: var(--neutral-700);
+        color: var(--text-light);
+        transform: translateY(-2px);
+    }
+
+    .navbar-cta svg {
+        margin-left: var(--spacing-sm);
+    }
+
+    /* Hero Section */
+    .hero {
+        position: relative;
+        height: 100vh;
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        background-color: var(--primary-color);
+    }
+
+    .hero-bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.8);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 650px;
+        animation: fadeIn var(--transition-slow) forwards;
+    }
+
+    .hero-title {
+        font-size: 4rem;
+        font-weight: 700;
+        color: var(--text-light);
+        margin-bottom: var(--spacing-md);
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        color: var(--text-light);
+        margin-bottom: var(--spacing-xl);
+        max-width: 500px;
+    }
+
+    .hero-cta {
+        display: flex;
+        gap: var(--spacing-md);
+    }
+
+    .hero-cta .btn {
+        display: inline-flex;
+        align-items: center;
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    .hero-cta .btn svg {
+        margin-left: var(--spacing-sm);
+    }
+
+    .hero-cta .btn-light {
+        background-color: var(--text-light);
+        color: var(--text-dark);
+    }
+
+    .hero-cta .btn-light:hover {
+        background-color: var(--neutral-200);
+    }
+
+    .hero-cta .btn-outline-light {
+        border-color: var(--text-light);
+        color: var(--text-light);
+    }
+
+    .hero-cta .btn-outline-light:hover {
+        background-color: var(--text-light);
+        color: var(--primary-color);
+    }
+
+    .hero-stats {
+        position: absolute;
+        bottom: var(--spacing-xl);
+        right: var(--spacing-xl);
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius-md);
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-stats-avatars {
+        display: flex;
+        margin-right: var(--spacing-md);
+    }
+
+    .hero-stats-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid var(--text-light);
+        overflow: hidden;
+        margin-left: -10px;
+    }
+
+    .hero-stats-avatar:first-child {
+        margin-left: 0;
+    }
+
+    .hero-stats-text {
+        font-weight: 600;
+    }
+
+    .hero-stats-rating {
+        display: flex;
+        margin-top: var(--spacing-xs);
+    }
+
+    /* Featured Properties */
+    .property-card {
+        overflow: hidden;
+        transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        margin-bottom: var(--spacing-xl);
+        height: 100%;
+    }
+
+    .property-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .property-card-img {
+        height: 240px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .property-card-content {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .property-card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .property-card-location {
+        color: var(--neutral-600);
+        margin-bottom: var(--spacing-md);
+        display: flex;
+        align-items: center;
+    }
+
+    .property-card-location svg {
+        margin-right: var(--spacing-xs);
+    }
+
+    .property-card-features {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--spacing-md) 0;
+        border-top: 1px solid var(--neutral-200);
+        margin-top: var(--spacing-md);
+    }
+
+    .property-card-feature {
+        display: flex;
+        align-items: center;
+    }
+
+    .property-card-feature svg {
+        margin-right: var(--spacing-xs);
+        color: var(--primary-color);
+    }
+
+    .property-card-price {
+        font-weight: 700;
+        color: var(--primary-color);
+        font-size: 1.25rem;
+        margin-top: var(--spacing-md);
+    }
+
+    /* Services Section */
+
+    /* Contact Section */
+    .contact-form {
+        background-color: var(--neutral-100);
+        padding: var(--spacing-xl);
+        border-radius: var(--border-radius-md);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-control {
+        padding: var(--spacing-md);
+        border: 1px solid var(--neutral-300);
+        border-radius: var(--border-radius-md);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(90, 137, 176, 0.2);
+    }
+
+    .contact-info {
+        margin-top: var(--spacing-xl);
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .contact-item-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--primary-light);
+        color: var(--text-light);
+        border-radius: 50%;
+        margin-right: var(--spacing-md);
+        flex-shrink: 0;
+    }
+
+    .contact-item-content h4 {
+        font-size: 1.25rem;
+        margin-bottom: var(--spacing-xs);
+    }
+
+
+    /* Responsive Styles */
+    @media (max-width: 991.98px) {
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+        }
+
+        .hero {
+            height: auto;
+            padding: 120px 0 var(--spacing-xxxl);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+        }
+
+        .navbar-collapse {
+            background-color: var(--text-light);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: var(--spacing-md);
+        }
+
+        .hero-stats {
+            position: relative;
+            bottom: auto;
+            right: auto;
+            margin-top: var(--spacing-xl);
+            display: inline-flex;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .section-padding {
+            padding: var(--spacing-xl) 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+        }
+
+        .hero-cta {
+            flex-direction: column;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .footer-bottom-links {
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        h1 {
+            font-size: 2.25rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+        }
+
+        .hero-title {
+            font-size: 2.25rem;
+        }
+
+        .property-card-features {
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+    }
+
+    .cover_img_product.mt-5.rounded-3 img {
+        margin-top: -10vh;
+        width: 100% !important;
+    }
+
+    .cover_img_product.mt-5.rounded-3 {
+        height: max-content !important;
+        background: #8bc6f6 !important;
+    }
+</style>
 
 <body>
 
-    <!-- Footer Section -->
+
+    <main class="container">
+        <nav class="navbar navbar-expand-lg mb-3 mt-3">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-bar-chart-3">
+                        <path d="M3 3v18h18" />
+                        <path d="M18 17V9" />
+                        <path d="M13 17V5" />
+                        <path d="M8 17v-3" />
+                    </svg>
+                    TerraSpace
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Property
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Residential</a></li>
+                                <li><a class="dropdown-item" href="#">Commercial</a></li>
+                                <li><a class="dropdown-item" href="#">Luxury</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Property Search</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Blogs</a>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="navbar-cta">
+                        Let's Talk
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-arrow-up-right">
+                            <path d="M7 7h10v10" />
+                            <path d="M7 17 17 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </nav>
 
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <section>
+            <div class="hero rounded-5">
+                <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1920"
+                    alt="Modern Apartment Building" class="hero-bg">
+                <div class="container">
+                    <div class="row" style="margin-left: 10%;">
+                        <div class="col-lg-8">
+                            <div class="hero-content">
+                                <h1 class="hero-title">Designing Your Next Chapter.</h1>
+                                <p class="hero-subtitle">Where Dreams Become Apartments: Transforming Visions into
+                                    Vibrant
+                                    Living Spaces.</p>
+                                <div class="hero-cta">
+                                    <a href="#featured-properties" class="btn btn-light">
+                                        Explore Projects
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-arrow-right">
+                                            <path d="M5 12h14" />
+                                            <path d="m12 5 7 7-7 7" />
+                                        </svg>
+                                    </a>
+                                    <a href="#services" class="btn btn-outline-light">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play">
+                                            <polygon points="5 3 19 12 5 21 5 3" />
+                                        </svg>
+                                        Our Process
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stats-avatars">
+                        <div class="hero-stats-avatar">
+                            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100"
+                                alt="Client">
+                        </div>
+                        <div class="hero-stats-avatar">
+                            <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=100"
+                                alt="Client">
+                        </div>
+                        <div class="hero-stats-avatar">
+                            <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=100"
+                                alt="Client">
+                        </div>
+                        <div class="hero-stats-avatar">
+                            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100"
+                                alt="Client">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="hero-stats-text">50k+ Happy Clients</div>
+                        <div class="hero-stats-rating">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="#FFD700" stroke="#FFD700" stroke-width="1" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-star">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="#FFD700" stroke="#FFD700" stroke-width="1" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-star">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="#FFD700" stroke="#FFD700" stroke-width="1" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-star">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="#FFD700" stroke="#FFD700" stroke-width="1" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-star">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="#FFD700" stroke="#FFD700" stroke-width="1" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-star-half">
+                                <path d="M12 17.8 5.8 21 7 14.1 2 9.3l7-1L12 2" />
+                            </svg>
+                            <span style="margin-left: 5px; font-weight: 600;">4.5/5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+
+
+
+    <!-- Header -->
+    <!-- About 1 - Bootstrap Brain Component -->
+    <section class="py-3 py-md-5">
+        <div class="container">
+            <div class="col-md-12">
+                <h2 class="section-title">Featured Properties</h2>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <p>Explore our handpicked selection of premium properties designed to elevate your living
+                        experience.</p>
+                </div>
+
+            </div>
+            <div class="row gy-3 gy-md-4 gy-lg-0 align-items-lg-center">
+                <div class="col-12 col-lg-6 col-xl-5">
+                    <img class="img-fluid rounded" loading="lazy" src="./assets/img/about-img-1 copy.webp"
+                        alt="About 1">
+                </div>
+                <div class="col-12 col-lg-6 col-xl-7">
+                    <div class="row justify-content-xl-center">
+                        <div class="col-12 col-xl-11">
+                            <h2 class="mb-3">Who Are We?</h2>
+                            <p class="lead fs-4 text-secondary mb-3">We help people to build incredible brands and
+                                superior products. Our perspective is to furnish outstanding captivating services.</p>
+                            <p class="mb-5">We are a fast-growing company, but we have never lost sight of our core
+                                values. We believe in collaboration, innovation, and customer satisfaction. We are
+                                always looking for new ways to improve our products and services.</p>
+                            <div class="row gy-4 gy-md-0 gx-xxl-5X">
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex">
+                                        <div class="me-4 text-primary">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h2 class="h4 mb-3">Versatile Brand</h2>
+                                            <p class="text-secondary mb-0">We are crafting a digital method that
+                                                subsists life across all mediums.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex">
+                                        <div class="me-4 text-primary">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h2 class="h4 mb-3">Digital Agency</h2>
+                                            <p class="text-secondary mb-0">We believe in innovation by merging primary
+                                                with elaborate ideas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+
+
+    <!-- Featured Properties -->
+    <div class="section-padding">
+        <div class="container">
+
+
+            <!--  -->
+
+            <!--  -->
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="section-title">Featured Properties</h2>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <p>Explore our handpicked selection of premium properties designed to elevate your living
+                        experience.</p>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="property-card">
+
+                        <div class="cover_card"
+                            style="background-image: url(https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800);">
+
+                        </div>
+
+
+                        <div class="property-card-content">
+                            <p class="property-card-location">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-map-pin">
+                                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Downtown, New York
+                            </p>
+
+                            <div class="d-flex align-items-center justify-content-between">
+
+                                <h3 class="property-card-title">Skyline Residences</h3>
+                                <h3 class="property-card-title">$2,500,000</h3>
+
+                            </div>
+
+
+
+                            <div class="property-card-features">
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-bed">
+                                        <path d="M2 9V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+                                        <path d="M2 11v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9" />
+                                        <path d="M2 14h20" />
+                                        <path
+                                            d="M4 9h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2Z" />
+                                    </svg>
+                                    3 Beds
+                                </div>
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-bath">
+                                        <path
+                                            d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
+                                        <line x1="10" x2="8" y1="5" y2="7" />
+                                        <line x1="2" x2="22" y1="12" y2="12" />
+                                        <line x1="7" x2="7" y1="19" y2="21" />
+                                        <line x1="17" x2="17" y1="19" y2="21" />
+                                    </svg>
+                                    2 Baths
+                                </div>
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-square">
+                                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                                    </svg>
+                                    1,200 sq ft
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!--  -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="property-card">
+
+                        <div class="cover_card"
+                            style="background-image: url(https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800);">
+
+                        </div>
+
+
+                        <div class="property-card-content">
+                            <p class="property-card-location">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-map-pin">
+                                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Downtown, New York
+                            </p>
+
+                            <div class="d-flex align-items-center justify-content-between">
+
+                                <h3 class="property-card-title">Skyline Residences</h3>
+                                <h3 class="property-card-title">$2,500,000</h3>
+
+                            </div>
+
+
+
+                            <div class="property-card-features">
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-bed">
+                                        <path d="M2 9V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+                                        <path d="M2 11v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9" />
+                                        <path d="M2 14h20" />
+                                        <path
+                                            d="M4 9h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2Z" />
+                                    </svg>
+                                    3 Beds
+                                </div>
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-bath">
+                                        <path
+                                            d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
+                                        <line x1="10" x2="8" y1="5" y2="7" />
+                                        <line x1="2" x2="22" y1="12" y2="12" />
+                                        <line x1="7" x2="7" y1="19" y2="21" />
+                                        <line x1="17" x2="17" y1="19" y2="21" />
+                                    </svg>
+                                    2 Baths
+                                </div>
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-square">
+                                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                                    </svg>
+                                    1,200 sq ft
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="property-card">
+
+                        <div class="cover_card"
+                            style="background-image: url(https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800);">
+
+                        </div>
+
+
+                        <div class="property-card-content">
+                            <p class="property-card-location">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-map-pin">
+                                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Downtown, New York
+                            </p>
+
+                            <div class="d-flex align-items-center justify-content-between">
+
+                                <h3 class="property-card-title">Skyline Residences</h3>
+                                <h3 class="property-card-title">$2,500,000</h3>
+
+                            </div>
+
+
+
+                            <div class="property-card-features">
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-bed">
+                                        <path d="M2 9V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+                                        <path d="M2 11v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9" />
+                                        <path d="M2 14h20" />
+                                        <path
+                                            d="M4 9h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2Z" />
+                                    </svg>
+                                    3 Beds
+                                </div>
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-bath">
+                                        <path
+                                            d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
+                                        <line x1="10" x2="8" y1="5" y2="7" />
+                                        <line x1="2" x2="22" y1="12" y2="12" />
+                                        <line x1="7" x2="7" y1="19" y2="21" />
+                                        <line x1="17" x2="17" y1="19" y2="21" />
+                                    </svg>
+                                    2 Baths
+                                </div>
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-square">
+                                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                                    </svg>
+                                    1,200 sq ft
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+
+
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="property-card">
+
+                        <div class="cover_card"
+                            style="background-image: url(https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800);">
+
+                        </div>
+
+
+                        <div class="property-card-content">
+                            <p class="property-card-location">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-map-pin">
+                                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Downtown, New York
+                            </p>
+
+                            <div class="d-flex align-items-center justify-content-between">
+
+                                <h3 class="property-card-title">Skyline Residences</h3>
+                                <h3 class="property-card-title">$2,500,000</h3>
+
+                            </div>
+
+
+
+                            <div class="property-card-features">
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-bed">
+                                        <path d="M2 9V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+                                        <path d="M2 11v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9" />
+                                        <path d="M2 14h20" />
+                                        <path
+                                            d="M4 9h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2Z" />
+                                    </svg>
+                                    3 Beds
+                                </div>
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-bath">
+                                        <path
+                                            d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
+                                        <line x1="10" x2="8" y1="5" y2="7" />
+                                        <line x1="2" x2="22" y1="12" y2="12" />
+                                        <line x1="7" x2="7" y1="19" y2="21" />
+                                        <line x1="17" x2="17" y1="19" y2="21" />
+                                    </svg>
+                                    2 Baths
+                                </div>
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-square">
+                                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                                    </svg>
+                                    1,200 sq ft
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+
+
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="property-card">
+
+                        <div class="cover_card"
+                            style="background-image: url(https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800);">
+
+                        </div>
+
+
+                        <div class="property-card-content">
+                            <p class="property-card-location">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-map-pin">
+                                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Downtown, New York
+                            </p>
+
+                            <div class="d-flex align-items-center justify-content-between">
+
+                                <h3 class="property-card-title">Skyline Residences</h3>
+                                <h3 class="property-card-title">$2,500,000</h3>
+
+                            </div>
+
+
+
+                            <div class="property-card-features">
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-bed">
+                                        <path d="M2 9V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+                                        <path d="M2 11v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9" />
+                                        <path d="M2 14h20" />
+                                        <path
+                                            d="M4 9h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2Z" />
+                                    </svg>
+                                    3 Beds
+                                </div>
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-bath">
+                                        <path
+                                            d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
+                                        <line x1="10" x2="8" y1="5" y2="7" />
+                                        <line x1="2" x2="22" y1="12" y2="12" />
+                                        <line x1="7" x2="7" y1="19" y2="21" />
+                                        <line x1="17" x2="17" y1="19" y2="21" />
+                                    </svg>
+                                    2 Baths
+                                </div>
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-square">
+                                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                                    </svg>
+                                    1,200 sq ft
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="property-card">
+
+                        <div class="cover_card"
+                            style="background-image: url(https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800);">
+
+                        </div>
+
+
+                        <div class="property-card-content">
+                            <p class="property-card-location">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-map-pin">
+                                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Downtown, New York
+                            </p>
+
+                            <div class="d-flex align-items-center justify-content-between">
+
+                                <h3 class="property-card-title">Skyline Residences</h3>
+                                <h3 class="property-card-title">$2,500,000</h3>
+
+                            </div>
+
+
+
+                            <div class="property-card-features">
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-bed">
+                                        <path d="M2 9V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+                                        <path d="M2 11v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9" />
+                                        <path d="M2 14h20" />
+                                        <path
+                                            d="M4 9h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2Z" />
+                                    </svg>
+                                    3 Beds
+                                </div>
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-bath">
+                                        <path
+                                            d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
+                                        <line x1="10" x2="8" y1="5" y2="7" />
+                                        <line x1="2" x2="22" y1="12" y2="12" />
+                                        <line x1="7" x2="7" y1="19" y2="21" />
+                                        <line x1="17" x2="17" y1="19" y2="21" />
+                                    </svg>
+                                    2 Baths
+                                </div>
+                                <div class="property-card-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-square">
+                                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                                    </svg>
+                                    1,200 sq ft
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+
+
+
+            </div>
+            <!-- <div class="row">
+                <div class="col-12 text-center mt-4">
+                    <a href="#" class="btn btn-primary">View All Properties</a>
+                </div>
+            </div> -->
+
+
+
+
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="section-title">Featured Properties</h2>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <p>Explore our handpicked selection of premium properties designed to elevate your living
+                            experience.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+
+                    <div class="cover_img_product mt-5 rounded-3"
+                        style="background: url('') center/cover no-repeat; height: 50vh;">
+                        <img src="./assets/img/wiktor-karkocha-resize.png" alt="">
+                    </div>
+
+
+                </div>
+
+                <div class="row text-center pt-5">
+                    <div class="col-md-3 info-box border-end-custom">
+                        <p>With over 15 years of experience,<br> we’ve helped hundreds of clients find the perfect
+                            property</p>
+                        <div class="stats-number">24+</div>
+                    </div>
+                    <div class="col-md-3 info-box border-end-custom">
+                        <p>Available Properties — from cozy starter homes to luxury estates. <br>We have Many properties
+                            For You
+                        </p>
+                        <div class="stats-number">250+</div>
+                    </div>
+                    <div class="col-md-3 info-box border-end-custom">
+                        <p>We have many clients who are very satisfied with the property that we offer to them.</p>
+                        <div class="stats-number">99%</div>
+                    </div>
+                    <div class="col-md-3 info-box">
+                        <p>We have many agents who are known for their exceptional service, market knowledge</p>
+                        <div class="stats-number">150+</div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Services Section -->
+
+
+
+
+    <section class="py-3 py-md-5">
+        <div class="container">
+            <div class="col-md-12">
+                <h2 class="section-title">Featured Properties</h2>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <p>Explore our handpicked selection of premium properties designed to elevate your living
+                        experience.</p>
+                </div>
+
+            </div>
+            <div class="row gy-3 gy-md-4 gy-lg-0 align-items-lg-center">
+
+                <div class="col-12 col-lg-6 col-xl-7">
+                    <div class="row justify-content-xl-center_">
+                        <div class="col-12 col-xl-11">
+
+
+                            <div class="mb-5">
+                                <div class="d-flex align-items-center mb-2">
+                                    <h5 class="me-2 fw-bold">Who We Are ?</h5>
+                                    <span class="icon"><i class="bi bi-globe2"></i></span>
+                                </div>
+                                <p class="text-muted">we are a dynamic and client-focused real estate and property
+                                    company dedicated
+                                    to connecting people with the spaces they love whether for living, working, or
+                                    investing.</p>
+                                <hr>
+                            </div>
+
+
+
+                            <div class="mb-5">
+                                <div class="d-flex align-items-center mb-2">
+                                    <h5 class="me-2 fw-bold">Who We Are ?</h5>
+                                    <span class="icon"><i class="bi bi-globe2"></i></span>
+                                </div>
+                                <p class="text-muted">we are a dynamic and client-focused real estate and property
+                                    company dedicated
+                                    to connecting people with the spaces they love whether for living, working, or
+                                    investing.</p>
+                                <hr>
+                            </div>
+
+                            <div class="mb-5">
+                                <div class="d-flex align-items-center mb-2">
+                                    <h5 class="me-2 fw-bold">Who We Are ?</h5>
+                                    <span class="icon"><i class="bi bi-globe2"></i></span>
+                                </div>
+                                <p class="text-muted">we are a dynamic and client-focused real estate and property
+                                    company dedicated
+                                    to connecting people with the spaces they love whether for living, working, or
+                                    investing.</p>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-lg-6 col-xl-5">
+                    <img class="img-fluid rounded" loading="lazy" src="./assets/img/about-img-1 copy.webp"
+                        alt="About 1">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!--  -->
+    <div class="container">
+
+
+
+
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card p-4 service-card h-100">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios/50/home--v1.png" alt="Buying">
+                    </div>
+                    <h5 class="fw-bold">Buying Services</h5>
+                    <p class="text-muted">We help clients find and purchase their ideal home or investment property.</p>
+                    <div class="arrow-btn">
+                        <span>↗</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card p-4 service-card h-100">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios/50/real-estate.png" alt="Selling">
+                    </div>
+                    <h5 class="fw-bold">Selling Services</h5>
+                    <p class="text-muted">Our sales service includes property valuation, strategic marketing (both
+                        online and offline).</p>
+                    <div class="arrow-btn">
+                        <span>↗</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card p-4 service-card h-100">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios/50/key--v1.png" alt="Rental">
+                    </div>
+                    <h5 class="fw-bold">Rental &amp; Leasing</h5>
+                    <p class="text-muted">Manage all aspects of the rental process. This includes property listings etc.
+                    </p>
+                    <div class="arrow-btn">
+                        <span>↗</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card p-4 service-card h-100">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios/50/commercial--v1.png" alt="Management">
+                    </div>
+                    <h5 class="fw-bold">Property Management</h5>
+                    <p class="text-muted">We offer full-service property management for landlords and absentee owners.
+                    </p>
+                    <div class="arrow-btn">
+                        <span>↗</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Section -->
+
+
+
+    <section id="footer"></section>
+
+
+
+    <style>
+        .cover_card {
+            height: 45vh;
+            background-size: cover;
+            border-radius: 10px;
+        }
+    </style>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/script/app.js"></script>
+    <script src="./assets/script/footer.js"></script>
+
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
