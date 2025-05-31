@@ -974,3 +974,9 @@ img {
   height: max-content !important;
   background: #8bc6f6 !important;
 }
+
+.cover_card {
+  height: 45vh;
+  background-size: cover;
+  border-radius: 10px;
+}
