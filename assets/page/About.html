@@ -1,16 +1,1244 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Estate Website with Bootstrap</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3B5998;
+            --secondary-color: #4B5563;
+            --accent-color: #FFA500;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --error-color: #EF4444;
+            --light-color: #F9FAFB;
+            --dark-color: #1F2937;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --font-family: 'Poppins', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: var(--font-family);
+            color: var(--gray-700);
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            transition: var(--transition);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar.scrolled {
+            background-color: #fff;
+            padding: 10px 0;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: var(--gray-800);
+        }
+
+        .navbar-brand .logo-circle {
+            width: 36px;
+            height: 36px;
+            background-color: var(--gray-900);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .logo-circle-footer {
+            width: 32px;
+            height: 32px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .nav-link {
+            color: var(--gray-700);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--gray-100);
+            color: var(--primary-color);
+        }
+
+        .btn-link {
+            color: var(--gray-700);
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-link:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-dark {
+            background-color: var(--dark-color);
+            border: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-dark:hover {
+            background-color: var(--gray-800);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            min-height: 700px;
+            background-color: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+            padding-top: 90px;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background-image: url('https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg');
+            background-size: cover;
+            background-position: center;
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: 1;
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--gray-900);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            background-color: #314b81;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-dark {
+            border: 2px solid var(--gray-800);
+            color: var(--gray-800);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-outline-dark:hover {
+            background-color: var(--gray-800);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Property Showcase */
+        .section-title {
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .view-all:hover {
+            color: #314b81;
+            text-decoration: underline;
+        }
+
+        .property-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            background-color: white;
+            height: 100%;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .property-image {
+            height: 240px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .property-card:hover .property-image img {
+            transform: scale(1.05);
+        }
+
+        .property-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .property-wishlist {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: white;
+            color: var(--gray-600);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .property-wishlist:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .property-details {
+            padding: 1.5rem;
+        }
+
+        .property-details h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--gray-900);
+        }
+
+        .property-location {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .property-features {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .property-features span {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .property-price {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 0;
+        }
+
+        /* Property Search Section */
+        .search-form {
+            border-radius: 16px;
+        }
+
+        .form-select,
+        .form-control {
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .section-subtitle {
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+        }
+
+        /* About Section */
+        .about-section img {
+            width: 100%;
+            height: auto;
+        }
+
+        .stat-box {
+            background-color: white;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .stat-number {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 0;
+        }
+
+        .stat-text {
+            color: var(--gray-600);
+            margin-bottom: 0;
+        }
+
+        /* Testimonials Section */
+        .testimonial-card {
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .testimonial-stars {
+            color: #FFD700;
+        }
+
+        .testimonial-text {
+            color: var(--gray-700);
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .avatar-placeholder {
+            width: 48px;
+            height: 48px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        .form-floating label {
+            color: var(--gray-500);
+        }
+
+        .contact-info {
+            height: 100%;
+        }
+
+        .contact-item .icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(59, 89, 152, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(59, 89, 152, 0.1);
+            color: var(--primary-color);
+            margin-right: 10px;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+        }
+
+        .footer-about {
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        .footer-title {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-icon {
+            color: var(--gray-400);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-form .input-group {
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .footer-form .form-control {
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px 0 0 50px;
+        }
+
+        .footer-form .btn {
+            border-radius: 0 50px 50px 0;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .footer-bottom-links {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-bottom-links li {
+            margin-left: 1.5rem;
+        }
+
+        .footer-bottom-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-bottom-links a:hover {
+            color: white;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 991.98px) {
+            .hero-section::before {
+                width: 100%;
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                opacity: 0.2;
+            }
+
+            .hero-text {
+                background-color: rgba(255, 255, 255, 0.9);
+                padding: 2rem;
+                border-radius: 16px;
+                backdrop-filter: blur(10px);
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .navbar-brand .logo-circle {
+                width: 30px;
+                height: 30px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+                margin-top: 1rem;
+            }
+
+            .footer-bottom-links li {
+                margin: 0 0.75rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fadeInUp {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Adding animation delay classes for staggered animations */
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-5 {
+            animation-delay: 0.5s;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-400);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-500);
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <div class="logo-circle me-2"></div>
+                <span>urbanice</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#properties">Properties</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Buy</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Residential</a></li>
+                            <li><a class="dropdown-item" href="#">Commercial</a></li>
+                            <li><a class="dropdown-item" href="#">Investment</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Sell</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">List Property</a></li>
+                            <li><a class="dropdown-item" href="#">Market Analysis</a></li>
+                            <li><a class="dropdown-item" href="#">Seller Guide</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Rent</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Apartments</a></li>
+                            <li><a class="dropdown-item" href="#">Houses</a></li>
+                            <li><a class="dropdown-item" href="#">Offices</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-link me-2">Sign In</a>
+                    <a href="#" class="btn btn-dark rounded-pill px-4">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <div class="hero-text">
+                        <h1 class="hero-title">Our Legacy of <br>Building Dream</h1>
+                        <p class="hero-subtitle">Urbanice is a dream builder, delivering quality homes that blend
+                            beauty, comfort, and sustainability for your future.</p>
+                        <div class="mt-4">
+                            <a href="#properties" class="btn btn-primary me-3 rounded-pill px-4">Explore Properties</a>
+                            <a href="#contact" class="btn btn-outline-dark rounded-pill px-4">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Property Showcase -->
+    <section class="property-showcase py-5" id="properties">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="section-title">Featured Properties</h2>
+                        <a href="#" class="view-all">View All <i class="fas fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg"
+                                alt="Modern apartment building" class="img-fluid">
+                            <div class="property-tag">For Sale</div>
+                            <div class="property-wishlist"><i class="far fa-heart"></i></div>
+                        </div>
+                        <div class="property-details">
+                            <h3>Modern Apartment</h3>
+                            <p class="property-location"><i class="fas fa-map-marker-alt me-2"></i>Downtown Area</p>
+                            <div class="property-features">
+                                <span><i class="fas fa-bed me-1"></i> 3 Beds</span>
+                                <span><i class="fas fa-bath me-1"></i> 2 Baths</span>
+                                <span><i class="fas fa-vector-square me-1"></i> 1,200 sq ft</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="property-price">$450,000</p>
+                                <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg"
+                                alt="Wooden house" class="img-fluid">
+                            <div class="property-tag">For Rent</div>
+                            <div class="property-wishlist"><i class="far fa-heart"></i></div>
+                        </div>
+                        <div class="property-details">
+                            <h3>Wooden Villa</h3>
+                            <p class="property-location"><i class="fas fa-map-marker-alt me-2"></i>Suburban Area</p>
+                            <div class="property-features">
+                                <span><i class="fas fa-bed me-1"></i> 4 Beds</span>
+                                <span><i class="fas fa-bath me-1"></i> 3 Baths</span>
+                                <span><i class="fas fa-vector-square me-1"></i> 2,400 sq ft</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="property-price">$2,800/mo</p>
+                                <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg"
+                                alt="Modern house" class="img-fluid">
+                            <div class="property-tag">For Sale</div>
+                            <div class="property-wishlist"><i class="far fa-heart"></i></div>
+                        </div>
+                        <div class="property-details">
+                            <h3>Luxury Residence</h3>
+                            <p class="property-location"><i class="fas fa-map-marker-alt me-2"></i>Hillside Area</p>
+                            <div class="property-features">
+                                <span><i class="fas fa-bed me-1"></i> 5 Beds</span>
+                                <span><i class="fas fa-bath me-1"></i> 4.5 Baths</span>
+                                <span><i class="fas fa-vector-square me-1"></i> 3,800 sq ft</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="property-price">$1,250,000</p>
+                                <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Property Search Section -->
+    <section class="property-search py-5 bg-light">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <h2 class="section-title">Find Your Dream Property</h2>
+                    <p class="section-subtitle">Search through thousands of listings to find the perfect home for you
+                        and your family</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="search-form p-4 bg-white rounded-lg shadow">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <select class="form-select">
+                                        <option selected>Property Type</option>
+                                        <option>House</option>
+                                        <option>Apartment</option>
+                                        <option>Villa</option>
+                                        <option>Commercial</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select">
+                                        <option selected>Location</option>
+                                        <option>Downtown</option>
+                                        <option>Suburban</option>
+                                        <option>Countryside</option>
+                                        <option>Beachfront</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select">
+                                        <option selected>Price Range</option>
+                                        <option>$100k - $300k</option>
+                                        <option>$300k - $500k</option>
+                                        <option>$500k - $1M</option>
+                                        <option>$1M+</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-primary w-100 rounded-pill">Search</button>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="d-flex flex-wrap">
+                                        <div class="form-check me-3 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="feature1">
+                                            <label class="form-check-label" for="feature1">Swimming Pool</label>
+                                        </div>
+                                        <div class="form-check me-3 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="feature2">
+                                            <label class="form-check-label" for="feature2">Garden</label>
+                                        </div>
+                                        <div class="form-check me-3 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="feature3">
+                                            <label class="form-check-label" for="feature3">Garage</label>
+                                        </div>
+                                        <div class="form-check me-3 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="feature4">
+                                            <label class="form-check-label" for="feature4">Air Conditioning</label>
+                                        </div>
+                                        <div class="form-check me-3 mb-2">
+                                            <input class="form-check-input" type="checkbox" id="feature5">
+                                            <label class="form-check-label" for="feature5">Furnished</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section py-5" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg" alt="About Urbanice"
+                        class="img-fluid rounded-4 shadow">
+                </div>
+                <div class="col-lg-6 ps-lg-5">
+                    <h2 class="section-title mb-4">About Urbanice</h2>
+                    <p class="lead mb-4">We're not just in the business of selling properties; we're in the business of
+                        building dreams.</p>
+                    <p class="mb-4">Founded in 2015, Urbanice has grown to become one of the most trusted names in real
+                        estate. Our mission is to connect people with properties that match their lifestyle, needs, and
+                        aspirations.</p>
+                    <div class="row g-4 mt-2">
+                        <div class="col-6">
+                            <div class="stat-box p-3 rounded-3 shadow-sm">
+                                <h3 class="stat-number">1500+</h3>
+                                <p class="stat-text">Properties Sold</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-box p-3 rounded-3 shadow-sm">
+                                <h3 class="stat-number">98%</h3>
+                                <p class="stat-text">Client Satisfaction</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-box p-3 rounded-3 shadow-sm">
+                                <h3 class="stat-number">25+</h3>
+                                <p class="stat-text">Years Experience</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-box p-3 rounded-3 shadow-sm">
+                                <h3 class="stat-number">120+</h3>
+                                <p class="stat-text">Expert Agents</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title">What Our Clients Say</h2>
+                    <p class="section-subtitle">Hear from homeowners who found their perfect match with Urbanice</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="testimonial-card p-4 bg-white rounded-4 shadow-sm h-100">
+                        <div class="testimonial-stars mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text mb-4">"Working with Urbanice was a dream. They understood exactly
+                            what we were looking for and found us the perfect family home within our budget."</p>
+                        <div class="testimonial-author d-flex align-items-center">
+                            <div class="testimonial-avatar me-3">
+                                <div class="avatar-placeholder">SA</div>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Sarah Anderson</h5>
+                                <p class="mb-0 text-muted">Homeowner</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="testimonial-card p-4 bg-white rounded-4 shadow-sm h-100">
+                        <div class="testimonial-stars mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text mb-4">"The Urbanice team sold our property in just three weeks, for
+                            above asking price! Their market knowledge and staging advice was invaluable."</p>
+                        <div class="testimonial-author d-flex align-items-center">
+                            <div class="testimonial-avatar me-3">
+                                <div class="avatar-placeholder">JM</div>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">James Mitchell</h5>
+                                <p class="mb-0 text-muted">Property Seller</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card p-4 bg-white rounded-4 shadow-sm h-100">
+                        <div class="testimonial-stars mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="testimonial-text mb-4">"As first-time investors, we needed a lot of guidance. Urbanice
+                            was patient, educational, and helped us find a rental property with excellent returns."</p>
+                        <div class="testimonial-author d-flex align-items-center">
+                            <div class="testimonial-avatar me-3">
+                                <div class="avatar-placeholder">EL</div>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Emily & Luke</h5>
+                                <p class="mb-0 text-muted">Property Investors</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section py-5" id="contact">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <h2 class="section-title mb-4">Get in Touch</h2>
+                    <p class="mb-4">Have questions about a property or service? Our team is ready to assist you.</p>
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="nameInput" placeholder="Your Name">
+                                    <label for="nameInput">Your Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="emailInput" placeholder="Your Email">
+                                    <label for="emailInput">Your Email</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subjectInput" placeholder="Subject">
+                                    <label for="subjectInput">Subject</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="messageInput" placeholder="Your Message"
+                                        style="height: 150px"></textarea>
+                                    <label for="messageInput">Your Message</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary rounded-pill px-4 py-3">Send
+                                    Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-info h-100 p-4 bg-light rounded-4">
+                        <h3 class="mb-4">Contact Information</h3>
+                        <div class="contact-item d-flex mb-3">
+                            <div class="icon me-3">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="text">
+                                <h5 class="mb-1">Office Address</h5>
+                                <p class="mb-0">1234 Urban Street, Suite 500<br>New York, NY 10001</p>
+                            </div>
+                        </div>
+                        <div class="contact-item d-flex mb-3">
+                            <div class="icon me-3">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="text">
+                                <h5 class="mb-1">Phone Number</h5>
+                                <p class="mb-0">(123) 456-7890</p>
+                            </div>
+                        </div>
+                        <div class="contact-item d-flex mb-3">
+                            <div class="icon me-3">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="text">
+                                <h5 class="mb-1">Email Address</h5>
+                                <p class="mb-0">info@urbanice.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item d-flex mb-3">
+                            <div class="icon me-3">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="text">
+                                <h5 class="mb-1">Office Hours</h5>
+                                <p class="mb-0">Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="social-links mt-4">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-logo d-flex align-items-center mb-3">
+                        <div class="logo-circle-footer me-2"></div>
+                        <span class="h4 mb-0">urbanice</span>
+                    </div>
+                    <p class="footer-about">Urbanice is a premium real estate agency specializing in luxury properties,
+                        commercial real estate, and investment opportunities.</p>
+                    <div class="footer-social mt-3">
+                        <a href="#" class="social-icon me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#properties">Properties</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title">Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Property Sales</a></li>
+                        <li><a href="#">Property Rental</a></li>
+                        <li><a href="#">Property Management</a></li>
+                        <li><a href="#">Investment Consulting</a></li>
+                        <li><a href="#">Market Analysis</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title">Subscribe</h5>
+                    <p>Subscribe to our newsletter for the latest property updates and market insights.</p>
+                    <form class="footer-form mt-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                            <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 Urbanice. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <ul class="footer-bottom-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="app"></div>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/main.js"></script>
+    <script>
+        import './style.css'
+        import './styles.css'
+
+        // Navbar scroll behavior
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Property wishlist functionality
+        document.querySelectorAll('.property-wishlist').forEach(wishlist => {
+            wishlist.addEventListener('click', function () {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                }
+            });
+        });
+
+        // Add animation classes to elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.property-card, .stat-box, .testimonial-card');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        };
+
+        // Initialize animations
+        animateOnScroll();
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const target = document.querySelector(targetId);
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
