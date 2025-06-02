@@ -518,7 +518,8 @@ section.about-section.bg_color {
   nav.navbar.navbar-expand-lg.navbar-light.bg-light {
     position: static;
   }
-  body {
-    overflow-x: hidden;
+  body,
+  html {
+    overflow-x: hidden !important;
   }
 }
