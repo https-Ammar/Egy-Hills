@@ -492,3 +492,33 @@ span.text_titel.titel_logo::first-letter {
 section.about-section.bg_color {
   background: url(../img/BG-Pattern.svg);
 }
+
+@media screen and (max-width: 992px) {
+  .inner-column {
+    padding: 0 !important;
+  }
+
+  .d-flex.align-items-center.gap-3.pl-5 {
+    display: none !important;
+  }
+
+  span.text_titel.titel_logo {
+    font-size: large;
+  }
+
+  .img_slider {
+    height: 50vh;
+  }
+
+  .slider_main {
+    margin: auto;
+    height: auto;
+  }
+
+  nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+    position: static;
+  }
+  body {
+    overflow-x: hidden;
+  }
+}
