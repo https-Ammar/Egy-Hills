@@ -5,6 +5,7 @@
   text-decoration: none;
   box-sizing: border-box;
   text-transform: capitalize !important;
+  text-decoration: none !important;
 }
 
 /* main color #001144 */
