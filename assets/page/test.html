@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="../css/main.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    <style>
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        a.nav-link {
+            padding: 12px 13px 12px;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 1;
+            color: black;
+        }
+
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999999;
+            background: white !important;
+        }
+
+        a.navbar-brand {
+            margin-right: 8vh;
+        }
+
+        .d-flex.align-items-center.gap-3.pl-5 a {
+            color: black;
+        }
+
+        a.navbar-brand {
+            letter-spacing: 5px;
+        }
+
+        .slider_main {
+
+            margin: 35px;
+            overflow: hidden;
+            height: 90vh;
+
+
+        }
+
+        .img_slider {
+            height: 100vh;
+            background-size: cover !important;
+            background-repeat: no-repeat !important;
+            background-position: center center !important;
+            animation-name: kenburns-top;
+            animation-duration: 12000ms;
+            animation-delay: 1000ms;
+            animation-fill-mode: forwards;
+
+            -webkit-animation-name: kenburns-top;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* تعريف الحركة */
+        @keyframes kenburns-top {
+            0% {
+                transform: scale(1) translateY(0);
+                transform-origin: 50% 16%;
+            }
+
+            100% {
+                transform: scale(1.08) translateY(-15px);
+                transform-origin: top;
+            }
+        }
+
+        @-webkit-keyframes kenburns-top {
+            0% {
+                -webkit-transform: scale(1) translateY(0);
+                -webkit-transform-origin: 50% 16%;
+            }
+
+            100% {
+                -webkit-transform: scale(1.08) translateY(-15px);
+                -webkit-transform-origin: top;
+            }
+        }
+
+        .text_slider {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.47);
+        }
+    </style>
+    <style>
+        .feature-box {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .property-image img {
+            width: 100%;
+        }
+
+        .container.mt-5 {
+            background-image: url(../img/BG-Pattern.svg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .property-title {
+            font-weight: 700;
+        }
+
+        .property-number {
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+    <style>
+        .tab-btn {
+            border: none;
+            background: none;
+            font-weight: bold;
+            margin-right: 15px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-btn.active {
+            border-color: #000;
+        }
+
+        .room-list span {
+            font-weight: bold;
+        }
+
+        .room-list li {
+            list-style: none;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav></nav>
+
+
+    <header class="main_img_cover">
+
+
+        <style>
+            .box {
+                width: 200px;
+                height: 50%;
+
+                position: relative;
+            }
+
+            .box::before,
+            .box::after {
+                content: '';
+                position: absolute;
+                background: #B18E72;
+                transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+
+            .box::before {
+                height: 10px;
+                width: 0;
+                top: 0;
+                left: 0;
+                animation: drawTop 1s forwards;
+                animation-delay: 3s;
+            }
+
+            .box::after {
+                width: 10px;
+                height: 0;
+                top: 0;
+                right: 0;
+                animation: drawRight 1s forwards;
+                animation-delay: 4s;
+            }
+
+            .bottom,
+            .left {
+                position: absolute;
+                background: #B18E72;
+                transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+
+            /* 
+            .bottom {
+                height: 10px;
+                width: 0;
+                bottom: 0;
+                right: 0;
+                animation: drawBottom 1s forwards;
+                animation-delay: 5s;
+            }
+
+            .left {
+                width: 10px;
+                height: 0;
+                bottom: 0;
+                left: 0;
+                animation: drawLeft 1s forwards;
+                animation-delay: 6s;
+            } */
+
+            @keyframes drawTop {
+                to {
+                    width: 100%;
+                }
+            }
+
+            @keyframes drawRight {
+                to {
+                    height: 100%;
+                }
+            }
+
+            @keyframes drawBottom {
+                to {
+                    width: 100%;
+                }
+            }
+
+            @keyframes drawLeft {
+                to {
+                    height: 100%;
+                }
+            }
+
+            .text_titel {
+                font-size: 12vh;
+            }
+
+            .text-outside {
+                position: absolute;
+                right: 50px;
+                top: 50%;
+                transform: translateY(-50%);
+
+                color: #fff;
+
+
+                white-space: nowrap;
+                font-size: xx-large;
+                font-weight: bold;
+            }
+
+            .text_slider {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .mt-5.py-35 {
+                margin: 35px;
+            }
+
+            .titel_logo::first-letter,
+            span.text_titel.titel_logo::first-letter {
+                color: #B18E72 !important;
+                font-size: 24px;
+                font-weight: bold;
+            }
+        </style>
+
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <!-- Brand/logo -->
+                <a class="navbar-brand titel_logo" href="#">EGY-HILLS</a>
+
+                <div class="d-flex align-items-center gap-3 pl-5">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-twitter" viewBox="0 0 16 16">
+                            <path
+                                d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334q.002-.211-.006-.422A6.7 6.7 0 0 0 16 3.542a6.7 6.7 0 0 1-1.889.518 3.3 3.3 0 0 0 1.447-1.817 6.5 6.5 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.32 9.32 0 0 1-6.767-3.429 3.29 3.29 0 0 0 1.018 4.382A3.3 3.3 0 0 1 .64 6.575v.045a3.29 3.29 0 0 0 2.632 3.218 3.2 3.2 0 0 1-.865.115 3 3 0 0 1-.614-.057 3.28 3.28 0 0 0 3.067 2.277A6.6 6.6 0 0 1 .78 13.58a6 6 0 0 1-.78-.045A9.34 9.34 0 0 0 5.026 15" />
+                        </svg>
+                    </a>
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-instagram" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+                        </svg>
+                    </a>
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-facebook" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+                        </svg>
+                    </a>
+
+                </div>
+
+                <!-- Toggle button for mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar links -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto d-flex align-items-center gap-3 justify-content-between">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Intro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Highlights</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Amenities</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Rooms</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Video</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Team</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Blog</a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                                class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                            </svg>
+                        </li>
+
+
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                                class="bi bi-brightness-low" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8m.5-9.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 11a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m5-5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m-11 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m9.743-4.036a.5.5 0 1 1-.707-.707.5.5 0 0 1 .707.707m-7.779 7.779a.5.5 0 1 1-.707-.707.5.5 0 0 1 .707.707m7.072 0a.5.5 0 1 1 .707-.707.5.5 0 0 1-.707.707M3.757 4.464a.5.5 0 1 1 .707-.707.5.5 0 0 1-.707.707" />
+                            </svg>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Bootstrap JS Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    </header>
+
+
+
+
+
+
+
+
+    <main class="mt-5 ">
+
+        <div class="slider_main">
+
+            <div class="img_slider" style="background: url(../img/skyhaus-header.jpg);">
+
+                <div class="text_slider">
+
+                    <div class="box">
+                        <div class="bottom"></div>
+                        <div class="left"></div>
+
+                        <div class="text_ text-outside">
+                            <span class="text_titel titel_logo">EGY-HILLS </span>
+                            <p>Lorem ipsum dolor sit.</p>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class=" mt-5 py-35 ">
+
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h2 class="section-title">Featured Properties</h2>
+                </div>
+                <div class="col-md-6">
+                    <p>Explore our handpicked selection of premium properties designed to elevate your living
+                        experience.</p>
+                </div>
+            </div>
+            <div class="row align-items-center animate__animated animate__fadeInUp">
+
+                <!-- Info Section -->
+                <div class="col-lg-6 property-info">
+                    <h2 class="property-title mb-4">SkyHaus Residence</h2>
+                    <p class="mb-4">
+                        A property description is made up of 2 parts: key features and property description.
+                        The key features section is your opportunity to tell potential tenants about the key
+                        selling points of your property, in a bullet point format. The property description
+                        section allows you to go in to more depth.
+                    </p>
+
+                    <div class="row  feature-box">
+                        <div class="col d-flex align-items-center gap-3">
+                            <div class="icon"><img decoding="async" alt="list-image"
+                                    style="max-width:50px;margin-right: px;" class="mt-image-list"
+                                    src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/bath-tub.svg"></div>
+
+                            <div class="block">
+                                <small class="text-muted">Beds</small>
+                                <div class="property-number">5</div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col d-flex align-items-center gap-3 ">
+                            <div class="icon"><img decoding="async" alt="list-image"
+                                    style="max-width:50px;margin-right: px;" class="mt-image-list"
+                                    src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/bath-tub.svg"></div>
+
+                            <div class="block">
+                                <small class="text-muted">Beds</small>
+                                <div class="property-number">5</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row  feature-box">
+
+                        <div class="col d-flex align-items-center gap-3">
+                            <div class="icon"><img decoding="async" alt="list-image"
+                                    style="max-width:50px;margin-right: px;" class="mt-image-list"
+                                    src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/bath-tub.svg"></div>
+
+                            <div class="block">
+                                <small class="text-muted">Beds</small>
+                                <div class="property-number">5</div>
+                            </div>
+
+                        </div>
+                        <div class="col d-flex align-items-center gap-3">
+                            <div class="icon"><img decoding="async" alt="list-image"
+                                    style="max-width:50px;margin-right: px;" class="mt-image-list"
+                                    src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/bath-tub.svg"></div>
+
+                            <div class="block">
+                                <small class="text-muted">Beds</small>
+                                <div class="property-number">5</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col d-flex align-items-center gap-3">
+                            <div class="icon"><img decoding="async" alt="list-image"
+                                    style="max-width:50px;margin-right: px;" class="mt-image-list"
+                                    src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/bath-tub.svg"></div>
+
+                            <div class="block">
+                                <small class="text-muted">Beds</small>
+                                <div class="property-number">5</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Section -->
+                <div class="col-lg-6 property-image mt-4 mt-lg-0">
+                    <img src="../img/cover.jpg" alt="SkyHaus Bedroom">
+                </div>
+            </div>
+        </div>
+
+
+        <section class="py-5 bg-white text-center">
+
+            <div class="row justify-content-center">
+
+
+                <div class="video_phot">
+                    <div class="elementor-widget-container">
+
+                        <script>
+                            jQuery(document).ready(function () {
+                                jQuery(".mt-addons-video-popup-vimeo-video").magnificPopup({
+                                    type: "iframe",
+                                    disableOn: 700,
+                                    removalDelay: 160,
+                                    preloader: false,
+                                    fixedContentPos: false
+                                });
+                                jQuery(".mt-addons-video-popup-vimeo-youtube").magnificPopup({
+                                    type: "iframe",
+                                    disableOn: 700,
+                                    removalDelay: 160,
+                                    preloader: false,
+                                    fixedContentPos: false
+                                });
+                            });
+                        </script>
+                        <div class="mt-addons-video text-center">
+
+                            <a class="mt-addons-video-popup-vimeo-youtube"
+                                href="https://www.youtube.com/watch?v=rqrAhBmimCY"><img decoding="async"
+                                    class="mt-addons-video-buton-image"
+                                    src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/play-button.svg"
+                                    data-src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/play-button.svg"
+                                    alt="Video"></a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Box 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="mb-3">
+                        <img decoding="async" alt="list-image" style="max-width:120px;margin-right: px;"
+                            class="mt-image-list"
+                            src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/skyhaus-aerothermal-icon.svg">
+                    </div>
+                    <h6 class="fw-bold">Central system for cooling and heating</h6>
+                </div>
+
+                <!-- Box 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="mb-3">
+                        <img decoding="async" alt="list-image" style="max-width:120px;margin-right: px;"
+                            class="mt-image-list"
+                            src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/skyhaus-aerothermal-icon.svg">
+                    </div>
+                    <h6 class="fw-bold">Floor heating in all the spaces of the house</h6>
+                </div>
+
+                <!-- Box 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="mb-3">
+                        <img decoding="async" alt="list-image" style="max-width:120px;margin-right: px;"
+                            class="mt-image-list"
+                            src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/skyhaus-aerothermal-icon.svg">
+                    </div>
+                    <h6 class="fw-bold">Dali and KNX Domotic systems</h6>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <div class="container py-5">
+            <div class="row align-items-center">
+
+                <!-- Floor Plan Image -->
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="../img/skyhaus-floor-img-min-scaled.jpg" alt="Floor Plan" class="img-fluid rounded ">
+                </div>
+
+                <!-- Description and Tabs -->
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-3 mt-3">Plan and Room<br>Dimensions</h2>
+
+                    <!-- Tabs -->
+                    <div class="mb-3">
+                        <button class="tab-btn active" onclick="showFloor(1)">FLOOR 1</button>
+                        <button class="tab-btn" onclick="showFloor(2)">FLOOR 2</button>
+                        <button class="tab-btn" onclick="showFloor(3)">FLOOR 3</button>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="text-muted">
+                        A property description is made up of 2 parts: key features and property description.
+                        The key features section is your opportunity to tell potential tenants about the key selling
+                        points of your property in a bullet point format.
+                    </p>
+
+                    <!-- Room Dimensions -->
+
+                    <div class="mt-addons-tab-content-v2">Bedroom 1&nbsp; ------------- <strong> 39 Sq Ft</strong><br>
+                        Bedroom 2 ------------- <strong> 38 Sq Ft</strong><br>
+                        Kitchen&nbsp; &nbsp; &nbsp; &nbsp; ------------- <strong> 49 Sq Ft</strong><br>
+                        Gym Area&nbsp; &nbsp;------------- <strong> 55 Sq Ft</strong><br>
+                        Bathroom&nbsp; &nbsp;------------- <strong> 65 Sq Ft</strong><br></div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <script>
+            function showFloor(floorNumber) {
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-btn')[floorNumber - 1].classList.add('active');
+                // هنا يمكنك إضافة كود لتغيير المحتوى عند تغيير الطابق
+            }
+        </script>
+
+
+        <section>
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h2 class="section-title">Featured Properties</h2>
+                </div>
+                <div class="col-md-6">
+                    <p>Explore our handpicked selection of premium properties designed to elevate your living
+                        experience.</p>
+                </div>
+            </div>
+
+
+            <div class="row gy-3 gy-md-4 gy-lg-0 align-items-lg-center">
+                <div class="col-12 col-lg-6 col-xl-5">
+                    <img class="img-fluid rounded" loading="lazy" src="./assets/img/about-img-1 copy.webp"
+                        alt="About 1">
+                </div>
+                <div class="col-12 col-lg-6 col-xl-7">
+                    <div class="row justify-content-xl-center">
+                        <div class="col-12 col-xl-11">
+                            <h2 class="mb-3">Who Are We?</h2>
+                            <p class="lead fs-4 text-secondary mb-3">We help people to build incredible brands and
+                                superior products. Our perspective is to furnish outstanding captivating services.</p>
+                            <p class="mb-5">We are a fast-growing company, but we have never lost sight of our core
+                                values. We believe in collaboration, innovation, and customer satisfaction. We are
+                                always looking for new ways to improve our products and services.</p>
+                            <div class="row gy-4 gy-md-0 gx-xxl-5X">
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex">
+                                        <div class="me-4 text-primary">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h2 class="h4 mb-3">Versatile Brand</h2>
+                                            <p class="text-secondary mb-0">We are crafting a digital method that
+                                                subsists life across all mediums.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex">
+                                        <div class="me-4 text-primary">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h2 class="h4 mb-3">Digital Agency</h2>
+                                            <p class="text-secondary mb-0">We believe in innovation by merging primary
+                                                with elaborate ideas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <style>
+        h2.property-title.mb-4 {
+            /* font-family: "Poppins"; */
+            font-weight: 600;
+            font-size: 45px;
+            line-height: 55px;
+        }
+
+        .col {
+
+            border-left: 1px solid red;
+        }
+
+        .mt-addons-video.text-center {
+            height: 36vh;
+            background: red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5vh;
+            background-image: url(../img/skyhaus-video.jpg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+
+</body>
+
+</html>
