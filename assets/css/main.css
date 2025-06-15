@@ -1078,150 +1078,6 @@ address {
     font-weight: 400;
   }
 }
-@media screen and (min-width: 1025px) and (max-width: 1920px) {
-  h1 {
-    font-size: 64px;
-    font-size: 4rem;
-    letter-spacing: 8px;
-  }
-  h2 {
-    font-size: 36px;
-    font-size: 2.25rem;
-    letter-spacing: 5px;
-  }
-  h3 {
-    font-size: 32px;
-    font-size: 2rem;
-    letter-spacing: 4px;
-  }
-  h4 {
-    font-size: 28px;
-    font-size: 1.75rem;
-    letter-spacing: 4px;
-  }
-  h5 {
-    font-size: 24px;
-    font-size: 1.5rem;
-    letter-spacing: 3px;
-  }
-  h6,
-  .gform_wrapper .gsection_title {
-    font-size: 18px;
-    font-size: 1.125rem;
-    letter-spacing: 2px;
-  }
-  p,
-  .gform_wrapper .gform_description,
-  li,
-  address {
-    font-size: 18px;
-    font-size: 1.125rem;
-    line-height: 160%;
-  }
-  .page-content p,
-  .page-content .gform_wrapper .gform_description,
-  .gform_wrapper .page-content .gform_description,
-  .page-content li,
-  .page-content address {
-    font-size: 20px;
-    font-size: 1.25rem;
-  }
-  .txt-larger,
-  .txt-larger p,
-  .txt-larger .gform_wrapper .gform_description,
-  .gform_wrapper .txt-larger .gform_description {
-    font-size: 24px;
-    font-size: 1.5rem;
-  }
-  .page-content .txt-large,
-  .txt-large,
-  .txt-large p,
-  .txt-large .gform_wrapper .gform_description,
-  .gform_wrapper .txt-large .gform_description {
-    font-size: 22px;
-    font-size: 1.375rem;
-  }
-  .txt-small,
-  .txt-small p,
-  .txt-small .gform_wrapper .gform_description,
-  .gform_wrapper .txt-small .gform_description {
-    font-size: 14px;
-    font-size: 0.875rem;
-    font-weight: 400;
-  }
-}
-@media screen and (min-width: 671px) and (max-width: 1920px) {
-  h1 {
-    font-size: 54px;
-    font-size: 3.375rem;
-    letter-spacing: 8px;
-  }
-  h2 {
-    font-size: 36px;
-    font-size: 2.25rem;
-    letter-spacing: 5px;
-  }
-  h3 {
-    font-size: 32px;
-    font-size: 2rem;
-    letter-spacing: 4px;
-  }
-  h4 {
-    font-size: 28px;
-    font-size: 1.75rem;
-    letter-spacing: 4px;
-  }
-  h5 {
-    font-size: 24px;
-    font-size: 1.5rem;
-    letter-spacing: 3px;
-  }
-  h6,
-  .gform_wrapper .gsection_title {
-    font-size: 18px;
-    font-size: 1.125rem;
-    letter-spacing: 2px;
-  }
-  p,
-  .gform_wrapper .gform_description,
-  li,
-  address {
-    font-size: 18px;
-    font-size: 1.125rem;
-    line-height: 160%;
-  }
-  .page-content p,
-  .page-content .gform_wrapper .gform_description,
-  .gform_wrapper .page-content .gform_description,
-  .page-content li,
-  .page-content address {
-    font-size: 20px;
-    font-size: 1.25rem;
-  }
-  .txt-larger,
-  .txt-larger p,
-  .txt-larger .gform_wrapper .gform_description,
-  .gform_wrapper .txt-larger .gform_description {
-    font-size: 24px;
-    font-size: 1.5rem;
-  }
-  .page-content .txt-large,
-  .txt-large,
-  .txt-large p,
-  .txt-large .gform_wrapper .gform_description,
-  .gform_wrapper .txt-large .gform_description {
-    font-size: 22px;
-    font-size: 1.375rem;
-  }
-  .txt-small,
-  .txt-small p,
-  .txt-small .gform_wrapper .gform_description,
-  .gform_wrapper .txt-small .gform_description {
-    font-size: 14px;
-    font-size: 0.875rem;
-    font-weight: 400;
-  }
-}
 
 table {
   width: 100%;
@@ -7293,4 +7149,14 @@ body {
   section.site-banner.site-banner--home {
     margin-top: 5vh;
   }
+  ul.usp-list.section.section--large.grid {
+    padding: 0 !important;
+    flex-flow: column;
+    width: 100%;
+  }
+}
+
+h1.site-banner__title a {
+  color: white !important;
+  font-weight: bold;
 }
