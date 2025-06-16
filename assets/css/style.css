@@ -259,6 +259,7 @@ span.text_titel.titel_logo::first-letter {
 .about-section {
   position: relative;
   /* padding: 120px 0px; */
+  margin: 0 !important;
 }
 
 .about-section .content-column {
