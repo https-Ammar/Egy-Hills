@@ -1,30 +1,28 @@
 <?php
 include 'db.php';
 
-// ✅ جلب البيانات من قاعدة البيانات
+// === Fetch Data ===
 $sliders = $conn->query("SELECT * FROM sliders");
 $about_sliders = $conn->query("SELECT * FROM about_slider");
 $about_cards = $conn->query("SELECT * FROM about_cards");
 $highlights = $conn->query("SELECT * FROM highlights");
 $videos = $conn->query("SELECT * FROM videos");
 $ads = $conn->query("SELECT * FROM ads");
-$ad_icons = $conn->query("SELECT * FROM ad_icons");
-$projects = $conn->query("SELECT * FROM projects");
 $questions = $conn->query("SELECT * FROM questions");
 $services = $conn->query("SELECT * FROM services");
 
-// ✅ حفظ بيانات الزائر (الاسم ورقم الهاتف)
-if (isset($_POST['submit_visitor'])) {
-    $name = trim($_POST['visitor_name']);
-    $phone = trim($_POST['visitor_phone']);
+// === Save Visitor ===
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_visitor'])) {
+    $name = trim($_POST['visitor_name'] ?? '');
+    $phone = trim($_POST['visitor_phone'] ?? '');
 
-    if (!empty($name) && !empty($phone)) {
+    if ($name && $phone) {
         $stmt = $conn->prepare("INSERT INTO visitors (name, phone) VALUES (?, ?)");
         $stmt->bind_param("ss", $name, $phone);
         $stmt->execute();
-        echo "<p style='color:green;'>Your inquiry has been received. Thank you!</p>";
+        $successMessage = "Thank you! Your inquiry has been received.";
     } else {
-        echo "<p style='color:red;'>Please fill in both fields.</p>";
+        $errorMessage = "Please fill in both name and phone fields.";
     }
 }
 ?>
@@ -39,68 +37,81 @@ if (isset($_POST['submit_visitor'])) {
 
 <body>
 
-    <hr>
     <h2>Booking / Inquiry</h2>
+    <?php if (isset($successMessage)): ?>
+        <p style="color: green;"><?= htmlspecialchars($successMessage) ?></p>
+    <?php elseif (isset($errorMessage)): ?>
+        <p style="color: red;"><?= htmlspecialchars($errorMessage) ?></p>
+    <?php endif; ?>
 
+    <form method="POST">
+        <input type="text" name="visitor_name" placeholder="Your Name" required>
+        <input type="text" name="visitor_phone" placeholder="Phone Number" required>
+        <button type="submit" name="submit_visitor">Submit</button>
+    </form>
 
     <hr>
-    <hr>
-    <hr>
-
     <h1>Main Slider</h1>
     <?php while ($row = $sliders->fetch_assoc()): ?>
-        <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="200">
+        <?php if (!empty($row['image'])): ?>
+            <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="200">
+        <?php endif; ?>
     <?php endwhile; ?>
 
     <hr>
-
     <h1>About Us</h1>
-    <p>This is the about section content from sliders and cards only.</p>
     <h2>About Sliders</h2>
     <?php while ($row = $about_sliders->fetch_assoc()): ?>
-        <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="200">
+        <?php if (!empty($row['image'])): ?>
+            <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="200">
+        <?php endif; ?>
     <?php endwhile; ?>
 
     <h2>About Cards</h2>
     <?php while ($row = $about_cards->fetch_assoc()): ?>
         <h3><?= htmlspecialchars($row['title']) ?></h3>
         <p><?= htmlspecialchars($row['description']) ?></p>
-        <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="200">
+        <?php if (!empty($row['image'])): ?>
+            <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="200">
+        <?php endif; ?>
     <?php endwhile; ?>
 
     <hr>
-
     <h1>Property Highlights</h1>
     <?php while ($row = $highlights->fetch_assoc()): ?>
         <h3><?= htmlspecialchars($row['title']) ?></h3>
         <p><?= htmlspecialchars($row['description']) ?></p>
-        <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="200">
+        <?php if (!empty($row['image'])): ?>
+            <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="200">
+        <?php endif; ?>
     <?php endwhile; ?>
 
     <hr>
-
     <h1>Videos</h1>
     <?php while ($row = $videos->fetch_assoc()): ?>
-        <iframe width="400" height="300" src="<?= htmlspecialchars($row['url']) ?>"></iframe>
+        <?php if (!empty($row['url'])): ?>
+            <iframe width="400" height="300" src="<?= htmlspecialchars($row['url']) ?>" allowfullscreen></iframe>
+        <?php endif; ?>
     <?php endwhile; ?>
 
     <hr>
-
     <h1>Ads</h1>
     <?php while ($ad = $ads->fetch_assoc()): ?>
         <h3><?= htmlspecialchars($ad['title']) ?></h3>
         <p><?= htmlspecialchars($ad['description']) ?></p>
-        <img src="uploads/<?= htmlspecialchars($ad['image']) ?>" width="200">
+        <?php if (!empty($ad['image'])): ?>
+            <img src="uploads/<?= htmlspecialchars($ad['image']) ?>" width="200">
+        <?php endif; ?>
 
         <h4>Icons:</h4>
         <?php
-        $icons = $conn->query("SELECT * FROM ad_icons WHERE ad_id=" . intval($ad['id']));
+        $icons = $conn->query("SELECT * FROM ad_icons WHERE ad_id = " . intval($ad['id']));
         while ($icon = $icons->fetch_assoc()):
+            $iconValue = htmlspecialchars($icon['icon']);
             ?>
             <p>
                 <?php
-                $iconValue = htmlspecialchars($icon['icon']);
-                if (preg_match('/\.(png|jpg|jpeg|svg|gif)$/i', $iconValue)) {
+                if (preg_match('/\.(png|jpe?g|gif|svg)$/i', $iconValue)) {
                     echo '<img src="uploads/' . $iconValue . '" width="30">';
                 } else {
                     echo '<i class="' . $iconValue . '"></i>';
@@ -112,15 +123,24 @@ if (isset($_POST['submit_visitor'])) {
     <?php endwhile; ?>
 
     <hr>
-
     <h1>Why Choose Us</h1>
     <?php while ($row = $questions->fetch_assoc()): ?>
         <h3>Q: <?= htmlspecialchars($row['question']) ?></h3>
         <p>A: <?= htmlspecialchars($row['answer']) ?></p>
-        <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="200">
+        <?php if (!empty($row['image'])): ?>
+            <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="200">
+        <?php endif; ?>
     <?php endwhile; ?>
 
     <hr>
+    <h1>Our Services</h1>
+    <?php while ($row = $services->fetch_assoc()): ?>
+        <?php if (!empty($row['icon'])): ?>
+            <img src="uploads/<?= htmlspecialchars($row['icon']) ?>" width="50">
+        <?php endif; ?>
+        <h3><?= htmlspecialchars($row['title']) ?></h3>
+        <p><?= htmlspecialchars($row['description']) ?></p>
+    <?php endwhile; ?>
 
 </body>
 

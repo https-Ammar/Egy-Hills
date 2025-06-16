@@ -1,6 +1,10 @@
--- ===========================================
--- ✅ جدول المشاريع
--- ===========================================
+CREATE TABLE IF NOT EXISTS `ads` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `image` VARCHAR(255) NOT NULL,
+    `title` VARCHAR(255) NOT NULL,
+    `description` TEXT
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
 CREATE TABLE IF NOT EXISTS `projects` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `image` VARCHAR(255) NOT NULL,
@@ -22,12 +26,11 @@ CREATE TABLE IF NOT EXISTS `projects` (
     `last_title` VARCHAR(255) DEFAULT NULL,
     `last_text` TEXT DEFAULT NULL,
     `last_image` VARCHAR(255) DEFAULT NULL,
-    `views` INT NOT NULL DEFAULT 0
+    `views` INT NOT NULL DEFAULT 0,
+    `ad_id` INT DEFAULT NULL,
+    FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول التفاصيل الفرعية للمشروع
--- ===========================================
 CREATE TABLE IF NOT EXISTS `project_table` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -36,9 +39,6 @@ CREATE TABLE IF NOT EXISTS `project_table` (
     FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول الصور المتعددة للمشروع
--- ===========================================
 CREATE TABLE IF NOT EXISTS `project_images` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -46,21 +46,17 @@ CREATE TABLE IF NOT EXISTS `project_images` (
     FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول البلوكات الفرعية للمشروع
--- ===========================================
 CREATE TABLE IF NOT EXISTS `project_blocks` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
     `block_title` VARCHAR(255) NOT NULL,
     `block_text` TEXT NOT NULL,
     `block_image` VARCHAR(255) DEFAULT NULL,
-    FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
+    `ad_id` INT DEFAULT NULL,
+    FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول سجل المشاهدات للمشروع
--- ===========================================
 CREATE TABLE IF NOT EXISTS `project_views` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -69,21 +65,17 @@ CREATE TABLE IF NOT EXISTS `project_views` (
     FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول طرق الدفع
--- ===========================================
 CREATE TABLE IF NOT EXISTS `payment_methods` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `method_name` VARCHAR(255) NOT NULL,
     `account_number` VARCHAR(255) DEFAULT NULL,
     `details` TEXT DEFAULT NULL,
     `title` VARCHAR(255) DEFAULT NULL,
-    `text` TEXT DEFAULT NULL
+    `text` TEXT DEFAULT NULL,
+    `ad_id` INT DEFAULT NULL,
+    FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول الحجوزات
--- ===========================================
 CREATE TABLE IF NOT EXISTS `bookings` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -97,9 +89,6 @@ CREATE TABLE IF NOT EXISTS `bookings` (
     FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول الزوار
--- ===========================================
 CREATE TABLE IF NOT EXISTS `visitors` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -116,9 +105,6 @@ CREATE TABLE IF NOT EXISTS `visitors` (
     FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول طلبات المشاريع
--- ===========================================
 CREATE TABLE IF NOT EXISTS `project_requests` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -132,64 +118,46 @@ CREATE TABLE IF NOT EXISTS `project_requests` (
     FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول السلايدر
--- ===========================================
 CREATE TABLE IF NOT EXISTS `sliders` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `image` VARCHAR(255) NOT NULL
+    `image` VARCHAR(255) NOT NULL,
+    `ad_id` INT DEFAULT NULL,
+    FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول سلايدر من نحن
--- ===========================================
 CREATE TABLE IF NOT EXISTS `about_slider` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `image` VARCHAR(255) NOT NULL
+    `image` VARCHAR(255) NOT NULL,
+    `ad_id` INT DEFAULT NULL,
+    FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول كروت من نحن
--- ===========================================
 CREATE TABLE IF NOT EXISTS `about_cards` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `image` VARCHAR(255) NOT NULL,
     `title` VARCHAR(255) NOT NULL,
     `description` TEXT,
-    `link` VARCHAR(255)
+    `link` VARCHAR(255),
+    `ad_id` INT DEFAULT NULL,
+    FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول أبرز ما يميزنا
--- ===========================================
 CREATE TABLE IF NOT EXISTS `highlights` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `image` VARCHAR(255) NOT NULL,
     `title` VARCHAR(255) NOT NULL,
-    `description` TEXT
+    `description` TEXT,
+    `ad_id` INT DEFAULT NULL,
+    FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول الفيديوهات
--- ===========================================
 CREATE TABLE IF NOT EXISTS `videos` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `url` VARCHAR(255) NOT NULL
+    `url` VARCHAR(255) NOT NULL,
+    `ad_id` INT DEFAULT NULL,
+    FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول الإعلانات
--- ===========================================
-CREATE TABLE IF NOT EXISTS `ads` (
-    `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `image` VARCHAR(255) NOT NULL,
-    `title` VARCHAR(255) NOT NULL,
-    `description` TEXT
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
-
--- ===========================================
--- ✅ جدول أيقونات الإعلانات
--- ===========================================
 CREATE TABLE IF NOT EXISTS `ad_icons` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `ad_id` INT NOT NULL,
@@ -199,9 +167,6 @@ CREATE TABLE IF NOT EXISTS `ad_icons` (
     FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول الأسئلة الشائعة
--- ===========================================
 CREATE TABLE IF NOT EXISTS `questions` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `question` VARCHAR(255) NOT NULL,
@@ -209,12 +174,36 @@ CREATE TABLE IF NOT EXISTS `questions` (
     `image` VARCHAR(255)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- ===========================================
--- ✅ جدول الخدمات
--- ===========================================
 CREATE TABLE IF NOT EXISTS `services` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `icon` VARCHAR(255) NOT NULL,
     `title` VARCHAR(255) NOT NULL,
-    `description` TEXT NOT NULL
+    `description` TEXT NOT NULL,
+    `ad_id` INT DEFAULT NULL,
+    FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE `booking_info_blocks` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `title` VARCHAR(255) NOT NULL,
+    `text` TEXT NOT NULL,
+    `image` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `info_blocks` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `title` VARCHAR(255) NOT NULL,
+    `text` TEXT NOT NULL,
+    `image` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `logs` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `action` VARCHAR(50) NOT NULL,
+    `table_name` VARCHAR(100) NOT NULL,
+    `record_id` INT NOT NULL,
+    `username` VARCHAR(100) DEFAULT NULL,
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;

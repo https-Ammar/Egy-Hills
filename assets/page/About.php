@@ -45,20 +45,6 @@ $about_cards = $conn->query("SELECT * FROM about_cards");
 
 
 
-
-
-    <!-- <section class="content-dark bg-dark spacing-large spacing-lt-medium">
-        <div class="section section--large grid grid--spaced">
-            <div class="content-dark__txt grid__col grid__col--11 grid__col--m-9 txt-large post-styles">
-                <h4>Our Expertise</h4>
-                <p>RJ Investments brings luxury living to the rental market through bespoke renovations, at
-                    affordable
-                    prices with quality property management.</p>
-            </div>
-        </div>
-    </section> -->
-
-
     <section class="about-section mt-5">
         <div class="container">
 
@@ -166,57 +152,8 @@ $about_cards = $conn->query("SELECT * FROM about_cards");
     </section>
 
 
-    <section class="about-section mt-5">
-        <div class="container">
-            <div class="row clearfix">
-
-                <!-- Image Column -->
-                <div class="image-column col-md-6 col-sm-12 aos-init aos-animate" data-aos="fade-left">
-                    <div class="inner-column" data-wow-delay="0ms" data-wow-duration="1500ms">
-                        <div class="image">
-                            <img src="https://i.ibb.co/vQbkKj7/about.jpg" alt="About EGY-HILLS">
-                            <div class="overlay-box">
-                                <div class="year-box">
-                                    <span class="number">5</span> Years <br> of Excellence <br> in Real Estate
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- Content Column -->
-                <div class="content-column col-md-6 col-sm-12 aos-init aos-animate" data-aos="fade-right">
-                    <div class="inner-column">
-                        <div class="sec-title">
-                            <div class="title">About Us</div>
-                            <h2>Shaping the Future of Real Estate<br> with EGY-HILLS</h2>
-                        </div>
-                        <div class="text">
-                            At EGY-HILLS, we redefine real estate development through innovation, quality, and
-                            vision.
-                            As a trusted leader in the industry, we specialize in crafting exceptional residential
-                            and commercial properties
-                            in prime locations. With over 5 years of experience, our focus is on creating vibrant,
-                            secure, and sustainable communities
-                            that add real value to modern living and long-term investment.
-                        </div>
-                        <div class="email">
-                            Request a Quote: <span class="theme_color">EGY-HILLS@gmail.com</span>
-                        </div>
-                        <a href="#" class="theme-btn btn-style-three">Read More</a>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </section>
 
     <section id="footer"></section>
-
-
-
 
 
 
