@@ -1,3 +1,4 @@
+-- ✅ ads
 CREATE TABLE IF NOT EXISTS `ads` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `image` VARCHAR(255) NOT NULL,
@@ -5,6 +6,7 @@ CREATE TABLE IF NOT EXISTS `ads` (
     `description` TEXT
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ projects
 CREATE TABLE IF NOT EXISTS `projects` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `image` VARCHAR(255) NOT NULL,
@@ -31,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
     FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ project_table
 CREATE TABLE IF NOT EXISTS `project_table` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -39,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `project_table` (
     FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ project_images
 CREATE TABLE IF NOT EXISTS `project_images` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -46,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `project_images` (
     FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ project_blocks
 CREATE TABLE IF NOT EXISTS `project_blocks` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -57,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `project_blocks` (
     FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ project_views
 CREATE TABLE IF NOT EXISTS `project_views` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -65,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `project_views` (
     FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ payment_methods
 CREATE TABLE IF NOT EXISTS `payment_methods` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `method_name` VARCHAR(255) NOT NULL,
@@ -76,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `payment_methods` (
     FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ bookings
 CREATE TABLE IF NOT EXISTS `bookings` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -89,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `bookings` (
     FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ visitors
 CREATE TABLE IF NOT EXISTS `visitors` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -105,6 +114,7 @@ CREATE TABLE IF NOT EXISTS `visitors` (
     FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ project_requests
 CREATE TABLE IF NOT EXISTS `project_requests` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `project_id` INT NOT NULL,
@@ -118,6 +128,7 @@ CREATE TABLE IF NOT EXISTS `project_requests` (
     FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ sliders
 CREATE TABLE IF NOT EXISTS `sliders` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `image` VARCHAR(255) NOT NULL,
@@ -125,6 +136,7 @@ CREATE TABLE IF NOT EXISTS `sliders` (
     FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ about_slider
 CREATE TABLE IF NOT EXISTS `about_slider` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `image` VARCHAR(255) NOT NULL,
@@ -132,6 +144,7 @@ CREATE TABLE IF NOT EXISTS `about_slider` (
     FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ about_cards
 CREATE TABLE IF NOT EXISTS `about_cards` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `image` VARCHAR(255) NOT NULL,
@@ -142,6 +155,7 @@ CREATE TABLE IF NOT EXISTS `about_cards` (
     FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ highlights
 CREATE TABLE IF NOT EXISTS `highlights` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `image` VARCHAR(255) NOT NULL,
@@ -151,6 +165,7 @@ CREATE TABLE IF NOT EXISTS `highlights` (
     FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ videos
 CREATE TABLE IF NOT EXISTS `videos` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `url` VARCHAR(255) NOT NULL,
@@ -158,6 +173,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
     FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ ad_icons
 CREATE TABLE IF NOT EXISTS `ad_icons` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `ad_id` INT NOT NULL,
@@ -167,6 +183,7 @@ CREATE TABLE IF NOT EXISTS `ad_icons` (
     FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ questions
 CREATE TABLE IF NOT EXISTS `questions` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `question` VARCHAR(255) NOT NULL,
@@ -174,6 +191,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
     `image` VARCHAR(255)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+-- ✅ services
 CREATE TABLE IF NOT EXISTS `services` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `icon` VARCHAR(255) NOT NULL,
@@ -183,7 +201,8 @@ CREATE TABLE IF NOT EXISTS `services` (
     FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
-CREATE TABLE `booking_info_blocks` (
+-- ✅ booking_info_blocks
+CREATE TABLE IF NOT EXISTS `booking_info_blocks` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `title` VARCHAR(255) NOT NULL,
     `text` TEXT NOT NULL,
@@ -191,7 +210,8 @@ CREATE TABLE `booking_info_blocks` (
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE `info_blocks` (
+-- ✅ info_blocks
+CREATE TABLE IF NOT EXISTS `info_blocks` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `title` VARCHAR(255) NOT NULL,
     `text` TEXT NOT NULL,
@@ -199,7 +219,8 @@ CREATE TABLE `info_blocks` (
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE `logs` (
+-- ✅ logs
+CREATE TABLE IF NOT EXISTS `logs` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `action` VARCHAR(50) NOT NULL,
     `table_name` VARCHAR(100) NOT NULL,
@@ -208,10 +229,11 @@ CREATE TABLE `logs` (
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(100) UNIQUE NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- ✅ users
+CREATE TABLE IF NOT EXISTS `users` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `username` VARCHAR(100) UNIQUE NOT NULL,
+    `email` VARCHAR(255) UNIQUE NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;

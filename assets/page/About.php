@@ -32,7 +32,7 @@ $about_cards = $conn->query("SELECT * FROM about_cards");
 
 
         <section class="site-banner site-banner--bg site-banner--page"
-            style="background-image:url(uploads/<?php echo $row['image']; ?>);">
+            style="background-image:url(./uploads/<?php echo $row['image']; ?>);">
 
             <div class="site-banner__txt section section--medium txt-center post-styles">
                 <h1 class="site-banner__title"><a href="#">About</a> / <a href="#">Home</a></h1>
@@ -75,7 +75,7 @@ $about_cards = $conn->query("SELECT * FROM about_cards");
                     <div class="image-column col-md-6 col-sm-12 aos-init aos-animate" data-aos="fade-left">
                         <div class="inner-column" data-wow-delay="0ms" data-wow-duration="1500ms">
                             <div class="image">
-                                <img src="uploads/<?php echo $row['image']; ?>" alt="About EGY-HILLS">
+                                <img src="./uploads/<?php echo $row['image']; ?>" alt="About EGY-HILLS">
                                 <div class="overlay-box">
                                     <div class="year-box">
                                         <span class="number">5</span> Years <br> of Excellence <br> in Real Estate

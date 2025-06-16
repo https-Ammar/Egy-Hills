@@ -1,12 +1,5 @@
 <?php
-session_start();
 include 'db.php';
-
-// تحقق من الجلسة
-if (empty($_SESSION['user_id'])) {
-    header("Location:login.php");
-    exit();
-}
 
 // === Upload Function ===
 function uploadFile($file)
@@ -19,116 +12,117 @@ function uploadFile($file)
     return '';
 }
 
-// === Helper for GET with default ===
-function safeGet($key, $default = '')
-{
-    return isset($_GET[$key]) ? $_GET[$key] : $default;
-}
-
-// === جميع عمليات الإضافة والحذف ===
-
 // === Main Slider ===
-if (!empty($_POST['add_slider'])) {
-    $image = uploadFile($_FILES['image'] ?? []);
+if (isset($_POST['add_slider'])) {
+    $image = uploadFile($_FILES['image']);
+    echo "Received for Slider: image = $image <br>";
     $conn->query("INSERT INTO sliders (image) VALUES ('$image')");
 }
 
-if (!empty(safeGet('delete_slider'))) {
-    $conn->query("DELETE FROM sliders WHERE id=" . intval(safeGet('delete_slider')));
+if (isset($_GET['delete_slider'])) {
+    $conn->query("DELETE FROM sliders WHERE id=" . intval($_GET['delete_slider']));
 }
 
 // === About Slider ===
-if (!empty($_POST['add_about_slider'])) {
-    $image = uploadFile($_FILES['image'] ?? []);
+if (isset($_POST['add_about_slider'])) {
+    $image = uploadFile($_FILES['image']);
+    echo "Received for About Slider: image = $image <br>";
     $conn->query("INSERT INTO about_slider (image) VALUES ('$image')");
 }
 
-if (!empty(safeGet('delete_about_slider'))) {
-    $conn->query("DELETE FROM about_slider WHERE id=" . intval(safeGet('delete_about_slider')));
+if (isset($_GET['delete_about_slider'])) {
+    $conn->query("DELETE FROM about_slider WHERE id=" . intval($_GET['delete_about_slider']));
 }
 
 // === About Cards ===
-if (!empty($_POST['add_about_card'])) {
-    $image = uploadFile($_FILES['image'] ?? []);
-    $title = $conn->real_escape_string($_POST['title'] ?? '');
-    $desc = $conn->real_escape_string($_POST['description'] ?? '');
-    $link = $conn->real_escape_string($_POST['link'] ?? '');
+if (isset($_POST['add_about_card'])) {
+    $image = uploadFile($_FILES['image']);
+    $title = $conn->real_escape_string($_POST['title']);
+    $desc = $conn->real_escape_string($_POST['description']);
+    $link = $conn->real_escape_string($_POST['link']);
+    echo "Received for About Card: image = $image, title = $title, description = $desc, link = $link <br>";
     $conn->query("INSERT INTO about_cards (image, title, description, link) VALUES ('$image', '$title', '$desc', '$link')");
 }
 
-if (!empty(safeGet('delete_about_card'))) {
-    $conn->query("DELETE FROM about_cards WHERE id=" . intval(safeGet('delete_about_card')));
+if (isset($_GET['delete_about_card'])) {
+    $conn->query("DELETE FROM about_cards WHERE id=" . intval($_GET['delete_about_card']));
 }
 
 // === Highlights ===
-if (!empty($_POST['add_highlight'])) {
-    $image = uploadFile($_FILES['image'] ?? []);
-    $title = $conn->real_escape_string($_POST['title'] ?? '');
-    $desc = $conn->real_escape_string($_POST['description'] ?? '');
+if (isset($_POST['add_highlight'])) {
+    $image = uploadFile($_FILES['image']);
+    $title = $conn->real_escape_string($_POST['title']);
+    $desc = $conn->real_escape_string($_POST['description']);
+    echo "Received for Highlight: image = $image, title = $title, description = $desc <br>";
     $conn->query("INSERT INTO highlights (image, title, description) VALUES ('$image', '$title', '$desc')");
 }
 
-if (!empty(safeGet('delete_highlight'))) {
-    $conn->query("DELETE FROM highlights WHERE id=" . intval(safeGet('delete_highlight')));
+if (isset($_GET['delete_highlight'])) {
+    $conn->query("DELETE FROM highlights WHERE id=" . intval($_GET['delete_highlight']));
 }
 
 // === Videos ===
-if (!empty($_POST['add_video'])) {
-    $url = $conn->real_escape_string($_POST['url'] ?? '');
+if (isset($_POST['add_video'])) {
+    $url = $conn->real_escape_string($_POST['url']);
+    echo "Received for Video: url = $url <br>";
     $conn->query("INSERT INTO videos (url) VALUES ('$url')");
 }
 
-if (!empty(safeGet('delete_video'))) {
-    $conn->query("DELETE FROM videos WHERE id=" . intval(safeGet('delete_video')));
+if (isset($_GET['delete_video'])) {
+    $conn->query("DELETE FROM videos WHERE id=" . intval($_GET['delete_video']));
 }
 
-// === Ads ===
-if (!empty($_POST['add_ad'])) {
-    $image = uploadFile($_FILES['image'] ?? []);
-    $title = $conn->real_escape_string($_POST['title'] ?? '');
-    $desc = $conn->real_escape_string($_POST['description'] ?? '');
+// === Ads (بدون section) ===
+if (isset($_POST['add_ad'])) {
+    $image = uploadFile($_FILES['image']);
+    $title = $conn->real_escape_string($_POST['title']);
+    $desc = $conn->real_escape_string($_POST['description']);
+    echo "Received for Ad: image = $image, title = $title, description = $desc <br>";
     $conn->query("INSERT INTO ads (image, title, description) VALUES ('$image', '$title', '$desc')");
 }
 
-if (!empty(safeGet('delete_ad'))) {
-    $conn->query("DELETE FROM ads WHERE id=" . intval(safeGet('delete_ad')));
+if (isset($_GET['delete_ad'])) {
+    $conn->query("DELETE FROM ads WHERE id=" . intval($_GET['delete_ad']));
 }
 
 // === Ad Icons ===
-if (!empty($_POST['add_ad_icon'])) {
-    $ad_id = intval($_POST['ad_id'] ?? 0);
-    $icon = uploadFile($_FILES['icon'] ?? []);
-    $title = $conn->real_escape_string($_POST['title'] ?? '');
-    $text = $conn->real_escape_string($_POST['text'] ?? '');
+if (isset($_POST['add_ad_icon'])) {
+    $ad_id = intval($_POST['ad_id']);
+    $icon = uploadFile($_FILES['icon']);
+    $title = $conn->real_escape_string($_POST['title']);
+    $text = $conn->real_escape_string($_POST['text']);
+    echo "Received for Ad Icon: ad_id = $ad_id, icon = $icon, title = $title, text = $text <br>";
     $conn->query("INSERT INTO ad_icons (ad_id, icon, title, text) VALUES ($ad_id, '$icon', '$title', '$text')");
 }
 
-if (!empty(safeGet('delete_ad_icon'))) {
-    $conn->query("DELETE FROM ad_icons WHERE id=" . intval(safeGet('delete_ad_icon')));
+if (isset($_GET['delete_ad_icon'])) {
+    $conn->query("DELETE FROM ad_icons WHERE id=" . intval($_GET['delete_ad_icon']));
 }
 
 // === Questions ===
-if (!empty($_POST['add_question'])) {
-    $question = $conn->real_escape_string($_POST['question'] ?? '');
-    $answer = $conn->real_escape_string($_POST['answer'] ?? '');
-    $image = uploadFile($_FILES['image'] ?? []);
+if (isset($_POST['add_question'])) {
+    $question = $conn->real_escape_string($_POST['question']);
+    $answer = $conn->real_escape_string($_POST['answer']);
+    $image = uploadFile($_FILES['image']);
+    echo "Received for Question: question = $question, answer = $answer, image = $image <br>";
     $conn->query("INSERT INTO questions (question, answer, image) VALUES ('$question', '$answer', '$image')");
 }
 
-if (!empty(safeGet('delete_question'))) {
-    $conn->query("DELETE FROM questions WHERE id=" . intval(safeGet('delete_question')));
+if (isset($_GET['delete_question'])) {
+    $conn->query("DELETE FROM questions WHERE id=" . intval($_GET['delete_question']));
 }
 
 // === Services ===
-if (!empty($_POST['add_service'])) {
-    $icon = uploadFile($_FILES['icon'] ?? []);
-    $title = $conn->real_escape_string($_POST['title'] ?? '');
-    $desc = $conn->real_escape_string($_POST['description'] ?? '');
+if (isset($_POST['add_service'])) {
+    $icon = uploadFile($_FILES['icon']);
+    $title = $conn->real_escape_string($_POST['title']);
+    $desc = $conn->real_escape_string($_POST['description']);
+    echo "Received for Service: icon = $icon, title = $title, description = $desc <br>";
     $conn->query("INSERT INTO services (icon, title, description) VALUES ('$icon', '$title', '$desc')");
 }
 
-if (!empty(safeGet('delete_service'))) {
-    $conn->query("DELETE FROM services WHERE id=" . intval(safeGet('delete_service')));
+if (isset($_GET['delete_service'])) {
+    $conn->query("DELETE FROM services WHERE id=" . intval($_GET['delete_service']));
 }
 
 // === Fetch Data ===
@@ -141,18 +135,7 @@ $ads = $conn->query("SELECT * FROM ads");
 $ad_icons = $conn->query("SELECT * FROM ad_icons");
 $questions = $conn->query("SELECT * FROM questions");
 $services = $conn->query("SELECT * FROM services");
-
-$section = htmlspecialchars(safeGet('section', ''));
 ?>
-<!-- هنا تضع واجهة لوحة التحكم الخاصة بك -->
-
-
-
-
-
-
-
-
 
 
 
@@ -180,7 +163,6 @@ $section = htmlspecialchars(safeGet('section', ''));
                     <img src="images/logo.png" alt="">
                 </div>
                 <span class="logo_name">CodingLab</span>
-                <a href="logout.php">Logout</a>
             </div>
             <div class="menu-items">
 
@@ -359,8 +341,7 @@ $section = htmlspecialchars(safeGet('section', ''));
                                     </ul>
                                     <hr>
 
-
-                                    <!-- ✅ Ads بدون حقل Section -->
+                                    <!-- Ads with Section -->
                                     <h2>Ads</h2>
                                     <form method="POST" enctype="multipart/form-data" class="mb-3">
                                         <div class="mb-3">
@@ -384,7 +365,8 @@ $section = htmlspecialchars(safeGet('section', ''));
                                                     class="card-img-top">
                                                 <div class="card-body">
                                                     <h6 class="card-title"><?= htmlspecialchars($row['title']) ?></h6>
-                                                    <!-- ✅ تم حذف عرض section -->
+                                                    <small
+                                                        class="text-muted"><?= htmlspecialchars($row['section']) ?></small>
                                                     <a href="?delete_ad=<?= intval($row['id']) ?>"
                                                         class="btn btn-danger btn-sm mt-1">Delete</a>
                                                 </div>
@@ -393,71 +375,48 @@ $section = htmlspecialchars(safeGet('section', ''));
                                     </div>
                                     <hr>
 
-                                    <!-- ✅ Add Icon to Ad (بدون تغيير) -->
+                                    <!-- Add Icon to Ad -->
                                     <h3>Add Icon to Ad</h3>
                                     <form method="POST" enctype="multipart/form-data" class="mb-3">
                                         <div class="mb-3">
-                                            <label for="ad_id">Select Ad</label>
-                                            <select name="ad_id" id="ad_id" class="form-select" required>
+                                            <select name="ad_id" class="form-select">
                                                 <?php
                                                 $ads2 = $conn->query("SELECT * FROM ads");
-                                                if ($ads2 && $ads2->num_rows > 0) {
-                                                    while ($a = $ads2->fetch_assoc()) {
-                                                        $ad_id = intval($a['id']);
-                                                        $ad_title = htmlspecialchars($a['title'] ?? 'No Title');
-                                                        echo "<option value='$ad_id'>$ad_title</option>";
-                                                    }
-                                                } else {
-                                                    echo "<option value=''>No ads available</option>";
+                                                while ($a = $ads2->fetch_assoc()) {
+                                                    echo "<option value='{$a['id']}'>" . htmlspecialchars($a['title']) . "</option>";
                                                 }
                                                 ?>
                                             </select>
                                         </div>
-
                                         <div class="mb-3">
-                                            <label for="icon">Icon</label>
-                                            <input type="file" name="icon" id="icon" accept="image/*,.svg"
-                                                class="form-control" required>
+                                            <input type="file" name="icon" accept="image/*,.svg" class="form-control"
+                                                required>
                                         </div>
-
                                         <div class="mb-3">
-                                            <label for="icon_title">Title</label>
-                                            <input type="text" name="title" id="icon_title" placeholder="Title"
-                                                class="form-control" required>
+                                            <input type="text" name="title" placeholder="Title" class="form-control"
+                                                required>
                                         </div>
-
                                         <div class="mb-3">
-                                            <label for="icon_text">Text</label>
-                                            <textarea name="text" id="icon_text" placeholder="Text" class="form-control"
+                                            <textarea name="text" placeholder="Text" class="form-control"
                                                 required></textarea>
                                         </div>
-
-                                        <button type="submit" name="add_ad_icon" class="btn btn-primary">Add
-                                            Icon</button>
+                                        <button name="add_ad_icon" class="btn btn-primary">Add Icon</button>
                                     </form>
 
-                                    <!-- ✅ All Ad Icons (بدون تغيير) -->
                                     <h3>All Ad Icons</h3>
                                     <div class="mb-4">
-                                        <?php if ($ad_icons && $ad_icons->num_rows > 0): ?>
-                                            <?php while ($icon = $ad_icons->fetch_assoc()): ?>
-                                                <div class="d-inline-block text-center me-3 mb-3">
-                                                    <img src="uploads/<?= htmlspecialchars($icon['icon'] ?? '') ?>" width="50"
-                                                        class="img-thumbnail">
-                                                    <div><?= htmlspecialchars($icon['title'] ?? '') ?></div>
-                                                    <small><?= htmlspecialchars($icon['text'] ?? '') ?></small>
-                                                    <a href="?delete_ad_icon=<?= intval($icon['id'] ?? 0) ?>"
-                                                        class="btn btn-danger btn-sm mt-1">Delete Icon</a>
-                                                </div>
-                                            <?php endwhile; ?>
-                                        <?php else: ?>
-                                            <p>No icons found.</p>
-                                        <?php endif; ?>
+                                        <?php while ($icon = $ad_icons->fetch_assoc()): ?>
+                                            <div class="d-inline-block text-center me-3 mb-3">
+                                                <img src="uploads/<?= htmlspecialchars($icon['icon']) ?>" width="50"
+                                                    class="img-thumbnail">
+                                                <div><?= htmlspecialchars($icon['title']) ?></div>
+                                                <small><?= htmlspecialchars($icon['text']) ?></small>
+                                                <a href="?delete_ad_icon=<?= intval($icon['id']) ?>"
+                                                    class="btn btn-danger btn-sm mt-1">Delete Icon</a>
+                                            </div>
+                                        <?php endwhile; ?>
                                     </div>
                                     <hr>
-
-                                    <!-- ✅ Questions (بدون تغيير) -->
-
 
                                     <!-- Questions -->
 
