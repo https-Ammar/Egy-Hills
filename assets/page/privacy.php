@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>privacy / policy</title>
+    <link rel="stylesheet" href="../css/main.css">
+
+
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+
 
 </head>
 
 <body>
 
-
+    <?php include './header.php'; ?>
     <div class="bg-light">
         <div class="container py-5">
             <h1 class="h1 fw-bold mb-4">Privacy Policy</h1>

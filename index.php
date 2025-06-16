@@ -1,6 +1,8 @@
 <?php
+session_start();
 include 'db.php';
 
+// جلب البيانات من الجداول
 $sliders = $conn->query("SELECT * FROM sliders");
 $about_sliders = $conn->query("SELECT * FROM about_slider");
 $about_cards = $conn->query("SELECT * FROM about_cards");
@@ -16,38 +18,50 @@ if (!$projects) {
     die("Query Error: " . $conn->error);
 }
 
-if (isset($_POST['submit_visitor'])) {
+$message = ''; // رسالة الحالة
+
+// معالجة تسجيل الزائر
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_visitor'])) {
     $name = trim($_POST['visitor_name']);
     $phone = trim($_POST['visitor_phone']);
-    $project_id = isset($_POST['project_id']) ? intval($_POST['project_id']) : 0;
 
-    if (!empty($name) && !empty($phone) && $project_id > 0) {
-        $check = $conn->prepare("SELECT id FROM projects WHERE id = ?");
-        $check->bind_param("i", $project_id);
-        $check->execute();
-        $check->store_result();
+    $project_id = null; // ليس مربوطًا بمشروع
 
-        if ($check->num_rows > 0) {
-            $stmt = $conn->prepare("INSERT INTO visitors (name, phone, project_id) VALUES (?, ?, ?)");
-            $stmt->bind_param("ssi", $name, $phone, $project_id);
-
-            if ($stmt->execute()) {
-                echo "<p style='color:green;'></p>";
-            } else {
-                echo "<p style='color:red;'>Database error: " . $stmt->error . "</p>";
-            }
-
-            $stmt->close();
+    if (!empty($name) && !empty($phone)) {
+        if ($project_id === null) {
+            $stmt = $conn->prepare("INSERT INTO visitors (project_id, name, phone) VALUES (NULL, ?, ?)");
+            $stmt->bind_param("ss", $name, $phone);
         } else {
-            echo "<p style='color:red;'>Invalid project ID.</p>";
+            $stmt = $conn->prepare("INSERT INTO visitors (project_id, name, phone) VALUES (?, ?, ?)");
+            $stmt->bind_param("iss", $project_id, $name, $phone);
         }
 
-        $check->close();
+        if ($stmt->execute()) {
+            $stmt->close();
+            // ✅ ضع رسالة النجاح في الجلسة بدلاً من URL
+            $_SESSION['success'] = "تم تسجيل بياناتك بنجاح!";
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
+        } else {
+            $message = "<p style='color:red;'>حدث خطأ في قاعدة البيانات: " . htmlspecialchars($stmt->error) . "</p>";
+            $stmt->close();
+        }
     } else {
-        echo "<p style='color:red;'>Invalid input data.</p>";
+        $message = "<p style='color:red;'>يرجى ملء جميع الحقول بشكل صحيح.</p>";
     }
 }
+
+// ✅ جلب رسالة النجاح من الجلسة إذا كانت موجودة
+if (isset($_SESSION['success'])) {
+    $message = "<p style='color:green;'>" . $_SESSION['success'] . "</p>";
+    unset($_SESSION['success']); // احذفها فورًا بعد العرض
+}
+
+// جلب الزوار المسجلين
+$visitors = $conn->query("SELECT name, phone FROM visitors ORDER BY id DESC");
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -106,6 +120,61 @@ if (isset($_POST['submit_visitor'])) {
 
 
     <?php include 'header.php'; ?>
+
+
+
+
+    <!-- 1️⃣ رابط Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 2️⃣ Modal -->
+    <div class="modal fade" id="visitorModal" tabindex="-1" aria-labelledby="visitorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="visitorModalLabel">أدخل بياناتك</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+                </div>
+                <div class="modal-body">
+                    <?php echo $message; ?>
+                    <form id="visitorForm" method="POST" action="">
+                        <div class="mb-3">
+                            <label for="visitor_name" class="form-label">الاسم:</label>
+                            <input type="text" id="visitor_name" name="visitor_name" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="visitor_phone" class="form-label">رقم الهاتف:</label>
+                            <input type="text" id="visitor_phone" name="visitor_phone" class="form-control" required>
+                        </div>
+
+                        <button type="submit" name="submit_visitor" class="btn btn-primary">إرسال</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3️⃣ روابط Bootstrap JS + Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- 4️⃣ تشغيل المودال تلقائيًا فقط إذا لم يسجل -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // تحقق من حالة التسجيل في localStorage
+            if (!localStorage.getItem('visitorRegistered')) {
+                var myModal = new bootstrap.Modal(document.getElementById('visitorModal'));
+                myModal.show();
+            }
+
+            // لما يرسل الفورم، احفظ حالة التسجيل
+            var visitorForm = document.getElementById('visitorForm');
+            visitorForm.addEventListener('submit', function () {
+                localStorage.setItem('visitorRegistered', 'true');
+            });
+        });
+    </script>
+
 
 
     <section class="site-banner site-banner--home">

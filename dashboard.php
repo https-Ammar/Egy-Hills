@@ -12,11 +12,21 @@ function uploadFile($file)
     return '';
 }
 
+// === Helper function redirect after POST to avoid form resubmission ===
+function redirectWithSuccess($page, $param)
+{
+    header("Location: $page?$param=1");
+    exit();
+}
+
 // === Main Slider ===
-if (isset($_POST['add_slider'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_slider'])) {
     $image = uploadFile($_FILES['image']);
-    echo "Received for Slider: image = $image <br>";
-    $conn->query("INSERT INTO sliders (image) VALUES ('$image')");
+    if ($conn->query("INSERT INTO sliders (image) VALUES ('$image')")) {
+        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_slider');
+    } else {
+        echo "Error inserting slider: " . $conn->error;
+    }
 }
 
 if (isset($_GET['delete_slider'])) {
@@ -24,10 +34,13 @@ if (isset($_GET['delete_slider'])) {
 }
 
 // === About Slider ===
-if (isset($_POST['add_about_slider'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_about_slider'])) {
     $image = uploadFile($_FILES['image']);
-    echo "Received for About Slider: image = $image <br>";
-    $conn->query("INSERT INTO about_slider (image) VALUES ('$image')");
+    if ($conn->query("INSERT INTO about_slider (image) VALUES ('$image')")) {
+        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_about_slider');
+    } else {
+        echo "Error inserting about slider: " . $conn->error;
+    }
 }
 
 if (isset($_GET['delete_about_slider'])) {
@@ -35,13 +48,16 @@ if (isset($_GET['delete_about_slider'])) {
 }
 
 // === About Cards ===
-if (isset($_POST['add_about_card'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_about_card'])) {
     $image = uploadFile($_FILES['image']);
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
     $link = $conn->real_escape_string($_POST['link']);
-    echo "Received for About Card: image = $image, title = $title, description = $desc, link = $link <br>";
-    $conn->query("INSERT INTO about_cards (image, title, description, link) VALUES ('$image', '$title', '$desc', '$link')");
+    if ($conn->query("INSERT INTO about_cards (image, title, description, link) VALUES ('$image', '$title', '$desc', '$link')")) {
+        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_about_card');
+    } else {
+        echo "Error inserting about card: " . $conn->error;
+    }
 }
 
 if (isset($_GET['delete_about_card'])) {
@@ -49,12 +65,15 @@ if (isset($_GET['delete_about_card'])) {
 }
 
 // === Highlights ===
-if (isset($_POST['add_highlight'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_highlight'])) {
     $image = uploadFile($_FILES['image']);
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
-    echo "Received for Highlight: image = $image, title = $title, description = $desc <br>";
-    $conn->query("INSERT INTO highlights (image, title, description) VALUES ('$image', '$title', '$desc')");
+    if ($conn->query("INSERT INTO highlights (image, title, description) VALUES ('$image', '$title', '$desc')")) {
+        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_highlight');
+    } else {
+        echo "Error inserting highlight: " . $conn->error;
+    }
 }
 
 if (isset($_GET['delete_highlight'])) {
@@ -62,23 +81,29 @@ if (isset($_GET['delete_highlight'])) {
 }
 
 // === Videos ===
-if (isset($_POST['add_video'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_video'])) {
     $url = $conn->real_escape_string($_POST['url']);
-    echo "Received for Video: url = $url <br>";
-    $conn->query("INSERT INTO videos (url) VALUES ('$url')");
+    if ($conn->query("INSERT INTO videos (url) VALUES ('$url')")) {
+        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_video');
+    } else {
+        echo "Error inserting video: " . $conn->error;
+    }
 }
 
 if (isset($_GET['delete_video'])) {
     $conn->query("DELETE FROM videos WHERE id=" . intval($_GET['delete_video']));
 }
 
-// === Ads (بدون section) ===
-if (isset($_POST['add_ad'])) {
+// === Ads ===
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_ad'])) {
     $image = uploadFile($_FILES['image']);
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
-    echo "Received for Ad: image = $image, title = $title, description = $desc <br>";
-    $conn->query("INSERT INTO ads (image, title, description) VALUES ('$image', '$title', '$desc')");
+    if ($conn->query("INSERT INTO ads (image, title, description) VALUES ('$image', '$title', '$desc')")) {
+        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_ad');
+    } else {
+        echo "Error inserting ad: " . $conn->error;
+    }
 }
 
 if (isset($_GET['delete_ad'])) {
@@ -86,13 +111,16 @@ if (isset($_GET['delete_ad'])) {
 }
 
 // === Ad Icons ===
-if (isset($_POST['add_ad_icon'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_ad_icon'])) {
     $ad_id = intval($_POST['ad_id']);
     $icon = uploadFile($_FILES['icon']);
     $title = $conn->real_escape_string($_POST['title']);
     $text = $conn->real_escape_string($_POST['text']);
-    echo "Received for Ad Icon: ad_id = $ad_id, icon = $icon, title = $title, text = $text <br>";
-    $conn->query("INSERT INTO ad_icons (ad_id, icon, title, text) VALUES ($ad_id, '$icon', '$title', '$text')");
+    if ($conn->query("INSERT INTO ad_icons (ad_id, icon, title, text) VALUES ($ad_id, '$icon', '$title', '$text')")) {
+        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_ad_icon');
+    } else {
+        echo "Error inserting ad icon: " . $conn->error;
+    }
 }
 
 if (isset($_GET['delete_ad_icon'])) {
@@ -100,12 +128,15 @@ if (isset($_GET['delete_ad_icon'])) {
 }
 
 // === Questions ===
-if (isset($_POST['add_question'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_question'])) {
     $question = $conn->real_escape_string($_POST['question']);
     $answer = $conn->real_escape_string($_POST['answer']);
     $image = uploadFile($_FILES['image']);
-    echo "Received for Question: question = $question, answer = $answer, image = $image <br>";
-    $conn->query("INSERT INTO questions (question, answer, image) VALUES ('$question', '$answer', '$image')");
+    if ($conn->query("INSERT INTO questions (question, answer, image) VALUES ('$question', '$answer', '$image')")) {
+        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_question');
+    } else {
+        echo "Error inserting question: " . $conn->error;
+    }
 }
 
 if (isset($_GET['delete_question'])) {
@@ -113,12 +144,15 @@ if (isset($_GET['delete_question'])) {
 }
 
 // === Services ===
-if (isset($_POST['add_service'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_service'])) {
     $icon = uploadFile($_FILES['icon']);
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
-    echo "Received for Service: icon = $icon, title = $title, description = $desc <br>";
-    $conn->query("INSERT INTO services (icon, title, description) VALUES ('$icon', '$title', '$desc')");
+    if ($conn->query("INSERT INTO services (icon, title, description) VALUES ('$icon', '$title', '$desc')")) {
+        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_service');
+    } else {
+        echo "Error inserting service: " . $conn->error;
+    }
 }
 
 if (isset($_GET['delete_service'])) {
@@ -135,7 +169,11 @@ $ads = $conn->query("SELECT * FROM ads");
 $ad_icons = $conn->query("SELECT * FROM ad_icons");
 $questions = $conn->query("SELECT * FROM questions");
 $services = $conn->query("SELECT * FROM services");
+
+// === Fetch visitors ===
+$visitors = $conn->query("SELECT id, name, phone FROM visitors ORDER BY id DESC");
 ?>
+
 
 
 
@@ -552,6 +590,32 @@ $services = $conn->query("SELECT * FROM services");
                 </div>
 
 
+                <!-- HTML part to display visitors -->
+                <h2>قائمة الزوار</h2>
+                <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>رقم الزائر</th>
+                            <th>الاسم</th>
+                            <th>رقم الهاتف</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($visitors && $visitors->num_rows > 0): ?>
+                            <?php while ($visitor = $visitors->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo (int) $visitor['id']; ?></td>
+                                    <td><?php echo htmlspecialchars($visitor['name']); ?></td>
+                                    <td><?php echo htmlspecialchars($visitor['phone']); ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="3" style="text-align: center;">لا يوجد زوار مسجلين</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
 
             </div>
         </section>
