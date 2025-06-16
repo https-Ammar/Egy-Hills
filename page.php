@@ -248,7 +248,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
 
-    
+
     <script>
         function addRow() {
             const container = document.getElementById('table-container');
@@ -266,11 +266,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 </html>
-
-
-
-
-
-
-
-
