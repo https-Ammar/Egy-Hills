@@ -2,7 +2,7 @@
 session_start();
 include 'db.php';
 
-// جلب البيانات من الجداول
+// ✅ جلب البيانات من الجداول الرئيسية
 $sliders = $conn->query("SELECT * FROM sliders");
 $about_sliders = $conn->query("SELECT * FROM about_slider");
 $about_cards = $conn->query("SELECT * FROM about_cards");
@@ -14,18 +14,27 @@ $projects = $conn->query("SELECT * FROM projects");
 $questions = $conn->query("SELECT * FROM questions");
 $services = $conn->query("SELECT * FROM services");
 
+// ✅ ✅ ✅ جلب كل Plan and Room وليس واحد فقط
+$plan_and_room = $conn->query("SELECT * FROM plan_and_room ORDER BY id DESC");
+
+// ✅ ✅ ✅ جلب كل Property Highlights الجديد
+$property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY id DESC");
+
+// تحقق من الاستعلامات المهمة
 if (!$projects) {
     die("Query Error: " . $conn->error);
 }
 
-$message = ''; // رسالة الحالة
+// === رسالة الحالة
+$message = '';
 
-// معالجة تسجيل الزائر
+// ✅ معالجة نموذج تسجيل الزائر
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_visitor'])) {
-    $name = trim($_POST['visitor_name']);
-    $phone = trim($_POST['visitor_phone']);
+    $name = trim($_POST['visitor_name'] ?? '');
+    $phone = trim($_POST['visitor_phone'] ?? '');
 
-    $project_id = null; // ليس مربوطًا بمشروع
+    // لا يوجد مشروع مرتبط افتراضيًا
+    $project_id = null;
 
     if (!empty($name) && !empty($phone)) {
         if ($project_id === null) {
@@ -38,30 +47,112 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_visitor'])) {
 
         if ($stmt->execute()) {
             $stmt->close();
-            // ✅ ضع رسالة النجاح في الجلسة بدلاً من URL
-            $_SESSION['success'] = "تم تسجيل بياناتك بنجاح!";
+            $_SESSION['success'] = "✅ تم تسجيل بياناتك بنجاح!";
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         } else {
-            $message = "<p style='color:red;'>حدث خطأ في قاعدة البيانات: " . htmlspecialchars($stmt->error) . "</p>";
+            $message = "<p style='color:red;'>❌ حدث خطأ في قاعدة البيانات: " . htmlspecialchars($stmt->error) . "</p>";
             $stmt->close();
         }
     } else {
-        $message = "<p style='color:red;'>يرجى ملء جميع الحقول بشكل صحيح.</p>";
+        $message = "<p style='color:red;'>⚠️ يرجى ملء جميع الحقول بشكل صحيح.</p>";
     }
 }
 
-// ✅ جلب رسالة النجاح من الجلسة إذا كانت موجودة
-if (isset($_SESSION['success'])) {
-    $message = "<p style='color:green;'>" . $_SESSION['success'] . "</p>";
-    unset($_SESSION['success']); // احذفها فورًا بعد العرض
+// ✅ إضافة Property Highlight جديد
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_property_highlight'])) {
+    $image = '';
+    if (!empty($_FILES['image']['name'])) {
+        $name = time() . '_' . basename($_FILES['image']['name']);
+        move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/' . $name);
+        $image = $name;
+    }
+
+    $title = trim($_POST['title'] ?? '');
+
+    if (!empty($title) && !empty($image)) {
+        $stmt = $conn->prepare("INSERT INTO property_highlights (image, title) VALUES (?, ?)");
+        $stmt->bind_param("ss", $image, $title);
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            $_SESSION['success'] = "✅ تم إضافة Highlight جديد بنجاح!";
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
+        } else {
+            $message = "<p style='color:red;'>❌ حدث خطأ في قاعدة البيانات: " . htmlspecialchars($stmt->error) . "</p>";
+            $stmt->close();
+        }
+    } else {
+        $message = "<p style='color:red;'>⚠️ يرجى ملء الحقول وتحميل صورة.</p>";
+    }
 }
 
-// جلب الزوار المسجلين
+// ✅ حذف Property Highlight
+if (isset($_GET['delete_property_highlight'])) {
+    $id = intval($_GET['delete_property_highlight']);
+    $conn->query("DELETE FROM property_highlights WHERE id=$id");
+    $_SESSION['success'] = "✅ تم الحذف بنجاح!";
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+// ✅ عرض رسالة النجاح إذا كانت مخزنة في الجلسة
+if (isset($_SESSION['success'])) {
+    $message = "<p style='color:green;'>" . $_SESSION['success'] . "</p>";
+    unset($_SESSION['success']);
+}
+
+// ✅ جلب قائمة الزوار
 $visitors = $conn->query("SELECT name, phone FROM visitors ORDER BY id DESC");
 ?>
 
 
+
+
+<?php
+// جلب الـ Property Highlights من قاعدة البيانات
+$property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY id DESC");
+?>
+
+
+
+<div class="container my-5">
+    <div class="row">
+        <?php if ($property_highlights && $property_highlights->num_rows > 0): ?>
+            <?php while ($row = $property_highlights->fetch_assoc()): ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top"
+                            alt="Highlight Image">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
+                        </div>
+                    </div>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p class="text-center"></p>
+        <?php endif; ?>
+    </div>
+</div>
+
+
+<!-- ✅ عرض جميع Plan and Room -->
+<?php if ($plan_and_room && $plan_and_room->num_rows > 0): ?>
+    <?php while ($row = $plan_and_room->fetch_assoc()): ?>
+        <section class="plan-and-room-card">
+            <img src="uploads/<?php echo htmlspecialchars($row['image']); ?>" alt="Plan Image">
+            <h2><?php echo htmlspecialchars($row['title']); ?></h2>
+            <p><?php echo nl2br(htmlspecialchars($row['description'])); ?></p>
+        </section>
+    <?php endwhile; ?>
+<?php endif; ?>
+
+<!-- ✅ عرض رسالة الحالة إذا وُجدت -->
+<?php if ($message): ?>
+    <div class="status-message"><?php echo $message; ?></div>
+<?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -107,7 +198,27 @@ $visitors = $conn->query("SELECT name, phone FROM visitors ORDER BY id DESC");
     <script type="text/javascript"
         src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/jquery.min.js?ver=2.2.4"
         id="jquery-js"></script>
+    <style>
+        .section-3d {
+            height: 200vh;
+            /* يمكنك تعديله حسب احتياجك */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
 
+        .section-3d img {
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+            will-change: transform;
+            position: sticky;
+            top: 30%;
+        }
+    </style>
 </head>
 
 
@@ -120,8 +231,6 @@ $visitors = $conn->query("SELECT name, phone FROM visitors ORDER BY id DESC");
 
 
     <?php include 'header.php'; ?>
-
-
 
 
     <!-- 1️⃣ رابط Bootstrap CSS -->
@@ -189,9 +298,9 @@ $visitors = $conn->query("SELECT name, phone FROM visitors ORDER BY id DESC");
 
             <div class="site-banner__txt-outer section section--large grid">
                 <div class="site-banner__txt grid__col grid__col--6">
-                    <h1 class="site-banner__title">Luxury
+                    <h1 class="site-banner__title">Egy-Hills
                         <br>
-                        House Shares
+                        real estate
                     </h1>
                     <h2 class="site-banner__subtitle">Exceptional Contemporary Living</h2>
                 </div>
@@ -584,6 +693,70 @@ $visitors = $conn->query("SELECT name, phone FROM visitors ORDER BY id DESC");
             </div>
         </section>
 
+
+
+        <!-- ============================
+     3D Mouse + Smooth Zoom Section
+============================ -->
+
+        <section class="section-3d">
+            <img src="./AI generated 3D Rendering of a Real Estate House or Home on Transparent Background - Ai Generated.jpeg"
+                alt="3D House" id="img3d" />
+        </section>
+        <style>
+            .section-3d {
+                height: 200vh;
+                /* يمكنك تعديله حسب احتياجك */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            .section-3d img {
+                width: 300px;
+                height: auto;
+                border-radius: 15px;
+                transition: transform 0.1s ease-out;
+                transform-style: preserve-3d;
+                will-change: transform;
+                position: sticky;
+                top: 20%;
+            }
+        </style>
+
+        <script>
+            const img3d = document.getElementById('img3d');
+            let rotateX = 0, rotateY = 0, scale = 1;
+            const maxScale = 2;
+
+            const updateTransform = () => {
+                img3d.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+            };
+
+            window.addEventListener('mousemove', e => {
+                const { innerWidth, innerHeight } = window;
+                const xMid = innerWidth / 2, yMid = innerHeight / 2;
+                rotateY = ((e.clientX - xMid) / xMid) * 10;
+                rotateX = ((e.clientY - yMid) / yMid) * 10;
+                updateTransform();
+            });
+
+            window.addEventListener('mouseleave', () => {
+                rotateX = rotateY = 0;
+                updateTransform();
+            });
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const zoomLimit = window.innerHeight * 0.8;
+                const progress = Math.min(scrollY / zoomLimit, 1);
+                scale = 1 + progress * (maxScale - 1);
+                updateTransform();
+            });
+        </script>
+
+
         <section class="service" data-aos="fade-up">
 
             <!-- Title and Intro -->
@@ -714,7 +887,7 @@ $visitors = $conn->query("SELECT name, phone FROM visitors ORDER BY id DESC");
 
     <section id="footer"></section>
 
-
+    <script src="./assets/script/footer.js"></script>
 
 </body>
 

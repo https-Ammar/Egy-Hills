@@ -1,7 +1,7 @@
 <?php
 include 'db.php';
 
-// === Upload Function ===
+// === وظيفة رفع الملفات ===
 function uploadFile($file)
 {
     if (!empty($file['name'])) {
@@ -12,154 +12,187 @@ function uploadFile($file)
     return '';
 }
 
-// === Helper function redirect after POST to avoid form resubmission ===
+// === إعادة التوجيه مع رسالة نجاح ===
 function redirectWithSuccess($page, $param)
 {
     header("Location: $page?$param=1");
     exit();
 }
 
-// === Main Slider ===
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_slider'])) {
-    $image = uploadFile($_FILES['image']);
-    if ($conn->query("INSERT INTO sliders (image) VALUES ('$image')")) {
-        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_slider');
-    } else {
-        echo "Error inserting slider: " . $conn->error;
-    }
+// === سجل العمليات العام ===
+function logAction($conn, $action, $table_name)
+{
+    $stmt = $conn->prepare("INSERT INTO logs (action, table_name, created_at) VALUES (?, ?, NOW())");
+    $stmt->bind_param("ss", $action, $table_name);
+    $stmt->execute();
+    $stmt->close();
 }
 
+// === سجل خاص بـ plan_and_room_logs ===
+function logPlanAndRoom($conn, $plan_id, $image, $title, $description, $action, $user)
+{
+    $stmt = $conn->prepare("INSERT INTO plan_and_room_logs (plan_id, image, title, description, action, user, date) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+    $stmt->bind_param("isssss", $plan_id, $image, $title, $description, $action, $user);
+    $stmt->execute();
+    $stmt->close();
+}
+
+// === الأقسام الأخرى: (لا تغيير) ===
+// sliders
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_slider'])) {
+    $image = uploadFile($_FILES['image']);
+    $conn->query("INSERT INTO sliders (image) VALUES ('$image')")
+        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_slider')
+        : exit("Error inserting slider: " . $conn->error);
+}
 if (isset($_GET['delete_slider'])) {
     $conn->query("DELETE FROM sliders WHERE id=" . intval($_GET['delete_slider']));
 }
 
-// === About Slider ===
+// about_slider
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_about_slider'])) {
     $image = uploadFile($_FILES['image']);
-    if ($conn->query("INSERT INTO about_slider (image) VALUES ('$image')")) {
-        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_about_slider');
-    } else {
-        echo "Error inserting about slider: " . $conn->error;
-    }
+    $conn->query("INSERT INTO about_slider (image) VALUES ('$image')")
+        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_about_slider')
+        : exit("Error inserting about slider: " . $conn->error);
 }
-
 if (isset($_GET['delete_about_slider'])) {
     $conn->query("DELETE FROM about_slider WHERE id=" . intval($_GET['delete_about_slider']));
 }
 
-// === About Cards ===
+// about_cards
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_about_card'])) {
     $image = uploadFile($_FILES['image']);
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
     $link = $conn->real_escape_string($_POST['link']);
-    if ($conn->query("INSERT INTO about_cards (image, title, description, link) VALUES ('$image', '$title', '$desc', '$link')")) {
-        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_about_card');
-    } else {
-        echo "Error inserting about card: " . $conn->error;
-    }
+    $conn->query("INSERT INTO about_cards (image, title, description, link) VALUES ('$image', '$title', '$desc', '$link')")
+        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_about_card')
+        : exit("Error inserting about card: " . $conn->error);
 }
-
 if (isset($_GET['delete_about_card'])) {
     $conn->query("DELETE FROM about_cards WHERE id=" . intval($_GET['delete_about_card']));
 }
 
-// === Highlights ===
+// highlights
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_highlight'])) {
     $image = uploadFile($_FILES['image']);
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
-    if ($conn->query("INSERT INTO highlights (image, title, description) VALUES ('$image', '$title', '$desc')")) {
-        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_highlight');
-    } else {
-        echo "Error inserting highlight: " . $conn->error;
-    }
+    $conn->query("INSERT INTO highlights (image, title, description) VALUES ('$image', '$title', '$desc')")
+        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_highlight')
+        : exit("Error inserting highlight: " . $conn->error);
 }
-
 if (isset($_GET['delete_highlight'])) {
     $conn->query("DELETE FROM highlights WHERE id=" . intval($_GET['delete_highlight']));
 }
 
-// === Videos ===
+// videos
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_video'])) {
     $url = $conn->real_escape_string($_POST['url']);
-    if ($conn->query("INSERT INTO videos (url) VALUES ('$url')")) {
-        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_video');
-    } else {
-        echo "Error inserting video: " . $conn->error;
-    }
+    $conn->query("INSERT INTO videos (url) VALUES ('$url')")
+        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_video')
+        : exit("Error inserting video: " . $conn->error);
 }
-
 if (isset($_GET['delete_video'])) {
     $conn->query("DELETE FROM videos WHERE id=" . intval($_GET['delete_video']));
 }
 
-// === Ads ===
+// ads
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_ad'])) {
     $image = uploadFile($_FILES['image']);
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
-    if ($conn->query("INSERT INTO ads (image, title, description) VALUES ('$image', '$title', '$desc')")) {
-        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_ad');
-    } else {
-        echo "Error inserting ad: " . $conn->error;
-    }
+    $conn->query("INSERT INTO ads (image, title, description) VALUES ('$image', '$title', '$desc')")
+        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_ad')
+        : exit("Error inserting ad: " . $conn->error);
 }
-
 if (isset($_GET['delete_ad'])) {
     $conn->query("DELETE FROM ads WHERE id=" . intval($_GET['delete_ad']));
 }
 
-// === Ad Icons ===
+// ad_icons
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_ad_icon'])) {
     $ad_id = intval($_POST['ad_id']);
     $icon = uploadFile($_FILES['icon']);
     $title = $conn->real_escape_string($_POST['title']);
     $text = $conn->real_escape_string($_POST['text']);
-    if ($conn->query("INSERT INTO ad_icons (ad_id, icon, title, text) VALUES ($ad_id, '$icon', '$title', '$text')")) {
-        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_ad_icon');
-    } else {
-        echo "Error inserting ad icon: " . $conn->error;
-    }
+    $conn->query("INSERT INTO ad_icons (ad_id, icon, title, text) VALUES ($ad_id, '$icon', '$title', '$text')")
+        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_ad_icon')
+        : exit("Error inserting ad icon: " . $conn->error);
 }
-
 if (isset($_GET['delete_ad_icon'])) {
     $conn->query("DELETE FROM ad_icons WHERE id=" . intval($_GET['delete_ad_icon']));
 }
 
-// === Questions ===
+// questions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_question'])) {
     $question = $conn->real_escape_string($_POST['question']);
     $answer = $conn->real_escape_string($_POST['answer']);
     $image = uploadFile($_FILES['image']);
-    if ($conn->query("INSERT INTO questions (question, answer, image) VALUES ('$question', '$answer', '$image')")) {
-        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_question');
-    } else {
-        echo "Error inserting question: " . $conn->error;
-    }
+    $conn->query("INSERT INTO questions (question, answer, image) VALUES ('$question', '$answer', '$image')")
+        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_question')
+        : exit("Error inserting question: " . $conn->error);
 }
-
 if (isset($_GET['delete_question'])) {
     $conn->query("DELETE FROM questions WHERE id=" . intval($_GET['delete_question']));
 }
 
-// === Services ===
+// services
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_service'])) {
     $icon = uploadFile($_FILES['icon']);
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
-    if ($conn->query("INSERT INTO services (icon, title, description) VALUES ('$icon', '$title', '$desc')")) {
-        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_service');
-    } else {
-        echo "Error inserting service: " . $conn->error;
-    }
+    $conn->query("INSERT INTO services (icon, title, description) VALUES ('$icon', '$title', '$desc')")
+        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_service')
+        : exit("Error inserting service: " . $conn->error);
 }
-
 if (isset($_GET['delete_service'])) {
     $conn->query("DELETE FROM services WHERE id=" . intval($_GET['delete_service']));
 }
 
-// === Fetch Data ===
+// === ✅ Property Highlights ===
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_property_highlight'])) {
+    $image = uploadFile($_FILES['image']);
+    $title = $conn->real_escape_string($_POST['title']);
+    $conn->query("INSERT INTO property_highlights (image, title) VALUES ('$image', '$title')")
+        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_property_highlight')
+        : exit("Error inserting property highlight: " . $conn->error);
+}
+if (isset($_GET['delete_property_highlight'])) {
+    $conn->query("DELETE FROM property_highlights WHERE id=" . intval($_GET['delete_property_highlight']));
+}
+
+// === ✅ Plan and Room مع سجل خاص ===
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_plan_and_room'])) {
+    $image = uploadFile($_FILES['image']);
+    $title = $conn->real_escape_string($_POST['title']);
+    $description = $conn->real_escape_string($_POST['description']);
+
+    if ($conn->query("INSERT INTO plan_and_room (image, title, description) VALUES ('$image', '$title', '$description')")) {
+        $last_id = $conn->insert_id;
+        redirectWithSuccess($_SERVER['PHP_SELF'], 'add_plan_and_room');
+    } else {
+        exit("Error inserting plan and room: " . $conn->error);
+    }
+}
+if (isset($_GET['delete_plan_and_room'])) {
+    $id = intval($_GET['delete_plan_and_room']);
+    $result = $conn->query("SELECT * FROM plan_and_room WHERE id=$id");
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $image = $row['image'];
+        $title = $row['title'];
+        $description = $row['description'];
+        $user = 'Admin';
+
+        $conn->query("DELETE FROM plan_and_room WHERE id=$id");
+        logPlanAndRoom($conn, $id, $image, $title, $description, 'delete', $user);
+        redirectWithSuccess($_SERVER['PHP_SELF'], 'delete_plan_and_room');
+    }
+}
+
+// === استعلامات العرض ===
 $sliders = $conn->query("SELECT * FROM sliders");
 $about_sliders = $conn->query("SELECT * FROM about_slider");
 $about_cards = $conn->query("SELECT * FROM about_cards");
@@ -169,10 +202,16 @@ $ads = $conn->query("SELECT * FROM ads");
 $ad_icons = $conn->query("SELECT * FROM ad_icons");
 $questions = $conn->query("SELECT * FROM questions");
 $services = $conn->query("SELECT * FROM services");
-
-// === Fetch visitors ===
+$plan_and_room = $conn->query("SELECT * FROM plan_and_room");
+$property_highlights = $conn->query("SELECT * FROM property_highlights");
 $visitors = $conn->query("SELECT id, name, phone FROM visitors ORDER BY id DESC");
+$logs = $conn->query("SELECT * FROM logs ORDER BY created_at DESC");
+$plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY date DESC");
 ?>
+
+
+
+
 
 
 
@@ -619,6 +658,114 @@ $visitors = $conn->query("SELECT id, name, phone FROM visitors ORDER BY id DESC"
 
             </div>
         </section>
+
+
+
+        <section>
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" required>
+                <input type="text" name="title" placeholder="Title" required>
+                <textarea name="description" placeholder="Description" required></textarea>
+                <button type="submit" name="add_plan_and_room">Add Plan and Room</button>
+            </form>
+
+
+
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $plan_and_room->fetch_assoc()): ?>
+                        <tr>
+                            <td><img src="uploads/<?php echo $row['image']; ?>" width="100"></td>
+                            <td><?php echo htmlspecialchars($row['title']); ?></td>
+                            <td><?php echo htmlspecialchars($row['description']); ?></td>
+                            <td>
+                                <a href="?delete_plan_and_room=<?php echo $row['id']; ?>"
+                                    onclick="return confirm('هل أنت متأكد من الحذف؟')">🗑️ حذف</a>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+
+            <h3>Plan and Room Logs</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>User</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($log = $plan_and_room_logs->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo $log['action']; ?></td>
+                            <td><?php echo htmlspecialchars($log['title']); ?></td>
+                            <td><?php echo htmlspecialchars($log['description']); ?></td>
+                            <td><?php echo htmlspecialchars($log['user']); ?></td>
+                            <td><?php echo $log['date']; ?></td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+
+        </section>
+
+
+
+        <section>
+            <form method="POST" enctype="multipart/form-data">
+                <h3>Add Property Highlight</h3>
+                <input type="file" name="image" required><br>
+                <input type="text" name="title" placeholder="Title" required><br>
+                <button type="submit" name="add_property_highlight">Add Property Highlight</button>
+            </form>
+
+            <?php if ($property_highlights && $property_highlights->num_rows > 0): ?>
+                <h3>قائمة الـ Property Highlights</h3>
+                <table border="1" cellpadding="10">
+                    <thead>
+                        <tr>
+                            <th>الصورة</th>
+                            <th>العنوان</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $property_highlights->fetch_assoc()): ?>
+                            <tr>
+                                <td>
+                                    <img src="uploads/<?php echo htmlspecialchars($row['image']); ?>" alt="" width="100">
+                                </td>
+                                <td>
+                                    <?php echo htmlspecialchars($row['title']); ?>
+                                </td>
+                                <td>
+                                    <a href="?delete_property_highlight=<?php echo $row['id']; ?>"
+                                        onclick="return confirm('هل أنت متأكد من الحذف؟');">حذف</a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>🚫 لا يوجد أي Property Highlights حتى الآن.</p>
+            <?php endif; ?>
+
+        </section>
+
+
 
         <script>
             const body = document.querySelector("body"),

@@ -158,7 +158,7 @@
 <!-- ============================
      Custom Scripts
 ============================ -->
-<script src="./assets/script/footer.js"></script>
+
 
 <!-- ============================
      RJ Investments Scripts

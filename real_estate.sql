@@ -237,3 +237,29 @@ CREATE TABLE IF NOT EXISTS `users` (
     `password` VARCHAR(255) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+DROP TABLE IF EXISTS plan_and_room;
+
+CREATE TABLE plan_and_room (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    image VARCHAR(255),
+    title VARCHAR(255),
+    description TEXT
+);
+
+CREATE TABLE plan_and_room_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    plan_id INT,
+    image VARCHAR(255),
+    title VARCHAR(255),
+    description TEXT,
+    action VARCHAR(50),
+    user VARCHAR(50),
+    date DATETIME
+);
+
+CREATE TABLE property_highlights (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    image VARCHAR(255),
+    title VARCHAR(255)
+);

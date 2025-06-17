@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section class="section-3d">
+        <img src="./AI generated 3D Rendering of a Real Estate House or Home on Transparent Background - Ai Generated.jpeg"
+            alt="3D House" id="img3d" />
+    </section>
+
+    <style>
+        .section-3d {
+            height: 200vh;
+            /* يمكنك تعديله حسب احتياجك */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .section-3d img {
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+            will-change: transform;
+            position: sticky;
+            top: 30%;
+        }
+    </style>
+
+    <script>
+        const img3d = document.getElementById('img3d');
+        let rotateX = 0, rotateY = 0, scale = 1;
+        const maxScale = 2;
+
+        const updateTransform = () => {
+            img3d.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+        };
+
+        window.addEventListener('mousemove', e => {
+            const { innerWidth, innerHeight } = window;
+            const xMid = innerWidth / 2, yMid = innerHeight / 2;
+            rotateY = ((e.clientX - xMid) / xMid) * 10;
+            rotateX = ((e.clientY - yMid) / yMid) * 10;
+            updateTransform();
+        });
+
+        window.addEventListener('mouseleave', () => {
+            rotateX = rotateY = 0;
+            updateTransform();
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const zoomLimit = window.innerHeight * 0.8;
+            const progress = Math.min(scrollY / zoomLimit, 1);
+            scale = 1 + progress * (maxScale - 1);
+            updateTransform();
+        });
+    </script>
+
+
+
+</body>
+
+</html>
