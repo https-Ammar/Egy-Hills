@@ -75,7 +75,7 @@ $about_cards = $conn->query("SELECT * FROM about_cards");
                     <div class="image-column col-md-6 col-sm-12 aos-init aos-animate" data-aos="fade-left">
                         <div class="inner-column" data-wow-delay="0ms" data-wow-duration="1500ms">
                             <div class="image">
-                                <img src="./uploads/<?php echo $row['image']; ?>" alt="About EGY-HILLS">
+                                <img src="/uploads/<?php echo $row['image']; ?>" alt="About EGY-HILLS">
                                 <div class="overlay-box">
                                     <div class="year-box">
                                         <span class="number">5</span> Years <br> of Excellence <br> in Real Estate

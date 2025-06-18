@@ -173,14 +173,36 @@ function e($value)
 
 
                 <div class="row">
-                    <div class="col-6">
-                        <div class="cover_img_product mt-5 rounded-5"
-                            style="background: url('../img/faq-bc.jpg') center/cover no-repeat; height: 40vh;"></div>
-                    </div>
-                    <div class="col-6">
-                        <div class="cover_img_product mt-5 rounded-5"
-                            style="background: url('../img/faq-bc.jpg') center/cover no-repeat; height: 40vh;"></div>
-                    </div>
+                    <?php if (!empty($images)): ?>
+                        <?php foreach ($images as $img): ?>
+
+                            <div class="col-6">
+                                <div class="cover_img_product mt-5 rounded-5"
+                                    style="background: url('uploads/<?= e($img) ?>') center/cover no-repeat; height: 40vh;">
+                                </div>
+                            </div>
+
+
+
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>لا توجد صور متعددة.</p>
+                    <?php endif; ?>
+
+
+
+                    <?php if (!empty($project['last_image'])): ?>
+
+                        <div class="col-6">
+                            <div class="cover_img_product mt-5 rounded-5"
+                                style="background: url('uploads/<?= e($project['last_image']) ?>') center/cover no-repeat; height: 40vh;">
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <p>لا توجد صورة أخيرة.</p>
+                    <?php endif; ?>
+
+
 
 
                     <div class="col-lg-12 mt-5">
@@ -221,59 +243,27 @@ function e($value)
                 </div>
 
 
-                <div class="table-responsive">
-                    <?php if (!empty($table_rows)): ?>
-                        <table>
-                            <tr>
-                                <th>العمود 1</th>
-                                <th>العمود 2</th>
-                            </tr>
-                            <?php foreach ($table_rows as $row): ?>
+
+                <?php if (!empty($table_rows)): ?>
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle text-center">
+                            <thead>
                                 <tr>
-                                    <td><?= e($row['col1']) ?></td>
-                                    <td><?= e($row['col2']) ?></td>
+                                    <th>العمود 1</th>
+                                    <th>العمود 2</th>
                                 </tr>
-                            <?php endforeach; ?>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($table_rows as $row): ?>
+                                    <tr>
+                                        <td><?= e($row['col1']) ?></td>
+                                        <td><?= e($row['col2']) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
                         </table>
-                    <?php else: ?>
-                        <p>لا توجد صفوف جدول.</p>
-                    <?php endif; ?>
-
-                    <table class="table  table-bordered align-middle text-center">
-
-
-
-                        <tbody>
-
-
-                            <tr>
-                                <td>Mudoks gallery</td>
-                                <td>1/1</td>
-                                <td>625</td>
-                                <td>€120.000</td>
-                                <td>€1.200</td>
-                            </tr>
-                            <tr>
-                                <td>Mudoks gallery</td>
-                                <td>1/1</td>
-                                <td>625</td>
-                                <td>€120.000</td>
-                                <td>€1.200</td>
-                            </tr>
-                            <tr>
-                                <td>Mudoks gallery</td>
-                                <td>1/1</td>
-                                <td>625</td>
-                                <td>€120.000</td>
-                                <td>€1.200</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-
-
-
+                    </div>
+                <?php endif; ?>
 
             </div>
 
@@ -334,27 +324,3 @@ function e($value)
 </body>
 
 </html>
-
-
-<!-- 
-<li><strong>المساحة بالمتر:</strong> <?= e($project['size']) ?></li>
-
-<?php if (!empty($images)): ?>
-    <?php foreach ($images as $img): ?>
-        <img src="uploads/<?= e($img) ?>" alt="صورة متعددة">
-    <?php endforeach; ?>
-<?php else: ?>
-    <p>لا توجد صور متعددة.</p>
-<?php endif; ?>
-
-<h2>عنوان أخير ونص أخير</h2>
-
-
-<h2>صورة أخيرة</h2>
-<?php if (!empty($project['last_image'])): ?>
-    <img src="uploads/<?= e($project['last_image']) ?>" alt="صورة أخيرة">
-<?php else: ?>
-    <p>لا توجد صورة أخيرة.</p>
-<?php endif; ?>
-
--->
