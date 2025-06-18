@@ -140,129 +140,152 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>إضافة مشروع</title>
-    <style>
-        body {
-            max-width: 800px;
-            margin: auto;
-            font-family: Arial;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        input,
-        textarea,
-        button {
-            padding: 8px;
-            font-size: 16px;
-        }
-
-        .message {
-            color: green;
-            margin: 20px 0;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <title>Add Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <h1>إضافة مشروع متكامل</h1>
+<body class="container py-5">
+
+    <h1 class="mb-4">Add New Project</h1>
 
     <?php if ($message): ?>
-        <p class="message"><?= htmlspecialchars($message) ?></p>
+        <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
     <?php endif; ?>
 
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" class="row g-3">
 
-        <label>صورة كافر</label>
-        <input type="file" name="cover_image" accept="image/*" required>
-
-        <label>فيديو أو صورة رئيسية</label>
-        <input type="file" name="main_media" accept="image/*,video/mp4">
-
-        <label>عنوان المشروع</label>
-        <input type="text" name="title" value="">
-
-        <label>المكان</label>
-        <input type="text" name="location" value="">
-
-        <label>المساحة</label>
-        <input type="text" name="area" value="">
-
-        <label>عدد الغرف</label>
-        <input type="number" name="beds" value="0">
-
-        <label>عدد الحمامات</label>
-        <input type="number" name="baths" value="0">
-
-        <label>المساحة بالمتر</label>
-        <input type="text" name="size" value="">
-
-        <label>السعر</label>
-        <input type="text" name="price" value="">
-
-        <label>عنوان تعريفي</label>
-        <input type="text" name="intro_title" value="">
-
-        <label>وصف</label>
-        <textarea name="intro_text"></textarea>
-
-        <label>تفاصيل (سطر لكل نقطة)</label>
-        <textarea name="list_text"></textarea>
-
-        <label>عنوان إضافي</label>
-        <input type="text" name="section_title" value="">
-
-        <label>نص إضافي</label>
-        <textarea name="section_text"></textarea>
-
-        <label>صورة إضافية (SVG أو أيقونة)</label>
-        <input type="file" name="svg_file" accept="image/*,image/svg+xml">
-
-        <label>صور متعددة</label>
-        <input type="file" name="multi_images[]" multiple accept="image/*">
-
-        <label>عنوان أخير</label>
-        <input type="text" name="last_title" value="">
-
-        <label>نص أخير</label>
-        <textarea name="last_text"></textarea>
-
-        <label>صورة أخيرة</label>
-        <input type="file" name="last_image" accept="image/*">
-
-        <div>
-            <h3>إضافة صفوف جدول</h3>
-            <button type="button" onclick="addRow()">إضافة صف</button>
-            <div id="table-container"></div>
+        <div class="col-12">
+            <label class="form-label">Cover Image</label>
+            <input type="file" name="cover_image" accept="image/*" required class="form-control">
         </div>
 
-        <button type="submit">إضافة المشروع</button>
+        <div class="col-12">
+            <label class="form-label">Main Media (Image or Video)</label>
+            <input type="file" name="main_media" accept="image/*,video/mp4" class="form-control">
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Project Title</label>
+            <input type="text" name="title" value="" class="form-control">
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Location</label>
+            <input type="text" name="location" value="" class="form-control">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Area</label>
+            <input type="text" name="area" value="" class="form-control">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Number of Rooms</label>
+            <input type="number" name="beds" value="0" class="form-control">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Number of Bathrooms</label>
+            <input type="number" name="baths" value="0" class="form-control">
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Size (sqm)</label>
+            <input type="text" name="size" value="" class="form-control">
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Price</label>
+            <input type="text" name="price" value="" class="form-control">
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Intro Title</label>
+            <input type="text" name="intro_title" value="" class="form-control">
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Intro Description</label>
+            <textarea name="intro_text" rows="3" class="form-control"></textarea>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Details (one point per line)</label>
+            <textarea name="list_text" rows="3" class="form-control"></textarea>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Additional Section Title</label>
+            <input type="text" name="section_title" value="" class="form-control">
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Additional Section Text</label>
+            <textarea name="section_text" rows="3" class="form-control"></textarea>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Additional Image (SVG or Icon)</label>
+            <input type="file" name="svg_file" accept="image/*,image/svg+xml" class="form-control">
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Multiple Images</label>
+            <input type="file" name="multi_images[]" multiple accept="image/*" class="form-control">
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Final Section Title</label>
+            <input type="text" name="last_title" value="" class="form-control">
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Final Section Text</label>
+            <textarea name="last_text" rows="3" class="form-control"></textarea>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Final Image</label>
+            <input type="file" name="last_image" accept="image/*" class="form-control">
+        </div>
+
+        <div class="col-12">
+            <h5 class="mt-4">Add Table Rows</h5>
+            <button type="button" class="btn btn-secondary mb-3" onclick="addRow()">Add Row</button>
+            <div id="table-container" class="row g-2"></div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Add Project</button>
+        </div>
+
     </form>
-
-
 
     <script>
         function addRow() {
             const container = document.getElementById('table-container');
             const row = document.createElement('div');
+            row.className = 'row g-2 mb-2';
             for (let i = 0; i < 2; i++) {
+                const col = document.createElement('div');
+                col.className = 'col';
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.name = `table_rows[${container.childElementCount}][]`;
-                input.placeholder = 'بيان';
-                row.appendChild(input);
+                input.placeholder = 'Value';
+                input.className = 'form-control';
+                col.appendChild(input);
+                row.appendChild(col);
             }
             container.appendChild(row);
         }
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,13 @@
+
 <?php
+session_start();
 include 'db.php';
+
+// ✅ تحقق من الجلسة - يمنع الوصول إذا لم يكن المستخدم مسجل دخول
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 
 // === وظيفة رفع الملفات ===
 function uploadFile($file)
@@ -37,7 +45,11 @@ function logPlanAndRoom($conn, $plan_id, $image, $title, $description, $action, 
     $stmt->close();
 }
 
-// === الأقسام الأخرى: (لا تغيير) ===
+// === استعلامات المشاريع ===
+$result = $conn->query("SELECT id, image, title, location, price FROM projects");
+
+// === الأقسام الأخرى كما هي ===
+
 // sliders
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_slider'])) {
     $image = uploadFile($_FILES['image']);
@@ -151,7 +163,7 @@ if (isset($_GET['delete_service'])) {
     $conn->query("DELETE FROM services WHERE id=" . intval($_GET['delete_service']));
 }
 
-// === ✅ Property Highlights ===
+// Property Highlights
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_property_highlight'])) {
     $image = uploadFile($_FILES['image']);
     $title = $conn->real_escape_string($_POST['title']);
@@ -163,7 +175,7 @@ if (isset($_GET['delete_property_highlight'])) {
     $conn->query("DELETE FROM property_highlights WHERE id=" . intval($_GET['delete_property_highlight']));
 }
 
-// === ✅ Plan and Room مع سجل خاص ===
+// Plan and Room مع سجل خاص
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_plan_and_room'])) {
     $image = uploadFile($_FILES['image']);
     $title = $conn->real_escape_string($_POST['title']);
@@ -216,6 +228,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -239,7 +252,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 <div class="logo-image">
                     <img src="images/logo.png" alt="">
                 </div>
-                <span class="logo_name">CodingLab</span>
+                <span class="logo_name">Egy - - Hills</span>
             </div>
             <div class="menu-items">
 
@@ -307,6 +320,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                             <i class="uil uil-comments"></i>
                             <span class="text">Comments</span>
                             <!-- <span class="number"><?= $booking_count ?></span> -->
+                            <span class="number">10,120</span>
 
                         </div>
                         <div class="box box3">
@@ -332,13 +346,36 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
 
 
+
+
                             <div class="container my-5" id="dashboard">
+                                <div class="block_">
+                                    <ul class="d-flex align-items-center justify-content-between">
+                                        <li>ID</li>
+                                        <li>Name</li>
+                                        <li>Phone</li>
+                                    </ul>
 
-
+                                    <?php if ($visitors && $visitors->num_rows > 0): ?>
+                                        <?php while ($visitor = $visitors->fetch_assoc()): ?>
+                                            <ul class="d-flex align-items-center justify-content-between">
+                                                <li><?php echo (int) $visitor['id']; ?></li>
+                                                <li><?php echo htmlspecialchars($visitor['name']); ?></li>
+                                                <li><?php echo htmlspecialchars($visitor['phone']); ?></li>
+                                            </ul>
+                                        <?php endwhile; ?>
+                                    <?php else: ?>
+                                        <ul>
+                                            <li>no user</li>
+                                        </ul>
+                                    <?php endif; ?>
+                                </div>
                             </div>
 
 
-                            <!--  -->
+
+
+
 
                             <div id="content">
                                 <div class="container py-5">
@@ -494,127 +531,350 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                         <?php endwhile; ?>
                                     </div>
                                     <hr>
+                                    <!-- About Slider -->
+                                    <h2>About Slider</h2>
+                                    <form method="POST" enctype="multipart/form-data" class="mb-3">
+                                        <div class="mb-3">
+                                            <input type="file" name="image" class="form-control" required>
+                                        </div>
+                                        <button name="add_about_slider" class="btn btn-primary">Add About
+                                            Slider</button>
+                                    </form>
+                                    <div class="mb-4">
+                                        <?php while ($row = $about_sliders->fetch_assoc()): ?>
+                                            <div class="d-inline-block text-center me-3">
+                                                <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="100"
+                                                    class="img-thumbnail">
+
+                                                <a href="?delete_about_slider=<?= intval($row['id']) ?>"
+                                                    class="btn btn-danger btn-sm mt-1">Delete</a>
+                                            </div>
+                                        <?php endwhile; ?>
+                                    </div>
+                                    <hr>
+                                    <h2>About Cards</h2>
+                                    <form method="POST" enctype="multipart/form-data" class="mb-3">
+                                        <div class="mb-3">
+                                            <input type="file" name="image" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" name="title" placeholder="Title" class="form-control"
+                                                required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <textarea name="description" placeholder="Description" class="form-control"
+                                                required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" name="link" placeholder="Link" class="form-control"
+                                                required>
+                                        </div>
+                                        <button name="add_about_card" class="btn btn-primary">Add Card</button>
+                                    </form>
+                                    <div class="mb-4">
+                                        <?php while ($row = $about_cards->fetch_assoc()): ?>
+                                            <div class="card d-inline-block text-center me-3 mb-3" style="width: 150px;">
+                                                <img src="uploads/<?= htmlspecialchars($row['image']) ?>"
+                                                    class="card-img-top">
+                                                <div class="card-body">
+                                                    <h6 class="card-title"><?= htmlspecialchars($row['title']) ?></h6>
+                                                    <a href="?delete_about_card=<?= intval($row['id']) ?>"
+                                                        class="btn btn-danger btn-sm">Delete</a>
+                                                </div>
+                                            </div>
+                                        <?php endwhile; ?>
+                                    </div>
+                                    <hr>
+                                    <h2>Why Choose Us</h2>
+                                    <form method="POST" enctype="multipart/form-data" class="mb-3">
+                                        <div class="mb-3">
+                                            <input type="text" name="question" placeholder="Question"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <textarea name="answer" placeholder="Answer" class="form-control"
+                                                required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="file" name="image" class="form-control">
+                                        </div>
+                                        <button name="add_question" class="btn btn-primary">Add Q&A</button>
+                                    </form>
+                                    <ul class="list-group mb-4">
+                                        <?php while ($row = $questions->fetch_assoc()): ?>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <?= htmlspecialchars($row['question']) ?>
+                                                <a href="?delete_question=<?= intval($row['id']) ?>"
+                                                    class="btn btn-danger btn-sm">Delete</a>
+                                            </li>
+                                        <?php endwhile; ?>
+                                    </ul>
+                                    <hr>
+
+                                    <!-- Services -->
+                                    <h2>Our Real Estate Services</h2>
+                                    <form method="POST" enctype="multipart/form-data" class="mb-3">
+                                        <div class="mb-3">
+                                            <input type="file" name="icon" accept="image/*,.svg" class="form-control"
+                                                required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" name="title" placeholder="Title" class="form-control"
+                                                required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <textarea name="description" placeholder="Description" class="form-control"
+                                                required></textarea>
+                                        </div>
+                                        <button name="add_service" class="btn btn-primary">Add Service</button>
+                                    </form>
+                                    <div class="mb-4">
+                                        <?php while ($row = $services->fetch_assoc()): ?>
+                                            <div class="card d-inline-block text-center me-3 mb-3" style="width: 150px;">
+                                                <img src="uploads/<?= htmlspecialchars($row['icon']) ?>"
+                                                    class="card-img-top" width="50">
+                                                <div class="card-body">
+                                                    <h6 class="card-title"><?= htmlspecialchars($row['title']) ?></h6>
+                                                    <p class="card-text"><?= htmlspecialchars($row['description']) ?></p>
+                                                    <a href="?delete_service=<?= intval($row['id']) ?>"
+                                                        class="btn btn-danger btn-sm">Delete</a>
+                                                </div>
+                                            </div>
+                                        <?php endwhile; ?>
+                                    </div>
+
+
 
                                     <!-- Questions -->
 
+                                    <!-- === Plan and Room Section === -->
+<section class="container my-5">
+  <h3 class="mb-4">Add Plan and Room</h3>
+  <form method="POST" enctype="multipart/form-data" class="mb-5">
+    <div class="mb-3">
+      <label for="planImage" class="form-label">Upload Image</label>
+      <input type="file" name="image" id="planImage" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="planTitle" class="form-label">Title</label>
+      <input type="text" name="title" id="planTitle" class="form-control" placeholder="Enter Title" required>
+    </div>
+    <div class="mb-3">
+      <label for="planDescription" class="form-label">Description</label>
+      <textarea name="description" id="planDescription" class="form-control" placeholder="Enter Description" rows="4" required></textarea>
+    </div>
+    <button type="submit" name="add_plan_and_room" class="btn btn-primary">Add Plan and Room</button>
+  </form>
+
+  <h4>Plan and Room List</h4>
+  <div class="table-responsive mb-5">
+    <table class="table table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php while ($row = $plan_and_room->fetch_assoc()): ?>
+          <tr>
+            <td><img src="uploads/<?php echo $row['image']; ?>" width="100" class="img-thumbnail"></td>
+            <td><?php echo htmlspecialchars($row['title']); ?></td>
+            <td><?php echo htmlspecialchars($row['description']); ?></td>
+            <td>
+              <a href="?delete_plan_and_room=<?php echo $row['id']; ?>" 
+                 class="btn btn-danger btn-sm"
+                 onclick="return confirm('Are you sure you want to delete this item?')">
+                 🗑️ Delete
+              </a>
+            </td>
+          </tr>
+        <?php endwhile; ?>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Plan and Room Logs</h4>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead class="table-secondary">
+        <tr>
+          <th>Action</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>User</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php while ($log = $plan_and_room_logs->fetch_assoc()): ?>
+          <tr>
+            <td><?php echo htmlspecialchars($log['action']); ?></td>
+            <td><?php echo htmlspecialchars($log['title']); ?></td>
+            <td><?php echo htmlspecialchars($log['description']); ?></td>
+            <td><?php echo htmlspecialchars($log['user']); ?></td>
+            <td><?php echo htmlspecialchars($log['date']); ?></td>
+          </tr>
+        <?php endwhile; ?>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- === Property Highlight Section === -->
+<section class="container my-5">
+  <h3 class="mb-4">Add Property Highlight</h3>
+  <form method="POST" enctype="multipart/form-data" class="mb-5">
+    <div class="mb-3">
+      <label for="highlightImage" class="form-label">Upload Image</label>
+      <input type="file" name="image" id="highlightImage" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="highlightTitle" class="form-label">Title</label>
+      <input type="text" name="title" id="highlightTitle" class="form-control" placeholder="Enter Title" required>
+    </div>
+    <button type="submit" name="add_property_highlight" class="btn btn-success">Add Property Highlight</button>
+  </form>
+
+  <?php if ($property_highlights && $property_highlights->num_rows > 0): ?>
+    <h4>Property Highlights List</h4>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php while ($row = $property_highlights->fetch_assoc()): ?>
+            <tr>
+              <td>
+                <img src="uploads/<?php echo htmlspecialchars($row['image']); ?>" width="100" class="img-thumbnail">
+              </td>
+              <td><?php echo htmlspecialchars($row['title']); ?></td>
+              <td>
+                <a href="?delete_property_highlight=<?php echo $row['id']; ?>" 
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Are you sure you want to delete this item?');">
+                  Delete
+                </a>
+              </td>
+            </tr>
+          <?php endwhile; ?>
+        </tbody>
+      </table>
+    </div>
+  <?php else: ?>
+    <div class="alert alert-warning">🚫 No Property Highlights available yet.</div>
+  <?php endif; ?>
+</section>
+
+
+                                    </section>
+
                                 </div>
 
 
                             </div>
-                            <div id="analytics"> <!-- About Cards -->
 
-                                <!-- About Slider -->
-                                <h2>About Slider</h2>
-                                <form method="POST" enctype="multipart/form-data" class="mb-3">
-                                    <div class="mb-3">
-                                        <input type="file" name="image" class="form-control" required>
-                                    </div>
-                                    <button name="add_about_slider" class="btn btn-primary">Add About
-                                        Slider</button>
-                                </form>
-                                <div class="mb-4">
-                                    <?php while ($row = $about_sliders->fetch_assoc()): ?>
-                                        <div class="d-inline-block text-center me-3">
-                                            <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="100"
-                                                class="img-thumbnail">
 
-                                            <a href="?delete_about_slider=<?= intval($row['id']) ?>"
-                                                class="btn btn-danger btn-sm mt-1">Delete</a>
-                                        </div>
-                                    <?php endwhile; ?>
-                                </div>
-                                <hr>
-                                <h2>About Cards</h2>
-                                <form method="POST" enctype="multipart/form-data" class="mb-3">
-                                    <div class="mb-3">
-                                        <input type="file" name="image" class="form-control" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" name="title" placeholder="Title" class="form-control"
-                                            required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <textarea name="description" placeholder="Description" class="form-control"
-                                            required></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" name="link" placeholder="Link" class="form-control" required>
-                                    </div>
-                                    <button name="add_about_card" class="btn btn-primary">Add Card</button>
-                                </form>
-                                <div class="mb-4">
-                                    <?php while ($row = $about_cards->fetch_assoc()): ?>
-                                        <div class="card d-inline-block text-center me-3 mb-3" style="width: 150px;">
-                                            <img src="uploads/<?= htmlspecialchars($row['image']) ?>" class="card-img-top">
-                                            <div class="card-body">
-                                                <h6 class="card-title"><?= htmlspecialchars($row['title']) ?></h6>
-                                                <a href="?delete_about_card=<?= intval($row['id']) ?>"
-                                                    class="btn btn-danger btn-sm">Delete</a>
-                                            </div>
-                                        </div>
-                                    <?php endwhile; ?>
-                                </div>
-                                <hr>
-                            </div>
 
+                 
+                            <!-- ✅ قسم المشاريع بشكل مميز مع Bootstrap -->
+<div id="analytics" class="container my-5">
+  <div class="row">
+    <?php if ($result && $result->num_rows > 0): ?>
+      <?php while ($row = $result->fetch_assoc()): ?>
+        <div class="col-md-4 mb-4" id="card-<?= $row['id'] ?>">
+          <div class="card shadow-sm border-0">
+            <?php if (!empty($row['image'])): ?>
+              <img src="uploads/<?= htmlspecialchars($row['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>">
+            <?php endif; ?>
+            <div class="card-body">
+              <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
+              <p class="card-text mb-1">📍 <?= htmlspecialchars($row['location']) ?></p>
+              <p class="card-text">💰 <?= htmlspecialchars($row['price']) ?></p>
+
+              <div class="d-flex justify-content-between">
+                <button class="btn btn-danger btn-sm" onclick="deleteProject(<?= $row['id'] ?>)">🗑️ حذف</button>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="collapse" data-bs-target="#edit-<?= $row['id'] ?>">
+                  ✏️ تعديل
+                </button>
+              </div>
+
+              <!-- ✅ بوب أب التعديل باستخدام Collapse -->
+              <div class="collapse mt-3" id="edit-<?= $row['id'] ?>">
+                <form onsubmit="event.preventDefault(); updateProject(<?= $row['id'] ?>);">
+                  <div class="mb-2">
+                    <input type="text" class="form-control" id="title-<?= $row['id'] ?>" value="<?= htmlspecialchars($row['title']) ?>" placeholder="عنوان المشروع">
+                  </div>
+                  <div class="mb-2">
+                    <input type="text" class="form-control" id="location-<?= $row['id'] ?>" value="<?= htmlspecialchars($row['location']) ?>" placeholder="الموقع">
+                  </div>
+                  <div class="mb-2">
+                    <input type="text" class="form-control" id="price-<?= $row['id'] ?>" value="<?= htmlspecialchars($row['price']) ?>" placeholder="السعر">
+                  </div>
+                  <button class="btn btn-success btn-sm w-100" type="submit">💾 حفظ التعديلات</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      <?php endwhile; ?>
+    <?php else: ?>
+      <p class="text-center">لا يوجد مشاريع مضافة حتى الآن.</p>
+    <?php endif; ?>
+  </div>
+</div>
+
+<!-- ✅ سكربت الحذف والتعديل -->
+<script>
+  function deleteProject(id) {
+    if (!confirm("هل أنت متأكد من حذف هذا المشروع؟")) return;
+    fetch('delete_project.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'id=' + id
+    })
+    .then(response => response.text())
+    .then(data => {
+      if (data.trim() === 'success') {
+        document.getElementById('card-' + id).remove();
+      } else {
+        alert('❌ حدث خطأ أثناء الحذف');
+      }
+    });
+  }
+
+  function updateProject(id) {
+    const title = document.getElementById('title-' + id).value;
+    const location = document.getElementById('location-' + id).value;
+    const price = document.getElementById('price-' + id).value;
+
+    fetch('update_project.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `id=${id}&title=${encodeURIComponent(title)}&location=${encodeURIComponent(location)}&price=${encodeURIComponent(price)}`
+    })
+    .then(response => response.text())
+    .then(data => {
+      if (data.trim() === 'success') {
+        alert('✅ تم حفظ التعديلات');
+        location.reload();
+      } else {
+        alert('❌ حدث خطأ أثناء التعديل');
+      }
+    });
+  }
+</script>
+
+                            
                             <div id="like">
-                                <h2>Why Choose Us</h2>
-                                <form method="POST" enctype="multipart/form-data" class="mb-3">
-                                    <div class="mb-3">
-                                        <input type="text" name="question" placeholder="Question" class="form-control"
-                                            required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <textarea name="answer" placeholder="Answer" class="form-control"
-                                            required></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="file" name="image" class="form-control">
-                                    </div>
-                                    <button name="add_question" class="btn btn-primary">Add Q&A</button>
-                                </form>
-                                <ul class="list-group mb-4">
-                                    <?php while ($row = $questions->fetch_assoc()): ?>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <?= htmlspecialchars($row['question']) ?>
-                                            <a href="?delete_question=<?= intval($row['id']) ?>"
-                                                class="btn btn-danger btn-sm">Delete</a>
-                                        </li>
-                                    <?php endwhile; ?>
-                                </ul>
-                                <hr>
 
-                                <!-- Services -->
-                                <h2>Our Real Estate Services</h2>
-                                <form method="POST" enctype="multipart/form-data" class="mb-3">
-                                    <div class="mb-3">
-                                        <input type="file" name="icon" accept="image/*,.svg" class="form-control"
-                                            required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" name="title" placeholder="Title" class="form-control"
-                                            required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <textarea name="description" placeholder="Description" class="form-control"
-                                            required></textarea>
-                                    </div>
-                                    <button name="add_service" class="btn btn-primary">Add Service</button>
-                                </form>
-                                <div class="mb-4">
-                                    <?php while ($row = $services->fetch_assoc()): ?>
-                                        <div class="card d-inline-block text-center me-3 mb-3" style="width: 150px;">
-                                            <img src="uploads/<?= htmlspecialchars($row['icon']) ?>" class="card-img-top"
-                                                width="50">
-                                            <div class="card-body">
-                                                <h6 class="card-title"><?= htmlspecialchars($row['title']) ?></h6>
-                                                <p class="card-text"><?= htmlspecialchars($row['description']) ?></p>
-                                                <a href="?delete_service=<?= intval($row['id']) ?>"
-                                                    class="btn btn-danger btn-sm">Delete</a>
-                                            </div>
-                                        </div>
-                                    <?php endwhile; ?>
-                                </div>
                             </div>
                             <div id="comment">This is the Comment section</div>
                             <div id="share">This is the Share section</div>
@@ -629,201 +889,69 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 </div>
 
 
-                <!-- HTML part to display visitors -->
-                <h2>قائمة الزوار</h2>
-                <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            <th>رقم الزائر</th>
-                            <th>الاسم</th>
-                            <th>رقم الهاتف</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if ($visitors && $visitors->num_rows > 0): ?>
-                            <?php while ($visitor = $visitors->fetch_assoc()): ?>
-                                <tr>
-                                    <td><?php echo (int) $visitor['id']; ?></td>
-                                    <td><?php echo htmlspecialchars($visitor['name']); ?></td>
-                                    <td><?php echo htmlspecialchars($visitor['phone']); ?></td>
-                                </tr>
-                            <?php endwhile; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="3" style="text-align: center;">لا يوجد زوار مسجلين</td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
 
             </div>
         </section>
 
 
 
-        <section>
-            <form method="POST" enctype="multipart/form-data">
-                <input type="file" name="image" required>
-                <input type="text" name="title" placeholder="Title" required>
-                <textarea name="description" placeholder="Description" required></textarea>
-                <button type="submit" name="add_plan_and_room">Add Plan and Room</button>
-            </form>
-
-
-
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = $plan_and_room->fetch_assoc()): ?>
-                        <tr>
-                            <td><img src="uploads/<?php echo $row['image']; ?>" width="100"></td>
-                            <td><?php echo htmlspecialchars($row['title']); ?></td>
-                            <td><?php echo htmlspecialchars($row['description']); ?></td>
-                            <td>
-                                <a href="?delete_plan_and_room=<?php echo $row['id']; ?>"
-                                    onclick="return confirm('هل أنت متأكد من الحذف؟')">🗑️ حذف</a>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
-
-            <h3>Plan and Room Logs</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Action</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>User</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($log = $plan_and_room_logs->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo $log['action']; ?></td>
-                            <td><?php echo htmlspecialchars($log['title']); ?></td>
-                            <td><?php echo htmlspecialchars($log['description']); ?></td>
-                            <td><?php echo htmlspecialchars($log['user']); ?></td>
-                            <td><?php echo $log['date']; ?></td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
-
-        </section>
-
-
-
-        <section>
-            <form method="POST" enctype="multipart/form-data">
-                <h3>Add Property Highlight</h3>
-                <input type="file" name="image" required><br>
-                <input type="text" name="title" placeholder="Title" required><br>
-                <button type="submit" name="add_property_highlight">Add Property Highlight</button>
-            </form>
-
-            <?php if ($property_highlights && $property_highlights->num_rows > 0): ?>
-                <h3>قائمة الـ Property Highlights</h3>
-                <table border="1" cellpadding="10">
-                    <thead>
-                        <tr>
-                            <th>الصورة</th>
-                            <th>العنوان</th>
-                            <th>إجراءات</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($row = $property_highlights->fetch_assoc()): ?>
-                            <tr>
-                                <td>
-                                    <img src="uploads/<?php echo htmlspecialchars($row['image']); ?>" alt="" width="100">
-                                </td>
-                                <td>
-                                    <?php echo htmlspecialchars($row['title']); ?>
-                                </td>
-                                <td>
-                                    <a href="?delete_property_highlight=<?php echo $row['id']; ?>"
-                                        onclick="return confirm('هل أنت متأكد من الحذف؟');">حذف</a>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            <?php else: ?>
-                <p>🚫 لا يوجد أي Property Highlights حتى الآن.</p>
-            <?php endif; ?>
-
-        </section>
-
-
 
         <script>
-            const body = document.querySelector("body"),
-                modeToggle = body.querySelector(".mode-toggle");
-            sidebar = body.querySelector("nav");
-            sidebarToggle = body.querySelector(".sidebar-toggle");
-            let getMode = localStorage.getItem("mode");
-            if (getMode && getMode === "dark") {
-                body.classList.toggle("dark");
-            }
-            let getStatus = localStorage.getItem("status");
-            if (getStatus && getStatus === "close") {
-                sidebar.classList.toggle("close");
-            }
-            modeToggle.addEventListener("click", () => {
-                body.classList.toggle("dark");
-                if (body.classList.contains("dark")) {
-                    localStorage.setItem("mode", "dark");
-                } else {
-                    localStorage.setItem("mode", "light");
-                }
-            });
-            sidebarToggle.addEventListener("click", () => {
-                sidebar.classList.toggle("close");
-                if (sidebar.classList.contains("close")) {
-                    localStorage.setItem("status", "close");
-                } else {
-                    localStorage.setItem("status", "open");
-                }
-            })
-        </script>
-    </main>
+    const body = document.querySelector("body"),
+        modeToggle = body.querySelector(".mode-toggle"),
+        sidebar = body.querySelector("nav"),
+        sidebarToggle = body.querySelector(".sidebar-toggle"),
+        links = document.querySelectorAll('.nav-links a'),
+        sections = document.querySelectorAll('.content > div');
 
+    let getMode = localStorage.getItem("mode");
+    if (getMode === "dark") {
+        body.classList.add("dark");
+    }
 
+    let getStatus = localStorage.getItem("status");
+    if (getStatus === "close") {
+        sidebar.classList.add("close");
+    }
 
-    <script>
-        const links = document.querySelectorAll('.nav-links a');
-        const sections = document.querySelectorAll('.content > div');
+    modeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark");
+        localStorage.setItem("mode", body.classList.contains("dark") ? "dark" : "light");
+    });
 
-        links.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                // إزالة الـ active من الكل
-                sections.forEach(sec => sec.classList.remove('active'));
+    sidebarToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+        localStorage.setItem("status", sidebar.classList.contains("close") ? "close" : "open");
+    });
 
-                // إضافة الـ active للديف المطلوب
-                const targetId = link.getAttribute('data-target');
-                document.getElementById(targetId).classList.add('active');
-
-                // حفظ الاختيار في localStorage
-                localStorage.setItem('activeSection', targetId);
-            });
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            sections.forEach(sec => sec.classList.remove('active'));
+            const targetId = link.getAttribute('data-target');
+            document.getElementById(targetId).classList.add('active');
+            localStorage.setItem('activeSection', targetId);
         });
+    });
 
-        // عند التحميل: اقرأ من localStorage
-        const savedSection = localStorage.getItem('activeSection') || 'dashboard';
-        document.getElementById(savedSection).classList.add('active');
-    </script>
+    const savedSection = localStorage.getItem('activeSection') || 'dashboard';
+    document.getElementById(savedSection).classList.add('active');
+</script>
+
+
+
+    <style>
+        ul.d-flex.align-items-center.justify-content-between {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+            /* text-align: center; */
+            line-height: 3;
+            list-style: none;
+            border-bottom: 1px solid #c0c0c0;
+            padding: 5px;
+        }
+    </style>
 
 
 </body>

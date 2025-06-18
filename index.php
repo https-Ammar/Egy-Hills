@@ -214,19 +214,18 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
     <!-- 4️⃣ تشغيل المودال تلقائيًا فقط إذا لم يسجل -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // تحقق من حالة التسجيل في localStorage
-            if (!localStorage.getItem('visitorRegistered')) {
-                var myModal = new bootstrap.Modal(document.getElementById('visitorModal'));
-                myModal.show();
-            }
+            // إظهار المودال دائمًا بدون شرط
+            var myModal = new bootstrap.Modal(document.getElementById('visitorModal'));
+            myModal.show();
 
-            // لما يرسل الفورم، احفظ حالة التسجيل
+            // إذا أردت الاحتفاظ بتسجيل الحالة عند الإرسال، يمكنك إبقاء هذا الجزء
             var visitorForm = document.getElementById('visitorForm');
             visitorForm.addEventListener('submit', function () {
                 localStorage.setItem('visitorRegistered', 'true');
             });
         });
     </script>
+
 
 
 
@@ -400,17 +399,61 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 
     </main>
 
+
     <section class="mt-5 mb-5" data-aos="zoom-in">
         <div class="video_phot text-center">
-            <a class="mt-addons-video-popup-vimeo-youtube" href="https://www.youtube.com/watch?v=rqrAhBmimCY">
-                <img decoding="async" class="mt-addons-video-buton-image"
-                    src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/play-button.svg" alt="Watch Video">
-            </a>
+            <?php
+            // جلب أحدث فيديو من قاعدة البيانات
+            $video = $conn->query("SELECT url FROM videos ORDER BY id DESC LIMIT 1")->fetch_assoc();
+
+            if (!empty($video['url'])) {
+                // استخراج معرف الفيديو من روابط YouTube
+                if (strpos($video['url'], 'youtube.com') !== false || strpos($video['url'], 'youtu.be') !== false) {
+                    $video_id = '';
+                    if (strpos($video['url'], 'youtube.com') !== false) {
+                        parse_str(parse_url($video['url'], PHP_URL_QUERY), $params);
+                        $video_id = $params['v'] ?? '';
+                    } elseif (strpos($video['url'], 'youtu.be') !== false) {
+                        $video_id = substr(parse_url($video['url'], PHP_URL_PATH), 1);
+                    }
+
+                    if (!empty($video_id)) {
+                        echo '
+                    <a class="mt-addons-video-popup-vimeo-youtube" href="https://www.youtube.com/watch?v=' . $video_id . '">
+                        <img decoding="async" class="mt-addons-video-buton-image"
+                            src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/play-button.svg" alt="Watch Video">
+                    </a>
+                    ';
+                    } else {
+                        echo '<p>رابط YouTube غير صالح</p>';
+                    }
+                }
+                // لروابط Vimeo
+                elseif (strpos($video['url'], 'vimeo.com') !== false) {
+                    $video_id = substr(parse_url($video['url'], PHP_URL_PATH), 1);
+                    echo '
+                <a class="mt-addons-video-popup-vimeo-youtube" href="https://vimeo.com/' . $video_id . '">
+                    <img decoding="async" class="mt-addons-video-buton-image"
+                        src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/play-button.svg" alt="Watch Video">
+                </a>
+                ';
+                }
+                // لروابط أخرى غير معروفة
+                else {
+                    echo '
+                <a class="mt-addons-video-popup-vimeo-youtube" href="' . htmlspecialchars($video['url']) . '">
+                    <img decoding="async" class="mt-addons-video-buton-image"
+                        src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/play-button.svg" alt="Watch Video">
+                </a>
+      
+                ';
+                }
+            } else {
+                echo '<p>.</p>';
+            }
+            ?>
         </div>
-
-
     </section>
-
 
 
     <main class="container">
@@ -840,6 +883,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
             </div>
         </section>
     </main>
+
 
 
 
