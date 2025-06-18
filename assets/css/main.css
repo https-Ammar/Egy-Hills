@@ -863,78 +863,7 @@ img {
 /*  */
 /*  */
 /*  */
-.woocommerce-cart .woocommerce:after,
-.woocommerce-checkout:after {
-  display: block;
-  clear: both;
-  content: "";
-}
-.wc_payment_method.payment_method_paypal label,
-.property__slider .bx-pager .bx-pager-item a {
-  overflow: hidden;
-  text-indent: -99999px;
-}
 
-*,
-*:before,
-*:after {
-  margin: 0;
-  padding: 0;
-  outline: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  border: 0;
-  font-size: 100%;
-  line-height: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-body {
-  font-family: "source-serif-pro", serif;
-  font-weight: 300;
-  font-size: 16px;
-  color: #7a838c;
-}
-h1,
-h1 a,
-h2,
-h2 a,
-h3,
-h3 a,
-h4,
-h4 a,
-h5,
-h5 a,
-h6,
-.gform_wrapper .gsection_title,
-h6 a,
-.gform_wrapper .gsection_title a {
-  color: #373f48;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.gform_wrapper .gsection_title {
-  font-family: "proxima-nova", "Arial", sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-h1 {
-  line-height: 110%;
-}
-h2,
-h3,
-h4,
-h5,
-h6,
-.gform_wrapper .gsection_title {
-  line-height: 120%;
-}
 strong {
   font-weight: 400;
 }
@@ -7107,4 +7036,9 @@ body {
 h1.site-banner__title a {
   color: white !important;
   font-weight: bold;
+}
+
+/* ammar */
+section.site-banner.site-banner--bg.site-banner--page {
+  background: red;
 }
