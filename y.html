@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>من نحن - شركتنا العقارية</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .about-section {
+            padding: 80px 0;
+            background: #f9f9f9;
+        }
+
+        .team-member img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- من نحن -->
+    <section class="about-section text-center">
+        <div class="container">
+            <h1 class="mb-4" data-aos="fade-up">من نحن</h1>
+            <p class="lead mb-5" data-aos="fade-up" data-aos-delay="100">
+                نحن في [اسم شركتك] نكرس جهودنا لتقديم أفضل الحلول العقارية لعملائنا الكرام منذ أكثر من 10 سنوات مع فريق
+                عمل محترف وملتزم.
+            </p>
+
+            <div class="row text-center mb-5">
+                <div class="col-md-4" data-aos="zoom-in">
+                    <h3>رؤيتنا</h3>
+                    <p>أن نكون الخيار الأول في تقديم العقارات الفاخرة بأعلى معايير الجودة.</p>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <h3>رسالتنا</h3>
+                    <p>تلبية احتياجات عملائنا من خلال الشفافية والمصداقية والالتزام الكامل.</p>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <h3>قيمنا</h3>
+                    <p>الجودة - الثقة - التطوير المستمر - رضا العميل.</p>
+                </div>
+            </div>
+
+            <!-- الفريق -->
+            <h2 class="mb-4" data-aos="fade-up">فريق العمل</h2>
+            <div class="row justify-content-center mb-5">
+                <div class="col-6 col-md-3 text-center" data-aos="flip-left">
+                    <div class="team-member mb-3">
+                        <img src="https://via.placeholder.com/120" alt="مدير عام">
+                    </div>
+                    <h5>محمد علي</h5>
+                    <p>المدير العام</p>
+                </div>
+                <div class="col-6 col-md-3 text-center" data-aos="flip-left" data-aos-delay="100">
+                    <div class="team-member mb-3">
+                        <img src="https://via.placeholder.com/120" alt="مسؤول مبيعات">
+                    </div>
+                    <h5>أحمد خالد</h5>
+                    <p>مسؤول المبيعات</p>
+                </div>
+                <div class="col-6 col-md-3 text-center" data-aos="flip-left" data-aos-delay="200">
+                    <div class="team-member mb-3">
+                        <img src="https://via.placeholder.com/120" alt="مدير مشاريع">
+                    </div>
+                    <h5>ليلى محمد</h5>
+                    <p>مديرة المشاريع</p>
+                </div>
+            </div>
+
+            <!-- الإحصائيات -->
+            <h2 class="mb-4" data-aos="fade-up">إنجازاتنا</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <div class="stat-card">
+                        <h3>+1500</h3>
+                        <p>عقار مباع</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-card">
+                        <h3>10 سنوات</h3>
+                        <p>خبرة في السوق</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-card">
+                        <h3>500+</h3>
+                        <p>عميل سعيد</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- زر التواصل -->
+            <a href="contact.php" class="btn btn-primary btn-lg mt-5" data-aos="fade-up">تواصل معنا</a>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS + Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+
+</body>
+
+</html>

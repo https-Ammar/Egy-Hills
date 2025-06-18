@@ -117,42 +117,6 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 
 
 
-<div class="container my-5">
-    <div class="row">
-        <?php if ($property_highlights && $property_highlights->num_rows > 0): ?>
-            <?php while ($row = $property_highlights->fetch_assoc()): ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <img src="uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top"
-                            alt="Highlight Image">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
-                        </div>
-                    </div>
-                </div>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <p class="text-center"></p>
-        <?php endif; ?>
-    </div>
-</div>
-
-
-<!-- ✅ عرض جميع Plan and Room -->
-<?php if ($plan_and_room && $plan_and_room->num_rows > 0): ?>
-    <?php while ($row = $plan_and_room->fetch_assoc()): ?>
-        <section class="plan-and-room-card">
-            <img src="uploads/<?php echo htmlspecialchars($row['image']); ?>" alt="Plan Image">
-            <h2><?php echo htmlspecialchars($row['title']); ?></h2>
-            <p><?php echo nl2br(htmlspecialchars($row['description'])); ?></p>
-        </section>
-    <?php endwhile; ?>
-<?php endif; ?>
-
-<!-- ✅ عرض رسالة الحالة إذا وُجدت -->
-<?php if ($message): ?>
-    <div class="status-message"><?php echo $message; ?></div>
-<?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -198,27 +162,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
     <script type="text/javascript"
         src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/jquery.min.js?ver=2.2.4"
         id="jquery-js"></script>
-    <style>
-        .section-3d {
-            height: 200vh;
-            /* يمكنك تعديله حسب احتياجك */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
 
-        .section-3d img {
-            width: 300px;
-            height: auto;
-            border-radius: 15px;
-            transition: transform 0.1s ease-out;
-            transform-style: preserve-3d;
-            will-change: transform;
-            position: sticky;
-            top: 30%;
-        }
-    </style>
 </head>
 
 
@@ -419,31 +363,33 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
             <div class="container">
                 <div class="row">
                     <!-- Feature 1 -->
-                    <div class="col-md-4 mb-4 text-center" data-aos="fade-up" data-aos-delay="100">
-                        <div class="mb-3">
-                            <img decoding="async" alt="Cooling & Heating System" style="max-width: 120px;"
-                                class="mt-image-list" src="./assets/img/skyhaus-aerothermal-icon.svg">
-                        </div>
-                        <h6 class="fw-bold">Central Cooling & Heating System</h6>
-                    </div>
 
-                    <!-- Feature 2 -->
-                    <div class="col-md-4 mb-4 text-center" data-aos="fade-up" data-aos-delay="200">
-                        <div class="mb-3">
-                            <img decoding="async" alt="Underfloor Heating" style="max-width: 120px;"
-                                class="mt-image-list" src="./assets/img/skyhaus-underfloor-heating-icon.svg">
-                        </div>
-                        <h6 class="fw-bold">Underfloor Heating Technology</h6>
-                    </div>
 
-                    <!-- Feature 3 -->
-                    <div class="col-md-4 mb-4 text-center" data-aos="fade-up" data-aos-delay="300">
-                        <div class="mb-3">
-                            <img decoding="async" alt="Smart Home System" style="max-width: 120px;"
-                                class="mt-image-list" src="./assets/img/skyhaus-icon-domotics-1.svg">
-                        </div>
-                        <h6 class="fw-bold">Integrated Smart Home System</h6>
-                    </div>
+
+                    <?php if ($property_highlights && $property_highlights->num_rows > 0): ?>
+                        <?php while ($row = $property_highlights->fetch_assoc()): ?>
+
+                            <div class="col-md-4 mb-4 text-center" data-aos="fade-up" data-aos-delay="100">
+                                <div class="mb-3">
+                                    <img decoding="async" alt="Cooling & Heating System" style="max-width: 120px;"
+                                        class="mt-image-list" src="uploads/<?php echo htmlspecialchars($row['image']); ?>">
+                                </div>
+                                <h6 class="fw-bold"><?php echo htmlspecialchars($row['title']); ?></h6>
+                            </div>
+
+
+
+
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p class="text-center"></p>
+                    <?php endif; ?>
+
+
+
+
+
+
                 </div>
             </div>
         </section>
@@ -655,42 +601,54 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 
 
         <section style="margin-bottom: 15vh;">
-            <div class="row align-items-center">
 
-                <!-- Floor Plan Image -->
-                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-delay="100">
-                    <img src="./assets/img/skyhaus-floor-img-min-scaled.jpg" alt="Floor Plan" class="img-fluid rounded">
-                </div>
+            <?php if ($plan_and_room && $plan_and_room->num_rows > 0): ?>
+                <?php while ($row = $plan_and_room->fetch_assoc()): ?>
 
-                <!-- Description and Tabs -->
-                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
-                    <h2 class="fw-bold mb-3 mt-3">Plan and Room<br>Dimensions</h2>
+                    <div class="row align-items-center">
 
-                    <!-- Tabs -->
-                    <div class="mb-3">
-                        <button class="tab-btn active" onclick="showFloor(1)">FLOOR 1</button>
-                        <button class="tab-btn" onclick="showFloor(2)">FLOOR 2</button>
-                        <button class="tab-btn" onclick="showFloor(3)">FLOOR 3</button>
+                        <!-- Floor Plan Image -->
+                        <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-delay="100">
+                            <img src="uploads/<?php echo htmlspecialchars($row['image']); ?>" alt="Floor Plan"
+                                class="img-fluid rounded">
+                        </div>
+
+                        <!-- Description and Tabs -->
+                        <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+                            <h2 class="fw-bold mb-3 mt-3">Plan and Room<br>Dimensions</h2>
+
+                            <!-- Tabs -->
+                            <div class="mb-3">
+                                <button class="tab-btn active" onclick="showFloor(1)">FLOOR 1</button>
+                                <button class="tab-btn" onclick="showFloor(2)">FLOOR 2</button>
+                                <button class="tab-btn" onclick="showFloor(3)">FLOOR 3</button>
+                            </div>
+
+                            <!-- Description -->
+                            <p class="text-muted">
+                                <?php echo htmlspecialchars($row['title']); ?>
+                            </p>
+
+                            <!-- Room Dimensions -->
+                            <div class="mt-addons-tab-content-v2">
+
+                                <?php echo nl2br(htmlspecialchars($row['description'])); ?>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <!-- Description -->
-                    <p class="text-muted">
-                        A property description is made up of 2 parts: key features and property description.
-                        The key features section is your opportunity to tell potential tenants about the key selling
-                        points of your property in a bullet point format.
-                    </p>
 
-                    <!-- Room Dimensions -->
-                    <div class="mt-addons-tab-content-v2">
-                        Bedroom 1&nbsp; ------------- <strong> 39 Sq Ft</strong><br>
-                        Bedroom 2 ------------- <strong> 38 Sq Ft</strong><br>
-                        Kitchen&nbsp; &nbsp; &nbsp; &nbsp; ------------- <strong> 49 Sq Ft</strong><br>
-                        Gym Area&nbsp; &nbsp;------------- <strong> 55 Sq Ft</strong><br>
-                        Bathroom&nbsp; &nbsp;------------- <strong> 65 Sq Ft</strong><br>
-                    </div>
-                </div>
+                <?php endwhile; ?>
+            <?php endif; ?>
 
-            </div>
+            <!-- ✅ عرض رسالة الحالة إذا وُجدت -->
+            <?php if ($message): ?>
+                <div class="status-message"><?php echo $message; ?></div>
+            <?php endif; ?>
+
+
+
         </section>
 
 
@@ -699,82 +657,84 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
      3D Mouse + Smooth Zoom Section
 ============================ -->
 
-        <section class="section-3d">
-            <img src="./AI generated 3D Rendering of a Real Estate House or Home on Transparent Background - Ai Generated.jpeg"
-                alt="3D House" id="img3d" />
-        </section>
-        <style>
-            .section-3d {
-                height: 200vh;
-                /* يمكنك تعديله حسب احتياجك */
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-start;
-            }
 
-            .section-3d img {
-                width: 300px;
-                height: auto;
-                border-radius: 15px;
-                transition: transform 0.1s ease-out;
-                transform-style: preserve-3d;
-                will-change: transform;
-                position: sticky;
-                top: 20%;
-            }
-        </style>
-
-        <script>
-            const img3d = document.getElementById('img3d');
-            let rotateX = 0, rotateY = 0, scale = 1;
-            const maxScale = 2;
-
-            const updateTransform = () => {
-                img3d.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
-            };
-
-            window.addEventListener('mousemove', e => {
-                const { innerWidth, innerHeight } = window;
-                const xMid = innerWidth / 2, yMid = innerHeight / 2;
-                rotateY = ((e.clientX - xMid) / xMid) * 10;
-                rotateX = ((e.clientY - yMid) / yMid) * 10;
-                updateTransform();
-            });
-
-            window.addEventListener('mouseleave', () => {
-                rotateX = rotateY = 0;
-                updateTransform();
-            });
-
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                const zoomLimit = window.innerHeight * 0.8;
-                const progress = Math.min(scrollY / zoomLimit, 1);
-                scale = 1 + progress * (maxScale - 1);
-                updateTransform();
-            });
-        </script>
-
+        <div class="row mb-4" data-aos="fade-right" data-aos-delay="100">
+            <div class="col-md-12">
+                <h2 class="section-title">Our Services & Speed</h2>
+            </div>
+            <div class="col-md-6">
+                <p>Experience fast, reliable, and professional property services tailored to meet your needs with
+                    precision and care.</p>
+            </div>
+        </div>
 
         <section class="service" data-aos="fade-up">
 
+
+            <style>
+                .section-3d {
+                    height: 150vh;
+                    /* يمكنك تعديله حسب احتياجك */
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start;
+                }
+
+                .section-3d img {
+
+                    height: auto;
+                    border-radius: 15px;
+                    transition: transform 0.1s ease-out;
+                    transform-style: preserve-3d;
+                    will-change: transform;
+                    position: sticky;
+                    top: 20%;
+                }
+            </style>
+
+            <script>
+                const img3d = document.getElementById('img3d');
+                let rotateX = 0, rotateY = 0, scale = 1;
+                const maxScale = 2;
+
+                const updateTransform = () => {
+                    img3d.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+                };
+
+                window.addEventListener('mousemove', e => {
+                    const { innerWidth, innerHeight } = window;
+                    const xMid = innerWidth / 2, yMid = innerHeight / 2;
+                    rotateY = ((e.clientX - xMid) / xMid) * 10;
+                    rotateX = ((e.clientY - yMid) / yMid) * 10;
+                    updateTransform();
+                });
+
+                window.addEventListener('mouseleave', () => {
+                    rotateX = rotateY = 0;
+                    updateTransform();
+                });
+
+                window.addEventListener('scroll', () => {
+                    const scrollY = window.scrollY;
+                    const zoomLimit = window.innerHeight * 0.8;
+                    const progress = Math.min(scrollY / zoomLimit, 1);
+                    scale = 1 + progress * (maxScale - 1);
+                    updateTransform();
+                });
+            </script>
+
             <!-- Title and Intro -->
-            <div class="row mb-4" data-aos="fade-right" data-aos-delay="100">
-                <div class="col-md-12">
-                    <h2 class="section-title">Our Services & Speed</h2>
-                </div>
-                <div class="col-md-6">
-                    <p>Experience fast, reliable, and professional property services tailored to meet your needs with
-                        precision and care.</p>
-                </div>
-            </div>
 
             <!-- Cover Image -->
             <div class="row" data-aos="zoom-in" data-aos-delay="200">
+
+                <section class="section-3d">
+                    <img src="./assets/img/wiktor-karkocha-resize.png" alt="3D House" id="img3d" />
+                </section>
                 <div class="cover_img_product mt-5 rounded-3"
                     style="background: url('') center/cover no-repeat; height: 50vh;">
-                    <img src="./assets/img/wiktor-karkocha-resize.png" alt="">
+
                 </div>
             </div>
 
@@ -883,6 +843,13 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 
 
 
+    <style>
+        .cover_img_product.mt-5.rounded-3 {
+            height: 35vh !important;
+            margin-top: -35vh !important;
+            overflow: hidden;
+        }
+    </style>
 
 
     <section id="footer"></section>

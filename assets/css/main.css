@@ -6820,59 +6820,7 @@ body.error404 {
     height: 2px;
   }
 }
-.no-touch .jcf-checkbox:hover,
-.no-touch .jcf-checkbox input:hover,
-.no-touch .jcf-radio:hover,
-.no-touch .jcf-radio input:hover {
-  cursor: pointer;
-}
-.no-touch .btn:hover,
-.no-touch input[type="submit"]:hover,
-.no-touch button:hover,
-.no-touch .button:hover,
-.no-touch .woocommerce-shipping-calculator > p a:hover,
-.woocommerce-shipping-calculator > p .no-touch a:hover,
-.no-touch
-  .gform_wrapper
-  .woocommerce-shipping-calculator
-  > .gform_description
-  a:hover,
-.gform_wrapper
-  .woocommerce-shipping-calculator
-  > .gform_description
-  .no-touch
-  a:hover {
-  background: #373f48;
-}
-.no-touch .btn--alt:hover,
-.no-touch .gform_wrapper .gform_button_select_files:hover:nth-of-type(n),
-.gform_wrapper .no-touch .gform_button_select_files:hover:nth-of-type(n),
-.no-touch button:hover,
-.no-touch .gform_button:hover {
-  background: #ca9d81;
-}
-.no-touch .post-styles a:not([class*="btn"]):hover {
-  color: #373f48;
-}
-.no-touch .site-logo:hover {
-  opacity: 0.4;
-}
-.no-touch .menu-icon:hover rect:nth-of-type(1),
-.no-touch .menu-icon:hover rect:nth-of-type(3) {
-  height: 40px;
-  -webkit-transform: translateY(-14px);
-  -ms-transform: translateY(-14px);
-  transform: translateY(-14px);
-}
-.no-touch .site-menu__links a:hover {
-  color: #ca9d81;
-}
-.no-touch .social--menu a:hover svg * {
-  fill: #fff;
-}
-.no-touch .site-footer__links a:hover {
-  color: #ca9d81;
-}
+
 .no-touch .site-footer__bottom a:hover {
   color: #373f48;
 }
