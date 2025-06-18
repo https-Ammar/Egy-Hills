@@ -357,7 +357,6 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
         </section>
 
 
-
         <section class="features-section py-5" data-aos="fade-up">
             <div class="container">
                 <div class="row">
@@ -566,12 +565,18 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 
                 <?php if ($projects->num_rows > 0): ?>
                     <div class="row">
-                        <?php while ($row = $projects->fetch_assoc()): ?>
+                        <?php
+                        $count = 0; // عداد العناصر المعروضة
+                        while ($row = $projects->fetch_assoc()):
+                            if ($count >= 3)
+                                break; // أوقف الحلقة بعد ٣ عناصر
+                            $count++;
+                            ?>
                             <div class="col-md-6 col-lg-4 mb-4">
-                                <a href="./assets//page/project_details.php?id=<?= (int) $row['id'] ?>">
+                                <a href="./assets/page/project_details.php?id=<?= (int) $row['id'] ?>">
                                     <div class="property-card">
                                         <div class="cover_card"
-                                            style="background-image: url('/uploads/<?= !empty($row['image']) ? 'uploads/' . htmlspecialchars($row['image']) : 'placeholder.jpg' ?>');">
+                                            style="background-image: url('uploads/<?= !empty($row['image']) ? htmlspecialchars($row['image']) : 'placeholder.jpg' ?>');">
                                         </div>
                                         <div class="property-card-content">
                                             <p class="property-card-location">
@@ -892,6 +897,16 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
             height: 35vh !important;
             margin-top: -35vh !important;
             overflow: hidden;
+        }
+
+        .card_text_blur.text-center {
+            width: -webkit-fill-available;
+        }
+
+        p.mb-0 {
+            word-wrap: break-word;
+            /* أو */
+            overflow-wrap: break-word;
         }
     </style>
 
