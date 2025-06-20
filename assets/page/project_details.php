@@ -265,6 +265,7 @@ function e($value)
                         .row.d-flex.justify-content-center.mt-5.animate__animated.animate__fadeIn {
                             padding: 10px;
                         }
+                        
                     }
                 </style>
             </div>
