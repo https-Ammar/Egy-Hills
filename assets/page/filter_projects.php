@@ -52,7 +52,7 @@ $result = $stmt->get_result();
                     <a href="project_details.php?id=<?= (int) $row['id'] ?>">
                         <div class="property-card">
                             <div class="cover_card"
-                                style="background-image: url('<?= !empty($row['image']) ? 'uploads/' . htmlspecialchars($row['image']) : 'placeholder.jpg' ?>');">
+                                style="background-image: url('/Egy-Hills/uploads/<?= !empty($row['image']) ? '' . htmlspecialchars($row['image']) : 'placeholder.jpg' ?>');">
                             </div>
                             <div class="property-card-content">
                                 <p class="property-card-location"><?= htmlspecialchars($row['location']) ?></p>

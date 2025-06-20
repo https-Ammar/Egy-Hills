@@ -53,7 +53,7 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                     <div class="image-column col-md-6 col-sm-12" data-aos="fade-left" data-aos-duration="1000">
                         <div class="inner-column">
                             <div class="image">
-                                <img src="/uploads/<?= $row['image'] ?>" alt="About EGY-HILLS">
+                                <img src="/Egy-Hills/uploads/<?= $row['image'] ?>" alt="About EGY-HILLS">
                                 <div class="overlay-box">
                                     <div class="year-box">
                                         <span class="number">5</span> Years <br> of Excellence <br> in Real Estate

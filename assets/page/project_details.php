@@ -46,29 +46,25 @@ function e($value)
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Get in Touch</title>
+    <title>Project Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
     <?php include './header.php'; ?>
 
-
     <main>
-
-
         <section class="py-5 bg-white">
-            <div class="container pt-5">
+            <div class="container pt-5 animate__animated animate__fadeInUp">
                 <div class="d-flex align-items-center gap-3 mb-3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-geo-alt" viewBox="0 0 16 16">
@@ -83,14 +79,12 @@ function e($value)
                 <h2 class="elementor-heading-title elementor-size-default pb-3"><?= e($project['title']) ?></h2>
                 <hr>
 
-                <div class="d-flex align-items-center justify-content-between mt-5">
+                <div class="d-flex align-items-center justify-content-between mt-5 animate__animated animate__fadeInUp">
                     <div class="d-flex align-items-center gap-3">
-                        <span class="icon_span">
-                            <i class="fa-solid fa-chart-area"></i>
-                        </span>
+                        <span class="icon_span"><i class="fa-solid fa-chart-area"></i></span>
                         <span>
                             <p class="titel_project">Project Area</p>
-                            <p class="des_project"> <?= e($project['area']) ?></p>
+                            <p class="des_project"><?= e($project['area']) ?></p>
                         </span>
                     </div>
                     <div class="d-flex align-items-center gap-3">
@@ -103,154 +97,90 @@ function e($value)
                     <div class="d-flex align-items-center gap-3">
                         <span class="icon_span"><i class="fa-regular fa-calendar"></i></span>
                         <span>
-                            <p class="titel_project">baths</p>
+                            <p class="titel_project">Baths</p>
                             <p class="des_project"><?= (int) $project['baths'] ?></p>
                         </span>
                     </div>
                     <div class="d-flex align-items-center gap-3">
                         <span class="icon_span"><i class="fa-solid fa-dollar-sign"></i></span>
                         <span>
-                            <p class="titel_project">price</p>
+                            <p class="titel_project">Price</p>
                             <p class="des_project"><?= e($project['price']) ?></p>
                         </span>
                     </div>
                 </div>
 
-
                 <?php if (!empty($project['image'])): ?>
-
-                    <div class="cover_img_product mt-5 rounded-5"
-                        style="background: url('uploads/<?= e($project['image']) ?>') center/cover no-repeat; height: 70vh;">
+                    <div class="cover_img_product mt-5 rounded-5 animate__animated animate__zoomIn"
+                        style="background: url('/Egy-Hills/uploads/<?= e($project['image']) ?>') center/cover no-repeat; height: 70vh;">
                     </div>
-                <?php else: ?>
-                    <p>لا توجد صورة كافر.</p>
                 <?php endif; ?>
-
-
             </div>
 
-
-
-
-
-
-
-            <div class="container py-5">
+            <div class="container py-5 animate__animated animate__fadeIn">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h2 class="fw-bold"> <?= e($project['subtitle']) ?></h2>
-                        <p>
-                            <?= nl2br(e($project['description'])) ?>
-                        </p>
-
+                        <h2 class="fw-bold"><?= e($project['subtitle']) ?></h2>
+                        <p><?= nl2br(e($project['description'])) ?></p>
                     </div>
-
                     <div class="col-lg-4">
                         <h4 class="fw-bold">Property Details</h4>
-                        <ul class="list-unstyled">
-
-                            <p><?= nl2br(e($project['details'])) ?></p>
-
-                        </ul>
+                        <p><?= nl2br(e($project['details'])) ?></p>
                     </div>
                 </div>
-
 
                 <hr>
 
-
                 <?php if (!empty($project['video_url'])): ?>
-                    <video src="<?= e($project['video_url']) ?>" controls></video>
+                    <video src="<?= e($project['video_url']) ?>" controls
+                        class="animate__animated animate__fadeInUp"></video>
                 <?php elseif (!empty($project['main_media'])): ?>
-
-
-                    <div class="cover_img_product mt-5 rounded-5"
-                        style="background: url('uploads/<?= e($project['main_media']) ?>') center/cover no-repeat; height: 70vh;">
+                    <div class="cover_img_product mt-5 rounded-5 animate__animated animate__zoomIn"
+                        style="background: url('/Egy-Hills/uploads/<?= e($project['main_media']) ?>') center/cover no-repeat; height: 70vh;">
                     </div>
-                <?php else: ?>
-                    <p>لا توجد صورة أو فيديو رئيسي.</p>
                 <?php endif; ?>
-
 
                 <div class="row">
-                    <?php if (!empty($images)): ?>
-                        <?php foreach ($images as $img): ?>
-
-                            <div class="col-6">
-                                <div class="cover_img_product mt-5 rounded-5"
-                                    style="background: url('uploads/<?= e($img) ?>') center/cover no-repeat; height: 40vh;">
-                                </div>
-                            </div>
-
-
-
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <p>لا توجد صور متعددة.</p>
-                    <?php endif; ?>
-
-
-
-                    <?php if (!empty($project['last_image'])): ?>
-
+                    <?php foreach ($images as $img): ?>
                         <div class="col-6">
-                            <div class="cover_img_product mt-5 rounded-5"
-                                style="background: url('uploads/<?= e($project['last_image']) ?>') center/cover no-repeat; height: 40vh;">
+                            <div class="cover_img_product mt-5 rounded-5 animate__animated animate__zoomIn"
+                                style="background: url('/Egy-Hills/uploads/<?= e($img) ?>') center/cover no-repeat; height: 40vh;">
                             </div>
                         </div>
-                    <?php else: ?>
-                        <p>لا توجد صورة أخيرة.</p>
+                    <?php endforeach; ?>
+
+                    <?php if (!empty($project['last_image'])): ?>
+                        <div class="col-6">
+                            <div class="cover_img_product mt-5 rounded-5 animate__animated animate__zoomIn"
+                                style="background: url('/Egy-Hills/uploads/<?= e($project['last_image']) ?>') center/cover no-repeat; height: 40vh;">
+                            </div>
+                        </div>
                     <?php endif; ?>
 
-
-
-
                     <div class="col-lg-12 mt-5">
-
-
                         <h2 class="fw-bold"><?= e($project['extra_title']) ?></h2>
-                        <p>
-                            <?= nl2br(e($project['extra_text'])) ?>
-                        </p>
-
+                        <p><?= nl2br(e($project['extra_text'])) ?></p>
                     </div>
-
-
                 </div>
-
 
                 <?php if (!empty($project['extra_image'])): ?>
-                    <div class="row d-flex justify-content-center justify-content-center  mt-5">
-                        <img src="uploads/<?= e($project['extra_image']) ?>" class="imp-main-image">
+                    <div class="row d-flex justify-content-center mt-5 animate__animated animate__fadeIn">
+                        <img src="/Egy-Hills/uploads/<?= e($project['extra_image']) ?>" class="imp-main-image">
                     </div>
-
-
-
-                <?php else: ?>
-                    <p>لا توجد صورة إضافية.</p>
                 <?php endif; ?>
 
-
-
-
                 <div class="col-lg-12 mt-5">
-
-                    <h2 class="fw-bold"><?= e($project['last_title']) ?: 'لا يوجد' ?></h2>
-                    <p>
-                        <?= nl2br(e($project['last_text'])) ?: 'لا يوجد' ?>
-                    </p>
-
+                    <h2 class="fw-bold"><?= e($project['last_title']) ?: 'N/A' ?></h2>
+                    <p><?= nl2br(e($project['last_text'])) ?: 'N/A' ?></p>
                 </div>
 
-
-
                 <?php if (!empty($table_rows)): ?>
-                    <div class="table-responsive">
+                    <div class="table-responsive mt-4 animate__animated animate__fadeInUp">
                         <table class="table table-bordered align-middle text-center">
                             <thead>
                                 <tr>
-                                    <th>العمود 1</th>
-                                    <th>العمود 2</th>
+                                    <th>Column 1</th>
+                                    <th>Column 2</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -264,19 +194,13 @@ function e($value)
                         </table>
                     </div>
                 <?php endif; ?>
-
             </div>
 
-
-
-
-
-            <div class="btn_payment flex">
-
-                <button class="btn_payment left">next</button>
-                <button class="btn_payment right"> <a href="booking.php?id=<?= (int) $project['id'] ?>">احجز معاينة</a>
+            <div class="btn_payment flex animate__animated animate__fadeInUp">
+                <button class="btn_payment left">Next</button>
+                <button class="btn_payment right">
+                    <a href="booking.php?id=<?= (int) $project['id'] ?>">Book a Visit</a>
                 </button>
-
                 <style>
                     .btn_payment.flex {
                         display: flex;
@@ -290,9 +214,9 @@ function e($value)
                         text-align: center;
                         padding: 30px;
                         background: black;
-
+                        color: white;
+                        border: none;
                     }
-
 
                     button.btn_payment.left {
                         border-radius: 30px 0 0 30px;
@@ -301,26 +225,21 @@ function e($value)
                     button.btn_payment.right {
                         border-radius: 0 30px 30px 0px;
                     }
+
+                    .btn_payment a {
+                        color: white;
+                        text-decoration: none;
+                    }
                 </style>
             </div>
-
-
         </section>
 
-
-
-
         <section id="footer"></section>
-
     </main>
-
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../script/app.js"></script>
     <script src="../script/footer.js"></script>
-
 </body>
 
 </html>

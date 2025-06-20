@@ -1,7 +1,5 @@
 <?php
 include 'db.php';
-
-// عرض جميع المشاريع بدون فلترة عند الفتح
 $result = $conn->query("SELECT * FROM projects");
 ?>
 
@@ -13,26 +11,24 @@ $result = $conn->query("SELECT * FROM projects");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Featured Properties</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
     <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
     <?php include './header.php'; ?>
 
-
     <section class="site-banner site-banner--bg site-banner--page"
         style="background-image:url(uploads/1750093639_20250524083242.webp);">
-        <div class="site-banner__txt section section--medium txt-center post-styles">
+        <div class="site-banner__txt section section--medium txt-center post-styles" data-aos="fade-down">
             <h1 class="site-banner__title"><a href="#">About</a> / <a href="#">Home</a></h1>
             <h2 class="site-banner__subtitle">Homes that move you</h2>
         </div>
     </section>
 
-
     <section class="py-5 bg-white">
         <div class="container pt-5">
-
-            <div class="row mb-4">
+            <div class="row mb-4" data-aos="fade-up">
                 <div class="col-md-12">
                     <h2 class="section-title">Featured Properties</h2>
                 </div>
@@ -42,8 +38,7 @@ $result = $conn->query("SELECT * FROM projects");
                 </div>
             </div>
 
-
-            <form class="row g-3 mb-4" id="filter-form">
+            <form class="row g-3 mb-4" id="filter-form" data-aos="zoom-in">
                 <div class="col-md-3">
                     <label for="min_price" class="form-label">Min Price</label>
                     <input type="number" class="form-control" name="min_price" id="min_price" placeholder="e.g. 50000">
@@ -66,14 +61,21 @@ $result = $conn->query("SELECT * FROM projects");
             </form>
 
             <div id="projects-container">
+                <div class="row mb-4" data-aos="fade-up">
+                    <div class="col-md-12">
+                        <h2 class="section-title">Featured Properties</h2>
+                    </div>
+
+                </div>
+
                 <div class="row">
                     <?php if ($result && $result->num_rows > 0): ?>
                         <?php while ($row = $result->fetch_assoc()): ?>
-                            <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up">
                                 <a href="project_details.php?id=<?= (int) $row['id'] ?>">
                                     <div class="property-card">
                                         <div class="cover_card"
-                                            style="background-image: url('<?= !empty($row['image']) ? 'uploads/' . htmlspecialchars($row['image']) : 'placeholder.jpg' ?>');">
+                                            style="background-image: url('/Egy-Hills/uploads/<?= !empty($row['image']) ? '' . htmlspecialchars($row['image']) : 'placeholder.jpg' ?>');">
                                         </div>
                                         <div class="property-card-content">
                                             <p class="property-card-location"><?= htmlspecialchars($row['location']) ?></p>
@@ -101,11 +103,13 @@ $result = $conn->query("SELECT * FROM projects");
 
     <section id="footer"></section>
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="../script/app.js"></script>
     <script src="../script/footer.js"></script>
     <script>
+        AOS.init();
+
         const form = document.getElementById('filter-form');
         const container = document.getElementById('projects-container');
 
@@ -117,11 +121,11 @@ $result = $conn->query("SELECT * FROM projects");
                 .then(response => response.text())
                 .then(html => {
                     container.innerHTML = html;
+                    AOS.refresh();
                 })
                 .catch(err => console.error(err));
         });
 
-        // تشغيل التصفية التلقائية عند الكتابة
         form.querySelectorAll('input').forEach(input => {
             input.addEventListener('input', () => {
                 form.dispatchEvent(new Event('submit'));
