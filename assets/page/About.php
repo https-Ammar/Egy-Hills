@@ -259,7 +259,5 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
             else ticking = false;
         }
     </script>
-
 </body>
-
 </html>

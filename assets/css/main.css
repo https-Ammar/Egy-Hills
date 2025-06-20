@@ -3310,47 +3310,8 @@ body.error404 {
   height: 100%;
   cursor: pointer;
 }
-.jcf-fake-input,
-.jcf-upload-button {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-.jcf-fake-input {
-  width: 100%;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-.jcf-upload-button {
-  margin-left: auto;
-  background: #ca9d81;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  color: #fff;
-  font-family: "proxima-nova", "Arial", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 14px;
-  font-size: 0.875rem;
-}
-.jcf-range {
-  width: 100%;
-  min-width: 200px;
-  display: inline-block;
-}
+
+
 .jcf-range-track {
   height: 5px;
   margin: 0 20px 0 0;
@@ -5099,10 +5060,8 @@ body.error404 {
 .post-styles ol li {
   margin: 5px 0 5px 25px;
 }
-.post-styles a:not([class*="btn"]) {
-  color: #ca9d81;
-  font-weight: 400;
-}
+
+
 .post-styles blockquote {
   position: relative;
 }
