@@ -16,83 +16,73 @@ $plan_and_room = $conn->query("SELECT * FROM plan_and_room ORDER BY id DESC");
 $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY id DESC");
 
 if (!$projects) {
-    die("Query Error: " . $conn->error);
+    http_response_code(500);
+    exit();
 }
 
 $message = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_visitor'])) {
-    $name = trim($_POST['visitor_name'] ?? '');
-    $phone = trim($_POST['visitor_phone'] ?? '');
-    $project_id = null;
-
-    if (!empty($name) && !empty($phone)) {
-        if ($project_id === null) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['submit_visitor'])) {
+        $name = trim($_POST['visitor_name'] ?? '');
+        $phone = trim($_POST['visitor_phone'] ?? '');
+        if ($name !== '' && $phone !== '') {
             $stmt = $conn->prepare("INSERT INTO visitors (project_id, name, phone) VALUES (NULL, ?, ?)");
             $stmt->bind_param("ss", $name, $phone);
-        } else {
-            $stmt = $conn->prepare("INSERT INTO visitors (project_id, name, phone) VALUES (?, ?, ?)");
-            $stmt->bind_param("iss", $project_id, $name, $phone);
-        }
-
-        if ($stmt->execute()) {
+            if ($stmt->execute()) {
+                $_SESSION['success'] = "Saved successfully";
+            }
             $stmt->close();
-            $_SESSION['success'] = "Data saved successfully!";
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
-        } else {
-            $message = "<p style='color:red;'>Database error: " . htmlspecialchars($stmt->error) . "</p>";
-            $stmt->close();
         }
-    } else {
-        $message = "<p style='color:red;'>Please fill all fields correctly.</p>";
-    }
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_property_highlight'])) {
-    $image = '';
-    if (!empty($_FILES['image']['name'])) {
-        $name = time() . '_' . basename($_FILES['image']['name']);
-        move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/' . $name);
-        $image = $name;
     }
 
-    $title = trim($_POST['title'] ?? '');
-
-    if (!empty($title) && !empty($image)) {
-        $stmt = $conn->prepare("INSERT INTO property_highlights (image, title) VALUES (?, ?)");
-        $stmt->bind_param("ss", $image, $title);
-
-        if ($stmt->execute()) {
+    if (isset($_POST['add_property_highlight'])) {
+        $title = trim($_POST['title'] ?? '');
+        $image = '';
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+            $name = time() . '_' . bin2hex(random_bytes(5)) . '.' . $ext;
+            if (move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/' . $name)) {
+                $image = $name;
+            }
+        }
+        if ($title !== '' && $image !== '') {
+            $stmt = $conn->prepare("INSERT INTO property_highlights (image, title) VALUES (?, ?)");
+            $stmt->bind_param("ss", $image, $title);
+            if ($stmt->execute()) {
+                $_SESSION['success'] = "Added successfully";
+            }
             $stmt->close();
-            $_SESSION['success'] = "Highlight added successfully!";
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
-        } else {
-            $message = "<p style='color:red;'>Database error: " . htmlspecialchars($stmt->error) . "</p>";
-            $stmt->close();
         }
-    } else {
-        $message = "<p style='color:red;'>Please fill fields and upload an image.</p>";
     }
 }
 
 if (isset($_GET['delete_property_highlight'])) {
     $id = intval($_GET['delete_property_highlight']);
-    $conn->query("DELETE FROM property_highlights WHERE id=$id");
-    $_SESSION['success'] = "Deleted successfully!";
+    if ($id > 0) {
+        $stmt = $conn->prepare("DELETE FROM property_highlights WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->close();
+        $_SESSION['success'] = "Deleted successfully";
+    }
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
 
 if (isset($_SESSION['success'])) {
-    $message = "<p style='color:green;'>" . $_SESSION['success'] . "</p>";
+    $message = "<p style='color:green;'>" . htmlspecialchars($_SESSION['success']) . "</p>";
     unset($_SESSION['success']);
 }
 
 $visitors = $conn->query("SELECT name, phone FROM visitors ORDER BY id DESC");
 $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY id DESC");
 ?>
+
 
 
 <!DOCTYPE html>
@@ -595,14 +585,12 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                             </div>
                         </div>
                     </div>
-
                     <div class="col-12 col-lg-6 col-xl-5" data-aos="fade-left" data-aos-delay="300">
                         <img class="img-fluid rounded" loading="lazy" src="./assets/img/about-img-1 copy.webp"
                             alt="About Us">
                     </div>
                 </div>
             </section>
-
             <section class="py-5">
                 <div class="row mb-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="col-md-12">
@@ -613,7 +601,6 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                             and professionalism.</p>
                     </div>
                 </div>
-
                 <div class="row g-4">
                     <?php if ($services && $services->num_rows > 0): ?>
                         <?php while ($row = $services->fetch_assoc()): ?>
@@ -636,66 +623,8 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                     <?php endif; ?>
                 </div>
             </section>
-
         </div>
-
     </main>
-
-    <style>
-        .section-3d {
-            height: 150vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        .section-3d img {
-            height: auto;
-            border-radius: 15px;
-            transition: transform 0.1s ease-out;
-            transform-style: preserve-3d;
-            will-change: transform;
-            position: sticky;
-            top: 20%;
-        }
-
-        .cover_img_product.mt-5.rounded-3 {
-            height: 35vh !important;
-            margin-top: -20vh !important;
-            overflow: hidden;
-        }
-
-        .card_text_blur.text-center {
-            width: -webkit-fill-available;
-        }
-
-        p.mb-0 {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-
-        .modal-dialog {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        form#visitorForm {
-            background: white;
-            color: black !important;
-        }
-
-        label.form-label {
-            color: black;
-        }
-
-        img#img3d {
-            width: 50%;
-        }
-    </style>
-
     <script>
         const img3d = document.getElementById('img3d');
         let rotateX = 0, rotateY = 0, scale = 1;
@@ -730,10 +659,8 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
             });
         });
     </script>
-
     <section id="footer"></section>
     <script src="./assets/script/footer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

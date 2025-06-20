@@ -61,16 +61,6 @@ if (isset($_GET['delete_slider'])) {
     $conn->query("DELETE FROM sliders WHERE id=" . intval($_GET['delete_slider']));
 }
 
-// about_slider
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_about_slider'])) {
-    $image = uploadFile($_FILES['image']);
-    $conn->query("INSERT INTO about_slider (image) VALUES ('$image')")
-        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_about_slider')
-        : exit("Error inserting about slider: " . $conn->error);
-}
-if (isset($_GET['delete_about_slider'])) {
-    $conn->query("DELETE FROM about_slider WHERE id=" . intval($_GET['delete_about_slider']));
-}
 
 // about_cards
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_about_card'])) {
@@ -531,15 +521,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                         <?php endwhile; ?>
                                     </div>
                                     <hr>
-                                    <!-- About Slider -->
-                                    <h2>About Slider</h2>
-                                    <form method="POST" enctype="multipart/form-data" class="mb-3">
-                                        <div class="mb-3">
-                                            <input type="file" name="image" class="form-control" required>
-                                        </div>
-                                        <button name="add_about_slider" class="btn btn-primary">Add About
-                                            Slider</button>
-                                    </form>
+                             
                                     <div class="mb-4">
                                         <?php while ($row = $about_sliders->fetch_assoc()): ?>
                                             <div class="d-inline-block text-center me-3">
@@ -887,6 +869,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                     </div>
 
                 </div>
+
 
 
 

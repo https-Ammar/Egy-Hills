@@ -263,3 +263,30 @@ CREATE TABLE property_highlights (
     image VARCHAR(255),
     title VARCHAR(255)
 );
+
+-- about us page .php
+
+-- كروت فريق التطوير
+CREATE TABLE IF NOT EXISTS `about_team_cards` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `image` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `phone` VARCHAR(50) DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+-- كارت رئيس التصوير
+CREATE TABLE IF NOT EXISTS `about_director_card` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `image` VARCHAR(255) NOT NULL,
+    `title` VARCHAR(255) NOT NULL,
+    `text` TEXT NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+-- كروت المبادرات
+CREATE TABLE IF NOT EXISTS `about_initiatives` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `image` VARCHAR(255) NOT NULL,
+    `title` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `link` VARCHAR(255) DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;

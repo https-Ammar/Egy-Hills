@@ -141,41 +141,28 @@
         </div>
     </div>
 </navigation>
-<!-- ============================
-     CSS Libraries
-============================ -->
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" />
 
-<!-- ============================
-     JS Libraries
-============================ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-<!-- ============================
-     Custom Scripts
-============================ -->
-<script src="./assets/script/footer.js"></script>
+<script
+    src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/all.min.js?ver=1533632804"></script>
 
-<!-- ============================
-     RJ Investments Scripts
-============================ -->
-<script src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/all.min.js?ver=1533632804"
-    id="rji-js"></script>
-<script id="rji-ajax-js-extra">
+<script>
     var ajax_data = {
-        "ajax_admin": "https:\/\/www.rj-investments.co.uk\/wp-admin\/admin-ajax.php",
-        "security": "718b83ca75"
+        ajax_admin: "https://www.rj-investments.co.uk/wp-admin/admin-ajax.php",
+        security: "718b83ca75"
     };
 </script>
-<script src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/ajax.min.js?ver=1533632804"
-    id="rji-ajax-js"></script>
 
-<!-- ============================
-     Google Analytics
-============================ -->
+<script
+    src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/ajax.min.js?ver=1533632804"></script>
+
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
@@ -183,9 +170,6 @@
     gtag('config', 'G-7T5YMSC4Y8');
 </script>
 
-<!-- ============================
-     Custom Inline Scripts
-============================ -->
 <script>
     jQuery(document).ready(function () {
         jQuery(".mt-addons-video-popup-vimeo-youtube, .mt-addons-video-popup-vimeo-video").magnificPopup({
@@ -200,9 +184,6 @@
     AOS.init();
 </script>
 
-<!-- ============================
-     Custom Inline Styles
-============================ -->
 <style>
     .property-card-content {
         color: #718096;
