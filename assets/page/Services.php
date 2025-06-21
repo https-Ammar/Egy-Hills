@@ -6,8 +6,6 @@ $services = $conn->query("SELECT * FROM services");
 ?>
 
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,7 +60,7 @@ $services = $conn->query("SELECT * FROM services");
                         <div class="card p-4 service-card h-100">
                             <div class="icon-box">
                                 <?php if (!empty($row['image'])): ?>
-                                    <img src="uploads/<?= htmlspecialchars($row['image']) ?>" alt="Service Image">
+                                    <img src="/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>" alt="Service Image">
                                 <?php endif; ?>
                             </div>
                             <h5 class="fw-bold"><?= htmlspecialchars($row['title'] ?? '') ?></h5>
@@ -88,63 +86,53 @@ $services = $conn->query("SELECT * FROM services");
     <div class="container container-flex">
         <main role="main">
 
-            <article class="article-featured">
-                <h2 class="article-title">Finding simplicity in life</h2>
-                <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/life.jpg"
-                    alt="simple white desk on a white wall with a plant on the far right side" class="article-image">
-                <p class="article-info">July 23, 2019 | 3 comments</p>
-                <p class="article-body">Life can get complicated really quickly, but it doesn't have to be! There
-                    are many ways to simplify your life, a few of which we've explored in the past. This week we're
-                    taking a bit of a approach though, in how you can find simplicity in the life you already
-                    living.</p>
-                <a href="#" class="article-read-more">CONTINUE READING</a>
-            </article>
+            <?php
+            $announcements = $conn->query("SELECT * FROM new_services WHERE type='announcement' ORDER BY created_at DESC LIMIT 1");
+            while ($row = $announcements->fetch_assoc()):
+                ?>
 
-            <article class="article-recent">
-                <div class="article-recent-main">
-                    <h2 class="article-title">Keeping cooking simple </h2>
-                    <p class="article-body">Food is a very important part of everyone's life. If you want to be
-                        healthy, you have to eat healthy. One of the easiest ways to do that is to keep your cooking
-                        nice and simple.</p>
-                    <a href="#" class="article-read-more">CONTINUE READING</a>
-                </div>
-                <div class="article-recent-secondary">
-                    <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/food.jpg"
-                        alt="two dumplings on a wood plate with chopsticks" class="article-image">
-                    <p class="article-info">July 19, 2019 | 3 comments</p>
-                </div>
-            </article>
+                <article class="article-featured">
+                    <h2 class="article-title"><?php echo htmlspecialchars($row['title']); ?></h2>
+                    <img src="/Egy-Hills/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top"
+                        alt="Announcement Image">
+                    <p class="article-info"> <?php echo date('Y-m-d', strtotime($row['created_at'])); ?></p>
+                    <p class="article-body"><?php echo htmlspecialchars($row['description']); ?></p>
+                    <a href="<?php echo htmlspecialchars($row['link']); ?>" class="article-read-more">CONTINUE READING</a>
+                </article>
+            <?php endwhile; ?>
 
-            <article class="article-recent">
-                <div class="article-recent-main">
-                    <h2 class="article-title">Simplicity and work </h2>
-                    <p class="article-body">Work is often a major source of stress. People get frustrated, it ruins
-                        their relationship with others and it leads to burnout. By keeping your work life as simple
-                        as possible, it will help balance everything out.</p>
-                    <a href="#" class="article-read-more">CONTINUE READING</a>
-                </div>
-                <div class="article-recent-secondary">
-                    <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/work.jpg"
-                        alt="a chair white chair at a white desk on a white wall" class="article-image">
-                    <p class="article-info">July 12, 2019 | 3 comments</p>
-                </div>
-            </article>
 
-            <article class="article-recent">
-                <div class="article-recent-main">
-                    <h2 class="article-title">Simple decorations</h2>
-                    <p class="article-body">A home isn't a home until you've decorated a little. People either don't
-                        decorate, or they go overboard and it doesn't have the impact they were hoping for. Staying
-                        simple will help draw the eye where you want it to and make things pop like never before.
-                    </p>
-                    <a href="#" class="article-read-more">CONTINUE READING</a>
-                </div>
-                <div class="article-recent-secondary">
-                    <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/work.jpg"
-                        alt="a green plant in a clear, round vase with water in it" class="article-image">
-                    <p class="article-info">July 3, 2019 | 3 comments</p>
-                </div>
-            </article>
+
+
+            <?php
+            $services = $conn->query("SELECT * FROM new_services WHERE type='service' ORDER BY created_at DESC");
+            while ($row = $services->fetch_assoc()):
+                ?>
+
+                <!--  -->
+                <article class="article-recent">
+                    <div class="article-recent-main">
+                        <h2 class="article-title"><?php echo htmlspecialchars($row['title']); ?></h2>
+                        <p class="article-body"><?php echo htmlspecialchars($row['description']); ?></p>
+
+                        <a href="<?php echo htmlspecialchars($row['link']); ?>" class="article-read-more">CONTINUE
+                            READING</a>
+                    </div>
+                    <div class="article-recent-secondary">
+                        <img src="/Egy-Hills/uploads/<?php echo htmlspecialchars($row['image']); ?>"
+                            alt="two dumplings on a wood plate with chopsticks" class="article-image">
+                        <p class="article-info"> <?php echo date('Y-m-d', strtotime($row['created_at'])); ?></p>
+                    </div>
+                </article>
+
+
+
+            <?php endwhile; ?>
+
+
+
+
+
         </main>
 
         <aside class="sidebar">
