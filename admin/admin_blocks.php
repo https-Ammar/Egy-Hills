@@ -2,7 +2,14 @@
 include 'db.php';
 session_start();
 
-$username = $_SESSION['username'] ?? 'unknown';
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$username = $_SESSION['username'];
+$message = '';
+$error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'] ?? '';
@@ -11,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $uploads_dir = __DIR__ . '/uploads';
 
-        // تأكد من وجود مجلد uploads وإلا انشئه
         if (!is_dir($uploads_dir)) {
             mkdir($uploads_dir, 0755, true);
         }
@@ -70,6 +76,8 @@ if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
 
 $blocks = $conn->query("SELECT * FROM info_blocks ORDER BY id DESC");
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
