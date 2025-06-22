@@ -1557,6 +1557,7 @@ body.lock-scroll {
     max-width: 1178px;
   }
 }
+
 @media screen and (min-width: 671px) and (max-width: 1920px) {
   .crop-top-left:before,
   .floating__block:nth-of-type(odd) .floating__block-img:before,
@@ -7148,19 +7149,6 @@ footer {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.icon-box {
-  background-color: #f2f2eb;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
-.icon-box img {
-  width: 30px;
-}
 
 .arrow-btn {
   width: 36px;
@@ -7279,6 +7267,5 @@ button.btn_payment.right a {
 }
 
 .btn_payment.flex.animate__animated.animate__fadeInUp a {
-    width: 50%;
+  width: 50%;
 }
-
