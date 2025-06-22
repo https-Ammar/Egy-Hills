@@ -7256,3 +7256,29 @@ label.form-label {
 img#img3d {
   width: 50%;
 }
+
+/*  */
+.btn_payment.flex.animate__animated.animate__fadeInUp {
+  filter: f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.btn_payment.right {
+  background: black;
+  border-radius: 40px;
+  border: navajowhite;
+  outline: navajowhite;
+  color: white !important;
+
+  width: 100%;
+}
+button.btn_payment.right a {
+  color: white;
+}
+
+.btn_payment.flex.animate__animated.animate__fadeInUp a {
+    width: 50%;
+}
+

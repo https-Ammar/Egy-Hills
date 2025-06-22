@@ -4,45 +4,46 @@ session_start();
 
 $username = $_SESSION['username'] ?? 'unknown';
 
-// ------------ إضافة بلوك ------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'] ?? '';
     $text = $_POST['text'] ?? '';
 
-    // معالجة الصورة
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $uploads_dir = __DIR__ . '/uploads';
+
+        // تأكد من وجود مجلد uploads وإلا انشئه
+        if (!is_dir($uploads_dir)) {
+            mkdir($uploads_dir, 0755, true);
+        }
+
         $image_name = time() . '_' . basename($_FILES['image']['name']);
-        $upload_path = 'uploads/' . $image_name;
+        $upload_path = $uploads_dir . '/' . $image_name;
 
         if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
-            // أضف البلوك
             $stmt = $conn->prepare("INSERT INTO info_blocks (title, text, image) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $title, $text, $image_name);
             if ($stmt->execute()) {
-                // سجل الإضافة
                 $block_id = $stmt->insert_id;
                 $log_stmt = $conn->prepare("INSERT INTO logs (action, table_name, record_id, username, created_at) VALUES ('add', 'info_blocks', ?, ?, NOW())");
                 $log_stmt->bind_param("is", $block_id, $username);
                 $log_stmt->execute();
                 $log_stmt->close();
-                echo "Block added and logged.<br>";
+                $message = "Block added and logged.";
             } else {
-                echo "Error adding block: " . $stmt->error;
+                $error = "Error adding block: " . $stmt->error;
             }
             $stmt->close();
         } else {
-            echo "Error uploading image.";
+            $error = "Error uploading image.";
         }
     } else {
-        echo "Image is required.";
+        $error = "Image is required.";
     }
 }
 
-// ------------ حذف بلوك ------------
 if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
     $block_id = intval($_GET['delete_id']);
 
-    // جلب اسم الصورة قبل الحذف
     $stmt = $conn->prepare("SELECT image FROM info_blocks WHERE id = ?");
     $stmt->bind_param("i", $block_id);
     $stmt->execute();
@@ -50,29 +51,23 @@ if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
     $stmt->fetch();
     $stmt->close();
 
-    // احذف البلوك
     $stmt = $conn->prepare("DELETE FROM info_blocks WHERE id = ?");
     $stmt->bind_param("i", $block_id);
     if ($stmt->execute()) {
-        // حذف الصورة من السيرفر
-        if ($image_name && file_exists('uploads/' . $image_name)) {
-            unlink('uploads/' . $image_name);
+        if ($image_name && file_exists(__DIR__ . '/uploads/' . $image_name)) {
+            unlink(__DIR__ . '/uploads/' . $image_name);
         }
-
-        // سجل الحذف
         $log_stmt = $conn->prepare("INSERT INTO logs (action, table_name, record_id, username, created_at) VALUES ('delete', 'info_blocks', ?, ?, NOW())");
         $log_stmt->bind_param("is", $block_id, $username);
         $log_stmt->execute();
         $log_stmt->close();
-
-        echo "Block deleted and logged.<br>";
+        $message = "Block deleted and logged.";
     } else {
-        echo "Error deleting block: " . $stmt->error;
+        $error = "Error deleting block: " . $stmt->error;
     }
     $stmt->close();
 }
 
-// ------------ جلب كل البلوكات ------------
 $blocks = $conn->query("SELECT * FROM info_blocks ORDER BY id DESC");
 ?>
 
@@ -80,53 +75,86 @@ $blocks = $conn->query("SELECT * FROM info_blocks ORDER BY id DESC");
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Manage Info Blocks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
-<body>
-    <h2>Add New Block</h2>
-    <form method="post" enctype="multipart/form-data">
-        <label>Title:</label><br>
-        <input type="text" name="title" required><br><br>
+<body class="bg-light">
+    <div class="container py-5">
+        <h2 class="mb-4">Add New Block</h2>
 
-        <label>Text:</label><br>
-        <textarea name="text" rows="5" required></textarea><br><br>
+        <?php if (!empty($message)): ?>
+            <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
+        <?php endif; ?>
 
-        <label>Image:</label><br>
-        <input type="file" name="image" accept="image/*" required><br><br>
+        <?php if (!empty($error)): ?>
+            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
 
-        <button type="submit">Add Block</button>
-    </form>
+        <form method="post" enctype="multipart/form-data" class="mb-5">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label>
+                <input id="title" type="text" name="title" class="form-control" required />
+            </div>
 
-    <hr>
+            <div class="mb-3">
+                <label for="text" class="form-label">Text:</label>
+                <textarea id="text" name="text" rows="5" class="form-control" required></textarea>
+            </div>
 
-    <h2>All Blocks</h2>
-    <?php if ($blocks->num_rows > 0): ?>
-        <table border="1" cellpadding="10">
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Text</th>
-                <th>Image</th>
-                <th>Action</th>
-            </tr>
-            <?php while ($row = $blocks->fetch_assoc()): ?>
-                <tr>
-                    <td><?= htmlspecialchars($row['id']) ?></td>
-                    <td><?= htmlspecialchars($row['title']) ?></td>
-                    <td><?= htmlspecialchars($row['text']) ?></td>
-                    <td><img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="100"></td>
-                    <td>
-                        <a href="?delete_id=<?= $row['id'] ?>"
-                            onclick="return confirm('Are you sure you want to delete this block?');">Delete</a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-        </table>
-    <?php else: ?>
-        <p>No blocks found.</p>
-    <?php endif; ?>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image:</label>
+                <input id="image" type="file" name="image" accept="image/*" class="form-control" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Block</button>
+        </form>
+
+        <h2 class="mb-4">All Blocks</h2>
+        <?php if ($blocks && $blocks->num_rows > 0): ?>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Text</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $blocks->fetch_assoc()): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($row['id']) ?></td>
+                                <td><?= htmlspecialchars($row['title']) ?></td>
+                                <td><?= nl2br(htmlspecialchars($row['text'])) ?></td>
+                                <td>
+                                    <?php if (!empty($row['image']) && file_exists(__DIR__ . '/uploads/' . $row['image'])): ?>
+                                        <img src="uploads/<?= htmlspecialchars($row['image']) ?>" alt="Image" width="100"
+                                            class="img-thumbnail" />
+                                    <?php else: ?>
+                                        No image
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to delete this block?');">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            <p>No blocks found.</p>
+        <?php endif; ?>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

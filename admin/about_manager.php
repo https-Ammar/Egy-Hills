@@ -168,217 +168,248 @@ if (isset($_GET['delete_initiative'])) {
 $about_team_cards = $conn->query("SELECT * FROM about_team_cards");
 $about_director_card = $conn->query("SELECT * FROM about_director_card LIMIT 1");
 $about_sliders = $conn->query("SELECT * FROM about_slider");
-$initiatives = $conn->query("SELECT * FROM about_initiatives");
-?>
-
+$initiatives = $conn->query("SELECT * FROM about_initiatives"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Dashboard - Content Manager</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body class="bg-light">
 
     <div class="container py-5">
-        <h1 class="mb-4 text-center">Dashboard - Content Manager</h1>
+        <h1 class="mb-5 text-center">Dashboard - Content Manager</h1>
 
         <!-- Add Team Card -->
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">Add New Team Card</div>
-            <div class="card-body">
-                <form method="POST" enctype="multipart/form-data" class="row g-3">
-                    <div class="col-md-4">
-                        <label class="form-label">Image</label>
-                        <input type="file" name="image" class="form-control" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Phone</label>
-                        <input type="text" name="phone" class="form-control">
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" name="add_team_card" class="btn btn-success">Add Card</button>
-                    </div>
-                </form>
+        <section class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white fs-5">Add New Team Card</div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data" class="row g-3 align-items-end">
+                        <div class="col-md-4">
+                            <label for="teamImage" class="form-label">Image</label>
+                            <input type="file" id="teamImage" name="image" class="form-control" required />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="teamName" class="form-label">Name</label>
+                            <input type="text" id="teamName" name="name" class="form-control" required />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="teamPhone" class="form-label">Phone</label>
+                            <input type="text" id="teamPhone" name="phone" class="form-control" />
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" name="add_team_card" class="btn btn-success">Add Card</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        </section>
 
         <!-- Team Cards List -->
-        <div class="card mb-4">
-            <div class="card-header bg-secondary text-white">Team Cards</div>
-            <div class="card-body table-responsive">
-                <table class="table table-bordered text-center">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        <section class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white fs-5">Team Cards</div>
+                <div class="card-body">
+                    <div class="row gy-4">
                         <?php while ($row = $about_team_cards->fetch_assoc()): ?>
-                            <tr>
-                                <td><img src="uploads/<?= $row['image'] ?>" width="80"></td>
-                                <td><?= htmlspecialchars($row['name']) ?></td>
-                                <td><?= htmlspecialchars($row['phone']) ?></td>
-                                <td>
-                                    <form method="POST" enctype="multipart/form-data" class="row g-1">
-                                        <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                                        <div class="col">
-                                            <input type="file" name="image" class="form-control">
-                                        </div>
-                                        <div class="col">
-                                            <input type="text" name="name" value="<?= htmlspecialchars($row['name']) ?>"
-                                                class="form-control" required>
-                                        </div>
-                                        <div class="col">
-                                            <input type="text" name="phone" value="<?= htmlspecialchars($row['phone']) ?>"
-                                                class="form-control">
-                                        </div>
-                                        <div class="col">
-                                            <button type="submit" name="update_team_card"
-                                                class="btn btn-warning btn-sm">Update</button>
-                                        </div>
-                                    </form>
-                                </td>
-                                <td>
-                                    <a href="?delete_team_card=<?= $row['id'] ?>" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Are you sure?')">Delete</a>
-                                </td>
-                            </tr>
+                            <div class="col-12 border rounded p-3">
+                                <div class="row align-items-center g-3">
+                                    <div class="col-auto">
+                                        <img src="uploads/<?= $row['image'] ?>" alt="team image" width="80"
+                                            class="rounded" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <strong>Name:</strong>
+                                        <div><?= htmlspecialchars($row['name']) ?></div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <strong>Phone:</strong>
+                                        <div><?= htmlspecialchars($row['phone']) ?></div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <form method="POST" enctype="multipart/form-data"
+                                            class="row g-2 align-items-center">
+                                            <input type="hidden" name="id" value="<?= $row['id'] ?>" />
+                                            <div class="col-md-3">
+                                                <input type="file" name="image" class="form-control form-control-sm" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="name" value="<?= htmlspecialchars($row['name']) ?>"
+                                                    class="form-control form-control-sm" required />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="phone"
+                                                    value="<?= htmlspecialchars($row['phone']) ?>"
+                                                    class="form-control form-control-sm" />
+                                            </div>
+                                            <div class="col-md-3 d-grid">
+                                                <button type="submit" name="update_team_card"
+                                                    class="btn btn-warning btn-sm">Update</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-1 d-grid">
+                                        <a href="?delete_team_card=<?= $row['id'] ?>" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Are you sure?')">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
                         <?php endwhile; ?>
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
         <!-- Director Card -->
         <?php $director = $about_director_card->fetch_assoc(); ?>
-        <div class="card mb-4">
-            <div class="card-header bg-info text-white">Director Card</div>
-            <div class="card-body">
-                <?php if ($director && $director['image']): ?>
-                    <img src="uploads/<?= $director['image'] ?>" width="120" class="mb-3 d-block">
-                <?php endif; ?>
-                <form method="POST" enctype="multipart/form-data" class="row g-3">
-                    <div class="col-md-4">
-                        <label class="form-label">Image</label>
-                        <input type="file" name="image" class="form-control">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Title</label>
-                        <input type="text" name="title"
-                            value="<?= $director ? htmlspecialchars($director['title']) : '' ?>" class="form-control"
-                            required>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Text</label>
-                        <textarea name="text" rows="2" class="form-control"
-                            required><?= $director ? htmlspecialchars($director['text']) : '' ?></textarea>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" name="save_director_card" class="btn btn-primary">Save</button>
-                        <?php if ($director): ?>
-                            <a href="?delete_director_card=<?= $director['id'] ?>" class="btn btn-danger ms-2"
-                                onclick="return confirm('Are you sure?')">Delete</a>
-                        <?php endif; ?>
-                    </div>
-                </form>
+        <section class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white fs-5">Director Card</div>
+                <div class="card-body">
+                    <?php if ($director && $director['image']): ?>
+                        <div class="mb-3 text-center">
+                            <img src="uploads/<?= $director['image'] ?>" alt="Director Image" width="120" class="rounded" />
+                        </div>
+                    <?php endif; ?>
+                    <form method="POST" enctype="multipart/form-data" class="row g-3">
+                        <div class="col-md-4">
+                            <label for="directorImage" class="form-label">Image</label>
+                            <input type="file" id="directorImage" name="image" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="directorTitle" class="form-label">Title</label>
+                            <input type="text" id="directorTitle" name="title"
+                                value="<?= $director ? htmlspecialchars($director['title']) : '' ?>"
+                                class="form-control" required />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="directorText" class="form-label">Text</label>
+                            <textarea id="directorText" name="text" rows="2" class="form-control"
+                                required><?= $director ? htmlspecialchars($director['text']) : '' ?></textarea>
+                        </div>
+                        <div class="col-12 d-flex align-items-center gap-2">
+                            <button type="submit" name="save_director_card" class="btn btn-primary">Save</button>
+                            <?php if ($director): ?>
+                                <a href="?delete_director_card=<?= $director['id'] ?>" class="btn btn-danger"
+                                    onclick="return confirm('Are you sure?')">Delete</a>
+                            <?php endif; ?>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        </section>
 
         <!-- About Slider -->
-        <div class="card mb-4">
-            <div class="card-header bg-dark text-white">Add New Slider</div>
-            <div class="card-body">
-                <form method="POST" enctype="multipart/form-data" class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label">Image</label>
-                        <input type="file" name="image" class="form-control" required>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" name="add_about_slider" class="btn btn-success">Add Slider</button>
-                    </div>
-                </form>
+        <section class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white fs-5">Add New Slider</div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data" class="row g-3 align-items-end">
+                        <div class="col-md-6">
+                            <label for="sliderImage" class="form-label">Image</label>
+                            <input type="file" id="sliderImage" name="image" class="form-control" required />
+                        </div>
+                        <div class="col-md-6 d-grid">
+                            <button type="submit" name="add_about_slider" class="btn btn-success">Add Slider</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="card mb-4">
-            <div class="card-header bg-dark text-white">Slider List</div>
-            <div class="card-body table-responsive">
-                <table class="table table-bordered text-center">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Image</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        <section class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white fs-5">Slider List</div>
+                <div class="card-body">
+                    <div class="row gy-3">
                         <?php while ($slider = $about_sliders->fetch_assoc()): ?>
-                            <tr>
-                                <td><img src="uploads/<?= $slider['image'] ?>" width="120"></td>
-                                <td>
-                                    <a href="?delete_about_slider=<?= $slider['id'] ?>" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Are you sure?')">Delete</a>
-                                </td>
-                            </tr>
+                            <div class="col-12 d-flex align-items-center justify-content-between border rounded p-3">
+                                <img src="uploads/<?= $slider['image'] ?>" alt="Slider Image" width="120" class="rounded" />
+                                <a href="?delete_about_slider=<?= $slider['id'] ?>" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Are you sure?')">Delete</a>
+                            </div>
                         <?php endwhile; ?>
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
+        <!-- CSR Initiatives -->
+        <section class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white fs-5">Add New CSR Initiative</div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data" class="row g-3">
+                        <div class="col-md-4">
+                            <label for="initiativeTitle" class="form-label">Title</label>
+                            <input type="text" id="initiativeTitle" name="title" class="form-control" required />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="initiativeName" class="form-label">Name</label>
+                            <input type="text" id="initiativeName" name="name" class="form-control" required />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="initiativeLink" class="form-label">Link (Optional)</label>
+                            <input type="url" id="initiativeLink" name="link" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="initiativeImage" class="form-label">Image</label>
+                            <input type="file" id="initiativeImage" name="image" class="form-control" accept="image/*"
+                                required />
+                        </div>
+                        <div class="col-md-6 d-grid">
+                            <button type="submit" name="add_initiative" class="btn btn-primary">Add Initiative</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Initiatives List -->
+        <section>
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white fs-5">CSR Initiatives List</div>
+                <div class="card-body">
+                    <div class="row gy-3">
+                        <?php while ($row = $initiatives->fetch_assoc()): ?>
+                            <div class="col-12 border rounded p-3 d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div>
+                                        <strong>Title:</strong><br />
+                                        <?= htmlspecialchars($row['title']) ?>
+                                    </div>
+                                    <div>
+                                        <strong>Name:</strong><br />
+                                        <?= htmlspecialchars($row['name']) ?>
+                                    </div>
+                                    <div>
+                                        <strong>Link:</strong><br />
+                                        <a href="<?= htmlspecialchars($row['link']) ?>" target="_blank">
+                                            <?= htmlspecialchars($row['link']) ?>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="60" class="rounded"
+                                            alt="initiative image" />
+                                    </div>
+                                </div>
+                                <div class="btn-group" role="group" aria-label="actions">
+                                    <a href="?edit_initiative=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="?delete_initiative=<?= $row['id'] ?>" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure?')">Delete</a>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-    <div class="container my-5">
-        <h3>Add New CSR Initiative</h3>
-        <form method="POST" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label>Title</label>
-                <input type="text" name="title" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label>Name</label>
-                <input type="text" name="name" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label>Link (Optional)</label>
-                <input type="url" name="link" class="form-control">
-            </div>
-
-            <div class="mb-3">
-                <label>Image</label>
-                <input type="file" name="image" class="form-control" accept="image/*" required>
-            </div>
-
-            <button type="submit" name="add_initiative" class="btn btn-primary">Add Initiative</button>
-        </form>
-    </div>
-    <?php
-    while ($row = $initiatives->fetch_assoc()): ?>
-        <tr>
-            <td><?= htmlspecialchars($row['title']) ?></td>
-            <td><?= htmlspecialchars($row['name']) ?></td>
-            <td><a href="<?= htmlspecialchars($row['link']) ?>" target="_blank"><?= htmlspecialchars($row['link']) ?></a>
-            </td>
-            <td><img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="60"></td>
-            <td>
-                <a href="?edit_initiative=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                <a href="?delete_initiative=<?= $row['id'] ?>" class="btn btn-danger btn-sm"
-                    onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
-        </tr>
-    <?php endwhile; ?>
 
 </body>
 

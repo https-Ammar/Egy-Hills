@@ -9,117 +9,62 @@ $result = $conn->query("SELECT id, image, title, location, price FROM projects")
 <html lang="ar">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>إدارة المشاريع</title>
-    <style>
-        body {
-            font-family: Arial;
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
-
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 6px;
-            text-align: center;
-            position: relative;
-        }
-
-        .card img {
-            width: 100%;
-            max-height: 200px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
-        .card h3 {
-            margin: 10px 0 5px;
-        }
-
-        .card p {
-            margin: 0 0 10px;
-        }
-
-        .btn {
-            background: #3498db;
-            color: #fff;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 5px;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            background: #2980b9;
-        }
-
-        .delete-btn {
-            background: #e74c3c;
-        }
-
-        .delete-btn:hover {
-            background: #c0392b;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .edit-form {
-            margin-top: 10px;
-            text-align: left;
-        }
-
-        .edit-form input {
-            display: block;
-            margin: 5px 0;
-            width: 100%;
-            padding: 5px;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
-<body>
+<body class="bg-light">
 
-    <h1>إدارة المشاريع</h1>
+    <div class="container py-4">
+        <h1 class="mb-4 text-center">إدارة المشاريع</h1>
 
-    <div class="projects">
         <?php if ($result && $result->num_rows > 0): ?>
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <div class="card" id="card-<?= $row['id'] ?>">
-                    <?php if (!empty($row['image'])): ?>
-                        <img src="uploads/<?= htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-                    <?php endif; ?>
-                    <h3><?= htmlspecialchars($row['title']) ?></h3>
-                    <p>📍 <?= htmlspecialchars($row['location']) ?></p>
-                    <p>💰 <?= htmlspecialchars($row['price']) ?></p>
-                    <button class="btn delete-btn" onclick="deleteProject(<?= $row['id'] ?>)">🗑️ حذف</button>
-                    <button class="btn" onclick="toggleEditForm(<?= $row['id'] ?>)">✏️ تعديل</button>
+            <ul class="list-group">
+                <?php while ($row = $result->fetch_assoc()): ?>
+                    <li class="list-group-item d-flex align-items-center justify-content-between flex-wrap"
+                        id="card-<?= $row['id'] ?>">
+                        <div class="d-flex align-items-center flex-grow-1 gap-3">
+                            <?php if (!empty($row['image'])): ?>
+                                <img src="uploads/<?= htmlspecialchars($row['image']) ?>"
+                                    alt="<?= htmlspecialchars($row['title']) ?>" class="img-thumbnail"
+                                    style="width: 120px; height: 80px; object-fit: cover;" />
+                            <?php else: ?>
+                                <div class="bg-secondary rounded" style="width: 120px; height: 80px;"></div>
+                            <?php endif; ?>
+                            <div class="project-info text-end flex-grow-1">
+                                <h5 class="mb-1"><?= htmlspecialchars($row['title']) ?></h5>
+                                <p class="mb-1">📍 <?= htmlspecialchars($row['location']) ?></p>
+                                <p class="mb-0">💰 <?= htmlspecialchars($row['price']) ?></p>
 
-                    <form class="edit-form hidden" id="edit-form-<?= $row['id'] ?>"
-                        onsubmit="event.preventDefault(); updateProject(<?= $row['id'] ?>);">
-                        <input type="text" id="title-<?= $row['id'] ?>" value="<?= htmlspecialchars($row['title']) ?>"
-                            placeholder="عنوان المشروع">
-                        <input type="text" id="location-<?= $row['id'] ?>" value="<?= htmlspecialchars($row['location']) ?>"
-                            placeholder="الموقع">
-                        <input type="text" id="price-<?= $row['id'] ?>" value="<?= htmlspecialchars($row['price']) ?>"
-                            placeholder="السعر">
-                        <button class="btn" type="submit">💾 حفظ التعديلات</button>
-                    </form>
-                </div>
-            <?php endwhile; ?>
+                                <form class="edit-form mt-2 d-none" id="edit-form-<?= $row['id'] ?>"
+                                    onsubmit="event.preventDefault(); updateProject(<?= $row['id'] ?>);">
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control form-control-sm" id="title-<?= $row['id'] ?>"
+                                            value="<?= htmlspecialchars($row['title']) ?>" placeholder="عنوان المشروع" />
+                                    </div>
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control form-control-sm" id="location-<?= $row['id'] ?>"
+                                            value="<?= htmlspecialchars($row['location']) ?>" placeholder="الموقع" />
+                                    </div>
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control form-control-sm" id="price-<?= $row['id'] ?>"
+                                            value="<?= htmlspecialchars($row['price']) ?>" placeholder="السعر" />
+                                    </div>
+                                    <button type="submit" class="btn btn-sm btn-success">💾 حفظ التعديلات</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="btn-group btn-group-sm flex-column flex-sm-row gap-2 mt-3 mt-sm-0">
+                            <button class="btn btn-danger" onclick="deleteProject(<?= $row['id'] ?>)">🗑️ حذف</button>
+                            <button class="btn btn-primary" onclick="toggleEditForm(<?= $row['id'] ?>)">✏️ تعديل</button>
+                        </div>
+                    </li>
+                <?php endwhile; ?>
+            </ul>
         <?php else: ?>
-            <p>لا يوجد مشاريع مضافة حتى الآن.</p>
+            <p class="text-center">لا يوجد مشاريع مضافة حتى الآن.</p>
         <?php endif; ?>
     </div>
 
@@ -143,7 +88,7 @@ $result = $conn->query("SELECT id, image, title, location, price FROM projects")
 
         function toggleEditForm(id) {
             const form = document.getElementById('edit-form-' + id);
-            form.classList.toggle('hidden');
+            form.classList.toggle('d-none');
         }
 
         function updateProject(id) {
@@ -160,13 +105,15 @@ $result = $conn->query("SELECT id, image, title, location, price FROM projects")
                 .then(data => {
                     if (data.trim() === 'success') {
                         alert('✅ تم حفظ التعديلات');
-                        location.reload(); // يمكن استبداله بتحديث جزء من الصفحة لو تحب
+                        location.reload();
                     } else {
                         alert('❌ حدث خطأ أثناء التعديل');
                     }
                 });
         }
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

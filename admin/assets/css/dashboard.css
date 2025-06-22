@@ -449,16 +449,20 @@ nav.close ~ .dashboard .top {
   }
 }
 .img_admin {
-  width: 75px;
-  height: 75px;
+  width: 175px;
+  height: 25vh;
   background: red;
   border: 1px solid black;
-  border-radius: 50%;
+  border-radius: 10px;
   background-size: cover;
   background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
 ul.sub-menu {

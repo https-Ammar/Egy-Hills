@@ -177,12 +177,7 @@ function e($value)
                 <?php if (!empty($table_rows)): ?>
                     <div class="table-responsive mt-4 animate__animated animate__fadeInUp">
                         <table class="table table-bordered align-middle text-center">
-                            <thead>
-                                <tr>
-                                    <th>Column 1</th>
-                                    <th>Column 2</th>
-                                </tr>
-                            </thead>
+                        
                             <tbody>
                                 <?php foreach ($table_rows as $row): ?>
                                     <tr>
@@ -197,10 +192,11 @@ function e($value)
             </div>
 
             <div class="btn_payment flex animate__animated animate__fadeInUp">
-                <button class="btn_payment left">Next</button>
+                                    <a href="booking.php?id=<?= (int) $project['id'] ?>">
                 <button class="btn_payment right">
-                    <a href="booking.php?id=<?= (int) $project['id'] ?>">Book a Visit</a>
+Book a Visit
                 </button>
+                </a>
 
             </div>
         </section>

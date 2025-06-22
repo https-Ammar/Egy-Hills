@@ -243,28 +243,28 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                     </li>
 
                     <li>
-                        <a href="#" data-target="content">
+                        <a href="./admin_blocks.php" data-target="content">
                             <i class="uil uil-files-landscapes"></i>
-                            <span class="link-name">Content</span>
+                            <span class="link-name">Payments</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" data-target="analytics">
+                        <a href="./requests.php" data-target="analytics">
                             <i class="uil uil-chart"></i>
-                            <span class="link-name">Analytics</span>
+                            <span class="link-name">requests</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" data-target="like">
+                        <a href="./manage_projects.php" data-target="like">
                             <i class="uil uil-thumbs-up"></i>
-                            <span class="link-name">Like</span>
+                            <span class="link-name"> projects</span>
                         </a>
                     </li>
 
                 </ul>
                 <ul class="logout-mode">
                     <li>
-                        <a href="#">
+                        <a href="login.php">
                             <i class="uil uil-signout"></i>
                             <span class="link-name">Logout</span>
                         </a>
