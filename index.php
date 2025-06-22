@@ -193,9 +193,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                                 <div class="image">
                                     <img src="uploads/<?= htmlspecialchars($row['image']) ?>" alt="About EGY-HILLS">
                                     <div class="overlay-box">
-                                        <div class="year-box">
-                                            <span class="number">5</span> Years <br> of Excellence <br> in Real Estate
-                                        </div>
+                                      
                                     </div>
                                 </div>
                             </div>

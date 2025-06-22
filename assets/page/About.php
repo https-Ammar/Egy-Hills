@@ -58,7 +58,6 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                                 <img src="/Egy-Hills/uploads/<?= $row['image'] ?>" alt="About EGY-HILLS">
                                 <div class="overlay-box">
                                     <div class="year-box">
-                                        <span class="number">5</span> Years <br> of Excellence <br> in Real Estate
                                     </div>
                                 </div>
                             </div>
