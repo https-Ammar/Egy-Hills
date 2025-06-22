@@ -201,73 +201,7 @@ function e($value)
                 <button class="btn_payment right">
                     <a href="booking.php?id=<?= (int) $project['id'] ?>">Book a Visit</a>
                 </button>
-                <style>
-                    .btn_payment.flex {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 10px;
-                    }
 
-                    button.btn_payment {
-                        width: 30%;
-                        text-align: center;
-                        padding: 30px;
-                        background: black;
-                        color: white;
-                        border: none;
-                    }
-
-                    button.btn_payment.left {
-                        border-radius: 30px 0 0 30px;
-                    }
-
-                    button.btn_payment.right {
-                        border-radius: 0 30px 30px 0px;
-                    }
-
-                    .btn_payment a {
-                        color: white;
-                        text-decoration: none;
-                    }
-
-                    @media screen and (max-width:992px) {
-                        .d-flex.align-items-center.justify-content-between.mt-5.animate__animated.animate__fadeInUp {
-                            display: block !important;
-                        }
-
-                        .d-flex.align-items-center.gap-3 {
-                            margin: 20px 0;
-                        }
-
-                        .cover_img_product.mt-5.rounded-5.animate__animated.animate__zoomIn {
-                            border-radius: 10px !important;
-                        }
-
-                        .btn_payment.flex.animate__animated.animate__fadeInUp {
-                            flex-direction: column;
-                        }
-
-                        .btn_payment.flex.animate__animated.animate__fadeInUp buttom {
-                            width: 100%;
-                        }
-
-                        button.btn_payment {
-                            width: -webkit-fill-available;
-                            margin: 10px;
-                            border-radius: 130px !important;
-                        }
-
-                        .row.d-flex.justify-content-center.mt-5.animate__animated.animate__fadeIn {
-                            margin: 0px;
-                        }
-
-                        .row.d-flex.justify-content-center.mt-5.animate__animated.animate__fadeIn {
-                            padding: 10px;
-                        }
-                        
-                    }
-                </style>
             </div>
         </section>
 

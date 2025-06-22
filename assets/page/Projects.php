@@ -20,7 +20,10 @@ $result = $conn->query("SELECT * FROM projects");
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script
         src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/jquery.min.js?ver=2.2.4"></script>
+
 </head>
+<link rel="stylesheet" href="../css/page.css">
+
 
 <body>
     <?php include './header.php'; ?>
@@ -179,44 +182,7 @@ $result = $conn->query("SELECT * FROM projects");
             });
         });
     </script>
-    <style>
-        form#filter-form {
-            padding: 30px;
-            border-radius: 15px;
-        }
 
-        label.form-label {
-            color: white;
-        }
-
-        .col-md-1.align-self-end {
-            padding: 0;
-        }
-
-        button.btn.btn-primary.w-100 {
-            margin-top: 2vh;
-            padding: 15px;
-            background: #ca9d81;
-            border: #ca9d81;
-        }
-
-        @media screen and (max-width:992px) {
-
-            button.btn.btn-primary.w-100 {
-                margin-top: 2vh;
-                padding: 15px;
-                background: #ca9d81;
-                border: #ca9d81;
-            }
-
-            button.btn.btn-dark.w-100.d-md-none.mb-3 {
-                margin-bottom: 5vh !important;
-                background: #383f48;
-                padding: 15px;
-            }
-
-        }
-    </style>
 </body>
 
 </html>

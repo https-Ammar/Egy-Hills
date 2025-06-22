@@ -1015,163 +1015,6 @@ td {
     font-size: 1rem;
   }
 }
-form {
-  background: #373f48;
-}
-form button,
-form input[type="submit"] {
-  width: 100%;
-  background: transparent;
-  border: 3px solid #ca9d81;
-}
-input[type="date"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="email"],
-input[type="month"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="time"],
-input[type="url"],
-input[type="week"],
-textarea {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-input[type="date"]::-moz-placeholder,
-input[type="datetime"]::-moz-placeholder,
-input[type="datetime-local"]::-moz-placeholder,
-input[type="email"]::-moz-placeholder,
-input[type="month"]::-moz-placeholder,
-input[type="number"]::-moz-placeholder,
-input[type="password"]::-moz-placeholder,
-input[type="search"]::-moz-placeholder,
-input[type="tel"]::-moz-placeholder,
-input[type="text"]::-moz-placeholder,
-input[type="time"]::-moz-placeholder,
-input[type="url"]::-moz-placeholder,
-input[type="week"]::-moz-placeholder,
-textarea::-moz-placeholder {
-  opacity: 1;
-  font-style: normal;
-  color: #888;
-}
-input[type="date"]::-webkit-input-placeholder,
-input[type="datetime"]::-webkit-input-placeholder,
-input[type="datetime-local"]::-webkit-input-placeholder,
-input[type="email"]::-webkit-input-placeholder,
-input[type="month"]::-webkit-input-placeholder,
-input[type="number"]::-webkit-input-placeholder,
-input[type="password"]::-webkit-input-placeholder,
-input[type="search"]::-webkit-input-placeholder,
-input[type="tel"]::-webkit-input-placeholder,
-input[type="text"]::-webkit-input-placeholder,
-input[type="time"]::-webkit-input-placeholder,
-input[type="url"]::-webkit-input-placeholder,
-input[type="week"]::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
-  font-style: normal;
-  color: #888;
-}
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-input,
-textarea,
-button {
-  -webkit-appearance: none;
-}
-textarea {
-  min-height: 200px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  resize: none;
-}
-label {
-  display: block;
-  color: #fff;
-  font-family: "proxima-nova", "Arial", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-@media screen and (min-width: 721px) {
-  .form-2-col .gform_validation_error form {
-    padding-top: 180px;
-  }
-  .form-2-col .gform_validation_error .form-2-col__right:nth-of-type(n) {
-    top: 210px;
-  }
-}
-@media screen and (max-width: 720px) {
-  .form-2-col .gform_validation_error form {
-    padding-top: 200px;
-  }
-  .form-2-col .gform_validation_error .form-2-col__right:nth-of-type(n) {
-    top: 230px;
-  }
-}
-@media screen and (min-width: 671px) {
-  label {
-    font-size: 14px;
-    font-size: 0.875rem;
-  }
-  .form-2-col form {
-    width: calc(50% - 20px);
-    position: relative;
-  }
-  .form-2-col .form-2-col__right.form-2-col__right:nth-of-type(n),
-  .form-2-col .gform_footer {
-    margin-top: 0;
-  }
-  .form-2-col .form-2-col__right:nth-of-type(n) {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: calc(100% + 40px);
-  }
-  .form-2-col .form-2-col__right:nth-of-type(n) textarea {
-    min-height: 0;
-    height: 160px;
-  }
-  .form-2-col .gform_footer {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: calc(100% + 40px);
-  }
-  .form-2-col .gform_validation_error .validation_error {
-    width: calc(200% + 40px);
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-}
-@media screen and (max-width: 670px) {
-  label {
-    font-size: 13px;
-    font-size: 0.8125rem;
-  }
-}
-.btn,
-input[type="submit"],
-button,
-.button,
-.woocommerce-shipping-calculator > p a,
-.gform_wrapper .woocommerce-shipping-calculator > .gform_description a,
-.woocommerce-shipping-calculator .button[name="calc_shipping"] {
-  display: inline-block;
-  cursor: pointer;
-  border: none;
-  background: #ca9d81;
-  font-family: "proxima-nova", "Arial", sans-serif;
-  font-weight: 700;
-  text-align: center;
-  color: #fff;
-  text-transform: uppercase;
-}
 .btn--has-loader {
   padding-right: 46px;
   position: relative;
@@ -3217,7 +3060,8 @@ body.error404 {
   display: block;
   position: relative;
 }
-.jcf-number input,input#location {
+.jcf-number input,
+input#location {
   padding-left: 55px;
   padding-right: 55px;
   text-align: center;
@@ -3311,7 +3155,6 @@ body.error404 {
   height: 100%;
   cursor: pointer;
 }
-
 
 .jcf-range-track {
   height: 5px;
@@ -5062,7 +4905,6 @@ body.error404 {
   margin: 5px 0 5px 25px;
 }
 
-
 .post-styles blockquote {
   position: relative;
 }
@@ -6596,6 +6438,9 @@ body.error404 {
 .usp-list__icon-outer {
   position: relative;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .usp-list__icon-outer:after {
   content: "";

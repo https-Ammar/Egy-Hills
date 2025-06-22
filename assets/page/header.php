@@ -73,10 +73,10 @@
                 </li>
                 <li id="menu-item-233"
                     class="menu-item menu-item-type-taxonomy menu-item-object-property_type menu-item-233">
-                    <a href="./Booking.php">Booking / Inquiry</a>
+                    <a href="./Inquiry.php">Booking / Inquiry</a>
                 </li>
-                <li id="menu-item-229" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-229"><a
-                        href="./Partners.php">Partners</a></li>
+
+
                 <li id="menu-item-310" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-310"><a
                         href="./privacy.php">Privacy Policy</a></li>
                 <li id="menu-item-226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-226"><a

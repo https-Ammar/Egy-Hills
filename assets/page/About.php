@@ -18,6 +18,8 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/page.css">
+
 </head>
 
 <body>
@@ -260,4 +262,5 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
         }
     </script>
 </body>
+
 </html>
