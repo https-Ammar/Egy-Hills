@@ -1818,7 +1818,6 @@ body.lock-scroll {
   .floating__block:nth-of-type(even) .floating__block-img:after,
   .page-link__img-inner:after,
   .property-preview:nth-of-type(even):after {
-    background: url("../img/graphics/crop-mark.svg") center/100%;
   }
 }
 @media screen and (max-width: 670px) {

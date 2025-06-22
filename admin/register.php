@@ -99,7 +99,6 @@ if (isset($_POST['register'])) {
 
         <p class="mt-3">Already have an account? <a href="login.php">Sign In</a></p>
     </div>
-
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

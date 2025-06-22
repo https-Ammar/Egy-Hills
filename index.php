@@ -586,7 +586,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 col-xl-5" data-aos="fade-left" data-aos-delay="300">
-                        <img class="img-fluid rounded" loading="lazy" src="./assets/img/about-img-1 copy.webp"
+                        <img class="img-fluid rounded" loading="lazy" src="./assets/img/about-img-1.webp"
                             alt="About Us">
                     </div>
                 </div>
@@ -663,4 +663,5 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
     <script src="./assets/script/footer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

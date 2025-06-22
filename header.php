@@ -75,8 +75,7 @@
                     class="menu-item menu-item-type-taxonomy menu-item-object-property_type menu-item-233">
                     <a href="./assets/page/Booking.html">Booking / Inquiry</a>
                 </li>
-                <li id="menu-item-229" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-229"><a
-                        href="./assets/page/Partners.html">Partners</a></li>
+
                 <li id="menu-item-310" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-310"><a
                         href="./assets/page/privacy.html">Privacy Policy</a></li>
                 <li id="menu-item-226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-226"><a

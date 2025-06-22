@@ -2,7 +2,7 @@
 :root {
   --primary-color: #fdb801;
   --secondary-color: #d7a449;
-  --accent-color: #d31148;
+
 
   --text-color: #fff;
   --gray-text: #606060;
@@ -895,3 +895,4 @@ body {
   align-items: center;
   justify-content: center;
 }
+/*  */
