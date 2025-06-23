@@ -2,6 +2,15 @@
 session_start();
 include 'db.php';
 
+$ip = $_SERVER['REMOTE_ADDR'];
+$conn->query("INSERT INTO site_visits (ip_address) VALUES ('$ip')");
+
+$total_visits_result = $conn->query("SELECT COUNT(*) as total FROM site_visits");
+$total_visits = 0;
+if ($total_visits_result && $row = $total_visits_result->fetch_assoc()) {
+    $total_visits = $row['total'];
+}
+
 $sliders = $conn->query("SELECT * FROM sliders");
 $about_sliders = $conn->query("SELECT * FROM about_slider");
 $about_cards = $conn->query("SELECT * FROM about_cards");
@@ -85,6 +94,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -105,8 +115,8 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 </head>
 
 <body>
-    <?php include 'header.php'; ?>
-    <?php include 'loging.php'; ?>
+    <?php include './assets/page/header.php'; ?>
+    <?php include './assets/page/loging.php'; ?>
 
     <main class="main">
         <div class="modal fade" id="visitorModal" tabindex="-1" aria-labelledby="visitorModalLabel" aria-hidden="true">
