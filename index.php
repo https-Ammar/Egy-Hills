@@ -92,9 +92,6 @@ $visitors = $conn->query("SELECT name, phone FROM visitors ORDER BY id DESC");
 $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY id DESC");
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,45 +107,64 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script
-        src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/jquery.min.js?ver=2.2.4"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        body.arabic {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .no-rtl {
+            direction: ltr !important;
+            text-align: left !important;
+        }
+    </style>
 </head>
 
 <body>
     <?php include './assets/page/header.php'; ?>
     <?php include './assets/page/loging.php'; ?>
 
+
+
     <main class="main">
         <div class="modal fade" id="visitorModal" tabindex="-1" aria-labelledby="visitorModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="visitorModalLabel">Enter Your Information</h1>
+                        <h1 class="modal-title fs-5" id="visitorModalLabel" data-translate>Enter Your Information</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <?php echo $message; ?>
                         <form id="visitorForm" method="POST" action="">
                             <div class="mb-3">
-                                <label for="visitor_name" class="form-label">Name:</label>
+                                <label for="visitor_name" class="form-label" data-translate>Name:</label>
                                 <input type="text" id="visitor_name" name="visitor_name" class="form-control" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="visitor_phone" class="form-label">Phone Number:</label>
+                                <label for="visitor_phone" class="form-label" data-translate>Phone Number:</label>
                                 <input type="text" id="visitor_phone" name="visitor_phone" class="form-control"
                                     required>
                             </div>
 
-                            <button type="submit" name="submit_visitor"
-                                class="btn btn-primary send_info">Submit</button>
+                            <button type="submit" name="submit_visitor" class="btn btn-primary send_info"
+                                data-translate>Submit</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
 
-        <section class="site-banner site-banner--home">
+        <section class="site-banner site-banner--home no-rtl">
             <div class="site-banner__inner">
 
                 <?php while ($row = $sliders->fetch_assoc()): ?>
@@ -165,14 +181,14 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                             <br>
                             real estate
                         </h1>
-                        <h2 class="site-banner__subtitle">Exceptional Contemporary Living</h2>
+                        <h2 class="site-banner__subtitle" data-translate>Exceptional Contemporary Living</h2>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <section class="about-section">
+        <section class="about-section ">
             <div class="container">
 
 
@@ -182,11 +198,11 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                         <div class="content-column col-md-6 col-sm-12" data-aos="fade-right">
                             <div class="inner-column">
                                 <div class="sec-title">
-                                    <div class="title">About Us</div>
+                                    <div class="title" data-translate>About Us</div>
 
-                                    <h2><?= htmlspecialchars($row['title']) ?></h2>
+                                    <h2 data-translate><?= htmlspecialchars($row['title']) ?></h2>
                                 </div>
-                                <div class="text">
+                                <div class="text" data-translate>
 
                                     <?= htmlspecialchars($row['description']) ?>
                                 </div>
@@ -221,10 +237,10 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
             <div class="container">
                 <div class="row align-items-center mb-5">
                     <div class="col-md-8" data-aos="fade-right">
-                        <h1 class="section-title">Property Highlights</h1>
+                        <h1 class="section-title" data-translate>Property Highlights</h1>
                     </div>
                     <div class="col-md-4" data-aos="fade-left">
-                        <p class="lead">
+                        <p class="lead" data-translate>
                             Discover the key features that make our properties stand out — from breathtaking views to
                             modern amenities designed for comfort and elegance.
                         </p>
@@ -236,8 +252,8 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                             <div class="highlight-card text-center"
                                 style="background-image: url(uploads/<?= htmlspecialchars($row['image']) ?>);">
                                 <div class="card_text_blur text-center">
-                                    <h2 class="h4 mb-3"><?= htmlspecialchars($row['title']) ?></h2>
-                                    <p class="mb-0"><?= htmlspecialchars($row['description']) ?></p>
+                                    <h2 class="h4 mb-3" data-translate><?= htmlspecialchars($row['title']) ?></h2>
+                                    <p class="mb-0" data-translate><?= htmlspecialchars($row['description']) ?></p>
                                 </div>
                             </div>
                         </div>
@@ -256,11 +272,11 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                                     <img decoding="async" alt="Feature Image" style="max-width: 120px;" class="mt-image-list"
                                         src="uploads/<?php echo htmlspecialchars($row['image']); ?>">
                                 </div>
-                                <h6 class="fw-bold"><?php echo htmlspecialchars($row['title']); ?></h6>
+                                <h6 class="fw-bold" data-translate><?php echo htmlspecialchars($row['title']); ?></h6>
                             </div>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <p class="text-center"></p>
+                        <p class="text-center" data-translate></p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -321,10 +337,10 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                         <div class="content-column col-md-6 col-sm-12" data-aos="fade-right">
                             <div class="inner-column">
                                 <div class="property-info">
-                                    <h2 class="property-title mb-4" data-aos="fade-up" data-aos-delay="100">
+                                    <h2 class="property-title mb-4" data-aos="fade-up" data-aos-delay="100" data-translate>
                                         <?= htmlspecialchars($ad['title']) ?>
                                     </h2>
-                                    <p class="mb-4" data-aos="fade-up" data-aos-delay="200">
+                                    <p class="mb-4" data-aos="fade-up" data-aos-delay="200" data-translate>
                                         <?= htmlspecialchars($ad['description']) ?>
                                     </p>
                                     <div class="row feature-box" data-aos="fade-up" data-aos-delay="400">
@@ -346,7 +362,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                                                     ?>
                                                 </div>
                                                 <div class="block">
-                                                    <small class="text-muted"><?= $title ?></small>
+                                                    <small class="text-muted" data-translate><?= $title ?></small>
                                                     <div class="property-number"><?= $text ?></div>
                                                 </div>
                                             </div>
@@ -371,13 +387,14 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 
         <div class="container">
             <section class="card_project" data-aos="fade-up">
-                <div class="row">
+                <div class="row no-rtl">
                     <div class="col-12 mb-4" data-aos="fade-right" data-aos-delay="100">
                         <div class="col-md-12">
-                            <h2 class="section-title">Discover Your Dream Home</h2>
+                            <h2 class="section-title" data-translate>Discover Your Dream Home</h2>
                         </div>
                         <div class="col-md-6">
-                            <p>Browse our exclusive collection of high-end properties, carefully selected to match your
+                            <p data-translate>Browse our exclusive collection of high-end properties, carefully selected
+                                to match your
                                 lifestyle, comfort, and aspirations.</p>
                         </div>
                     </div>
@@ -410,10 +427,12 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                                                 </p>
                                                 <div class="d-flex align-items-center justify-content-between">
                                                     <h3 class="property-card-title"><?= htmlspecialchars($row['title']) ?></h3>
-                                                    <h3 class="property-card-title"><?= htmlspecialchars($row['price']) ?></h3>
+                                                    <h3 class="property-card-title"><?= htmlspecialchars($row['price']) ?>
+                                                        <sub>EGP</sub>
+                                                    </h3>
                                                 </div>
                                                 <div class="property-card-features">
-                                                    <div class="property-card-feature">
+                                                    <div class="property-card-feature" data-translate>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -427,7 +446,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                                                         </svg>
                                                         <?= (int) $row['beds'] ?> Beds
                                                     </div>
-                                                    <div class="property-card-feature">
+                                                    <div class="property-card-feature" data-translate>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -442,7 +461,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                                                         </svg>
                                                         <?= (int) $row['baths'] ?> Baths
                                                     </div>
-                                                    <div class="property-card-feature">
+                                                    <div class="property-card-feature" data-translate>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -479,40 +498,40 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 
                             <!-- Description and Tabs -->
                             <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
-                                <h2 class="fw-bold mb-3 mt-3">Plan and Room<br>Dimensions</h2>
+                                <h2 class="fw-bold mb-3 mt-3" data-translate>Plan and Room<br>Dimensions</h2>
 
                                 <div class="mb-3">
                                     <button class="tab-btn active" onclick="showFloor(1)">FLOOR 1</button>
-                                    <button class="tab-btn" onclick="showFloor(2)">FLOOR 2</button>
-                                    <button class="tab-btn" onclick="showFloor(3)">FLOOR 3</button>
+
                                 </div>
 
-                                <p class="text-muted"><?= htmlspecialchars($row['title']) ?></p>
+                                <p class="text-muted" data-translate><?= htmlspecialchars($row['title']) ?></p>
 
-                                <div class="mt-addons-tab-content-v2">
+                                <div class="mt-addons-tab-content-v2" data-translate>
                                     <?= nl2br(htmlspecialchars($row['description'])) ?>
                                 </div>
                             </div>
                         </div>
                     <?php endwhile; ?>
                 <?php else: ?>
-                    <p>No floor plans available.</p>
+                    <p data-translate>No floor plans available.</p>
                 <?php endif; ?>
 
                 <?php if (!empty($message)): ?>
-                    <div class="status-message"><?= htmlspecialchars($message) ?></div>
+                    <div class="status-message" data-translate><?= htmlspecialchars($message) ?></div>
                 <?php endif; ?>
 
             </section>
 
 
 
-            <div class="row mb-4" data-aos="fade-right" data-aos-delay="100">
+            <div class="row mb-4 no-rtl" data-aos="fade-right" data-aos-delay="100">
                 <div class="col-md-12">
-                    <h2 class="section-title">Our Services & Speed</h2>
+                    <h2 class="section-title" data-translate>Our Services & Speed</h2>
                 </div>
                 <div class="col-md-6">
-                    <p>Experience fast, reliable, and professional property services tailored to meet your needs with
+                    <p data-translate>Experience fast, reliable, and professional property services tailored to meet
+                        your needs with
                         precision and care.</p>
                 </div>
             </div>
@@ -532,22 +551,26 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 
                 <div class="row text-center pt-5">
                     <div class="col-md-3 info-box border-end-custom" data-aos="fade-up" data-aos-delay="300">
-                        <p>Over 15 years of expertise helping clients find the ideal property — fast and efficiently.
+                        <p data-translate>Over 15 years of expertise helping clients find the ideal property — fast and
+                            efficiently.
                         </p>
                         <div class="stats-number">24h</div>
                     </div>
                     <div class="col-md-3 info-box border-end-custom" data-aos="fade-up" data-aos-delay="400">
-                        <p>Extensive listings updated daily. From budget-friendly homes to premium estates, we have it
+                        <p data-translate>Extensive listings updated daily. From budget-friendly homes to premium
+                            estates, we have it
                             all.</p>
                         <div class="stats-number">250+</div>
                     </div>
                     <div class="col-md-3 info-box border-end-custom" data-aos="fade-up" data-aos-delay="500">
-                        <p>Client satisfaction is our priority — delivering seamless service and unmatched speed every
+                        <p data-translate>Client satisfaction is our priority — delivering seamless service and
+                            unmatched speed every
                             time.</p>
                         <div class="stats-number">99%</div>
                     </div>
                     <div class="col-md-3 info-box" data-aos="fade-up" data-aos-delay="600">
-                        <p>Work with dedicated agents known for their responsiveness, market insight, and efficiency.
+                        <p data-translate>Work with dedicated agents known for their responsiveness, market insight, and
+                            efficiency.
                         </p>
                         <div class="stats-number">150+</div>
                     </div>
@@ -561,9 +584,9 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
             <section class="py-3 py-md-5">
                 <div class="row mb-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="col-md-12">
-                        <h2 class="section-title">Why Choose Us?</h2>
+                        <h2 class="section-title" data-translate>Why Choose Us?</h2>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" data-translate>
                         <p>We deliver seamless real estate services backed by years of experience, client trust, and a
                             deep understanding of the market.</p>
                     </div>
@@ -577,10 +600,12 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                                     <?php while ($row = $questions->fetch_assoc()): ?>
                                         <div class="mb-5" data-aos="fade-up" data-aos-delay="400">
                                             <div class="d-flex align-items-center mb-2">
-                                                <h5 class="me-2 fw-bold"><?= htmlspecialchars($row['question']) ?></h5>
+                                                <h5 class="me-2 fw-bold" data-translate>
+                                                    <?= htmlspecialchars($row['question']) ?>
+                                                </h5>
                                                 <span class="icon"><i class="bi bi-shield-check"></i></span>
                                             </div>
-                                            <p class="text-muted"><?= htmlspecialchars($row['answer']) ?></p>
+                                            <p class="text-muted" data-translate><?= htmlspecialchars($row['answer']) ?></p>
                                             <hr>
                                             <?php if (!empty($row['image'])): ?>
                                                 <img src="uploads/<?= htmlspecialchars($row['image']) ?>" width="200"
@@ -603,10 +628,11 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
             <section class="py-5">
                 <div class="row mb-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="col-md-12">
-                        <h2 class="section-title">Our Real Estate Services</h2>
+                        <h2 class="section-title" data-translate>Our Real Estate Services</h2>
                     </div>
                     <div class="col-md-6">
-                        <p>We provide tailored real estate services that cover all your needs — with speed, integrity,
+                        <p data-translate>We provide tailored real estate services that cover all your needs — with
+                            speed, integrity,
                             and professionalism.</p>
                     </div>
                 </div>
@@ -619,8 +645,8 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                                         <img src="uploads/<?= htmlspecialchars($row['icon']) ?>"
                                             alt="<?= htmlspecialchars($row['title']) ?>">
                                     </div>
-                                    <h5 class="fw-bold"><?= htmlspecialchars($row['title']) ?></h5>
-                                    <p class="text-muted"><?= htmlspecialchars($row['description']) ?></p>
+                                    <h5 class="fw-bold" data-translate><?= htmlspecialchars($row['title']) ?></h5>
+                                    <p class="text-muted" data-translate><?= htmlspecialchars($row['description']) ?></p>
                                     <div class="arrow-btn">
                                         <span>↗</span>
                                     </div>
@@ -634,57 +660,70 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
             </section>
         </div>
     </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.1.0/jquery.fitvids.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <?php include './assets/page/footer.php'; ?>
+
+
+
     <script>
         const img3d = document.getElementById('img3d');
-        let rotateX = 0, rotateY = 0, scale = 1;
-        const maxScale = 2;
-        const updateTransform = () => {
-            img3d.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
-        };
-        window.addEventListener('mousemove', e => {
-            const { innerWidth, innerHeight } = window;
-            const xMid = innerWidth / 2, yMid = innerHeight / 2;
-            rotateY = ((e.clientX - xMid) / xMid) * 10;
-            rotateX = ((e.clientY - yMid) / yMid) * 10;
-            updateTransform();
-        });
-        window.addEventListener('mouseleave', () => {
-            rotateX = rotateY = 0;
-            updateTransform();
-        });
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const zoomLimit = window.innerHeight * 0.8;
-            const progress = Math.min(scrollY / zoomLimit, 1);
-            scale = 1 + progress * (maxScale - 1);
-            updateTransform();
-        });
-        document.addEventListener('DOMContentLoaded', () => {
-            const myModal = new bootstrap.Modal(document.getElementById('visitorModal'));
-            myModal.show();
-            const visitorForm = document.getElementById('visitorForm');
-            visitorForm.addEventListener('submit', () => {
-                localStorage.setItem('visitorRegistered', 'true');
+        if (img3d) {
+            let rotateX = 0, rotateY = 0, scale = 1;
+            const maxScale = 2;
+            const updateTransform = () => {
+                img3d.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+            };
+            window.addEventListener('mousemove', e => {
+                const { innerWidth, innerHeight } = window;
+                const xMid = innerWidth / 2, yMid = innerHeight / 2;
+                rotateY = ((e.clientX - xMid) / xMid) * 10;
+                rotateX = ((e.clientY - yMid) / yMid) * 10;
+                updateTransform();
             });
+            window.addEventListener('mouseleave', () => {
+                rotateX = rotateY = 0;
+                updateTransform();
+            });
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const zoomLimit = window.innerHeight * 0.8;
+                const progress = Math.min(scrollY / zoomLimit, 1);
+                scale = 1 + progress * (maxScale - 1);
+                updateTransform();
+            });
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const visitorRegistered = localStorage.getItem('visitorRegistered');
+            if (!visitorRegistered) {
+                const modal = document.getElementById('visitorModal');
+                if (modal) {
+                    const myModal = new bootstrap.Modal(modal);
+                    myModal.show();
+                }
+            }
+            const visitorForm = document.getElementById('visitorForm');
+            if (visitorForm) {
+                visitorForm.addEventListener('submit', () => {
+                    localStorage.setItem('visitorRegistered', 'true');
+                });
+            }
         });
     </script>
-    <section id="footer"></section>
-    <script src="./assets/script/footer.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        button.btn.btn-primary.send_info {
-            width: 100%;
-            padding: 15px;
-            border-radius: 30px;
-            background: black;
-            border: navajowhite;
-        }
 
-        .row.feature-box.aos-init.aos-animate {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
-    </style>
+    <script src="./assets/script/app.js"></script>
+
+
 </body>
 
 </html>

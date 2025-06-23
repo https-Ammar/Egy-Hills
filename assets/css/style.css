@@ -383,3 +383,38 @@ span.text_titel.titel_logo::first-letter {
     overflow-x: hidden !important;
   }
 }
+/*  */
+/*  */
+button.btn.btn-primary.send_info {
+  width: 100%;
+  padding: 15px;
+  border-radius: 30px;
+  background-color: black;
+  border: none;
+}
+
+.row.feature-box.aos-init.aos-animate {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media screen and (max-width: 992px) {
+  .section-3d {
+    height: 22vh;
+  }
+
+  .cover_img_product.mt-5.rounded-3 {
+    height: 24vh !important;
+  }
+
+  .cover_img_product.mt-5.rounded-3 {
+    background-image: url(../img/wiktor-karkocha-resize.png) !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: bottom !important;
+  }
+
+  img#img3d {
+    display: none;
+  }
+}

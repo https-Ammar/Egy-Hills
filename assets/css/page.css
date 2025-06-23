@@ -186,6 +186,7 @@ section#timeline-container .text {
   font-weight: 600;
   color: var(--text-color);
   margin: 0;
+  text-align: center;
 }
 
 .about-sec p .color-red {
@@ -411,13 +412,13 @@ main {
   }
 }
 
-nav ul {
+/* nav ul {
   display: flex;
   justify-content: center;
   list-style: none;
   padding: 0;
   margin: 0;
-}
+} */
 
 nav li {
   margin: 0 1em;
@@ -890,11 +891,25 @@ body {
   background-image: url(../img/skyhaus-header.jpg);
   background-size: cover;
   background-position: center center;
-  display: flex;
   align-items: center;
   justify-content: center;
 }
 /*  */
 label.form-label.Max.Price {
   color: white;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+body.arabic {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+.no-rtl {
+  direction: ltr !important;
+  text-align: left !important;
 }

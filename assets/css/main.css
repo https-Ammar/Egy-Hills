@@ -216,7 +216,7 @@ footer {
 
 
 .footer-subscribe input {
-  background-color: var(--secondary-dark);
+  background-color: white;
   border: 1px solid var(--border-color);
   color: var(--text-color);
   padding: 0.75rem 3rem 0.75rem 1rem;
@@ -859,14 +859,12 @@ address {
 .gform_wrapper [id^="extensions_message_"],
 .anchor-list__item a,
 .property__room-title {
-  font-family: "proxima-nova", "Arial", sans-serif;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #373f48;
 }
 .txt-subtitle {
-  font-family: "source-serif-pro", serif;
   font-weight: 300;
   letter-spacing: normal;
   text-transform: none;
@@ -974,7 +972,6 @@ td {
 }
 th {
   background: #373f48;
-  font-family: "proxima-nova", "Arial", sans-serif;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -2285,7 +2282,6 @@ body.lock-scroll {
 }
 .site-banner .site-banner__subtitle {
   position: relative;
-  font-family: "source-serif-pro", serif;
   font-weight: 300;
   text-transform: none;
   letter-spacing: 0.5px;
@@ -3373,7 +3369,6 @@ input#location {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  font-family: "source-serif-pro", serif;
   font-weight: 400;
   color: #c0c1c3;
   font-size: 18px;
@@ -4916,7 +4911,6 @@ input#location {
   line-height: 160%;
 }
 .post-styles blockquote cite strong {
-  font-family: "proxima-nova", "Arial", sans-serif;
   text-transform: uppercase;
   color: #ca9d81;
   letter-spacing: 2px;
@@ -6937,7 +6931,7 @@ tr {
 }
 
 footer {
-  background-color: var(--dark-bg);
+  background-color: #373f48;
   color: var(--text-color);
   padding-top: 6rem;
   padding-bottom: 1rem;

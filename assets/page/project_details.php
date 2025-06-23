@@ -57,6 +57,26 @@ function e($value)
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        body.arabic {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .no-rtl {
+            direction: ltr !important;
+            text-align: left !important;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -84,28 +104,28 @@ function e($value)
                     <div class="d-flex align-items-center gap-3">
                         <span class="icon_span"><i class="fa-solid fa-chart-area"></i></span>
                         <span>
-                            <p class="titel_project">Project Area</p>
+                            <p class="titel_project" data-translate>Project Area</p>
                             <p class="des_project"><?= e($project['area']) ?></p>
                         </span>
                     </div>
                     <div class="d-flex align-items-center gap-3">
                         <span class="icon_span"><i class="fa-solid fa-bed"></i></span>
                         <span>
-                            <p class="titel_project">Number of rooms</p>
+                            <p class="titel_project" data-translate>Number of rooms</p>
                             <p class="des_project"><?= (int) $project['beds'] ?></p>
                         </span>
                     </div>
                     <div class="d-flex align-items-center gap-3">
                         <span class="icon_span"><i class="fa-regular fa-calendar"></i></span>
                         <span>
-                            <p class="titel_project">Baths</p>
+                            <p class="titel_project" data-translate>Baths</p>
                             <p class="des_project"><?= (int) $project['baths'] ?></p>
                         </span>
                     </div>
                     <div class="d-flex align-items-center gap-3">
                         <span class="icon_span"><i class="fa-solid fa-dollar-sign"></i></span>
                         <span>
-                            <p class="titel_project">Price</p>
+                            <p class="titel_project" data-translate>Price</p>
                             <p class="des_project"><?= e($project['price']) ?></p>
                         </span>
                     </div>
@@ -121,12 +141,12 @@ function e($value)
             <div class="container py-5 animate__animated animate__fadeIn">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h2 class="fw-bold"><?= e($project['subtitle']) ?></h2>
-                        <p><?= nl2br(e($project['description'])) ?></p>
+                        <h2 class="fw-bold" data-translate><?= e($project['subtitle']) ?></h2>
+                        <p data-translate><?= nl2br(e($project['description'])) ?></p>
                     </div>
                     <div class="col-lg-4">
-                        <h4 class="fw-bold">Property Details</h4>
-                        <p><?= nl2br(e($project['details'])) ?></p>
+                        <h4 class="fw-bold" data-translate> Property Details</h4>
+                        <p data-translate><?= nl2br(e($project['details'])) ?></p>
                     </div>
                 </div>
 
@@ -159,8 +179,8 @@ function e($value)
                     <?php endif; ?>
 
                     <div class="col-lg-12 mt-5">
-                        <h2 class="fw-bold"><?= e($project['extra_title']) ?></h2>
-                        <p><?= nl2br(e($project['extra_text'])) ?></p>
+                        <h2 data-translate class="fw-bold"><?= e($project['extra_title']) ?></h2>
+                        <p data-translate><?= nl2br(e($project['extra_text'])) ?></p>
                     </div>
                 </div>
 
@@ -171,8 +191,8 @@ function e($value)
                 <?php endif; ?>
 
                 <div class="col-lg-12 mt-5">
-                    <h2 class="fw-bold"><?= e($project['last_title']) ?: 'N/A' ?></h2>
-                    <p><?= nl2br(e($project['last_text'])) ?: 'N/A' ?></p>
+                    <h2 data-translate class="fw-bold"><?= e($project['last_title']) ?: 'N/A' ?></h2>
+                    <p data-translate><?= nl2br(e($project['last_text'])) ?: 'N/A' ?></p>
                 </div>
 
                 <?php if (!empty($table_rows)): ?>
@@ -182,8 +202,8 @@ function e($value)
                             <tbody>
                                 <?php foreach ($table_rows as $row): ?>
                                     <tr>
-                                        <td><?= e($row['col1']) ?></td>
-                                        <td><?= e($row['col2']) ?></td>
+                                        <td data-translate><?= e($row['col1']) ?></td>
+                                        <td data-translate><?= e($row['col2']) ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -194,7 +214,7 @@ function e($value)
 
             <div class="btn_payment flex animate__animated animate__fadeInUp">
                 <a href="booking.php?id=<?= (int) $project['id'] ?>">
-                    <button class="btn_payment right">
+                    <button class="btn_payment right" data-translate>
                         Book a Visit
                     </button>
                 </a>
@@ -202,12 +222,14 @@ function e($value)
             </div>
         </section>
 
-        <section id="footer"></section>
+        <?php include './footer.php'; ?>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../script/app.js"></script>
-    <script src="../script/footer.js"></script>
+
+
+
 </body>
 
 </html>

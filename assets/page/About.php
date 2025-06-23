@@ -26,6 +26,7 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script
         src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/jquery.min.js?ver=2.2.4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
 
 </head>
 
@@ -39,8 +40,9 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
             style="background-image:url(/Egy-Hills/uploads/<?= $row['image'] ?>);" data-aos="zoom-in"
             data-aos-duration="1000">
             <div class="site-banner__txt section section--medium txt-center post-styles">
-                <h1 class="site-banner__title"><a href="#">About</a> / <a href="#">Home</a></h1>
-                <h2 class="site-banner__subtitle">Homes that move you</h2>
+                <h1 class="site-banner__title"><a href="#" data-translate>About</a> / <a href="# " data-translate>Home</a>
+                </h1>
+                <h2 class="site-banner__subtitle" data-translate>Homes that move you</h2>
             </div>
         </section>
     <?php endwhile; ?>
@@ -52,12 +54,12 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                     <div class="content-column col-md-6 col-sm-12" data-aos="fade-right" data-aos-duration="1000">
                         <div class="inner-column">
                             <div class="sec-title m-0">
-                                <div class="title">About Us</div>
-                                <h2><?= $row['title'] ?></h2>
+                                <di data-translatev class="title">About Us</di>
+                                <h2 data-translate><?= $row['title'] ?></h2>
                             </div>
-                            <div class="text"><?= $row['description'] ?></div>
+                            <div class="text" data-translate><?= $row['description'] ?></div>
                             <div class="email">Request a Quote: <span class="theme_color">EGY-HILLS@gmail.com</span></div>
-                            <a href="#" class="theme-btn btn-style-three">Read More</a>
+                            <a href="#" class="theme-btn btn-style-three" data-translate>Read More</a>
                         </div>
                     </div>
                     <div class="image-column col-md-6 col-sm-12" data-aos="fade-left" data-aos-duration="1000">
@@ -76,10 +78,12 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
         </div>
     </section>
 
-    <section class="timeline-container" id="timeline-container" data-aos="fade-up" data-aos-duration="1000">
+    <section class="timeline-container " id="timeline-container" data-aos="fade-up" data-aos-duration="1000">
         <div class="text  mb-4">
-            <h2>Meet Our Team</h2>
-            <p>Discover the talented professionals behind our success.</p>
+            <h2 data-translate>Our Journey Through the Years</h2>
+            <p data-translate>From our humble beginnings to remarkable milestones, each year has shaped our legacy of
+                excellence and innovation.</p>
+
         </div>
         <div class="timeline" id="timeline">
             <?php $i = 0;
@@ -107,7 +111,7 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                             </div>
                             <hr>
                         </div>
-                        <p class="title"><?= htmlspecialchars($card['name']) ?></p>
+                        <p class="title" data-translate><?= htmlspecialchars($card['name']) ?></p>
                     <?php endif; ?>
                 </div>
             <?php endwhile; ?>
@@ -129,10 +133,10 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                     <div class="content-column col-md-6 col-sm-12" data-aos="fade-left" data-aos-duration="1000">
                         <div class="inner-column">
                             <div class="sec-title">
-                                <div class="title">Director</div>
-                                <h2><?= htmlspecialchars($director_card['title']) ?></h2>
+                                <div class="title" data-translate>Director</div>
+                                <h2 data-translate><?= htmlspecialchars($director_card['title']) ?></h2>
                             </div>
-                            <div class="text"><?= nl2br(htmlspecialchars($director_card['text'])) ?></div>
+                            <div class="text" data-translate><?= nl2br(htmlspecialchars($director_card['text'])) ?></div>
                         </div>
                     </div>
                 </div>
@@ -149,10 +153,11 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                 <div class="row align-items-center mb-5 flex-md-row<?= $even ? '-reverse' : '' ?>" data-aos="fade-up"
                     data-aos-delay="<?= $i * 100 ?>">
                     <div class="col-md-6">
-                        <h2 class="csr-title">CSR <span class="csr-subtitle">Full at Badya University</span></h2>
+                        <h2 class="csr-title" data-translate>CSR <span class="csr-subtitle" data-translate>Full at Badya
+                                University</span></h2>
                         <p class="mt-3"><?= $i ?> - <?= $i + 1 ?></p>
-                        <h4 class="fw-bold"><?= htmlspecialchars($initiative['title']) ?></h4>
-                        <p class="text-muted fw-semibold"><?= htmlspecialchars($initiative['name']) ?></p>
+                        <h4 class="fw-bold" data-translate><?= htmlspecialchars($initiative['title']) ?></h4>
+                        <p class="text-muted fw-semibold" data-translate><?= htmlspecialchars($initiative['name']) ?></p>
                         <?php if (!empty($initiative['link'])): ?>
                             <div class="d-flex align-items-center mt-4">
                                 <a href="<?= htmlspecialchars($initiative['link']) ?>" class="me-4">
@@ -171,7 +176,7 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
         </div>
     </section>
 
-    <section class="spacing-small bg-dark" data-aos="zoom-in-up" data-aos-duration="1000">
+    <section class="spacing-small bg-dark no-rtl " data-aos="zoom-in-up" data-aos-duration="1000">
         <ul class="usp-list section section--large grid">
             <li class="usp-list__item grid__col grid__col--4 txt-center">
                 <a class="usp-list__link" href="/investors">
@@ -179,8 +184,8 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                         <img class="usp-list__icon"
                             src="https://www.rj-investments.co.uk/wp-content/uploads/2018/02/package.svg" alt="">
                     </div>
-                    <h6>Investment Options</h6>
-                    <p class="usp-list__desc">Get More</p>
+                    <h6 data-translate>Investment Options</h6>
+                    <p class="usp-list__desc" data-translate>Get More</p>
                 </a>
             </li>
             <li class="usp-list__item grid__col grid__col--4 txt-center">
@@ -189,8 +194,8 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                         <img class="usp-list__icon"
                             src="https://www.rj-investments.co.uk/wp-content/uploads/2018/02/accommodation.svg" alt="">
                     </div>
-                    <h6>Accommodation</h6>
-                    <p class="usp-list__desc">Future Tenants</p>
+                    <h6 data-translate>Accommodation</h6>
+                    <p class="usp-list__desc" data-translate>Future Tenants</p>
                 </a>
             </li>
             <li class="usp-list__item grid__col grid__col--4 txt-center">
@@ -199,16 +204,16 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                         <img class="usp-list__icon"
                             src="https://www.rj-investments.co.uk/wp-content/uploads/2018/02/development.svg" alt="">
                     </div>
-                    <h6>Land Development</h6>
-                    <p class="usp-list__desc">Meet Pandora Homes</p>
+                    <h6 data-translate>Land Development</h6>
+                    <p class="usp-list__desc" data-translate>Meet Pandora Homes</p>
                 </a>
             </li>
         </ul>
     </section>
 
-    <section id="footer"></section>
+    <?php include './footer.php'; ?>
 
-    <script src="/Egy-Hills/assets/script/footer.js"></script>
+
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init();
@@ -268,6 +273,7 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
             else ticking = false;
         }
     </script>
+    <script src="../script/app.js"></script>
 </body>
 
 </html>

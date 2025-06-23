@@ -9,7 +9,7 @@ $result = $conn->query("SELECT * FROM projects");
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Featured Properties</title>
+    <title data-translate>Featured Properties</title>
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -20,9 +20,9 @@ $result = $conn->query("SELECT * FROM projects");
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script
         src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/jquery.min.js?ver=2.2.4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+
 </head>
-
-
 
 <body>
     <?php include './header.php'; ?>
@@ -30,8 +30,10 @@ $result = $conn->query("SELECT * FROM projects");
 
     <section class="site-banner site-banner--bg site-banner--page" style="background-image:url(../img/Projects.jpg);">
         <div class="site-banner__txt section section--medium txt-center post-styles" data-aos="fade-down">
-            <h1 class="site-banner__title"><a href="#">Projects</a> / <a href="#">Home</a></h1>
-            <h2 class="site-banner__subtitle">Homes that move you</h2>
+            <h1 class="site-banner__title">
+                <a href="#" data-translate>Projects</a> / <a href="#" data-translate>Home</a>
+            </h1>
+            <h2 class="site-banner__subtitle" data-translate>Homes that move you</h2>
         </div>
     </section>
 
@@ -39,42 +41,43 @@ $result = $conn->query("SELECT * FROM projects");
         <div class="container pt-5">
             <div class="row mb-4" data-aos="fade-up">
                 <div class="col-md-12">
-                    <h2 class="section-title">Featured Properties</h2>
+                    <h2 class="section-title" data-translate>Featured Properties</h2>
                 </div>
                 <div class="col-md-6">
-                    <p>Explore our handpicked selection of premium properties designed to elevate your living
-                        experience.</p>
+                    <p data-translate>
+                        Explore our handpicked selection of premium properties designed to elevate your living
+                        experience.
+                    </p>
                 </div>
             </div>
 
-
             <!-- Toggle Button for Mobile Only -->
-            <button class="btn btn-dark w-100 d-md-none mb-3" onclick="toggleFilter()">Show/Hide Filters</button>
+            <button class="btn btn-dark w-100 d-md-none mb-3" onclick="toggleFilter()" data-translate>Show/Hide
+                Filters</button>
 
             <!-- Filter Form -->
             <form class="row g-3 mb-4 d-none d-md-flex" id="filter-form" data-aos="zoom-in">
                 <div class="col-md-3">
-                    <label for="min_price" class="form-label Max Price">Min Price</label>
+                    <label for="min_price" class="form-label Max Price" data-translate>Min Price</label>
                     <input type="number" class="form-control" name="min_price" id="min_price" placeholder="e.g. 50000">
                 </div>
                 <div class="col-md-3">
-                    <label for="max_price" class="form-label Max Price">Max Price</label>
+                    <label for="max_price" class="form-label Max Price" data-translate>Max Price</label>
                     <input type="number" class="form-control" name="max_price" id="max_price" placeholder="e.g. 300000">
                 </div>
                 <div class="col-md-3">
-                    <label for="rooms" class="form-label Max Price">Rooms</label>
+                    <label for="rooms" class="form-label Max Price" data-translate>Rooms</label>
                     <input type="number" class="form-control" name="rooms" id="rooms" placeholder="e.g. 3">
                 </div>
                 <div class="col-md-3">
-                    <label for="location" class="form-label Max Price">Location</label>
+                    <label for="location" class="form-label Max Price" data-translate>Location</label>
                     <input type="text" class="form-control" name="location" id="location" placeholder="e.g. Cairo">
                 </div>
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary w-100">Filter</button>
+                    <button type="submit" class="btn btn-primary w-100" data-translate>Filter</button>
                 </div>
             </form>
 
-            <!-- JavaScript -->
             <script>
                 function toggleFilter() {
                     const form = document.getElementById('filter-form');
@@ -82,13 +85,11 @@ $result = $conn->query("SELECT * FROM projects");
                 }
             </script>
 
-
-            <div id="projects-container">
+            <div id="projects-container no-rtl" >
                 <div class="row mb-4" data-aos="fade-up">
                     <div class="col-md-12">
-                        <h2 class="section-title">Featured Properties</h2>
+                        <h2 class="section-title" data-translate>Featured Properties</h2>
                     </div>
-
                 </div>
 
                 <div class="row">
@@ -98,7 +99,7 @@ $result = $conn->query("SELECT * FROM projects");
                                 <a href="project_details.php?id=<?= (int) $row['id'] ?>">
                                     <div class="property-card">
                                         <div class="cover_card"
-                                            style="background-image: url('/Egy-Hills/uploads/<?= !empty($row['image']) ? '' . htmlspecialchars($row['image']) : 'placeholder.jpg' ?>');">
+                                            style="background-image: url('/Egy-Hills/uploads/<?= !empty($row['image']) ? htmlspecialchars($row['image']) : 'placeholder.jpg' ?>');">
                                         </div>
                                         <div class="property-card-content">
                                             <p class="property-card-location"><?= htmlspecialchars($row['location']) ?></p>
@@ -107,24 +108,31 @@ $result = $conn->query("SELECT * FROM projects");
                                                 <h3 class="property-card-title"><?= htmlspecialchars($row['price']) ?></h3>
                                             </div>
                                             <div class="property-card-features">
-                                                <div class="property-card-feature"><svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" class="lucide lucide-bed">
+                                                <div class="property-card-feature">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-bed">
                                                         <path d="M2 9V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"></path>
                                                         <path d="M2 11v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9"></path>
                                                         <path d="M2 14h20"></path>
                                                         <path
                                                             d="M4 9h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2Z">
                                                         </path>
-                                                    </svg> <?= (int) $row['beds'] ?> Beds</div>
-                                                <div class="property-card-feature"> <?= (int) $row['baths'] ?> Baths</div>
-                                                <div class="property-card-feature"><svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" class="lucide lucide-square">
+                                                    </svg>
+                                                    <span data-translate><?= (int) $row['beds'] ?> Beds</span>
+                                                </div>
+                                                <div class="property-card-feature" data-translate><?= (int) $row['baths'] ?>
+                                                    Baths</div>
+                                                <div class="property-card-feature">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-square">
                                                         <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                    </svg> <?= htmlspecialchars($row['size']) ?></div>
+                                                    </svg>
+                                                    <span data-translate><?= htmlspecialchars($row['size']) ?></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -132,19 +140,19 @@ $result = $conn->query("SELECT * FROM projects");
                             </div>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <p>No projects found.</p>
+                        <p data-translate>No projects found.</p>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="footer"></section>
+    <?php include './footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="../script/app.js"></script>
-    <script src="../script/footer.js"></script>
+
     <script>
         AOS.init();
 
