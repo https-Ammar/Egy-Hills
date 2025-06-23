@@ -124,29 +124,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
 
     <section class="site-banner site-banner--bg site-banner--page" style="background-image:url(../img/cover.jpg);">
         <div class="site-banner__txt section section--medium txt-center post-styles">
-            <h1 class="site-banner__title"><a href="#" data-translate>Inquiry</a> / <a href="#" data-translate>Home</a>
+            <h1 class="site-banner__title">
+                <a href="#" data-translate>Inquiry</a> /
+                <a href="#" data-translate>Home</a>
             </h1>
-            <h2 class="site-banner__subtitle">Homes that move you</h2>
+            <h2 class="site-banner__subtitle" data-translate>Homes that move you</h2>
         </div>
     </section>
 
-    <article class="card mt-5 ">
+    <article class="card mt-5">
         <div class="container">
             <div class="card-body no-rtl">
                 <div class="card-title">
                     <h2 data-translate>Payment</h2>
                 </div>
-                <div class="payment-type">
-                    <h4 data-translate> data-translateChoose payment method below</h4>
-                    <div class="types flex justify-space-between">
+
+                <div class="payment-type mb-4">
+                    <h4 data-translate>Choose a payment method below</h4>
+                    <div class="types flex justify-space-between flex-wrap">
                         <?php if ($info_blocks): ?>
                             <?php foreach ($info_blocks as $info): ?>
-                                <div class="type selected">
+                                <div class="type selected mb-3">
                                     <div class="text">
                                         <?php if ($info['image']): ?>
                                             <img src="uploads/<?= htmlspecialchars($info['image']) ?>" alt="Info Image">
                                         <?php endif; ?>
-                                        <p><?= htmlspecialchars($info['title']) ?></p>
+                                        <p class="fw-bold"><?= htmlspecialchars($info['title']) ?></p>
                                         <p><?= nl2br(htmlspecialchars($info['text'])) ?></p>
                                     </div>
                                 </div>
@@ -157,59 +160,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
                     </div>
                 </div>
 
-                <div class="payment-info flex justify-space-between">
+                <div class="payment-info flex justify-space-between flex-wrap">
                     <div class="column billing">
-                        <div class="title">
+                        <div class="title mb-3">
                             <div class="num">1</div>
                             <h4 data-translate>Booking Info</h4>
                         </div>
-                        <div class="flex-end">
+
+                        <div class="flex-end mb-4">
                             <button type="button" class="button booking-btn" data-type="inquiry"
                                 data-translate>Inquiry</button>
                             <button type="button" class="button booking-btn" data-type="visit"
                                 data-translate>Visit</button>
                         </div>
+
                         <form method="post" enctype="multipart/form-data">
                             <input type="hidden" name="booking_type" id="booking_type">
-                            <div class="field full">
+
+                            <div class="field full mb-3">
                                 <label data-translate>Full Name</label>
                                 <input type="text" name="client_name" placeholder="Full Name" required>
                             </div>
-                            <div class="field full">
+
+                            <div class="field full mb-3">
                                 <label data-translate>Phone Number</label>
                                 <input type="tel" name="client_phone" placeholder="Phone Number" required>
                             </div>
 
                             <div id="visit_fields" style="display:none;">
-                                <div class="field full">
+                                <div class="field full mb-3">
                                     <label data-translate>Booking Date</label>
                                     <input type="date" name="visit_date">
                                 </div>
-                                <div class="field full">
+
+                                <div class="field full mb-3">
                                     <label data-translate>Booking Time</label>
                                     <input type="time" name="visit_time">
                                 </div>
-                                <div class="field full">
+
+                                <div class="field full mb-3">
                                     <label data-translate>Amount</label>
                                     <input type="number" name="amount" step="0.01">
                                 </div>
-                                <div class="field full">
+
+                                <div class="field full mb-3">
                                     <label data-translate>Upload Payment Receipt</label>
                                     <input type="file" name="receipt" accept=".jpg,.jpeg,.png,.pdf">
                                 </div>
                             </div>
 
-                            <button class="button button-secondary" type="submit" name="book_project"
-                                data-translate>Submit
-                                Booking</button>
+                            <button class="button button-secondary mt-3" type="submit" name="book_project"
+                                data-translate>
+                                Submit Booking
+                            </button>
                         </form>
                     </div>
-
 
                     <div class="column billing bg" style="background-image: url(../img/pexels-heyho.jpg);">
                         <style>
                             .column.billing.bg {
-                                background: red;
+                                background-color: red;
                                 height: 100%;
                                 border-radius: 10px;
                                 background-size: cover;
@@ -217,7 +227,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
                             }
                         </style>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -235,10 +244,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
         const bookingType = document.getElementById('booking_type');
         const visitFields = document.getElementById('visit_fields');
 
-        // ✅ اجعل النوع الافتراضي inquiry عند تحميل الصفحة
         bookingType.value = 'inquiry';
 
-        // ✅ حدد زر inquiry افتراضيًا
         buttons.forEach(b => {
             if (b.dataset.type === 'inquiry') {
                 b.classList.add('selected');
@@ -262,7 +269,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
         });
     </script>
 
-    <script src="../script/footer.js"></script>
 
 
 

@@ -1,6 +1,10 @@
 <?php
 session_start();
 include 'db.php';
+require __DIR__ . '/vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
@@ -16,10 +20,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->fetch();
 
         if (password_verify($password, $hashed_password)) {
-            $_SESSION['user_id'] = $id;
-            $_SESSION['username'] = $username;  // خزن اسم المستخدم في السيشن
-            header("Location:index.php");
-            exit();
+            $code = rand(100000, 999999);
+            $_SESSION['verify_code'] = $code;
+            $_SESSION['verify_email'] = $email;
+            $_SESSION['temp_user_id'] = $id;
+            $_SESSION['temp_username'] = $username;
+
+            $mail = new PHPMailer(true);
+            try {
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'ammar132004@gmail.com';
+                $mail->Password = 'okcejzwtuepbqgyq';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+
+                $mail->setFrom('ammar132004@gmail.com', 'Neo');
+                $mail->addAddress($email);
+
+                $mail->Subject = 'Your verification code';
+                $mail->Body = "Your verification code is: $code";
+
+                $mail->send();
+                header("Location: verify.php");
+                exit();
+            } catch (Exception $e) {
+                $error = "Verification email could not be sent.";
+            }
         } else {
             $error = "Wrong password.";
         }
@@ -30,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

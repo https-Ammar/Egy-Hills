@@ -18,7 +18,7 @@ function uploadFile($file)
             mkdir('uploads', 0755, true);
         }
         $name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '', basename($file['name']));
-        $target = 'uploads/' . $name;
+        $target = '/Applications/MAMP/htdocs/Egy-Hills/uploads/' . $name;
         if (move_uploaded_file($file['tmp_name'], $target)) {
             return $name;
         } else {

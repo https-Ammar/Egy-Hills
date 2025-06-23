@@ -3,19 +3,24 @@ session_start();
 include 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
-
-$user_id = intval($_SESSION['user_id']);
-$user_check = $conn->query("SELECT id FROM users WHERE id = $user_id LIMIT 1");
-if (!$user_check || $user_check->num_rows === 0) {
     session_unset();
     session_destroy();
     header("Location: login.php");
     exit();
 }
 
+$user_id = intval($_SESSION['user_id']);
+$stmt = $conn->prepare("SELECT id FROM users WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->store_result();
+if ($stmt->num_rows === 0) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
+$stmt->close();
 
 $visits_result = $conn->query("SELECT COUNT(*) AS total FROM site_visits");
 $total_visits = 0;
@@ -28,13 +33,10 @@ function uploadFile($file)
     if (!empty($file['name'])) {
         $name = time() . '_' . basename($file['name']);
         $uploadDir = '/Applications/MAMP/htdocs/Egy-Hills/uploads/';
-
         if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true); // تأكد إن المجلد موجود
+            mkdir($uploadDir, 0755, true);
         }
-
         $destination = $uploadDir . $name;
-
         if (move_uploaded_file($file['tmp_name'], $destination)) {
             return $name;
         }
@@ -196,6 +198,8 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 ?>
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -273,7 +277,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 </ul>
                 <ul class="logout-mode">
                     <li>
-                        <a href="login.php">
+                        <a href="./logout.php">
                             <i class="uil uil-signout"></i>
                             <span class="link-name">Logout</span>
                         </a>
