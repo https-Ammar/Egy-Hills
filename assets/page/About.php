@@ -32,6 +32,7 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
 <body>
 
     <?php include './header.php'; ?>
+    <?php include './loging.php'; ?>
 
     <?php while ($row = $about_slider->fetch_assoc()): ?>
         <section class="site-banner site-banner--bg site-banner--page"

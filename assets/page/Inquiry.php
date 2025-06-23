@@ -118,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
 <body>
 
     <?php include './header.php'; ?>
+    <?php include './loging.php'; ?>
 
     <section class="site-banner site-banner--bg site-banner--page" style="background-image:url(../img/cover.jpg);">
         <div class="site-banner__txt section section--medium txt-center post-styles">

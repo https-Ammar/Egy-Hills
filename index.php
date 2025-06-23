@@ -106,7 +106,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 
 <body>
     <?php include 'header.php'; ?>
-
+    <?php include 'loging.php'; ?>
 
     <main class="main">
         <div class="modal fade" id="visitorModal" tabindex="-1" aria-labelledby="visitorModalLabel" aria-hidden="true">

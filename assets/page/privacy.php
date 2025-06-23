@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+    <?php include './loging.php'; ?>
     <div class="bg-light">
         <div class="container py-5">
             <h1 class="h1 fw-bold mb-4">Privacy Policy</h1>

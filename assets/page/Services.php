@@ -23,6 +23,7 @@ $recentPosts = $conn->query("SELECT * FROM new_services WHERE type='service' ORD
 
 <body>
     <?php include './header.php'; ?>
+    <?php include './loging.php'; ?>
 
     <!-- Banner -->
     <section class="site-banner site-banner--bg site-banner--page" style="background-image:url(../img/services.jpg);">
@@ -119,12 +120,8 @@ $recentPosts = $conn->query("SELECT * FROM new_services WHERE type='service' ORD
             </div>
         </aside>
     </div>
-
-
-
     <section id="footer"></section>
     <script src="../script/footer.js"></script>
-
 </body>
 
 </html>

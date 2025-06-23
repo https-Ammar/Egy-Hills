@@ -129,6 +129,7 @@ if (isset($_GET['status'])) {
     <?php endif; ?>
 
     <?php include './header.php'; ?>
+    <?php include './loging.php'; ?>
 
     <section class="site-banner site-banner--bg site-banner--page"
         style="background-image:url(/Egy-Hills/uploads/1750093639_20250524083242.webp);">

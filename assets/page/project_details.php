@@ -61,6 +61,7 @@ function e($value)
 
 <body>
     <?php include './header.php'; ?>
+    <?php include './loging.php'; ?>
 
     <main>
         <section class="py-5 bg-white">
@@ -177,7 +178,7 @@ function e($value)
                 <?php if (!empty($table_rows)): ?>
                     <div class="table-responsive mt-4 animate__animated animate__fadeInUp">
                         <table class="table table-bordered align-middle text-center">
-                        
+
                             <tbody>
                                 <?php foreach ($table_rows as $row): ?>
                                     <tr>
@@ -192,10 +193,10 @@ function e($value)
             </div>
 
             <div class="btn_payment flex animate__animated animate__fadeInUp">
-                                    <a href="booking.php?id=<?= (int) $project['id'] ?>">
-                <button class="btn_payment right">
-Book a Visit
-                </button>
+                <a href="booking.php?id=<?= (int) $project['id'] ?>">
+                    <button class="btn_payment right">
+                        Book a Visit
+                    </button>
                 </a>
 
             </div>

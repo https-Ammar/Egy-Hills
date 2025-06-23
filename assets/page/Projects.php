@@ -26,9 +26,9 @@ $result = $conn->query("SELECT * FROM projects");
 
 <body>
     <?php include './header.php'; ?>
+    <?php include './loging.php'; ?>
 
-    <section class="site-banner site-banner--bg site-banner--page"
-        style="background-image:url(../img/Projects.jpg);">
+    <section class="site-banner site-banner--bg site-banner--page" style="background-image:url(../img/Projects.jpg);">
         <div class="site-banner__txt section section--medium txt-center post-styles" data-aos="fade-down">
             <h1 class="site-banner__title"><a href="#">Projects</a> / <a href="#">Home</a></h1>
             <h2 class="site-banner__subtitle">Homes that move you</h2>
