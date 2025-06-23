@@ -543,9 +543,7 @@ body {
   margin: 0;
 }
 
-.landing_page * {
-  font-family: "Nunito", sans-serif;
-}
+
 
 /*=========================== Containers ===========================*/
 .landing_page .responsive-container-block {

@@ -14,19 +14,12 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
-
-
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script
-        src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/jquery.min.js?ver=2.2.4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 </head>
 
@@ -54,7 +47,7 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                     <div class="content-column col-md-6 col-sm-12" data-aos="fade-right" data-aos-duration="1000">
                         <div class="inner-column">
                             <div class="sec-title m-0">
-                                <di data-translatev class="title">About Us</di>
+                                <di data-translate class="title">About Us</di>
                                 <h2 data-translate><?= $row['title'] ?></h2>
                             </div>
                             <div class="text" data-translate><?= $row['description'] ?></div>
@@ -213,12 +206,7 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
 
     <?php include './footer.php'; ?>
 
-
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
-
+    <script src="../script/app.js"></script>
     <script>
         const timeline = document.getElementById('timeline');
         const container = document.getElementById('timeline-container');
@@ -273,7 +261,6 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
             else ticking = false;
         }
     </script>
-    <script src="../script/app.js"></script>
 </body>
 
 </html>

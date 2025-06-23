@@ -13,15 +13,9 @@ $result = $conn->query("SELECT * FROM projects");
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script
-        src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/jquery.min.js?ver=2.2.4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
-
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
@@ -44,18 +38,14 @@ $result = $conn->query("SELECT * FROM projects");
                     <h2 class="section-title" data-translate>Featured Properties</h2>
                 </div>
                 <div class="col-md-6">
-                    <p data-translate>
-                        Explore our handpicked selection of premium properties designed to elevate your living
-                        experience.
-                    </p>
+                    <p data-translate>Explore our handpicked selection of premium properties designed to elevate your
+                        living experience.</p>
                 </div>
             </div>
 
-            <!-- Toggle Button for Mobile Only -->
             <button class="btn btn-dark w-100 d-md-none mb-3" onclick="toggleFilter()" data-translate>Show/Hide
                 Filters</button>
 
-            <!-- Filter Form -->
             <form class="row g-3 mb-4 d-none d-md-flex" id="filter-form" data-aos="zoom-in">
                 <div class="col-md-3">
                     <label for="min_price" class="form-label Max Price" data-translate>Min Price</label>
@@ -85,7 +75,7 @@ $result = $conn->query("SELECT * FROM projects");
                 }
             </script>
 
-            <div id="projects-container no-rtl" >
+            <div id="projects-container" class="no-rtl">
                 <div class="row mb-4" data-aos="fade-up">
                     <div class="col-md-12">
                         <h2 class="section-title" data-translate>Featured Properties</h2>
@@ -154,31 +144,29 @@ $result = $conn->query("SELECT * FROM projects");
     <script src="../script/app.js"></script>
 
     <script>
-        AOS.init();
-
-        const form = document.getElementById('filter-form');
-        const container = document.getElementById('projects-container');
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const formData = new FormData(form);
-            const params = new URLSearchParams(formData);
-            fetch(`filter_projects.php?${params}`)
-                .then(response => response.text())
-                .then(html => {
-                    container.innerHTML = html;
-                    AOS.refresh();
-                })
-                .catch(err => console.error(err));
-        });
-
-        form.querySelectorAll('input').forEach(input => {
-            input.addEventListener('input', () => {
-                form.dispatchEvent(new Event('submit'));
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('filter-form');
+            const container = document.getElementById('projects-container');
+            if (!form || !container) return;
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const params = new URLSearchParams(formData);
+                fetch(`filter_projects.php?${params}`)
+                    .then(response => response.text())
+                    .then(html => {
+                        container.innerHTML = html;
+                        AOS.refresh();
+                    })
+                    .catch(err => console.error(err));
+            });
+            form.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', () => {
+                    form.dispatchEvent(new Event('submit'));
+                });
             });
         });
     </script>
-
 </body>
 
 </html>

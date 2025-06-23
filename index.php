@@ -99,34 +99,13 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EGY-HILLS | Best Real Estate Properties for Sale and Rent in Egypt</title>
-    <link rel="icon" type="image/x-icon" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        body.arabic {
-            font-family: 'Cairo', sans-serif;
-            direction: rtl;
-            text-align: right;
-        }
-
-        .no-rtl {
-            direction: ltr !important;
-            text-align: left !important;
-        }
-    </style>
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
+
 
 <body>
     <?php include './assets/page/header.php'; ?>
@@ -574,13 +553,12 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                         </p>
                         <div class="stats-number">150+</div>
                     </div>
+
                 </div>
 
             </section>
 
 
-
-            <!--  -->
             <section class="py-3 py-md-5">
                 <div class="row mb-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="col-md-12">
@@ -661,69 +639,28 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
         </div>
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.1.0/jquery.fitvids.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
     <?php include './assets/page/footer.php'; ?>
-
-
-
     <script>
-        const img3d = document.getElementById('img3d');
-        if (img3d) {
-            let rotateX = 0, rotateY = 0, scale = 1;
-            const maxScale = 2;
-            const updateTransform = () => {
-                img3d.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
-            };
-            window.addEventListener('mousemove', e => {
-                const { innerWidth, innerHeight } = window;
-                const xMid = innerWidth / 2, yMid = innerHeight / 2;
-                rotateY = ((e.clientX - xMid) / xMid) * 10;
-                rotateX = ((e.clientY - yMid) / yMid) * 10;
-                updateTransform();
-            });
-            window.addEventListener('mouseleave', () => {
-                rotateX = rotateY = 0;
-                updateTransform();
-            });
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                const zoomLimit = window.innerHeight * 0.8;
-                const progress = Math.min(scrollY / zoomLimit, 1);
-                scale = 1 + progress * (maxScale - 1);
-                updateTransform();
-            });
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            const visitorRegistered = localStorage.getItem('visitorRegistered');
-            if (!visitorRegistered) {
-                const modal = document.getElementById('visitorModal');
-                if (modal) {
-                    const myModal = new bootstrap.Modal(modal);
-                    myModal.show();
-                }
-            }
-            const visitorForm = document.getElementById('visitorForm');
-            if (visitorForm) {
-                visitorForm.addEventListener('submit', () => {
-                    localStorage.setItem('visitorRegistered', 'true');
-                });
-            }
+        const paths = {
+            home: "/index.php",
+            about: "./assets/page/About.php",
+            projects: "./assets/page/projects.php",
+            services: "./assets/page/services.php",
+            inquiry: "./assets/page/Inquiry.php",
+            privacy: "./assets/page/privacy.php",
+            contact: "./assets/page/contact.php"
+        };
+
+        document.querySelectorAll(".site-menu__links a").forEach(link => {
+            const key = Object.keys(paths).find(k =>
+                link.textContent.toLowerCase().includes(k) ||
+                (k === "projects" && link.textContent.toLowerCase().includes("developments")) ||
+                (k === "inquiry" && link.textContent.toLowerCase().includes("booking"))
+            );
+            if (key) link.href = paths[key];
         });
     </script>
-
     <script src="./assets/script/app.js"></script>
-
-
 </body>
 
 </html>

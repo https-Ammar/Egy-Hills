@@ -61,11 +61,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Us</title>
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/page.css" />
+    <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
 
 <body class="Contact">
@@ -80,8 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <!-- Left Content -->
                 <div class="responsive-cell-block wk-desk-6 wk-ipadp-6 wk-tab-12 wk-mobile-12 left-one">
                     <div class="content-box">
-                        <p class="text-blk section-head">Get in Touch with Egy-Hills</p>
-                        <p class="text-blk section-subhead">
+                        <p class="text-blk section-head" data-translate>Get in Touch with Egy-Hills</p>
+                        <p class="text-blk section-subhead" data-translate>
                             Whether you're looking to find your dream home, invest in property, or have any real estate
                             inquiries, the professional team at <strong>Egy-Hills Real Estate</strong> is always ready
                             to assist you. Your journey starts here — let’s make it successful together.
@@ -104,8 +106,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="responsive-cell-block wk-desk-6 wk-ipadp-6 wk-tab-12 wk-mobile-12 right-one" id="i1zj">
                     <form action="" method="POST" id="contact-form">
                         <div class="container-block form-wrapper">
-                            <p class="text-blk contactus-head">Get a quote</p>
-                            <p class="text-blk contactus-subhead">We will get back to you in 24 hours</p>
+                            <!-- <p class="text-blk contactus-head" data-translate>Get a quote</p>
+                            <p class="text-blk contactus-subhead" data-translate>We will get back to you in 24 hours</p> -->
 
                             <div class="responsive-container-block">
 
@@ -137,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </div>
                             </div>
 
-                            <button class="submit-btn">Get quote</button>
+                            <button class="submit-btn" data-translate>Get quote</button>
 
                             <!-- Overall message (success or failure) -->
                             <?php if ($message_sent): ?>
@@ -150,6 +152,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </div>
+    <?php include './footer.php'; ?>
+
+    <script src="../script/app.js"></script>
 
 </body>
 
