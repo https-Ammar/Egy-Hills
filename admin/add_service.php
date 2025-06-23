@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Handle image upload
     $image = $_FILES['image']['name'];
-    $target = "uploads/" . basename($image);
+    $target = "/Applications/MAMP/htdocs/Egy-Hills/uploads/" . basename($image);
     move_uploaded_file($_FILES['image']['tmp_name'], $target);
 
     // Insert into database
