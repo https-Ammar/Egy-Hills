@@ -33,47 +33,12 @@ if (isset($_POST['register'])) {
     <title>Neo - Register</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        body {
-            background-color: #0d0d1f;
-            color: #ccc;
-            min-height: 100vh;
-        }
 
-        .form-control {
-            background-color: #1a1a2e;
-            border: none;
-            color: #fff;
-        }
-
-        .form-control:focus {
-            background-color: #1a1a2e;
-            color: #fff;
-            box-shadow: none;
-        }
-
-        .btn-primary {
-            background-color: #b19cd9;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #9a7dcd;
-        }
-
-        a {
-            color: #90ee90;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="./assets/css/dashboard.css">
 </head>
 
 <body class="d-flex align-items-center justify-content-center">
-    <div class="text-center w-100" style="max-width: 400px;">
+    <div class=" w-100" style="max-width: 400px;">
         <h3 class="mb-3 text-success">Neo</h3>
         <p class="mb-4">Create a new account</p>
 

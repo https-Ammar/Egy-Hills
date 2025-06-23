@@ -100,12 +100,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($project['title']) ?> - Booking</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/booking.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    <script
+        src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/jquery.min.js?ver=2.2.4"></script>
 
 </head>
 
@@ -113,10 +119,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
 
     <?php include './header.php'; ?>
 
-    <section class="site-banner site-banner--bg site-banner--page"
-        style="background-image:url(uploads/1750093639_20250524083242.webp);">
+    <section class="site-banner site-banner--bg site-banner--page" style="background-image:url(../img/cover.jpg);">
         <div class="site-banner__txt section section--medium txt-center post-styles">
-            <h1 class="site-banner__title"><a href="#">About</a> / <a href="#">Home</a></h1>
+            <h1 class="site-banner__title"><a href="#">Inquiry</a> / <a href="#">Home</a></h1>
             <h2 class="site-banner__subtitle">Homes that move you</h2>
         </div>
     </section>
@@ -192,6 +197,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
                                 Booking</button>
                         </form>
                     </div>
+
+
+                    <div class="column billing bg" style="background-image: url(../img/pexels-heyho.jpg);">
+                        <style>
+                            .column.billing.bg {
+                                background: red;
+                                height: 100%;
+                                border-radius: 10px;
+                                background-size: cover;
+                                background-repeat: no-repeat;
+                            }
+                        </style>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -237,11 +256,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
 
     <script src="../script/footer.js"></script>
 
-    <style>
-        .payment-info.flex.justify-space-between {
-            display: block;
-        }
-    </style>
+
 
 </body>
 

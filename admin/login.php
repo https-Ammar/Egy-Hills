@@ -40,47 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Neo - Login</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        body {
-            background-color: #181821;
-            color: #ccc;
-            min-height: 100vh;
-        }
+    <link rel="stylesheet" href="./assets/css/dashboard.css">
 
-        .form-control {
-            background-color: #1a1a2e;
-            border: none;
-            color: #fff;
-        }
-
-        .form-control:focus {
-            background-color: #1a1a2e;
-            color: #fff;
-            box-shadow: none;
-        }
-
-        .btn-primary {
-            background-color: #b19cd9;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #9a7dcd;
-        }
-
-        a {
-            color: #90ee90;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 
 <body class="d-flex align-items-center justify-content-center">
-    <div class="text-center w-100" style="max-width: 400px;">
+    <div class=" w-100" style="max-width: 400px;">
         <h3 class="mb-3 text-success">Neo</h3>
         <p class="mb-4">Welcome to Neo<br>Please Sign-in to your account.</p>
         <?php if (isset($error)): ?>

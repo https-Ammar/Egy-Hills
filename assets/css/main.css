@@ -214,9 +214,6 @@ footer {
   transform: translateY(-3px);
 }
 
-.footer-subscribe {
-  position: relative;
-}
 
 .footer-subscribe input {
   background-color: var(--secondary-dark);
@@ -7008,19 +7005,7 @@ footer {
   position: relative;
 }
 
-.footer-subscribe input {
-  background-color: var(--secondary-dark);
-  border: 1px solid var(--border-color);
-  color: var(--text-color);
-  padding: 0.75rem 3rem 0.75rem 1rem;
-  width: 100%;
-  border-radius: 4px;
-}
 
-.footer-subscribe input:focus {
-  outline: none;
-  border-color: var(--accent-color);
-}
 
 .footer-subscribe button {
   position: absolute;
@@ -7187,9 +7172,9 @@ body {
 
 /* ammar */
 section.site-banner.site-banner--bg.site-banner--page {
-  background: url(../img/all.jpg) !important;
+
   background-size: cover !important;
-  background-position: center top !important;
+  background-position: center  !important;
 }
 
 .section-3d {

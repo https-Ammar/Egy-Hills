@@ -130,7 +130,8 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                                     required>
                             </div>
 
-                            <button type="submit" name="submit_visitor" class="btn btn-primary">Submit</button>
+                            <button type="submit" name="submit_visitor"
+                                class="btn btn-primary send_info">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -193,7 +194,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                                 <div class="image">
                                     <img src="uploads/<?= htmlspecialchars($row['image']) ?>" alt="About EGY-HILLS">
                                     <div class="overlay-box">
-                                      
+
                                     </div>
                                 </div>
                             </div>
@@ -660,6 +661,20 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
     <section id="footer"></section>
     <script src="./assets/script/footer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        button.btn.btn-primary.send_info {
+            width: 100%;
+            padding: 15px;
+            border-radius: 30px;
+            background: black;
+            border: navajowhite;
+        }
+
+        .row.feature-box.aos-init.aos-animate {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+    </style>
 </body>
 
 </html>

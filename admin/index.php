@@ -7,12 +7,31 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+$user_id = intval($_SESSION['user_id']);
+$user_check = $conn->query("SELECT id FROM users WHERE id = $user_id LIMIT 1");
+if (!$user_check || $user_check->num_rows === 0) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
+
+
 function uploadFile($file)
 {
     if (!empty($file['name'])) {
         $name = time() . '_' . basename($file['name']);
-        move_uploaded_file($file['tmp_name'], '/Egy-Hills/uploads/' . $name);
-        return $name;
+        $uploadDir = '/Applications/MAMP/htdocs/Egy-Hills/uploads/';
+
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true); // تأكد إن المجلد موجود
+        }
+
+        $destination = $uploadDir . $name;
+
+        if (move_uploaded_file($file['tmp_name'], $destination)) {
+            return $name;
+        }
     }
     return '';
 }
@@ -43,9 +62,7 @@ $result = $conn->query("SELECT id, image, title, location, price FROM projects")
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_slider'])) {
     $image = uploadFile($_FILES['image']);
-    $conn->query("INSERT INTO sliders (image) VALUES ('$image')")
-        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_slider')
-        : exit("Error inserting slider: " . $conn->error);
+    $conn->query("INSERT INTO sliders (image) VALUES ('$image')") ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_slider') : exit("Error inserting slider: " . $conn->error);
 }
 if (isset($_GET['delete_slider'])) {
     $conn->query("DELETE FROM sliders WHERE id=" . intval($_GET['delete_slider']));
@@ -56,9 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_about_card'])) {
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
     $link = $conn->real_escape_string($_POST['link']);
-    $conn->query("INSERT INTO about_cards (image, title, description, link) VALUES ('$image', '$title', '$desc', '$link')")
-        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_about_card')
-        : exit("Error inserting about card: " . $conn->error);
+    $conn->query("INSERT INTO about_cards (image, title, description, link) VALUES ('$image', '$title', '$desc', '$link')") ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_about_card') : exit("Error inserting about card: " . $conn->error);
 }
 if (isset($_GET['delete_about_card'])) {
     $conn->query("DELETE FROM about_cards WHERE id=" . intval($_GET['delete_about_card']));
@@ -68,9 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_highlight'])) {
     $image = uploadFile($_FILES['image']);
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
-    $conn->query("INSERT INTO highlights (image, title, description) VALUES ('$image', '$title', '$desc')")
-        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_highlight')
-        : exit("Error inserting highlight: " . $conn->error);
+    $conn->query("INSERT INTO highlights (image, title, description) VALUES ('$image', '$title', '$desc')") ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_highlight') : exit("Error inserting highlight: " . $conn->error);
 }
 if (isset($_GET['delete_highlight'])) {
     $conn->query("DELETE FROM highlights WHERE id=" . intval($_GET['delete_highlight']));
@@ -78,9 +91,7 @@ if (isset($_GET['delete_highlight'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_video'])) {
     $url = $conn->real_escape_string($_POST['url']);
-    $conn->query("INSERT INTO videos (url) VALUES ('$url')")
-        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_video')
-        : exit("Error inserting video: " . $conn->error);
+    $conn->query("INSERT INTO videos (url) VALUES ('$url')") ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_video') : exit("Error inserting video: " . $conn->error);
 }
 if (isset($_GET['delete_video'])) {
     $conn->query("DELETE FROM videos WHERE id=" . intval($_GET['delete_video']));
@@ -90,9 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_ad'])) {
     $image = uploadFile($_FILES['image']);
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
-    $conn->query("INSERT INTO ads (image, title, description) VALUES ('$image', '$title', '$desc')")
-        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_ad')
-        : exit("Error inserting ad: " . $conn->error);
+    $conn->query("INSERT INTO ads (image, title, description) VALUES ('$image', '$title', '$desc')") ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_ad') : exit("Error inserting ad: " . $conn->error);
 }
 if (isset($_GET['delete_ad'])) {
     $conn->query("DELETE FROM ads WHERE id=" . intval($_GET['delete_ad']));
@@ -103,9 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_ad_icon'])) {
     $icon = uploadFile($_FILES['icon']);
     $title = $conn->real_escape_string($_POST['title']);
     $text = $conn->real_escape_string($_POST['text']);
-    $conn->query("INSERT INTO ad_icons (ad_id, icon, title, text) VALUES ($ad_id, '$icon', '$title', '$text')")
-        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_ad_icon')
-        : exit("Error inserting ad icon: " . $conn->error);
+    $conn->query("INSERT INTO ad_icons (ad_id, icon, title, text) VALUES ($ad_id, '$icon', '$title', '$text')") ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_ad_icon') : exit("Error inserting ad icon: " . $conn->error);
 }
 if (isset($_GET['delete_ad_icon'])) {
     $conn->query("DELETE FROM ad_icons WHERE id=" . intval($_GET['delete_ad_icon']));
@@ -115,9 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_question'])) {
     $question = $conn->real_escape_string($_POST['question']);
     $answer = $conn->real_escape_string($_POST['answer']);
     $image = uploadFile($_FILES['image']);
-    $conn->query("INSERT INTO questions (question, answer, image) VALUES ('$question', '$answer', '$image')")
-        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_question')
-        : exit("Error inserting question: " . $conn->error);
+    $conn->query("INSERT INTO questions (question, answer, image) VALUES ('$question', '$answer', '$image')") ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_question') : exit("Error inserting question: " . $conn->error);
 }
 if (isset($_GET['delete_question'])) {
     $conn->query("DELETE FROM questions WHERE id=" . intval($_GET['delete_question']));
@@ -127,9 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_service'])) {
     $icon = uploadFile($_FILES['icon']);
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
-    $conn->query("INSERT INTO services (icon, title, description) VALUES ('$icon', '$title', '$desc')")
-        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_service')
-        : exit("Error inserting service: " . $conn->error);
+    $conn->query("INSERT INTO services (icon, title, description) VALUES ('$icon', '$title', '$desc')") ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_service') : exit("Error inserting service: " . $conn->error);
 }
 if (isset($_GET['delete_service'])) {
     $conn->query("DELETE FROM services WHERE id=" . intval($_GET['delete_service']));
@@ -138,9 +141,7 @@ if (isset($_GET['delete_service'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_property_highlight'])) {
     $image = uploadFile($_FILES['image']);
     $title = $conn->real_escape_string($_POST['title']);
-    $conn->query("INSERT INTO property_highlights (image, title) VALUES ('$image', '$title')")
-        ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_property_highlight')
-        : exit("Error inserting property highlight: " . $conn->error);
+    $conn->query("INSERT INTO property_highlights (image, title) VALUES ('$image', '$title')") ? redirectWithSuccess($_SERVER['PHP_SELF'], 'add_property_highlight') : exit("Error inserting property highlight: " . $conn->error);
 }
 if (isset($_GET['delete_property_highlight'])) {
     $conn->query("DELETE FROM property_highlights WHERE id=" . intval($_GET['delete_property_highlight']));
@@ -187,6 +188,8 @@ $visitors = $conn->query("SELECT id, name, phone, created_at FROM visitors ORDER
 $logs = $conn->query("SELECT * FROM logs ORDER BY created_at DESC");
 $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY date DESC");
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

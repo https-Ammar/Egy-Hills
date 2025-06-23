@@ -14,11 +14,18 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
+
+
+    <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script
+        src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/jquery.min.js?ver=2.2.4"></script>
 
 </head>
 
@@ -69,7 +76,7 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
     </section>
 
     <section class="timeline-container" id="timeline-container" data-aos="fade-up" data-aos-duration="1000">
-        <div class="text text-center mb-4">
+        <div class="text  mb-4">
             <h2>Meet Our Team</h2>
             <p>Discover the talented professionals behind our success.</p>
         </div>

@@ -79,11 +79,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <!-- Left Content -->
                 <div class="responsive-cell-block wk-desk-6 wk-ipadp-6 wk-tab-12 wk-mobile-12 left-one">
                     <div class="content-box">
-                        <p class="text-blk section-head">Lorem ipsum amet dolor</p>
-                        <p class="text-blk section-subhead">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis volupta
-                        </p>
+       <p class="text-blk section-head">Get in Touch with Egy-Hills</p>
+<p class="text-blk section-subhead">
+Whether you're looking to find your dream home, invest in property, or have any real estate inquiries, the professional team at <strong>Egy-Hills Real Estate</strong> is always ready to assist you. Your journey starts here — let’s make it successful together.
+</p>
+
                         <div class="icons-container">
                             <a class="share-icon"><img class="img"
                                     src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-twitter.png" /></a>

@@ -208,8 +208,8 @@ if (isset($_GET['status'])) {
                     <div class="cccc">
                         <div class="row">
                             <div class="title mb-3">
-                                <div class="num">1</div>
-                                <h4>Booking Info</h4>
+                                <div class="num">2</div>
+                                <h4>card info</h4>
                             </div>
                             <div class="col-12 mb-4">
                                 <a href="project_details.php?id=<?= $project['id'] ?>">
@@ -231,12 +231,39 @@ if (isset($_GET['status'])) {
                                             </div>
                                             <div class="property-card-features">
                                                 <div class="property-card-feature">
-                                                    <?= htmlspecialchars($project['beds']) ?> Beds
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-bed">
+                                                        <path d="M2 9V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"></path>
+                                                        <path d="M2 11v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9"></path>
+                                                        <path d="M2 14h20"></path>
+                                                        <path
+                                                            d="M4 9h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2Z">
+                                                        </path>
+                                                    </svg> <?= htmlspecialchars($project['beds']) ?> Beds
                                                 </div>
                                                 <div class="property-card-feature">
-                                                    <?= htmlspecialchars($project['baths']) ?> Baths
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-bath">
+                                                        <path
+                                                            d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5">
+                                                        </path>
+                                                        <line x1="10" x2="8" y1="5" y2="7"></line>
+                                                        <line x1="2" x2="22" y1="12" y2="12"></line>
+                                                        <line x1="7" x2="7" y1="19" y2="21"></line>
+                                                        <line x1="17" x2="17" y1="19" y2="21"></line>
+                                                    </svg> <?= htmlspecialchars($project['baths']) ?> Baths
                                                 </div>
                                                 <div class="property-card-feature">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-square">
+                                                        <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                                    </svg>
                                                     <?= htmlspecialchars($project['area']) ?> sqm
                                                 </div>
                                             </div>

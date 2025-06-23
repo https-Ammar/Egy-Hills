@@ -208,7 +208,11 @@ form {
 
 button.button.booking-btn {
   color: black;
-  background: #edf7ff;
+  background: black;
+  color: white;
+  width: 30%;
+  padding: 20px;
+  border-radius: 5px;
 }
 
 button.button.button-secondary {

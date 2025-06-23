@@ -3,7 +3,6 @@
   --primary-color: #fdb801;
   --secondary-color: #d7a449;
 
-
   --text-color: #fff;
   --gray-text: #606060;
   --dark-bg: #111;
@@ -896,3 +895,6 @@ body {
   justify-content: center;
 }
 /*  */
+label.form-label.Max.Price {
+  color: white;
+}

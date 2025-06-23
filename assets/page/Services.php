@@ -25,10 +25,9 @@ $recentPosts = $conn->query("SELECT * FROM new_services WHERE type='service' ORD
     <?php include './header.php'; ?>
 
     <!-- Banner -->
-    <section class="site-banner site-banner--bg site-banner--page"
-        style="background-image:url(uploads/1750093639_20250524083242.webp);">
+    <section class="site-banner site-banner--bg site-banner--page" style="background-image:url(../img/services.jpg);">
         <div class="site-banner__txt section section--medium txt-center post-styles">
-            <h1 class="site-banner__title"><a href="#">About</a> / <a href="#">Home</a></h1>
+            <h1 class="site-banner__title"><a href="#">Services</a> / <a href="#">Home</a></h1>
             <h2 class="site-banner__subtitle">Homes that move you</h2>
         </div>
     </section>
@@ -120,6 +119,12 @@ $recentPosts = $conn->query("SELECT * FROM new_services WHERE type='service' ORD
             </div>
         </aside>
     </div>
+
+
+
+    <section id="footer"></section>
+    <script src="../script/footer.js"></script>
+
 </body>
 
 </html>
