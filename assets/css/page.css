@@ -224,8 +224,10 @@ section#timeline-container .text {
   height: 75vh;
   object-fit: cover;
   border: 1px solid var(--secondary-color);
-  background: red;
   border-radius: 50% 50% 0 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* ===================== Buttons ===================== */

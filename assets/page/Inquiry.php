@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
 
     <article class="card mt-5 ">
         <div class="container">
-            <div class="card-body">
+            <div class="card-body no-rtl">
                 <div class="card-title">
                     <h2 data-translate>Payment</h2>
                 </div>

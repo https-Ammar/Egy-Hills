@@ -239,7 +239,9 @@ button.button.button-secondary {
   height: 45vh;
   background-size: cover;
   border-radius: 10px;
-  background: red;
+
+  background-size: cover;
+  
 }
 
 article.card.mt-5 {

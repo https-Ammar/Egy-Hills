@@ -109,6 +109,10 @@ if (isset($_GET['status'])) {
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/booking.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -131,34 +135,34 @@ if (isset($_GET['status'])) {
     <?php include './header.php'; ?>
     <?php include './loging.php'; ?>
 
-    <section class="site-banner site-banner--bg site-banner--page"
-        style="background-image:url(/Egy-Hills/uploads/1750093639_20250524083242.webp);">
+    <section class="site-banner site-banner--bg site-banner--page" style="background-image:url(../img/cover.jpg);">
         <div class="site-banner__txt section section--medium txt-center post-styles">
-            <h1 class="site-banner__title"><a href="#">About</a> / <a href="#">Home</a></h1>
-            <h2 class="site-banner__subtitle">Homes that move you</h2>
+            <h1 class="site-banner__title"><a href="#" data-translate>About</a> / <a href="#" data-translate>Home</a>
+            </h1>
+            <h2 class="site-banner__subtitle" data-translate>Homes that move you</h2>
         </div>
     </section>
 
     <article class="card mt-5">
         <div class="container">
-            <div class="card-body">
+            <div class="card-body no-rtl">
                 <div class="card-title">
-                    <h2>Payment</h2>
+                    <h2 data-translate>Payment</h2>
                 </div>
                 <div class="payment-type">
-                    <h4>Choose payment method below</h4>
+                    <h4 data-translate> Choose payment method below</h4>
                     <div class="types flex justify-space-between">
                         <?php if ($info_blocks): ?>
                             <?php foreach ($info_blocks as $info): ?>
                                 <div class="type selected">
                                     <div class="text">
-                                        <p><?= htmlspecialchars($info['title']) ?></p>
-                                        <p><?= nl2br(htmlspecialchars($info['text'])) ?></p>
+                                        <p data-translate><?= htmlspecialchars($info['title']) ?></p>
+                                        <p data-translate><?= nl2br(htmlspecialchars($info['text'])) ?></p>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <p>No general info blocks found.</p>
+                            <p data-translate>No general info blocks found.</p>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -167,41 +171,44 @@ if (isset($_GET['status'])) {
                     <div class="column billing">
                         <div class="title">
                             <div class="num">1</div>
-                            <h4>Booking Info</h4>
+                            <h4 data-translate> data-translateBooking Info</h4>
                         </div>
                         <div class="flex-end">
-                            <button type="button" class="button booking-btn" data-type="inquiry">Inquiry</button>
-                            <button type="button" class="button booking-btn" data-type="visit">Visit</button>
+                            <button type="button" class="button booking-btn" data-type="inquiry"
+                                data-translate>Inquiry</button>
+                            <button type="button" class="button booking-btn" data-type="visit"
+                                data-translate>Visit</button>
                         </div>
                         <form method="post" enctype="multipart/form-data">
                             <input type="hidden" name="booking_type" id="booking_type">
                             <div class="field full">
-                                <label>Full Name</label>
+                                <label data-translate>Full Name</label>
                                 <input type="text" name="client_name" placeholder="Full Name" required>
                             </div>
                             <div class="field full">
-                                <label>Phone Number</label>
+                                <label data-translate>Phone Number</label>
                                 <input type="tel" name="client_phone" placeholder="Phone Number" required>
                             </div>
                             <div id="visit_fields" style="display:none;">
                                 <div class="field full">
-                                    <label>Booking Date</label>
+                                    <label data-translate>Booking Date</label>
                                     <input type="date" name="visit_date">
                                 </div>
                                 <div class="field full">
-                                    <label>Booking Time</label>
+                                    <label data-translate>Booking Time</label>
                                     <input type="time" name="visit_time">
                                 </div>
                                 <div class="field full">
-                                    <label>Amount</label>
+                                    <label data-translate>Amount</label>
                                     <input type="number" name="amount" step="1" min="1">
                                 </div>
                                 <div class="field full">
-                                    <label>Upload Payment Receipt</label>
+                                    <label data-translate>Upload Payment Receipt</label>
                                     <input type="file" name="receipt" accept=".jpg,.jpeg,.png,.pdf">
                                 </div>
                             </div>
-                            <button class="button button-secondary" type="submit" name="book_project">Submit
+                            <button class="button button-secondary" type="submit" name="book_project"
+                                data-translate>Submit
                                 Booking</button>
                         </form>
                     </div>
@@ -210,7 +217,7 @@ if (isset($_GET['status'])) {
                         <div class="row">
                             <div class="title mb-3">
                                 <div class="num">2</div>
-                                <h4>card info</h4>
+                                <h4 data-translate>card info</h4>
                             </div>
                             <div class="col-12 mb-4">
                                 <a href="project_details.php?id=<?= $project['id'] ?>">
@@ -231,7 +238,7 @@ if (isset($_GET['status'])) {
                                                 </h3>
                                             </div>
                                             <div class="property-card-features">
-                                                <div class="property-card-feature">
+                                                <div class="property-card-feature" data-translate>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -244,7 +251,7 @@ if (isset($_GET['status'])) {
                                                         </path>
                                                     </svg> <?= htmlspecialchars($project['beds']) ?> Beds
                                                 </div>
-                                                <div class="property-card-feature">
+                                                <div class="property-card-feature" data-translate>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -258,7 +265,7 @@ if (isset($_GET['status'])) {
                                                         <line x1="17" x2="17" y1="19" y2="21"></line>
                                                     </svg> <?= htmlspecialchars($project['baths']) ?> Baths
                                                 </div>
-                                                <div class="property-card-feature">
+                                                <div class="property-card-feature" data-translate>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -306,7 +313,7 @@ if (isset($_GET['status'])) {
         });
     </script>
 
-    <script src="../script/footer.js"></script>
+    <script src="../script/app.js"></script>
 
     <style>
         @media screen and (max-width:992px) {
@@ -316,6 +323,7 @@ if (isset($_GET['status'])) {
             }
         }
     </style>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
