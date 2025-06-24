@@ -16207,6 +16207,7 @@ html[data-menu-color=brand] .main-nav .logo-box .logo-dark {
 .avatar-md {
   height: 3.5rem;
   width: 3.5rem;
+  background-size: cover;
 }
 
 .avatar-lg {

@@ -393,7 +393,7 @@ form#filter-form {
 }
 
 main {
-  max-width: 75%;
+  max-width: 100%;
 }
 
 .sidebar {
@@ -544,8 +544,6 @@ button.btn_payment.right {
 body {
   margin: 0;
 }
-
-
 
 /*=========================== Containers ===========================*/
 .landing_page .responsive-container-block {
