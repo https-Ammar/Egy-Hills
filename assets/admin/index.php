@@ -197,7 +197,7 @@ $logs = $conn->query("SELECT * FROM logs ORDER BY created_at DESC");
 $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY date DESC");
 ?>
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark" data-menu-color="dark">
+<html lang="en" data-bs-theme="dark" data-menu-color="dark" data-bs-theme="dark ">
 
 <head>
     <meta charset="utf-8" />
@@ -206,7 +206,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
     <meta name="description" content="A fully responsive premium admin dashboard template" />
     <meta name="author" content="Techzaa" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
     <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
@@ -1786,8 +1785,10 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
     </div>
     <script>
+
         function deleteProject(id) {
             if (!confirm("Are you sure you want to delete this project?")) return;
+
             fetch('delete_project.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -1829,7 +1830,9 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                     }
                 });
         }
+    </script>
 
+    <script>
         window.addEventListener('DOMContentLoaded', () => {
             const savedBoxId = localStorage.getItem('selectedBoxId');
             if (savedBoxId) {
@@ -1837,17 +1840,16 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                     div.style.display = (div.id === savedBoxId) ? 'block' : 'none';
                 });
             }
-
             document.querySelectorAll('.xyxbtn123').forEach(button => {
                 button.onclick = () => {
                     const id = button.dataset.id;
                     localStorage.setItem('selectedBoxId', id);
+
                     document.querySelectorAll('.ptn_box_open').forEach(div => {
                         div.style.display = (div.id === id && div.style.display !== 'block') ? 'block' : 'none';
                     });
                 };
             });
-
             const body = document.querySelector("body");
             const sidebar = body.querySelector("nav");
             const toggleBtn = body.querySelector(".sidebar-toggle");
@@ -1861,24 +1863,32 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 sidebar.classList.toggle("close");
                 localStorage.setItem("status", sidebar.classList.contains("close") ? "close" : "open");
             });
+        });
+    </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
             const tableBody = document.querySelector("tbody");
-            if (tableBody) {
-                const rowCount = tableBody.querySelectorAll("tr").length;
-                const visitorCount = document.getElementById("visitorCount");
-                if (visitorCount) {
-                    visitorCount.textContent = rowCount;
-                }
+            const rowCount = tableBody.querySelectorAll("tr").length;
+            console.log("Total Visitors:", rowCount);
+            document.getElementById("visitorCount").textContent = + rowCount;
+        });
+    </script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            // اختار tbody المحدد
+            const tbody = document.getElementById("countriesTableBody");
+
+            // حساب عدد الصفوف اللي الـ ID بتاعها بيبدأ بـ row- داخل هذا الـ tbody فقط
+            const rowCount = tbody.querySelectorAll("tr[id^='row-']").length;
+
+            // عنصر عرض العدد
+            const countElement = document.getElementById("countryCount");
+            if (countElement) {
+                countElement.textContent = rowCount;
             }
 
-            const countriesTableBody = document.getElementById("countriesTableBody");
-            if (countriesTableBody) {
-                const rowCount = countriesTableBody.querySelectorAll("tr[id^='row-']").length;
-                const countElement = document.getElementById("countryCount");
-                if (countElement) {
-                    countElement.textContent = rowCount;
-                }
-            }
+            console.log("عدد الدول:", rowCount);
         });
     </script>
 

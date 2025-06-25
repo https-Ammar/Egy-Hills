@@ -123,7 +123,6 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
 
     <!-- Vendor css (Require in all Page) -->
     <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
