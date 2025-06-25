@@ -79,6 +79,9 @@ $blocks = $conn->query("SELECT * FROM info_blocks ORDER BY id DESC");
 
 
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 

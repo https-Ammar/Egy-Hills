@@ -224,11 +224,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
     <!-- Theme Config js (Require in all Page) -->
     <script src="assets/js/config.js"></script>
-    <style>
-        .main-nav {
-            display: none;
-        }
-    </style>
+
 </head>
 
 <body>
@@ -1812,81 +1808,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 </div>
             </div>
 
-            <!-- العنصر 12 -->
-            <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center gap-1">
-                    <h4 class="card-title flex-grow-1">Main Slider</h4>
-                    <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#addProductModal-12">
-                        Add Product
-                    </a>
-                </div>
-                <div>
-                    <div class="table-responsive">
-                        <table class="table align-middle mb-0 table-hover table-centered">
-                            <thead class="bg-light-subtle">
-                                <tr>
-                                    <th style="width: 20px;">
-                                        <div class="form-check ms-1">
-                                            <input type="checkbox" class="form-check-input" id="customCheck12">
-                                            <label class="form-check-label" for="customCheck12"></label>
-                                        </div>
-                                    </th>
-                                    <th>Product Name &amp; Size</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th>Category</th>
-                                    <th>Rating</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr id="row-12">
-                                    <td>
-                                        <div class="form-check ms-1">
-                                            <input type="checkbox" class="form-check-input" id="check-12">
-                                            <label class="form-check-label" for="check-12">&nbsp;</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                                style="background-image: url(/Egy-Hills/uploads/1750726719_pexels-heyho-6908502.jpg)">
-                                            </div>
-                                            <div>
-                                                <a href="#!" class="text-dark fw-medium fs-15">Project Title</a>
-                                                <p class="text-muted mb-0 mt-1 fs-13"><span>Location: </span>Project
-                                                    Title</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>$1000</td>
-                                    <td>
-                                        <p class="mb-1 text-muted"><span class="text-dark fw-medium">Available</span>
-                                        </p>
-                                        <p class="mb-0 text-muted">-</p>
-                                    </td>
-                                    <td>Real Estate</td>
-                                    <td>
-                                        <span class="badge p-1 bg-light text-dark fs-12 me-1">
-                                            <i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i>
-                                            4.5
-                                        </span> 0 Reviews
-                                    </td>
-                                    <td>
-                                        <div class="d-flex gap-2">
-                                            <button onclick="deleteProject(12)" class="btn btn-soft-danger btn-sm">
-                                                <iconify-icon icon="solar:trash-bin-minimalistic-2-broken"
-                                                    class="align-middle fs-18"></iconify-icon>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
 
         </div>
@@ -2183,25 +2104,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
         </div>
 
-        <!-- Modal 12 -->
-        <div class="modal fade" id="addProductModal-12" tabindex="-1" aria-labelledby="addProductModalLabel-12"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Product - Slider 12</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- محتوى المودال هنا -->
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- king mero -->
-        <!-- king mero -->
-        <!-- king mero -->
 
     </div>
     <!-- End Container Fluid -->
@@ -2247,267 +2150,128 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
 
 
-<!--  -->
-<!-- edit -->
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dashboard</title>
-
-
-</head>
-
-<body>
-
-    <main class="contint">
-        <nav>
-            <div class="logo-name">
-                <div class="logo-image">
-                    <img src="images/logo.png" alt="">
-                </div>
-                <span class="logo_name">Egy - - Hills</span>
-            </div>
-            <div class="menu-items">
-                <ul class="nav-links">
-
-
-                    <li>
-                        <a href="./add_service.php" data-target="share">
-                            <i class="uil uil-share"></i>
-                            <span class="link-name">Add Service</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="./admin_blocks.php" data-target="content">
-                            <i class="uil uil-files-landscapes"></i>
-                            <span class="link-name">Payments</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./requests.php" data-target="analytics">
-                            <i class="uil uil-chart"></i>
-                            <span class="link-name">requests</span>
-                        </a>
-                    </li>
-
-
-                </ul>
-                <ul class="logout-mode">
-                    <li>
-                        <a href="./logout.php">
-                            <i class="uil uil-signout"></i>
-                            <span class="link-name">Logout</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-        </nav>
-
-        <section class="dashboard">
-            <div class="top">
-                <i class="uil uil-bars sidebar-toggle"></i>
-                <div class="search-box">
-                    <i class="uil uil-search"></i>
-                    <input type="text" placeholder="Search here...">
-                </div>
-            </div>
-            <div class="dash-content">
-                <div class="overview">
-                    <div class="title">
-                        <i class="uil uil-tachometer-fast-alt"></i>
-                        <span class="text">Dashboard</span>
-                    </div>
-                    <div class="boxes">
-
-                        <div class="box box2">
-                            <i class="uil uil-comments"></i>
-                            <span class="text">Comments</span>
-                            <span class="number" id="visitor-count"></span>
-
-                        </div>
-
-
-                        <div class="box box3">
-                            <i class="uil uil-share"></i>
-                            <span class="text">Total Share</span>
-                            <span class="number" id="project-count">10,120</span>
-
-
-                            <script>
-                                window.addEventListener('DOMContentLoaded', () => {
-                                    const rows = document.querySelectorAll('ul.d-flex');
-                                    const count = rows.length;
-                                    const result = Math.max(0, 1 - count);
-                                    document.getElementById("visitor-count").textContent = result;
-                                });
-                            </script>
 
 
 
-                            <script>
-                                window.addEventListener('DOMContentLoaded', () => {
-                                    const projectItems = document.querySelectorAll('.list-group-item');
-                                    const projectCount = projectItems.length;
 
-                                    const countElement = document.getElementById('project-count');
-                                    countElement.textContent = `${projectCount}`;
-                                });
-                            </script>
+<li>
+    <a href="./add_service.php" data-target="share">
+        <i class="uil uil-share"></i>
+        <span class="link-name">Add Service</span>
+    </a>
+</li>
 
-
-                        </div>
-                    </div>
-                </div>
-                <div class="activity">
-
-
-                    <div id="box2" class="ptn_box_open">
-
-
-
-                        <div id="box4" class="ptn_box_open">
-                            <div class="title">
-                                <i class="uil uil-clock-three"></i>
-                                <span class="text">Property Highlights</span>
-                            </div>
-
-                            <div class="mb-4 d-flex flex-wrap gap-4">
-
-                            </div>
+<li>
+    <a href="./admin_blocks.php" data-target="content">
+        <i class="uil uil-files-landscapes"></i>
+        <span class="link-name">Payments</span>
+    </a>
+</li>
+<li>
+    <a href="./requests.php" data-target="analytics">
+        <i class="uil uil-chart"></i>
+        <span class="link-name">requests</span>
+    </a>
+</li>
 
 
-                        </div>
+<li>
+    <a href="./logout.php">
+        <i class="uil uil-signout"></i>
+        <span class="link-name">Logout</span>
+    </a>
+</li>
+
+<button class="xyxbtn123" data-id="box1">Open Box 1</button>
+<button class="xyxbtn123" data-id="box2">Open Box 2</button>
+
+<div class="ptn_box_open" id="box1">This is Box 1</div>
+<div class="ptn_box_open" id="box2">This is Box 2</div>
+
+<script>
+    function deleteProject(id) {
+        if (!confirm("هل أنت متأكد من حذف هذا المشروع؟")) return;
+        fetch('delete_project.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'id=' + id
+        })
+            .then(response => response.text())
+            .then(data => {
+                if (data.trim() === 'success') {
+                    document.getElementById('card-' + id).remove();
+                } else {
+                    alert('❌ حدث خطأ أثناء الحذف');
+                }
+            });
+    }
+
+    function toggleEditForm(id) {
+        const form = document.getElementById('edit-form-' + id);
+        form.classList.toggle('d-none');
+    }
+
+    function updateProject(id) {
+        const title = document.getElementById('title-' + id).value;
+        const location = document.getElementById('location-' + id).value;
+        const price = document.getElementById('price-' + id).value;
+
+        fetch('update_project.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `id=${id}&title=${encodeURIComponent(title)}&location=${encodeURIComponent(location)}&price=${encodeURIComponent(price)}`
+        })
+            .then(response => response.text())
+            .then(data => {
+                if (data.trim() === 'success') {
+                    alert('✅ تم حفظ التعديلات');
+                    location.reload();
+                } else {
+                    alert('❌ حدث خطأ أثناء التعديل');
+                }
+            });
+    }
+</script>
 
 
 
 
 
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedId = localStorage.getItem('selectedBoxId');
+        if (savedId) {
+            document.querySelectorAll('.ptn_box_open').forEach(div => {
+                div.style.display = (div.id === savedId) ? 'block' : 'none';
+            });
+        }
 
-                        <div class="container py-4">
-
-
-
-                            <script>
-                                function deleteProject(id) {
-                                    if (!confirm("هل أنت متأكد من حذف هذا المشروع؟")) return;
-                                    fetch('delete_project.php', {
-                                        method: 'POST',
-                                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                                        body: 'id=' + id
-                                    })
-                                        .then(response => response.text())
-                                        .then(data => {
-                                            if (data.trim() === 'success') {
-                                                document.getElementById('card-' + id).remove();
-                                            } else {
-                                                alert('❌ حدث خطأ أثناء الحذف');
-                                            }
-                                        });
-                                }
-
-                                function toggleEditForm(id) {
-                                    const form = document.getElementById('edit-form-' + id);
-                                    form.classList.toggle('d-none');
-                                }
-
-                                function updateProject(id) {
-                                    const title = document.getElementById('title-' + id).value;
-                                    const location = document.getElementById('location-' + id).value;
-                                    const price = document.getElementById('price-' + id).value;
-
-                                    fetch('update_project.php', {
-                                        method: 'POST',
-                                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                                        body: `id=${id}&title=${encodeURIComponent(title)}&location=${encodeURIComponent(location)}&price=${encodeURIComponent(price)}`
-                                    })
-                                        .then(response => response.text())
-                                        .then(data => {
-                                            if (data.trim() === 'success') {
-                                                alert('✅ تم حفظ التعديلات');
-                                                location.reload();
-                                            } else {
-                                                alert('❌ حدث خطأ أثناء التعديل');
-                                            }
-                                        });
-                                }
-                            </script>
-
-                        </div>
-
-
-
-
-
-
-                    </div>
-                </div>
-        </section>
-
-    </main>
-
-
-
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedId = localStorage.getItem('selectedBoxId');
-            if (savedId) {
+        document.querySelectorAll('.xyxbtn123').forEach(btn => {
+            btn.onclick = () => {
+                const id = btn.dataset.id;
+                localStorage.setItem('selectedBoxId', id);
                 document.querySelectorAll('.ptn_box_open').forEach(div => {
-                    div.style.display = (div.id === savedId) ? 'block' : 'none';
+                    div.style.display = (div.id === id && div.style.display !== 'block') ? 'block' : 'none';
                 });
-            }
-
-            document.querySelectorAll('.xyxbtn123').forEach(btn => {
-                btn.onclick = () => {
-                    const id = btn.dataset.id;
-                    localStorage.setItem('selectedBoxId', id);
-                    document.querySelectorAll('.ptn_box_open').forEach(div => {
-                        div.style.display = (div.id === id && div.style.display !== 'block') ? 'block' : 'none';
-                    });
-                };
-            });
-
-            const body = document.querySelector("body"),
-                modeToggle = body.querySelector(".mode-toggle"),
-                sidebar = body.querySelector("nav"),
-                sidebarToggle = body.querySelector(".sidebar-toggle");
-
-            let getMode = localStorage.getItem("mode");
-            if (getMode === "dark") {
-                body.classList.add("dark");
-            }
-
-            let getStatus = localStorage.getItem("status");
-            if (getStatus === "close") {
-                sidebar.classList.add("close");
-            }
-
-            modeToggle.addEventListener("click", () => {
-                body.classList.toggle("dark");
-                if (body.classList.contains("dark")) {
-                    localStorage.setItem("mode", "dark");
-                } else {
-                    localStorage.setItem("mode", "light");
-                }
-            });
-
-            sidebarToggle.addEventListener("click", () => {
-                sidebar.classList.toggle("close");
-                if (sidebar.classList.contains("close")) {
-                    localStorage.setItem("status", "close");
-                } else {
-                    localStorage.setItem("status", "open");
-                }
-            });
+            };
         });
-    </script>
 
+        const body = document.querySelector("body"),
+            sidebar = body.querySelector("nav"),
+            sidebarToggle = body.querySelector(".sidebar-toggle");
 
-</body>
+        let getStatus = localStorage.getItem("status");
+        if (getStatus === "close") {
+            sidebar.classList.add("close");
+        }
 
-</html>
+        sidebarToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+            if (sidebar.classList.contains("close")) {
+                localStorage.setItem("status", "close");
+            } else {
+                localStorage.setItem("status", "open");
+            }
+        });
+    });
+</script>
