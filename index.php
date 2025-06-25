@@ -172,43 +172,71 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
             <div class="container">
 
 
-
+                <?php $i = 0; ?>
                 <?php while ($row = $about_cards->fetch_assoc()): ?>
-                    <div class="row clearfix">
-                        <div class="content-column col-md-6 col-sm-12" data-aos="fade-right">
-                            <div class="inner-column">
-                                <div class="sec-title">
-                                    <div class="title" data-translate>About Us</div>
+                    <?php $i++; ?>
+                    <div class="row clearfix d-flex align-items-center">
+                        <?php if ($i % 2 == 0): ?>
 
-                                    <h2 data-translate><?= htmlspecialchars($row['title']) ?></h2>
-                                </div>
-                                <div class="text" data-translate>
 
-                                    <?= htmlspecialchars($row['description']) ?>
-                                </div>
-                                <div class="email">
-                                    Request a Quote: <span class="theme_color">EGY-HILLS@gmail.com</span>
-                                </div>
-                                <a href="<?php echo $row['link']; ?>" class="theme-btn btn-style-three">Read More</a>
-
-                            </div>
-                        </div>
-
-                        <!-- Image Column -->
-                        <div class="image-column col-md-6 col-sm-12" data-aos="fade-left">
-                            <div class="inner-column" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                <div class="image">
-                                    <img src="uploads/<?= htmlspecialchars($row['image']) ?>" alt="About EGY-HILLS">
-                                    <div class="overlay-box">
-
+                            <!-- الصورة يمين، المحتوى شمال -->
+                            <div class="image-column col-md-6 col-sm-12 order-md-1" data-aos="fade-right">
+                                <div class="inner-column" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                    <div class="image">
+                                        <img src="uploads/<?= htmlspecialchars($row['image']) ?>" alt="About EGY-HILLS">
+                                        <div class="overlay-box"></div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                            <div class="content-column col-md-6 col-sm-12 order-md-2" data-aos="fade-left">
+                                <div class="inner-column">
+                                    <div class="sec-title">
+                                        <div class="title" data-translate>About Us</div>
+                                        <h2 data-translate><?= htmlspecialchars($row['title']) ?></h2>
+                                    </div>
+                                    <div class="text" data-translate>
+                                        <?= htmlspecialchars($row['description']) ?>
+                                    </div>
+                                    <div class="email">
+                                        Request a Quote: <span class="theme_color">EGY-HILLS@gmail.com</span>
+                                    </div>
+                                    <a href="<?= $row['link']; ?>" class="theme-btn btn-style-three">Read More</a>
+                                </div>
+                            </div>
+
+                        <?php else: ?>
+
+                            <!-- المحتوى يمين، الصورة شمال -->
+                            <div class="content-column col-md-6 col-sm-12 order-md-1" data-aos="fade-right">
+                                <div class="inner-column">
+                                    <div class="sec-title">
+                                        <div class="title" data-translate>About Us</div>
+                                        <h2 data-translate><?= htmlspecialchars($row['title']) ?></h2>
+                                    </div>
+                                    <div class="text" data-translate>
+                                        <?= htmlspecialchars($row['description']) ?>
+                                    </div>
+                                    <div class="email">
+                                        Request a Quote: <span class="theme_color">EGY-HILLS@gmail.com</span>
+                                    </div>
+                                    <a href="<?= $row['link']; ?>" class="theme-btn btn-style-three">Read More</a>
+                                </div>
+                            </div>
+
+                            <div class="image-column col-md-6 col-sm-12 order-md-2" data-aos="fade-left">
+                                <div class="inner-column" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                    <div class="image">
+                                        <img src="uploads/<?= htmlspecialchars($row['image']) ?>" alt="About EGY-HILLS">
+                                        <div class="overlay-box"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        <?php endif; ?>
                     </div>
                 <?php endwhile; ?>
-
 
             </div>
         </section>

@@ -42,32 +42,64 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
 
     <section class="about-section mt-5">
         <div class="container">
+            <?php $i = 0; ?>
             <?php while ($row = $about_cards->fetch_assoc()): ?>
-                <div class="row clearfix mb-5">
-                    <div class="content-column col-md-6 col-sm-12" data-aos="fade-right" data-aos-duration="1000">
-                        <div class="inner-column">
-                            <div class="sec-title m-0">
-                                <di data-translate class="title">About Us</di>
-                                <h2 data-translate><?= $row['title'] ?></h2>
-                            </div>
-                            <div class="text" data-translate><?= $row['description'] ?></div>
-                            <div class="email">Request a Quote: <span class="theme_color">EGY-HILLS@gmail.com</span></div>
-                            <a href="#" class="theme-btn btn-style-three" data-translate>Read More</a>
-                        </div>
-                    </div>
-                    <div class="image-column col-md-6 col-sm-12" data-aos="fade-left" data-aos-duration="1000">
-                        <div class="inner-column">
-                            <div class="image">
-                                <img src="/Egy-Hills/uploads/<?= $row['image'] ?>" alt="About EGY-HILLS">
-                                <div class="overlay-box">
-                                    <div class="year-box">
+                <?php $i++; ?>
+                <div class="row clearfix mb-5 align-items-center">
+                    <?php if ($i % 2 == 0): ?>
+
+                        <!-- الصورة يمين - المحتوى شمال -->
+                        <div class="image-column col-md-6 col-sm-12 order-md-1" data-aos="fade-right" data-aos-duration="1000">
+                            <div class="inner-column">
+                                <div class="image">
+                                    <img src="/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>" alt="About EGY-HILLS">
+                                    <div class="overlay-box">
+                                        <div class="year-box"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="content-column col-md-6 col-sm-12 order-md-2" data-aos="fade-left" data-aos-duration="1000">
+                            <div class="inner-column">
+                                <div class="sec-title m-0">
+                                    <di data-translate class="title">About Us</di>
+                                    <h2 data-translate><?= htmlspecialchars($row['title']) ?></h2>
+                                </div>
+                                <div class="text" data-translate><?= htmlspecialchars($row['description']) ?></div>
+                                <div class="email">Request a Quote: <span class="theme_color">EGY-HILLS@gmail.com</span></div>
+                                <a href="#" class="theme-btn btn-style-three" data-translate>Read More</a>
+                            </div>
+                        </div>
+
+                    <?php else: ?>
+
+                        <!-- المحتوى يمين - الصورة شمال -->
+                        <div class="content-column col-md-6 col-sm-12 order-md-1" data-aos="fade-right"
+                            data-aos-duration="1000">
+                            <div class="inner-column">
+                                <div class="sec-title m-0">
+                                    <di data-translate class="title">About Us</di>
+                                    <h2 data-translate><?= htmlspecialchars($row['title']) ?></h2>
+                                </div>
+                                <div class="text" data-translate><?= htmlspecialchars($row['description']) ?></div>
+                                <div class="email">Request a Quote: <span class="theme_color">EGY-HILLS@gmail.com</span></div>
+                                <a href="#" class="theme-btn btn-style-three" data-translate>Read More</a>
+                            </div>
+                        </div>
+                        <div class="image-column col-md-6 col-sm-12 order-md-2" data-aos="fade-left" data-aos-duration="1000">
+                            <div class="inner-column">
+                                <div class="image">
+                                    <img src="/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>" alt="About EGY-HILLS">
+                                    <div class="overlay-box">
+                                        <div class="year-box"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             <?php endwhile; ?>
+
         </div>
     </section>
 

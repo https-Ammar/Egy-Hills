@@ -230,6 +230,18 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             background-position: center center !important;
             background-repeat: no-repeat;
         }
+
+        .avatar-md.bg-soft-primary.rounded {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar-md.bg-soft-primary.rounded svg {
+            color: #ff6c30;
+            width: 35px;
+            height: 35px;
+        }
     </style>
 
 </head>
@@ -468,12 +480,16 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="avatar-md bg-soft-primary rounded">
-                                                    <iconify-icon icon="solar:cart-5-bold-duotone"
-                                                        class="avatar-title fs-32 text-primary"></iconify-icon>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0-8 0M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+                                                    </svg>
                                                 </div>
                                             </div> <!-- end col -->
                                             <div class="col-6 text-end">
-                                                <p class="text-muted mb-0 text-truncate">Total Orders</p>
+                                                <p class="text-muted mb-0 text-truncate">Total Visitors</p>
                                                 <h3 class="text-dark mt-1 mb-0"><?= $total_visits ?></h3>
                                             </div> <!-- end col -->
                                         </div> <!-- end row-->
@@ -481,7 +497,9 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                     <div class="card-footer py-2 bg-light bg-opacity-50">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div>
-                                                <span class="text-success"> <i class="bx bxs-up-arrow fs-12"></i>
+                                                <span class="text-success">
+
+
                                                     2.3%</span>
                                                 <span class="text-muted ms-1 fs-12">Last Week</span>
                                             </div>
@@ -495,19 +513,25 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="avatar-md bg-soft-primary rounded">
-                                                    <i class="bx bx-award avatar-title fs-24 text-primary"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024"
+                                                        viewBox="0 0 1024 1024">
+                                                        <path fill="currentColor" fill-rule="evenodd"
+                                                            d="M464 144c8.837 0 16 7.163 16 16v304c0 8.836-7.163 16-16 16H160c-8.837 0-16-7.164-16-16V160c0-8.837 7.163-16 16-16zm-52 68H212v200h200zm493.333 87.686c6.248 6.248 6.248 16.379 0 22.627l-181.02 181.02c-6.248 6.248-16.378 6.248-22.627 0l-181.019-181.02c-6.248-6.248-6.248-16.379 0-22.627l181.02-181.02c6.248-6.248 16.378-6.248 22.627 0zm-84.853 11.313L713 203.52L605.52 311L713 418.48zM464 544c8.837 0 16 7.164 16 16v304c0 8.837-7.163 16-16 16H160c-8.837 0-16-7.163-16-16V560c0-8.836 7.163-16 16-16zm-52 68H212v200h200zm452-68c8.837 0 16 7.164 16 16v304c0 8.837-7.163 16-16 16H560c-8.837 0-16-7.163-16-16V560c0-8.836 7.163-16 16-16zm-52 68H612v200h200z" />
+                                                    </svg>
                                                 </div>
                                             </div> <!-- end col -->
                                             <div class="col-6 text-end">
-                                                <p class="text-muted mb-0 text-truncate">New Leads</p>
-                                                <h3 class="text-dark mt-1 mb-0">9,56</h3>
+                                                <p class="text-muted mb-0 text-truncate">User</p>
+                                                <h3 class="text-dark mt-1 mb-0">
+                                                    <div id="visitorCount"></div>
+                                                </h3>
                                             </div> <!-- end col -->
                                         </div> <!-- end row-->
                                     </div> <!-- end card body -->
                                     <div class="card-footer py-2 bg-light bg-opacity-50">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div>
-                                                <span class="text-success"> <i class="bx bxs-up-arrow fs-12"></i>
+                                                <span class="text-success">
                                                     8.1%</span>
                                                 <span class="text-muted ms-1 fs-12">Last Month</span>
                                             </div>
@@ -521,19 +545,28 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="avatar-md bg-soft-primary rounded">
-                                                    <i class="bx bxs-backpack avatar-title fs-24 text-primary"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24">
+                                                        <g fill="none" stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="1.5">
+                                                            <path
+                                                                d="M6.053 20.25h3m-3-15.75v9M.803 9h10.5M3.803.75l2.25 3.75M8.303.75L6.053 4.5M15.8 23.25a3 3 0 0 0-3-3H9.053a3 3 0 0 0-3-3H.8v6zM1.303 4.5h9.5s.5 0 .5.5v8s0 .5-.5.5h-9.5s-.5 0-.5-.5V5s0-.5.5-.5M13.86 8.575l.357-2.675a.75.75 0 0 1 .743-.651h6.187a.75.75 0 0 1 .743.651l1.3 9.75a.764.764 0 0 1-.743.849H12.8" />
+                                                            <path d="M15.8 5.25v-1.5a2.25 2.25 0 0 1 4.5 0v1.5" />
+                                                        </g>
+                                                    </svg>
                                                 </div>
                                             </div> <!-- end col -->
                                             <div class="col-6 text-end">
-                                                <p class="text-muted mb-0 text-truncate">Deals</p>
-                                                <h3 class="text-dark mt-1 mb-0">976</h3>
+                                                <p class="text-muted mb-0 text-truncate">Product</p>
+                                                <h3 class="text-dark mt-1 mb-0"><span id="countryCount">0</span>
+                                                </h3>
                                             </div> <!-- end col -->
                                         </div> <!-- end row-->
                                     </div> <!-- end card body -->
                                     <div class="card-footer py-2 bg-light bg-opacity-50">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div>
-                                                <span class="text-danger"> <i class="bx bxs-down-arrow fs-12"></i>
+                                                <span class="text-danger">
                                                     0.3%</span>
                                                 <span class="text-muted ms-1 fs-12">Last Month</span>
                                             </div>
@@ -547,19 +580,43 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="avatar-md bg-soft-primary rounded">
-                                                    <i class="bx bx-dollar-circle avatar-title text-primary fs-24"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill="currentColor" fill-rule="evenodd"
+                                                            d="m12.6 11.503l3.891 3.891l-.848.849L11.4 12V6h1.2zM12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10m0-1.2a8.8 8.8 0 1 0 0-17.6a8.8 8.8 0 0 0 0 17.6" />
+                                                    </svg>
                                                 </div>
                                             </div> <!-- end col -->
                                             <div class="col-6 text-end">
-                                                <p class="text-muted mb-0 text-truncate">Booked Revenue</p>
-                                                <h3 class="text-dark mt-1 mb-0">$16k</h3>
+                                                <p class="text-muted mb-0 text-truncate">time</p>
+                                                <h3 class="text-dark mt-1 mb-0" id="current-time"></h3>
+
+                                                <script>
+                                                    function updateTime() {
+                                                        const now = new Date();
+                                                        let hours = now.getHours();
+                                                        const minutes = now.getMinutes();
+                                                        const ampm = hours >= 12 ? '' : '';
+
+                                                        hours = hours % 12;
+                                                        hours = hours ? hours : 12; // لو الساعة 0 تبقى 12
+                                                        const minutesStr = minutes < 10 ? '0' + minutes : minutes;
+
+                                                        const timeStr = hours + ':' + minutesStr + ' ' + ampm;
+                                                        document.getElementById('current-time').textContent = timeStr;
+                                                    }
+
+                                                    updateTime();
+                                                    setInterval(updateTime, 60000); // تحدث كل دقيقة
+                                                </script>
+
                                             </div> <!-- end col -->
                                         </div> <!-- end row-->
                                     </div> <!-- end card body -->
                                     <div class="card-footer py-2 bg-light bg-opacity-50">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div>
-                                                <span class="text-danger"> <i class="bx bxs-down-arrow fs-12"></i>
+                                                <span class="text-danger">
                                                     10.6%</span>
                                                 <span class="text-muted ms-1 fs-12">Last Month</span>
                                             </div>
@@ -717,7 +774,8 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="countriesTableBody">
+
 
 
 
@@ -1904,6 +1962,36 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             });
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const tableBody = document.querySelector("tbody");
+            const rowCount = tableBody.querySelectorAll("tr").length;
+            console.log("Total Visitors:", rowCount);
+
+            // لو حابب تعرضها في مكان معين في الصفحة مثلاً:
+            document.getElementById("visitorCount").textContent = + rowCount;
+        });
+    </script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            // اختار tbody المحدد
+            const tbody = document.getElementById("countriesTableBody");
+
+            // حساب عدد الصفوف اللي الـ ID بتاعها بيبدأ بـ row- داخل هذا الـ tbody فقط
+            const rowCount = tbody.querySelectorAll("tr[id^='row-']").length;
+
+            // عنصر عرض العدد
+            const countElement = document.getElementById("countryCount");
+            if (countElement) {
+                countElement.textContent = rowCount;
+            }
+
+            console.log("عدد الدول:", rowCount);
+        });
+    </script>
+
+
 
     <script src="assets/js/vendor.js"></script>
 
