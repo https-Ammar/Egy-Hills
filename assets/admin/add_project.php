@@ -18,7 +18,8 @@ function uploadFile($file)
             mkdir('uploads', 0755, true);
         }
         $name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '', basename($file['name']));
-        $target = __DIR__ . '/uploads/' . $name;
+        $target = __DIR__ . '/../uploads/' . $name;
+
         if (move_uploaded_file($file['tmp_name'], $target)) {
             return $name;
         } else {

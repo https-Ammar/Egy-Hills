@@ -224,6 +224,13 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
     <!-- Theme Config js (Require in all Page) -->
     <script src="assets/js/config.js"></script>
+    <style>
+        .rounded.bg-light.avatar-md.d-flex.align-items-center.justify-content-center.size_ {
+            background-size: 25px !important;
+            background-position: center center !important;
+            background-repeat: no-repeat;
+        }
+    </style>
 
 </head>
 
@@ -728,7 +735,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                         <td>
                                                             <div class="d-flex align-items-center gap-2">
                                                                 <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                                                    style="background-image: url(/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>)">
+                                                                    style="background-image: url('/Egy-Hills/assets/uploads/<?= urlencode(htmlspecialchars($row['image'])) ?>')">
                                                                     <?php if (!empty($row['image'])): ?>
 
                                                                     <?php else: ?>
@@ -805,11 +812,8 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                     <label class="form-check-label" for="customCheck1-1"></label>
                                                 </div>
                                             </th>
-                                            <th>Product Name &amp; Size</th>
-                                            <th>Price</th>
-                                            <th>Stock</th>
-                                            <th>Category</th>
-                                            <th>Rating</th>
+                                            <th>Product</th>
+
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -825,31 +829,17 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                         <label class="form-check-label" for="check-1">&nbsp;</label>
                                                     </div>
                                                 </td>
+
+
+
                                                 <td>
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                                            style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>');">
-                                                        </div>
-                                                        <div>
-                                                            <a href="#!" class="text-dark fw-medium fs-15">Project Title</a>
-                                                            <p class="text-muted mb-0 mt-1 fs-13"><span>Location:</span>
-                                                                Project Title</p>
-                                                        </div>
+                                                    <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
+                                                        style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>');">
                                                     </div>
                                                 </td>
-                                                <td>$1000</td>
-                                                <td>
-                                                    <p class="mb-1 text-muted"><span
-                                                            class="text-dark fw-medium">Available</span></p>
-                                                    <p class="mb-0 text-muted">-</p>
-                                                </td>
-                                                <td>Real Estate</td>
-                                                <td>
-                                                    <span class="badge p-1 bg-light text-dark fs-12 me-1">
-                                                        <i
-                                                            class="bx bxs-star align-text-top fs-14 text-warning me-1"></i>4.5
-                                                    </span> 0 Reviews
-                                                </td>
+
+
+
                                                 <td>
                                                     <div class="d-flex gap-2">
 
@@ -894,10 +884,9 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                             </div>
                                         </th>
                                         <th>Product Name &amp; Size</th>
-                                        <th>Price</th>
-                                        <th>Stock</th>
-                                        <th>Category</th>
-                                        <th>Rating</th>
+                                        <th>title</th>
+                                        <th>description</th>
+                                        <th>link</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -913,29 +902,26 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                                        style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>');">
-                                                    </div>
-                                                    <div>
-                                                        <a href="#!" class="text-dark fw-medium fs-15">Project Title</a>
-                                                        <p class="text-muted mb-0 mt-1 fs-13"><span>Location:</span>
-                                                            Project Title</p>
-                                                    </div>
+                                                <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
+                                                    style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>');">
                                                 </div>
                                             </td>
-                                            <td>$1000</td>
+
                                             <td>
-                                                <p class="mb-1 text-muted"><span
-                                                        class="text-dark fw-medium">Available</span></p>
-                                                <p class="mb-0 text-muted">-</p>
+                                                <?= htmlspecialchars($row['title']) ?>
                                             </td>
-                                            <td>Real Estate</td>
+
+
+
                                             <td>
-                                                <span class="badge p-1 bg-light text-dark fs-12 me-1">
-                                                    <i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i>4.5
-                                                </span> 0 Reviews
+                                                <?= htmlspecialchars($row['description']) ?>
                                             </td>
+
+                                            <td>
+                                                <a href=" <?= htmlspecialchars($row['link']) ?>">link</a>
+                                            </td>
+
+
                                             <td>
                                                 <div class="d-flex gap-2">
                                                     <a href="?delete_about_card=<?= intval($row['id']) ?>">
@@ -979,10 +965,8 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                         </div>
                                     </th>
                                     <th>Product Name &amp; Size</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th>Category</th>
-                                    <th>Rating</th>
+                                    <th>titel</th>
+                                    <th>description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -998,31 +982,19 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                                    style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>'); background-size: cover; background-position: center;">
+                                            <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
+                                                style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>'); background-size: cover; background-position: center;">
 
-                                                </div>
-                                                <div>
-                                                    <a href="#!"
-                                                        class="text-dark fw-medium fs-15"><?= htmlspecialchars($row['title']) ?></a>
-                                                    <p class="text-muted mb-0 mt-1 fs-13"><span>Location:</span>
-                                                        <?= htmlspecialchars($row['title']) ?></p>
-                                                </div>
                                             </div>
                                         </td>
-                                        <td>$1000</td>
-                                        <td>
-                                            <p class="mb-1 text-muted"><span class="text-dark fw-medium">Available</span>
-                                            </p>
-                                            <p class="mb-0 text-muted">-</p>
-                                        </td>
-                                        <td>Real Estate</td>
-                                        <td>
-                                            <span class="badge p-1 bg-light text-dark fs-12 me-1">
-                                                <i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i>4.5
-                                            </span> 0 Reviews
-                                        </td>
+
+                                        <td> <?= htmlspecialchars($row['title']) ?></td>
+
+                                        <td> <?= htmlspecialchars($row['description']) ?></td>
+
+
+
+
                                         <td>
                                             <div class="d-flex gap-2">
                                                 <a href="?delete_highlight=<?= intval($row['id']) ?>">
@@ -1064,11 +1036,11 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                             <label class="form-check-label" for="customCheck4"></label>
                                         </div>
                                     </th>
-                                    <th>Product Name &amp; Size</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
+                                    <th>Product </th>
+                                    <th>name</th>
+
                                     <th>Category</th>
-                                    <th>Rating</th>
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1088,31 +1060,15 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                                        style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>'); background-size: cover;">
-                                                    </div>
-                                                    <div>
-                                                        <a href="#!"
-                                                            class="text-dark fw-medium fs-15"><?= htmlspecialchars($row['title']) ?></a>
-                                                        <p class="text-muted mb-0 mt-1 fs-13"><span>Location:
-                                                            </span><?= htmlspecialchars($row['title']) ?></p>
-                                                    </div>
+                                                <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
+                                                    style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>'); background-size: cover;">
                                                 </div>
                                             </td>
-                                            <td>$1000</td>
-                                            <td>
-                                                <p class="mb-1 text-muted"><span class="text-dark fw-medium">Available</span>
-                                                </p>
-                                                <p class="mb-0 text-muted">-</p>
-                                            </td>
+
+                                            <td><?= htmlspecialchars($row['title']) ?></td>
+
                                             <td>Real Estate</td>
-                                            <td>
-                                                <span class="badge p-1 bg-light text-dark fs-12 me-1">
-                                                    <i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i>
-                                                    4.5
-                                                </span> 0 Reviews
-                                            </td>
+
                                             <td>
                                                 <div class="d-flex gap-2">
                                                     <a href="?delete_property_highlight=<?= intval($row['id']) ?>"
@@ -1126,12 +1082,12 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                         </tr>
                                         <?php $i++; endwhile; ?>
                                 <?php else: ?>
-                                    <tr>
+                                    <!-- <tr>
                                         <td colspan="7">
                                             <div class="alert alert-warning text-center mb-0">🚫 No Property Highlights
                                                 available yet.</div>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                 <?php endif; ?>
                             </tbody>
 
@@ -1161,11 +1117,8 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                             <label class="form-check-label" for="customCheck5"></label>
                                         </div>
                                     </th>
-                                    <th>Product Name &amp; Size</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th>Category</th>
-                                    <th>Rating</th>
+                                    <th>link</th>
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1180,12 +1133,15 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                     <label class="form-check-label" for="check-<?= $i ?>">&nbsp;</label>
                                                 </div>
                                             </td>
+
                                             <td colspan="5">
                                                 <a href="<?= htmlspecialchars($row['url']) ?>" target="_blank"
                                                     class="text-primary">
                                                     <?= htmlspecialchars($row['url']) ?>
                                                 </a>
                                             </td>
+
+
                                             <td>
                                                 <div class="d-flex gap-2">
                                                     <a href="?delete_video=<?= intval($row['id']) ?>"
@@ -1199,12 +1155,12 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                         </tr>
                                         <?php $i++; endwhile; ?>
                                 <?php else: ?>
-                                    <tr>
+                                    <!-- <tr>
                                         <td colspan="7">
                                             <div class="alert alert-warning text-center mb-0">🚫 No videos available yet.
                                             </div>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                 <?php endif; ?>
 
 
@@ -1239,11 +1195,11 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                             <label class="form-check-label" for="customCheck7"></label>
                                         </div>
                                     </th>
-                                    <th>Product Name &amp; Size</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
+                                    <th>Product </th>
+                                    <th>Name</th>
+
                                     <th>Category</th>
-                                    <th>Rating</th>
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1261,31 +1217,14 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                                        style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>'); background-size: cover;">
-                                                    </div>
-                                                    <div>
-                                                        <a href="#!"
-                                                            class="text-dark fw-medium fs-15"><?= htmlspecialchars($row['title']) ?></a>
-                                                        <p class="text-muted mb-0 mt-1 fs-13"><span>Location:
-                                                            </span><?= htmlspecialchars($row['title']) ?></p>
-                                                    </div>
+                                                <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
+                                                    style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>'); background-size: cover;">
                                                 </div>
                                             </td>
-                                            <td>$1000</td>
-                                            <td>
-                                                <p class="mb-1 text-muted"><span class="text-dark fw-medium">Available</span>
-                                                </p>
-                                                <p class="mb-0 text-muted">-</p>
-                                            </td>
+                                            <td><?= htmlspecialchars($row['title']) ?></td>
+
                                             <td>Real Estate</td>
-                                            <td>
-                                                <span class="badge p-1 bg-light text-dark fs-12 me-1">
-                                                    <i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i>
-                                                    4.5
-                                                </span> 0 Reviews
-                                            </td>
+
                                             <td>
                                                 <div class="d-flex gap-2">
                                                     <a href="?delete_ad=<?= intval($row['id']) ?>"
@@ -1311,45 +1250,40 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                         for="check-icon-<?= intval($icon['id']) ?>">&nbsp;</label>
                                                 </div>
                                             </td>
+
                                             <td>
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <div
-                                                        class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                        <img src="/Egy-Hills/uploads/<?= htmlspecialchars($icon['icon']) ?>"
-                                                            width="50" height="50" class="img-thumbnail rounded" />
-                                                    </div>
-                                                    <div>
-                                                        <a href="#!"
-                                                            class="text-dark fw-medium fs-15"><?= htmlspecialchars($icon['title']) ?></a>
-                                                        <p class="text-muted mb-0 mt-1 fs-13">
-                                                            <?= htmlspecialchars($icon['text']) ?>
-                                                        </p>
-                                                    </div>
+                                                <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center size_"
+                                                    style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($icon['icon']) ?>'); background-size: cover;">
+
                                                 </div>
+
                                             </td>
-                                            <td>$1000</td>
+
+
+
+
                                             <td>
-                                                <p class="mb-1 text-muted"><span class="text-dark fw-medium">Available</span>
-                                                </p>
-                                                <p class="mb-0 text-muted">-</p>
+                                                <?= htmlspecialchars($icon['text']) ?>
                                             </td>
-                                            <td>Real Estate</td>
+
+
                                             <td>
-                                                <span class="badge p-1 bg-light text-dark fs-12 me-1">
-                                                    <i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i>
-                                                    4.5
-                                                </span> 0 Reviews
+                                                <?= htmlspecialchars($icon['title']) ?>
                                             </td>
+
+
                                             <td>
-                                                <div class="d-flex gap-2">
-                                                    <a href="?delete_ad_icon=<?= intval($icon['id']) ?>"
-                                                        class="btn btn-soft-danger btn-sm"
-                                                        onclick="return confirm('Are you sure you want to delete this icon?');">
-                                                        <iconify-icon icon="solar:trash-bin-minimalistic-2-broken"
-                                                            class="align-middle fs-18"></iconify-icon>
-                                                    </a>
-                                                </div>
+
+                                                <a href="?delete_ad_icon=<?= intval($icon['id']) ?>"
+                                                    class="btn btn-soft-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this icon?');">
+                                                    <iconify-icon icon="solar:trash-bin-minimalistic-2-broken"
+                                                        class="align-middle fs-18"></iconify-icon>
+                                                </a>
                                             </td>
+
+
+
                                         </tr>
                                     <?php endwhile; ?>
                                 <?php endif; ?>
@@ -1380,11 +1314,11 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                             <label class="form-check-label" for="customCheck8"></label>
                                         </div>
                                     </th>
-                                    <th>Product Name &amp; Size</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th>Category</th>
-                                    <th>Rating</th>
+                                    <th>Product </th>
+                                    <th>Name</th>
+                                    <th>description</th>
+
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1401,31 +1335,14 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                                    style="background-image: url(/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>)">
-                                                </div>
-                                                <div>
-                                                    <a href="#!"
-                                                        class="text-dark fw-medium fs-15"><?= htmlspecialchars($row['title']) ?></a>
-                                                    <p class="text-muted mb-0 mt-1 fs-13"><span>Location: </span>
-                                                        <?= htmlspecialchars($row['description']) ?></p>
-                                                </div>
+                                            <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
+                                                style="background-image: url(/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>)">
                                             </div>
                                         </td>
-                                        <td>$1000</td>
-                                        <td>
-                                            <p class="mb-1 text-muted"><span class="text-dark fw-medium">Available</span>
-                                            </p>
-                                            <p class="mb-0 text-muted">-</p>
-                                        </td>
-                                        <td>Real Estate</td>
-                                        <td>
-                                            <span class="badge p-1 bg-light text-dark fs-12 me-1">
-                                                <i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i>
-                                                4.5
-                                            </span> 0 Reviews
-                                        </td>
+                                        <td><?= htmlspecialchars($row['title']) ?></td>
+
+                                        <td> <?= htmlspecialchars($row['description']) ?></td>
+
                                         <td>
                                             <div class="d-flex gap-2">
                                                 <a href="?delete_plan_and_room=<?= intval($row['id']) ?>"> <button
@@ -1471,11 +1388,10 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                             <label class="form-check-label" for="customCheck9"></label>
                                         </div>
                                     </th>
-                                    <th>Product Name &amp; Size</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th>Category</th>
-                                    <th>Rating</th>
+                                    <th>question</th>
+
+
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1490,35 +1406,11 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                     for="check-<?= intval($row['id']) ?>">&nbsp;</label>
                                             </div>
                                         </td>
-                                        <td>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                                    style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($row['image']) ?>'); background-size: cover;">
-                                                </div>
-                                                <div>
-                                                    <a href="#!"
-                                                        class="text-dark fw-medium fs-15"><?= htmlspecialchars($row['question']) ?></a>
-                                                    <p class="text-muted mb-0 mt-1 fs-13">
-                                                        <span>Location:
-                                                        </span><?= htmlspecialchars($row['location'] ?? 'N/A') ?>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>$<?= htmlspecialchars($row['price'] ?? '0') ?></td>
-                                        <td>
-                                            <p class="mb-1 text-muted">
-                                                <span class="text-dark fw-medium">Available</span>
-                                            </p>
-                                            <p class="mb-0 text-muted">-</p>
-                                        </td>
+
+
                                         <td><?= htmlspecialchars($row['category'] ?? 'Real Estate') ?></td>
-                                        <td>
-                                            <span class="badge p-1 bg-light text-dark fs-12 me-1">
-                                                <i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i>
-                                                <?= htmlspecialchars($row['rating'] ?? '4.5') ?>
-                                            </span> <?= htmlspecialchars($row['reviews'] ?? '0') ?> Reviews
-                                        </td>
+
+
                                         <td>
                                             <div class="d-flex gap-2">
                                                 <a href="?delete_question=<?= intval($row['id']) ?>"
@@ -1560,76 +1452,59 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                             <label class="form-check-label" for="customCheck10"></label>
                                         </div>
                                     </th>
-                                    <th>Product Name &amp; Size</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th>Category</th>
-                                    <th>Rating</th>
+                                    <th>Product </th>
+                                    <th>Name</th>
+                                    <th>description</th>
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr id="row-10">
                                     <?php while ($row = $services->fetch_assoc()): ?>
-                                        <div class="row align-items-center border rounded p-3 mb-3">
-                                            <div class="col-md-2 text-center mb-2 mb-md-0">
-                                                <img src="/Egy-Hills/uploads/<?= htmlspecialchars($row['icon']) ?>"
-                                                    width="60" class="img-thumbnail">
+
+                                        <td>
+                                            <div class="form-check ms-1">
+                                                <input type="checkbox" class="form-check-input" id="check-10">
+                                                <label class="form-check-label" for="check-10">&nbsp;</label>
                                             </div>
-                                            <div class="col-md-3">
-                                                <strong><?= htmlspecialchars($row['title']) ?></strong>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <p class="mb-0"><?= htmlspecialchars($row['description']) ?></p>
-                                            </div>
-                                            <div class="col-md-2 text-end">
-                                                <a href="?delete_service=<?= intval($row['id']) ?>"
-                                                    class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Are you sure you want to delete this item?')">🗑️
-                                                    Delete</a>
-                                            </div>
-                                        </div>
-                                    <?php endwhile; ?>
-                                    <td>
-                                        <div class="form-check ms-1">
-                                            <input type="checkbox" class="form-check-input" id="check-10">
-                                            <label class="form-check-label" for="check-10">&nbsp;</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-2">
+                                        </td>
+
+
+                                        <td>
                                             <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                                style="background-image: url(/Egy-Hills/uploads/1750726719_pexels-heyho-6908502.jpg)">
+                                                style="background-image: url(/Egy-Hills/uploads/<?= htmlspecialchars($row['icon']) ?>)">
                                             </div>
-                                            <div>
-                                                <a href="#!" class="text-dark fw-medium fs-15">Project Title</a>
-                                                <p class="text-muted mb-0 mt-1 fs-13"><span>Location: </span>Project
-                                                    Title</p>
+                                        </td>
+
+
+                                        <td>
+                                            <?= htmlspecialchars($row['title']) ?>
+                                        </td>
+
+                                        <td>
+                                            <?= htmlspecialchars($row['description']) ?>
+                                        </td>
+
+
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <a href="?delete_service=<?= intval($row['id']) ?>">
+                                                    <button class="btn btn-soft-danger btn-sm">
+                                                        <iconify-icon icon="solar:trash-bin-minimalistic-2-broken"
+                                                            class="align-middle fs-18"></iconify-icon>
+                                                    </button>
+
+                                                </a>
+
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>$1000</td>
-                                    <td>
-                                        <p class="mb-1 text-muted"><span class="text-dark fw-medium">Available</span>
-                                        </p>
-                                        <p class="mb-0 text-muted">-</p>
-                                    </td>
-                                    <td>Real Estate</td>
-                                    <td>
-                                        <span class="badge p-1 bg-light text-dark fs-12 me-1">
-                                            <i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i>
-                                            4.5
-                                        </span> 0 Reviews
-                                    </td>
-                                    <td>
-                                        <div class="d-flex gap-2">
-                                            <button onclick="deleteProject(10)" class="btn btn-soft-danger btn-sm">
-                                                <iconify-icon icon="solar:trash-bin-minimalistic-2-broken"
-                                                    class="align-middle fs-18"></iconify-icon>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+
+
+                                    <?php endwhile; ?>
+
+
+
                             </tbody>
                         </table>
                     </div>
@@ -1744,8 +1619,8 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                     placeholder="Enter Title" required>
                             </div>
                             <button type="submit" name="add_property_highlight" class="btn btn-primary">Add
-                                Property
-                                Highlight</button>
+                                Features list
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -1878,7 +1753,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                             <div class="mb-3">
                                 <textarea name="answer" placeholder="Answer" class="form-control" required></textarea>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" style="display: none;">
                                 <input type="file" name="image" class="form-control">
                             </div>
                             <button name="add_question" class="btn btn-primary">Add Q&A</button>
