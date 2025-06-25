@@ -367,25 +367,33 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="#sidebarInventory" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarInventory">
+                        <a class="nav-link menu-arrow" href="./requests.php">
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:box-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> Inventory </span>
+                            <span class="nav-text"> requests </span>
                         </a>
-                        <div class="collapse" id="sidebarInventory">
-                            <ul class="nav sub-navbar-nav">
 
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="inventory-warehouse.html">Warehouse</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="inventory-received-orders.html">Received Orders</a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
+
+
+
+                    <li>
+                        <a href="./add_service.php" data-target="share">
+                            <i class="uil uil-share"></i>
+                            <span class="link-name">Add Service</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./admin_blocks.php" data-target="content">
+                            <i class="uil uil-files-landscapes"></i>
+                            <span class="link-name">Payments</span>
+                        </a>
+                    </li>
+
+
+
 
                     <li class="nav-item">
                         <a class="nav-link menu-arrow" href="#sidebarOrders" data-bs-toggle="collapse" role="button"
@@ -484,7 +492,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="settings.html">
+                        <a class="nav-link" href="./logout.php">
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:settings-bold-duotone"></iconify-icon>
                             </span>
@@ -2154,33 +2162,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
 
 
-<li>
-    <a href="./add_service.php" data-target="share">
-        <i class="uil uil-share"></i>
-        <span class="link-name">Add Service</span>
-    </a>
-</li>
-
-<li>
-    <a href="./admin_blocks.php" data-target="content">
-        <i class="uil uil-files-landscapes"></i>
-        <span class="link-name">Payments</span>
-    </a>
-</li>
-<li>
-    <a href="./requests.php" data-target="analytics">
-        <i class="uil uil-chart"></i>
-        <span class="link-name">requests</span>
-    </a>
-</li>
-
-
-<li>
-    <a href="./logout.php">
-        <i class="uil uil-signout"></i>
-        <span class="link-name">Logout</span>
-    </a>
-</li>
 
 <button class="xyxbtn123" data-id="box1">Open Box 1</button>
 <button class="xyxbtn123" data-id="box2">Open Box 2</button>
