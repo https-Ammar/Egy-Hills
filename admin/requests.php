@@ -1,5 +1,11 @@
 <?php
 include 'db.php';
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
 
 function safe($value)
 {
@@ -8,7 +14,6 @@ function safe($value)
 
 if (isset($_GET['action']) && isset($_GET['id'])) {
     $id = intval($_GET['id']);
-
     if ($_GET['action'] === 'accept') {
         $status = 'accepted';
         $stmt = $conn->prepare("UPDATE visitors SET status = ? WHERE id = ?");
@@ -45,6 +50,7 @@ $result = $conn->query("
 ") or die("Error fetching visitors: " . $conn->error);
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,6 +60,7 @@ $result = $conn->query("
     <title>Reservation Requests Dashboard</title>
     <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <script src="assets/js/config.js"></script>
     <style>
         .status-accepted {
@@ -71,9 +78,10 @@ $result = $conn->query("
             font-weight: bold;
         }
     </style>
+    <script src="assets/js/config.js"></script>
 </head>
 
-<body class="bg-light mt-5">
+<body class=" mt-5">
     <div class="page-content_">
         <div class="container-fluid">
             <div class="row">

@@ -199,7 +199,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark" data-menu-color="dark">
 
 <head>
     <!-- Title Meta -->
@@ -320,50 +320,67 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:t-shirt-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> Products </span>
+                            <span class="nav-text"> Home </span>
                         </a>
-                        <div class="collapse" id="sidebarProducts">
+                        <div class="collapse show" id="sidebarProducts">
                             <ul class="nav sub-navbar-nav">
                                 <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="product-list.html">List</a>
+                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box3">All Product List
+                                    </a>
                                 </li>
                                 <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="product-grid.html">Grid</a>
+                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box4">Main Slider
+                                    </a>
                                 </li>
                                 <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="product-details.html">Details</a>
+                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box5">About Cards
+                                    </a>
                                 </li>
                                 <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="product-edit.html">Edit</a>
+                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box6">Property Highlights
+                                    </a>
                                 </li>
                                 <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="product-add.html">Create</a>
+                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box7">Features list
+                                    </a>
+                                </li>
+                                <li class="sub-nav-item">
+                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box8">Videos
+                                    </a>
+                                </li>
+                                <li class="sub-nav-item">
+                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box9">Advertisement
+
+                                    </a>
+                                </li>
+                                <li class="sub-nav-item">
+                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box10">Plan Room
+
+                                    </a>
+                                </li>
+                                <li class="sub-nav-item">
+                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box11">Why Choose Us
+
+                                    </a>
+                                </li>
+                                <li class="sub-nav-item">
+                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box12">Services Card
+
+
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="#sidebarCategory" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarCategory">
+                        <a class="nav-link menu-arrow" href="./add_service.php">
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:clipboard-list-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> Category </span>
+                            <span class="nav-text"> Add Service </span>
                         </a>
-                        <div class="collapse" id="sidebarCategory">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="category-list.html">List</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="category-edit.html">Edit</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="category-add.html">Create</a>
-                                </li>
-                            </ul>
-                        </div>
+
                     </li>
 
                     <li class="nav-item">
@@ -378,117 +395,30 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
 
 
-                    <li>
-                        <a href="./add_service.php" data-target="share">
-                            <i class="uil uil-share"></i>
-                            <span class="link-name">Add Service</span>
-                        </a>
-                    </li>
 
-                    <li>
-                        <a href="./admin_blocks.php" data-target="content">
-                            <i class="uil uil-files-landscapes"></i>
-                            <span class="link-name">Payments</span>
-                        </a>
-                    </li>
 
 
 
 
                     <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="#sidebarOrders" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarOrders">
-                            <span class="nav-icon">
-                                <iconify-icon icon="solar:bag-smile-bold-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Orders </span>
-                        </a>
-                        <div class="collapse" id="sidebarOrders">
-                            <ul class="nav sub-navbar-nav">
-
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="orders-list.html">List</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="order-detail.html">Details</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="order-cart.html">Cart</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="order-checkout.html">Check Out</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="#sidebarPurchases" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarPurchases">
+                        <a class="nav-link menu-arrow" href="./admin_blocks.php">
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:card-send-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> Purchases </span>
+                            <span class="nav-text"> Payments </span>
                         </a>
-                        <div class="collapse" id="sidebarPurchases">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="purchase-list.html">List</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="purchase-order.html">Order</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="purchase-returns.html">Return</a>
-                                </li>
-                            </ul>
-                        </div>
+
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="#sidebarAttributes" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarAttributes">
-                            <span class="nav-icon">
-                                <iconify-icon icon="solar:confetti-minimalistic-bold-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Attributes </span>
-                        </a>
-                        <div class="collapse" id="sidebarAttributes">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="attributes-list.html">List</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="attributes-edit.html">Edit</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="attributes-add.html">Create</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="#sidebarInvoice" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarInvoice">
+                        <a class="nav-link menu-arrow" href="./about_manager.php">
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:bill-list-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> Invoices </span>
+                            <span class="nav-text"> About </span>
                         </a>
-                        <div class="collapse" id="sidebarInvoice">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="invoice-list.html">List</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="invoice-details.html">Details</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="invoice-add.html">Create</a>
-                                </li>
-                            </ul>
-                        </div>
+
                     </li>
 
                     <li class="nav-item">
@@ -496,7 +426,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:settings-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> Settings </span>
+                            <span class="nav-text"> logout </span>
                         </a>
                     </li>
 
@@ -749,7 +679,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 <!-- king mero -->
 
 
-                <div class="row">
+                <div class="row ptn_box_open" id="box3">
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center gap-1">
@@ -773,11 +703,10 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                         <label class="form-check-label" for="customCheck1"></label>
                                                     </div>
                                                 </th>
-                                                <th>Product Name &amp; Size</th>
+                                                <th>&amp; Product </th>
                                                 <th>Price</th>
-                                                <th>Stock</th>
+
                                                 <th>Category</th>
-                                                <th>Rating</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -815,20 +744,10 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td>$<?= htmlspecialchars($row['price']) ?></td>
-                                                        <td>
-                                                            <p class="mb-1 text-muted"><span
-                                                                    class="text-dark fw-medium">Available</span></p>
-                                                            <p class="mb-0 text-muted">-</p>
-                                                        </td>
+                                                        <td><?= htmlspecialchars($row['price']) ?></td>
+
                                                         <td>Real Estate</td>
-                                                        <td>
-                                                            <span class="badge p-1 bg-light text-dark fs-12 me-1">
-                                                                <i
-                                                                    class="bx bxs-star align-text-top fs-14 text-warning me-1"></i>
-                                                                4.5
-                                                            </span> 0 Reviews
-                                                        </td>
+
                                                         <td>
                                                             <div class="d-flex gap-2">
                                                                 <button onclick="deleteProject(<?= $row['id'] ?>)"
@@ -860,38 +779,15 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                     </div>
 
 
-                    <!-- king mero -->
-                    <!-- king mero -->
-                    <!-- king mero -->
-                    <!-- king mero -->
-                    <!-- king mero -->
-                    <!-- king mero -->
-                    <!-- king mero -->
-                    <!-- king mero -->
-                    <!-- king mero -->
-
-
-
-                    <!-- king mero -->
-                    <!-- king mero -->
-                    <!-- king mero -->
-
-                    <!-- king mero -->
-                    <!-- king mero -->
-                    <!-- king mero -->
-                    <!-- king mero -->
-                    <!-- king mero -->
-                    <!-- king mero -->
-
 
                 </div>
 
                 <!-- king mero -->
                 <!-- king mero -->
-                <div class="row">
+                <div class="row ">
 
                     <!-- الكارد 1 -->
-                    <div class="col-xl-12">
+                    <div class="col-xl-12 ptn_box_open" id="box4">
                         <div class="card mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center gap-1">
                                 <h4 class="card-title flex-grow-1">Main Slider
@@ -980,7 +876,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 </div>
 
                 <!-- الكارد 2 -->
-                <div class="col-xl-12">
+                <div class="col-xl-12 ptn_box_open" id="box5">
                     <div class="card mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center gap-1">
                             <h4 class="card-title flex-grow-1">About Cards</h4>
@@ -1065,7 +961,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
 
             <!-- الكارد 3 -->
-            <div class="col-xl-12">
+            <div class="col-xl-12 ptn_box_open" id="box6">
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center gap-1">
                         <h4 class="card-title flex-grow-1">Property Highlights</h4>
@@ -1149,7 +1045,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
             <!-- الرابع -->
             <!-- العنصر 4 -->
-            <div class="card mb-4">
+            <div class="card mb-4 ptn_box_open" id="box7">
                 <div class="card-header d-flex justify-content-between align-items-center gap-1">
                     <h4 class="card-title flex-grow-1">Features list</h4>
                     <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal"
@@ -1246,7 +1142,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
 
             <!-- العنصر 5 -->
-            <div class="card mb-4">
+            <div class="card mb-4 ptn_box_open" id="box8">
                 <div class="card-header d-flex justify-content-between align-items-center gap-1">
                     <h4 class="card-title flex-grow-1">Videos</h4>
                     <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal"
@@ -1323,7 +1219,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             <!-- موجود بالفعل قبل كده عندك -->
 
             <!-- العنصر 7 -->
-            <div class="card mb-4">
+            <div class="card mb-4 ptn_box_open" id="box9">
                 <div class="card-header d-flex justify-content-between align-items-center gap-1">
                     <h4 class="card-title flex-grow-1">Advertisement</h4>
                     <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal"
@@ -1465,7 +1361,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
 
             <!-- العنصر 8 -->
-            <div class="card mb-4">
+            <div class="card mb-4 ptn_box_open" id="box10">
                 <div class="card-header d-flex justify-content-between align-items-center gap-1">
                     <h4 class="card-title flex-grow-1">Plan Room</h4>
                     <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal"
@@ -1556,7 +1452,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
 
             <!-- العنصر 9 -->
-            <div class="card mb-4">
+            <div class="card mb-4 ptn_box_open" id="box11">
                 <div class="card-header d-flex justify-content-between align-items-center gap-1">
                     <h4 class="card-title flex-grow-1">Why Choose Us</h4>
                     <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal"
@@ -1643,7 +1539,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
 
             <!-- العنصر 10 -->
-            <div class="card mb-4">
+            <div class="card mb-4 ptn_box_open" id="box12">
                 <div class="card-header d-flex justify-content-between align-items-center gap-1">
                     <h4 class="card-title flex-grow-1">Services Card
                     </h4>
@@ -1740,81 +1636,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 </div>
             </div>
 
-            <!-- العنصر 11 -->
-            <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center gap-1">
-                    <h4 class="card-title flex-grow-1">Main Slider</h4>
-                    <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#addProductModal-11">
-                        Add Product
-                    </a>
-                </div>
-                <div>
-                    <div class="table-responsive">
-                        <table class="table align-middle mb-0 table-hover table-centered">
-                            <thead class="bg-light-subtle">
-                                <tr>
-                                    <th style="width: 20px;">
-                                        <div class="form-check ms-1">
-                                            <input type="checkbox" class="form-check-input" id="customCheck11">
-                                            <label class="form-check-label" for="customCheck11"></label>
-                                        </div>
-                                    </th>
-                                    <th>Product Name &amp; Size</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th>Category</th>
-                                    <th>Rating</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr id="row-11">
-                                    <td>
-                                        <div class="form-check ms-1">
-                                            <input type="checkbox" class="form-check-input" id="check-11">
-                                            <label class="form-check-label" for="check-11">&nbsp;</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                                style="background-image: url(/Egy-Hills/uploads/1750726719_pexels-heyho-6908502.jpg)">
-                                            </div>
-                                            <div>
-                                                <a href="#!" class="text-dark fw-medium fs-15">Project Title</a>
-                                                <p class="text-muted mb-0 mt-1 fs-13"><span>Location: </span>Project
-                                                    Title</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>$1000</td>
-                                    <td>
-                                        <p class="mb-1 text-muted"><span class="text-dark fw-medium">Available</span>
-                                        </p>
-                                        <p class="mb-0 text-muted">-</p>
-                                    </td>
-                                    <td>Real Estate</td>
-                                    <td>
-                                        <span class="badge p-1 bg-light text-dark fs-12 me-1">
-                                            <i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i>
-                                            4.5
-                                        </span> 0 Reviews
-                                    </td>
-                                    <td>
-                                        <div class="d-flex gap-2">
-                                            <button onclick="deleteProject(11)" class="btn btn-soft-danger btn-sm">
-                                                <iconify-icon icon="solar:trash-bin-minimalistic-2-broken"
-                                                    class="align-middle fs-18"></iconify-icon>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
 
 
@@ -2096,22 +1917,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
         </div>
 
-        <!-- Modal 11 -->
-        <div class="modal fade" id="addProductModal-11" tabindex="-1" aria-labelledby="addProductModalLabel-11"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Product - Slider 11</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- محتوى المودال هنا -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
 
     </div>
@@ -2136,123 +1941,100 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
     <!-- ==================================================== -->
 
     </div>
-    <!-- END Wrapper -->
+    <script>
+        // Delete a project by ID
+        function deleteProject(id) {
+            if (!confirm("Are you sure you want to delete this project?")) return;
 
-    <!-- Vendor Javascript (Require in all Page) -->
+            fetch('delete_project.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'id=' + id
+            })
+                .then(response => response.text())
+                .then(data => {
+                    if (data.trim() === 'success') {
+                        const card = document.getElementById('card-' + id);
+                        if (card) card.remove();
+                    } else {
+                        alert('❌ An error occurred while deleting.');
+                    }
+                });
+        }
+
+        // Toggle the edit form visibility
+        function toggleEditForm(id) {
+            const form = document.getElementById('edit-form-' + id);
+            if (form) form.classList.toggle('d-none');
+        }
+
+        // Update a project
+        function updateProject(id) {
+            const title = document.getElementById('title-' + id).value;
+            const location = document.getElementById('location-' + id).value;
+            const price = document.getElementById('price-' + id).value;
+
+            fetch('update_project.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `id=${id}&title=${encodeURIComponent(title)}&location=${encodeURIComponent(location)}&price=${encodeURIComponent(price)}`
+            })
+                .then(response => response.text())
+                .then(data => {
+                    if (data.trim() === 'success') {
+                        alert('✅ Changes saved successfully.');
+                        location.reload();
+                    } else {
+                        alert('❌ An error occurred while updating.');
+                    }
+                });
+        }
+    </script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            // Restore previously opened content box
+            const savedBoxId = localStorage.getItem('selectedBoxId');
+            if (savedBoxId) {
+                document.querySelectorAll('.ptn_box_open').forEach(div => {
+                    div.style.display = (div.id === savedBoxId) ? 'block' : 'none';
+                });
+            }
+
+            // Button click to toggle box visibility
+            document.querySelectorAll('.xyxbtn123').forEach(button => {
+                button.onclick = () => {
+                    const id = button.dataset.id;
+                    localStorage.setItem('selectedBoxId', id);
+
+                    document.querySelectorAll('.ptn_box_open').forEach(div => {
+                        div.style.display = (div.id === id && div.style.display !== 'block') ? 'block' : 'none';
+                    });
+                };
+            });
+
+            // Sidebar toggle handling
+            const body = document.querySelector("body");
+            const sidebar = body.querySelector("nav");
+            const toggleBtn = body.querySelector(".sidebar-toggle");
+
+            const sidebarStatus = localStorage.getItem("status");
+            if (sidebarStatus === "close") {
+                sidebar.classList.add("close");
+            }
+
+            toggleBtn.addEventListener("click", () => {
+                sidebar.classList.toggle("close");
+                localStorage.setItem("status", sidebar.classList.contains("close") ? "close" : "open");
+            });
+        });
+    </script>
+
     <script src="assets/js/vendor.js"></script>
 
-    <!-- App Javascript (Require in all Page) -->
-    <script src="assets/js/app.js"></script>
 
-    <!-- Vector Map Js -->
-    <script src="assets/vendor/jsvectormap/js/jsvectormap.min.js"></script>
-    <script src="assets/vendor/jsvectormap/maps/world-merc.js"></script>
-    <script src="assets/vendor/jsvectormap/maps/world.js"></script>
-
-    <!-- Dashboard Js -->
     <script src="assets/js/pages/dashboard.js"></script>
 
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-<button class="xyxbtn123" data-id="box1">Open Box 1</button>
-<button class="xyxbtn123" data-id="box2">Open Box 2</button>
-
-<div class="ptn_box_open" id="box1">This is Box 1</div>
-<div class="ptn_box_open" id="box2">This is Box 2</div>
-
-<script>
-    function deleteProject(id) {
-        if (!confirm("هل أنت متأكد من حذف هذا المشروع؟")) return;
-        fetch('delete_project.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: 'id=' + id
-        })
-            .then(response => response.text())
-            .then(data => {
-                if (data.trim() === 'success') {
-                    document.getElementById('card-' + id).remove();
-                } else {
-                    alert('❌ حدث خطأ أثناء الحذف');
-                }
-            });
-    }
-
-    function toggleEditForm(id) {
-        const form = document.getElementById('edit-form-' + id);
-        form.classList.toggle('d-none');
-    }
-
-    function updateProject(id) {
-        const title = document.getElementById('title-' + id).value;
-        const location = document.getElementById('location-' + id).value;
-        const price = document.getElementById('price-' + id).value;
-
-        fetch('update_project.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `id=${id}&title=${encodeURIComponent(title)}&location=${encodeURIComponent(location)}&price=${encodeURIComponent(price)}`
-        })
-            .then(response => response.text())
-            .then(data => {
-                if (data.trim() === 'success') {
-                    alert('✅ تم حفظ التعديلات');
-                    location.reload();
-                } else {
-                    alert('❌ حدث خطأ أثناء التعديل');
-                }
-            });
-    }
-</script>
-
-
-
-
-
-<script>
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedId = localStorage.getItem('selectedBoxId');
-        if (savedId) {
-            document.querySelectorAll('.ptn_box_open').forEach(div => {
-                div.style.display = (div.id === savedId) ? 'block' : 'none';
-            });
-        }
-
-        document.querySelectorAll('.xyxbtn123').forEach(btn => {
-            btn.onclick = () => {
-                const id = btn.dataset.id;
-                localStorage.setItem('selectedBoxId', id);
-                document.querySelectorAll('.ptn_box_open').forEach(div => {
-                    div.style.display = (div.id === id && div.style.display !== 'block') ? 'block' : 'none';
-                });
-            };
-        });
-
-        const body = document.querySelector("body"),
-            sidebar = body.querySelector("nav"),
-            sidebarToggle = body.querySelector(".sidebar-toggle");
-
-        let getStatus = localStorage.getItem("status");
-        if (getStatus === "close") {
-            sidebar.classList.add("close");
-        }
-
-        sidebarToggle.addEventListener("click", () => {
-            sidebar.classList.toggle("close");
-            if (sidebar.classList.contains("close")) {
-                localStorage.setItem("status", "close");
-            } else {
-                localStorage.setItem("status", "open");
-            }
-        });
-    });
-</script>

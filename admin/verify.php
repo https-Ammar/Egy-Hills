@@ -27,7 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8" />
     <title>Verify Code</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/css/dashboard.css">
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <script src="assets/js/config.js"></script>
 </head>
 
 <body class="d-flex align-items-center justify-content-center">
@@ -41,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="mb-3">
                 <input type="text" class="form-control" name="code" placeholder="Enter code" required>
             </div>
-            <button type="submit" class="btn btn-success w-100">Verify</button>
+            <button type="submit" class="btn btn-primary w-100 mb-3">Verify</button>
         </form>
     </div>
 </body>

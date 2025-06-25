@@ -2,24 +2,51 @@
 include 'db.php';
 session_start();
 
-$success = "";
-$error = "";
+if (isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
 
-if (isset($_POST['register'])) {
-    $username = $conn->real_escape_string(trim($_POST['username']));
-    $email = $conn->real_escape_string(trim($_POST['email']));
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
 
-    // تأكد أن الإيميل أو اسم المستخدم غير مسجل من قبل
-    $check = $conn->query("SELECT id FROM users WHERE username = '$username' OR email = '$email'");
-    if ($check->num_rows > 0) {
-        $error = "Username or Email already exists.";
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        header("Location: register.php?error=Invalid email format");
+        exit();
+    }
+
+    if (strlen($password) < 6) {
+        header("Location: register.php?error=Password must be at least 6 characters");
+        exit();
+    }
+
+    $stmt = $conn->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
+    $stmt->bind_param("ss", $username, $email);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+        $stmt->close();
+        header("Location: register.php?error=Username or Email already exists");
+        exit();
+    }
+
+    $stmt->close();
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $insert = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+    $insert->bind_param("sss", $username, $email, $hashedPassword);
+
+    if ($insert->execute()) {
+        $insert->close();
+        header("Location: login.php");
+        exit();
     } else {
-        if ($conn->query("INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')")) {
-            $success = "Account created successfully. <a href='login.php'>Login here</a>";
-        } else {
-            $error = "Error creating account. Please try again.";
-        }
+        $insert->close();
+        header("Location: register.php?error=Error creating account");
+        exit();
     }
 }
 ?>
@@ -29,43 +56,43 @@ if (isset($_POST['register'])) {
 
 <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Neo - Register</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="./assets/css/dashboard.css">
+    <title>Register</title>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/vendor.min.css" />
+    <link rel="stylesheet" href="assets/css/icons.min.css" />
+    <link rel="stylesheet" href="assets/css/app.min.css" />
+    <script src="assets/js/config.js"></script>
 </head>
 
-<body class="d-flex align-items-center justify-content-center">
-    <div class=" w-100" style="max-width: 400px;">
-        <h3 class="mb-3 text-success">Neo</h3>
-        <p class="mb-4">Create a new account</p>
+<body class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="w-100" style="max-width: 400px;">
+        <h3 class="mb-3">Egy-Hills</h3>
+        <p class="mb-4">Welcome to Neo<br>Please Sign-in to your account.</p>
 
-        <?php if (!empty($error)): ?>
-            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-        <?php endif; ?>
-        <?php if (!empty($success)): ?>
-            <div class="alert alert-success"><?= $success ?></div>
+        <?php if (isset($_GET['error'])): ?>
+            <div class="alert alert-danger"><?= htmlspecialchars($_GET['error']) ?></div>
         <?php endif; ?>
 
         <form method="post" action="">
             <div class="mb-3">
-                <input name="username" class="form-control" placeholder="Username" required>
+                <input type="text" name="username" class="form-control" placeholder="Username" required
+                    autocomplete="username">
             </div>
             <div class="mb-3">
-                <input name="email" type="email" class="form-control" placeholder="Email address" required>
+                <input name="email" type="email" class="form-control" placeholder="Email address" required
+                    autocomplete="email">
             </div>
             <div class="mb-3">
-                <input name="password" type="password" class="form-control" placeholder="Password" required>
+                <input name="password" type="password" class="form-control" placeholder="Password" required
+                    autocomplete="new-password">
             </div>
             <button name="register" type="submit" class="btn btn-primary w-100 mb-3">Register</button>
         </form>
 
         <p class="mt-3">Already have an account? <a href="login.php">Sign In</a></p>
     </div>
-    <!-- Bootstrap Bundle JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

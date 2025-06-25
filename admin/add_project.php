@@ -1,16 +1,16 @@
 <?php
 include 'db.php';
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
 
 function uploadFile($file)
 {
     if (isset($file) && $file['error'] === UPLOAD_ERR_OK) {
-        $allowedTypes = [
-            'image/jpeg',
-            'image/png',
-            'image/gif',
-            'image/svg+xml',
-            'video/mp4'
-        ];
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'video/mp4'];
         if (!in_array($file['type'], $allowedTypes)) {
             die("Unsupported file type: " . htmlspecialchars($file['type']));
         }
@@ -18,7 +18,7 @@ function uploadFile($file)
             mkdir('uploads', 0755, true);
         }
         $name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '', basename($file['name']));
-        $target = '/Applications/MAMP/htdocs/Egy-Hills/uploads/' . $name;
+        $target = __DIR__ . '/uploads/' . $name;
         if (move_uploaded_file($file['tmp_name'], $target)) {
             return $name;
         } else {
@@ -129,6 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

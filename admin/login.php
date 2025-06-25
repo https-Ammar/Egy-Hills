@@ -2,82 +2,87 @@
 session_start();
 include 'db.php';
 require __DIR__ . '/vendor/autoload.php';
+require 'config.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+$error = null;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email']);
+    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
     $password = trim($_POST['password']);
 
-    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->store_result();
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($password)) {
+        $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
 
-    if ($stmt->num_rows === 1) {
-        $stmt->bind_result($id, $username, $hashed_password);
-        $stmt->fetch();
+        if ($stmt->num_rows === 1) {
+            $stmt->bind_result($id, $username, $hashed_password);
+            $stmt->fetch();
 
-        if (password_verify($password, $hashed_password)) {
-            $code = rand(100000, 999999);
-            $_SESSION['verify_code'] = $code;
-            $_SESSION['verify_email'] = $email;
-            $_SESSION['temp_user_id'] = $id;
-            $_SESSION['temp_username'] = $username;
+            if (password_verify($password, $hashed_password)) {
+                $code = random_int(100000, 999999);
+                $_SESSION['verify_code'] = $code;
+                $_SESSION['verify_email'] = $email;
+                $_SESSION['temp_user_id'] = $id;
+                $_SESSION['temp_username'] = $username;
 
-            $mail = new PHPMailer(true);
-            try {
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'ammar132004@gmail.com';
-                $mail->Password = 'okcejzwtuepbqgyq';
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'ammar132004@gmail.com';
+                    $mail->Password = 'okcejzwtuepbqgyq';
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
 
-                $mail->setFrom('ammar132004@gmail.com', 'Neo');
-                $mail->addAddress($email);
+                    $mail->setFrom(MAIL_FROM, MAIL_FROM_NAME);
+                    $mail->addAddress($email);
+                    $mail->Subject = 'Your verification code';
+                    $mail->Body = "Your verification code is: $code";
+                    $mail->send();
 
-                $mail->Subject = 'Your verification code';
-                $mail->Body = "Your verification code is: $code";
-
-                $mail->send();
-                header("Location: verify.php");
-                exit();
-            } catch (Exception $e) {
-                $error = "Verification email could not be sent.";
+                    header("Location: verify.php");
+                    exit();
+                } catch (Exception $e) {
+                    $error = "Verification email could not be sent.";
+                }
+            } else {
+                $error = "Invalid password.";
             }
         } else {
-            $error = "Wrong password.";
+            $error = "Email not found.";
         }
+        $stmt->close();
     } else {
-        $error = "Email not found.";
+        $error = "Invalid email or password.";
     }
-
-    $stmt->close();
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Neo - Login</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Login</title>
     <link rel="stylesheet" href="./assets/css/dashboard.css">
-
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link href="assets/css/vendor.min.css" rel="stylesheet" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" />
+    <link href="assets/css/app.min.css" rel="stylesheet" />
+    <script src="assets/js/config.js"></script>
 </head>
 
 <body class="d-flex align-items-center justify-content-center">
-    <div class=" w-100" style="max-width: 400px;">
-        <h3 class="mb-3 text-success">Neo</h3>
-        <p class="mb-4">Welcome to Neo<br>Please Sign-in to your account.</p>
-        <?php if (isset($error)): ?>
+    <div class="w-100" style="max-width: 400px;">
+        <h3 class="mb-3">Egy-Hills</h3>
+        <p class="mb-4">Welcome to Neo<br>Please sign in to your account.</p>
+        <?php if ($error): ?>
             <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
         <form method="POST" action="">
@@ -89,16 +94,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="form-check text-start mb-3">
                 <input class="form-check-input" type="checkbox" id="checkMeOut">
-                <label class="form-check-label" for="checkMeOut">
-                    Check me out
-                </label>
+                <label class="form-check-label" for="checkMeOut">Remember me</label>
             </div>
             <button type="submit" class="btn btn-primary w-100 mb-3">Sign In</button>
         </form>
         <p class="mt-3">Not registered? <a href="register.php">Create an account</a></p>
     </div>
-
-    <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

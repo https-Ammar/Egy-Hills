@@ -17,8 +17,9 @@ if (!$project) {
     die('Project not found.');
 }
 
+// جلب بيانات info_blocks كاملة
 $info_blocks = [];
-$result = $conn->query("SELECT title, text, image FROM info_blocks");
+$result = $conn->query("SELECT * FROM info_blocks ORDER BY id DESC");
 while ($row = $result->fetch_assoc()) {
     $info_blocks[] = $row;
 }
@@ -97,6 +98,38 @@ if (isset($_GET['status'])) {
     }
 }
 ?>
+
+<!-- ✅ عرض معلومات البلوكات -->
+<div class="container my-4">
+    <h3 class="mb-3">Info Blocks</h3>
+    <div class="row">
+        <?php foreach ($info_blocks as $block): ?>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <?php if (!empty($block['image']) && file_exists("uploads/{$block['image']}")): ?>
+                        <img src="uploads/<?= htmlspecialchars($block['image']) ?>" class="card-img-top" alt="Block Image">
+                    <?php endif; ?>
+                    <div class="card-body">
+                        <h5 class="card-title"><?= htmlspecialchars($block['username']) ?> -
+                            <?= htmlspecialchars($block['phone']) ?></h5>
+                        <p class="mb-1"><strong>Amount:</strong> <?= htmlspecialchars(number_format($block['amount'], 2)) ?>
+                        </p>
+                        <p class="mb-1"><strong>Payment Method:</strong> <?= htmlspecialchars($block['payment_method']) ?>
+                        </p>
+                        <p class="mb-2">
+                            <strong>Description:</strong><br><?= nl2br(htmlspecialchars($block['description'])) ?></p>
+                        <?php if (!empty($block['background_image']) && file_exists("uploads/{$block['background_image']}")): ?>
+                            <img src="uploads/<?= htmlspecialchars($block['background_image']) ?>"
+                                class="img-fluid mt-2 rounded" alt="Background Image">
+                        <?php endif; ?>
+                        <small class="text-muted d-block mt-2">Added at: <?= $block['created_at'] ?></small>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -1,73 +1,65 @@
 <?php
 include 'db.php';
 
-// ✅ Allow project ID to be optional
 $project_id = null;
-$project = ['title' => 'Booking']; // ✅ Default title
+$project = ['title' => 'Booking'];
 $blocks = [];
 
+// ✅ Get project details
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $project_id = intval($_GET['id']);
 
-    // Fetch project title
     $stmt = $conn->prepare("SELECT title FROM projects WHERE id = ?");
     $stmt->bind_param("i", $project_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    $fetched = $result->fetch_assoc();
-    $stmt->close();
+    if ($row = $result->fetch_assoc()) {
+        $project = $row;
 
-    if ($fetched) {
-        $project = $fetched;
-
-        // Fetch project-specific blocks
         $stmt = $conn->prepare("SELECT block_title, block_text, block_image FROM project_blocks WHERE project_id = ?");
         $stmt->bind_param("i", $project_id);
         $stmt->execute();
-        $result = $stmt->get_result();
-        while ($row = $result->fetch_assoc()) {
-            $blocks[] = $row;
+        $block_result = $stmt->get_result();
+        while ($block = $block_result->fetch_assoc()) {
+            $blocks[] = $block;
         }
-        $stmt->close();
     }
+    $stmt->close();
 }
 
-// ✅ Fetch general info blocks
+// ✅ تعديل الاستعلام للحصول على كل الأعمدة المطلوبة
 $info_blocks = [];
-$info_query = $conn->query("SELECT title, text, image FROM info_blocks");
+$info_query = $conn->query("SELECT username, phone, amount, payment_method, description, image, background_image, created_at FROM info_blocks");
 while ($row = $info_query->fetch_assoc()) {
     $info_blocks[] = $row;
 }
 
-// ✅ Handle booking or inquiry
+// ✅ معالجة نموذج الحجز
 $booking_message = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
     $type = $_POST['booking_type'] ?? 'inquiry';
-    $client_name = trim($_POST['client_name']);
-    $client_phone = trim($_POST['client_phone']);
+    $client_name = trim($_POST['client_name'] ?? '');
+    $client_phone = trim($_POST['client_phone'] ?? '');
 
     if ($type === 'inquiry') {
         if ($client_name && $client_phone) {
             $stmt = $conn->prepare("INSERT INTO visitors (project_id, name, phone, status, created_at) VALUES (?, ?, ?, 'inquiry', NOW())");
             $stmt->bind_param("iss", $project_id, $client_name, $client_phone);
-            if ($stmt->execute()) {
-                $booking_message = "✅ Inquiry sent successfully!";
-            } else {
-                $booking_message = "❌ Error sending inquiry.";
-            }
+            $booking_message = $stmt->execute() ? "✅ Inquiry sent successfully!" : "❌ Error sending inquiry.";
             $stmt->close();
         } else {
             $booking_message = "❌ Please enter name and phone number.";
         }
     } elseif ($type === 'visit') {
-        $visit_date = trim($_POST['visit_date']);
-        $visit_time = trim($_POST['visit_time']);
-        $amount = floatval($_POST['amount']);
+        $visit_date = trim($_POST['visit_date'] ?? '');
+        $visit_time = trim($_POST['visit_time'] ?? '');
+        $amount = floatval($_POST['amount'] ?? 0);
         $receipt = null;
 
         if (isset($_FILES['receipt']) && $_FILES['receipt']['error'] === UPLOAD_ERR_OK) {
-            $allowed = ['jpg', 'jpeg', 'png', 'pdf'];
             $ext = strtolower(pathinfo($_FILES['receipt']['name'], PATHINFO_EXTENSION));
+            $allowed = ['jpg', 'jpeg', 'png', 'pdf'];
             if (in_array($ext, $allowed)) {
                 $newName = time() . '_' . basename($_FILES['receipt']['name']);
                 move_uploaded_file($_FILES['receipt']['tmp_name'], 'uploads/' . $newName);
@@ -77,22 +69,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
             }
         }
 
-        if ($client_name && $client_phone && $visit_date && $visit_time && $amount) {
+        if ($client_name && $client_phone && $visit_date && $visit_time && $amount && !$booking_message) {
             $stmt = $conn->prepare("INSERT INTO visitors (project_id, name, phone, visit_date, visit_time, amount, payment_receipt, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, 'pending', NOW())");
             $stmt->bind_param("issssds", $project_id, $client_name, $client_phone, $visit_date, $visit_time, $amount, $receipt);
-            if ($stmt->execute()) {
-                $booking_message = "✅ Visit request sent successfully!";
-            } else {
-                $booking_message = "❌ Error sending visit request.";
-            }
+            $booking_message = $stmt->execute() ? "✅ Visit request sent successfully!" : "❌ Error sending visit request.";
             $stmt->close();
         } else {
-            $booking_message = "❌ Please fill in all required fields for the visit.";
+            if (!$booking_message) {
+                $booking_message = "❌ Please fill in all required fields for the visit.";
+            }
         }
     }
 }
 ?>
 
+<!-- ✅ عرض معلومات البلوكات -->
+<div class="container my-4">
+    <h3 class="mb-3">Info Blocks</h3>
+    <div class="row">
+        <?php foreach ($info_blocks as $block): ?>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <?php if (!empty($block['image']) && file_exists("uploads/{$block['image']}")): ?>
+                        <img src="uploads/<?= htmlspecialchars($block['image']) ?>" class="card-img-top" alt="Block Image">
+                    <?php endif; ?>
+                    <div class="card-body">
+                        <h5 class="card-title"><?= htmlspecialchars($block['username']) ?> -
+                            <?= htmlspecialchars($block['phone']) ?></h5>
+                        <p class="mb-1"><strong>Amount:</strong> <?= number_format($block['amount'], 2) ?></p>
+                        <p class="mb-1"><strong>Payment Method:</strong> <?= htmlspecialchars($block['payment_method']) ?>
+                        </p>
+                        <p class="mb-2">
+                            <strong>Description:</strong><br><?= nl2br(htmlspecialchars($block['description'])) ?></p>
+                        <?php if (!empty($block['background_image']) && file_exists("uploads/{$block['background_image']}")): ?>
+                            <img src="uploads/<?= htmlspecialchars($block['background_image']) ?>"
+                                class="img-fluid mt-2 rounded" alt="Background Image">
+                        <?php endif; ?>
+                        <small class="text-muted d-block mt-2">Added at:
+                            <?= htmlspecialchars($block['created_at']) ?></small>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
 
 <!DOCTYPE html>
 <html lang="en">
