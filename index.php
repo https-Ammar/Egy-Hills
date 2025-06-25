@@ -664,6 +664,12 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
     <script src="./assets/script/app.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            var visitorModal = new bootstrap.Modal(document.getElementById('visitorModal'));
+            visitorModal.show();
+        });
+    </script>
 
 </body>
 

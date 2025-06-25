@@ -591,12 +591,10 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <h4 class="card-title">
-                                        Recent Orders
+                                        User Information
                                     </h4>
 
-                                    <a href="#!" class="btn btn-sm btn-soft-primary">
-                                        <i class="bx bx-plus me-1"></i>Create Order
-                                    </a>
+
                                 </div>
                             </div>
                             <!-- end card body -->
@@ -604,24 +602,25 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                 <table class="table mb-0">
                                     <thead class="bg-light bg-opacity-50">
                                         <tr>
+                                            <th>
+                                                User
+                                            </th>
                                             <th class="ps-3">
-                                                Order ID.
+                                                ID
                                             </th>
                                             <th>
-                                                Date
+                                                Name
                                             </th>
                                             <th>
-                                                Product
+                                                phone
                                             </th>
                                             <th>
-                                                Customer Name
+                                                Data
                                             </th>
                                             <th>
-                                                Email ID
+                                                time
                                             </th>
-                                            <th>
-                                                Phone No.
-                                            </th>
+
 
 
                                         </tr>
@@ -637,6 +636,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
 
                                                 <tr>
+                                                    <td>.</td>
                                                     <td class="ps-3">
                                                         <a href="order-detail.html">#<?= (int) $visitor['id'] ?></a>
                                                     </td>
@@ -645,7 +645,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                     <td><?= htmlspecialchars($visitor['phone']) ?></td>
                                                     <td><?= date('Y-m-d', strtotime($visitor['created_at'])) ?></td>
                                                     <td><?= date('H:i:s', strtotime($visitor['created_at'])) ?></td>
-                                                    <td>Credit Card</td>
+
 
                                                 </tr>
 

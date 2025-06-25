@@ -178,24 +178,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="page-content">
         <div class="container-xxl">
-            <form method="post" enctype="multipart/form-data" class="dropzone dz-clickable">
+            <form method="post" enctype="multipart/form-data" class="mt-5">
                 <div class="row">
                     <div class="col-12">
 
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Upload Media</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="dz-message needsclick">
-                                    <i class="bx bx-cloud-upload fs-48 text-primary"></i>
-                                    <h3 class="mt-4">Drop your images here, or <span class="text-primary">click to
-                                            browse</span></h3>
-                                    <span class="text-muted fs-13">1600 x 1200 (4:3) recommended. PNG, JPG and GIF files
-                                        are allowed</span>
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="card">
                             <div class="card-header">
@@ -330,9 +317,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                             <div class="card-body">
                                 <div class="col-12 mb-3">
-                                    <button type="button" class="btn btn-secondary mb-3" onclick="addRow()">Add
-                                        Row</button>
+
                                     <div id="table-container" class="row g-2"></div>
+                                    <button type="button" class="btn btn btn-primary  mb-3 mt-3" onclick="addRow()">Add
+                                        Row</button>
                                 </div>
                             </div>
                         </div>
