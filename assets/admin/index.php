@@ -196,33 +196,20 @@ $visitors = $conn->query("SELECT id, name, phone, created_at FROM visitors ORDER
 $logs = $conn->query("SELECT * FROM logs ORDER BY created_at DESC");
 $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY date DESC");
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark" data-menu-color="dark">
 
 <head>
-    <!-- Title Meta -->
     <meta charset="utf-8" />
     <title>Dashboard | Larkon - Responsive Admin Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A fully responsive premium admin dashboard template" />
     <meta name="author" content="Techzaa" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-
-    <!-- Vendor css (Require in all Page) -->
     <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- Icons css (Require in all Page) -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- App css (Require in all Page) -->
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- Theme Config js (Require in all Page) -->
     <script src="assets/js/config.js"></script>
     <style>
         .rounded.bg-light.avatar-md.d-flex.align-items-center.justify-content-center.size_ {
@@ -243,46 +230,32 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             height: 35px;
         }
     </style>
-
 </head>
 
 <body>
 
-    <!-- START Wrapper -->
     <div class="wrapper">
 
-        <!-- ========== Topbar Start ========== -->
         <header class="topbar">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <div class="d-flex align-items-center">
-                        <!-- Menu Toggle Button -->
                         <div class="topbar-item">
                             <button type="button" class="button-toggle-menu me-2">
                                 <iconify-icon icon="solar:hamburger-menu-broken"
                                     class="fs-24 align-middle"></iconify-icon>
                             </button>
                         </div>
-
-                        <!-- Menu Toggle Button -->
                         <div class="topbar-item">
                             <h4 class="fw-bold topbar-button pe-none text-uppercase mb-0">Welcome!</h4>
                         </div>
                     </div>
-
                     <div class="d-flex align-items-center gap-1">
-
-                        <!-- Theme Color (Light/Dark) -->
                         <div class="topbar-item">
                             <button type="button" class="topbar-button" id="light-dark-mode">
                                 <iconify-icon icon="solar:moon-bold-duotone" class="fs-24 align-middle"></iconify-icon>
                             </button>
                         </div>
-
-
-
-
-                        <!-- App Search-->
                         <form class="app-search d-none d-md-block ms-2">
                             <div class="position-relative">
                                 <input type="search" class="form-control" placeholder="Search..." autocomplete="off"
@@ -295,25 +268,18 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
         </header>
 
-
-        <!-- ========== Topbar End ========== -->
-
-        <!-- ========== App Menu Start ========== -->
         <div class="main-nav">
-            <!-- Sidebar Logo -->
             <div class="logo-box">
                 <a href="index.html" class="logo-dark">
                     <img src="assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                     <img src="assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
                 </a>
-
                 <a href="index.html" class="logo-light">
                     <img src="assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                     <img src="assets/images/logo-light.png" class="logo-lg" alt="logo light">
                 </a>
             </div>
 
-            <!-- Menu Toggle Button (sm-hover) -->
             <button type="button" class="button-sm-hover" aria-label="Show Full Sidebar">
                 <iconify-icon icon="solar:double-alt-arrow-right-bold-duotone"
                     class="button-sm-hover-icon"></iconify-icon>
@@ -321,7 +287,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
             <div class="scrollbar" data-simplebar>
                 <ul class="navbar-nav" id="navbar-nav">
-
                     <li class="menu-title">General</li>
 
                     <li class="nav-item">
@@ -329,7 +294,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:widget-5-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> Dashboard </span>
+                            <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
 
@@ -339,55 +304,30 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:t-shirt-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> Home </span>
+                            <span class="nav-text">Home</span>
                         </a>
                         <div class="collapse show" id="sidebarProducts">
                             <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box3">All Product List
-                                    </a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box4">Main Slider
-                                    </a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box5">About Cards
-                                    </a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box6">Property Highlights
-                                    </a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box7">Features list
-                                    </a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box8">Videos
-                                    </a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box9">Advertisement
-
-                                    </a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box10">Plan Room
-
-                                    </a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box11">Why Choose Us
-
-                                    </a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link xyxbtn123" href="#" data-id="box12">Services Card
-
-
-                                    </a>
-                                </li>
+                                <li class="sub-nav-item"><a class="sub-nav-link xyxbtn123" href="#" data-id="box3">All
+                                        Product List</a></li>
+                                <li class="sub-nav-item"><a class="sub-nav-link xyxbtn123" href="#" data-id="box4">Main
+                                        Slider</a></li>
+                                <li class="sub-nav-item"><a class="sub-nav-link xyxbtn123" href="#" data-id="box5">About
+                                        Cards</a></li>
+                                <li class="sub-nav-item"><a class="sub-nav-link xyxbtn123" href="#"
+                                        data-id="box6">Property Highlights</a></li>
+                                <li class="sub-nav-item"><a class="sub-nav-link xyxbtn123" href="#"
+                                        data-id="box7">Features list</a></li>
+                                <li class="sub-nav-item"><a class="sub-nav-link xyxbtn123" href="#"
+                                        data-id="box8">Videos</a></li>
+                                <li class="sub-nav-item"><a class="sub-nav-link xyxbtn123" href="#"
+                                        data-id="box9">Advertisement</a></li>
+                                <li class="sub-nav-item"><a class="sub-nav-link xyxbtn123" href="#" data-id="box10">Plan
+                                        Room</a></li>
+                                <li class="sub-nav-item"><a class="sub-nav-link xyxbtn123" href="#" data-id="box11">Why
+                                        Choose Us</a></li>
+                                <li class="sub-nav-item"><a class="sub-nav-link xyxbtn123" href="#"
+                                        data-id="box12">Services Card</a></li>
                             </ul>
                         </div>
                     </li>
@@ -397,9 +337,8 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:clipboard-list-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> Add Service </span>
+                            <span class="nav-text">Add Service</span>
                         </a>
-
                     </li>
 
                     <li class="nav-item">
@@ -407,37 +346,26 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:box-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> requests </span>
+                            <span class="nav-text">Requests</span>
                         </a>
-
                     </li>
-
-
-
-
-
-
-
 
                     <li class="nav-item">
                         <a class="nav-link menu-arrow" href="./admin_blocks.php">
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:card-send-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> Payments </span>
+                            <span class="nav-text">Payments</span>
                         </a>
-
                     </li>
-
 
                     <li class="nav-item">
                         <a class="nav-link menu-arrow" href="./about_manager.php">
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:bill-list-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> About </span>
+                            <span class="nav-text">About</span>
                         </a>
-
                     </li>
 
                     <li class="nav-item">
@@ -445,19 +373,17 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                             <span class="nav-icon">
                                 <iconify-icon icon="solar:settings-bold-duotone"></iconify-icon>
                             </span>
-                            <span class="nav-text"> logout </span>
+                            <span class="nav-text">Logout</span>
                         </a>
                     </li>
-
-
                 </ul>
             </div>
         </div>
-        <!-- ========== App Menu End ========== -->
 
-        <!-- ==================================================== -->
-        <!-- Start right Content here -->
-        <!-- ==================================================== -->
+
+
+
+
         <div class="page-content">
 
             <!-- Start Container Fluid -->
@@ -1574,7 +1500,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
         </div>
 
-        <!-- مودالات فاضية -->
+
         <div class="modal fade" id="addProductModal-1" tabindex="-1" aria-labelledby="modalLabel1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
@@ -1656,9 +1582,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
         </div>
 
-
-
-        <!-- Modal 4 -->
         <div class="modal fade" id="addProductModal-4" tabindex="-1" aria-labelledby="addProductModalLabel-4"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -1684,8 +1607,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 </div>
             </div>
         </div>
-
-        <!-- Modal 5 -->
         <div class="modal fade" id="addProductModal-5" tabindex="-1" aria-labelledby="addProductModalLabel-5"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -1708,7 +1629,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
         </div>
 
 
-        <!-- Modal 7 -->
         <div class="modal fade" id="addProductModal-7" tabindex="-1" aria-labelledby="addProductModalLabel-7"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -1762,7 +1682,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
         </div>
 
-        <!-- Modal 8 -->
         <div class="modal fade" id="addProductModal-8" tabindex="-1" aria-labelledby="addProductModalLabel-8"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -1794,7 +1713,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
         </div>
 
-        <!-- Modal 9 -->
         <div class="modal fade" id="addProductModal-9" tabindex="-1" aria-labelledby="addProductModalLabel-9"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -1821,7 +1739,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
         </div>
 
-        <!-- Modal 10 -->
         <div class="modal fade" id="addProductModal-10" tabindex="-1" aria-labelledby="addProductModalLabel-10"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -1853,9 +1770,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
 
     </div>
-    <!-- End Container Fluid -->
-
-    <!-- ========== Footer Start ========== -->
     <footer class="footer">
         <div class="container-fluid">
             <div class="row">
@@ -1866,19 +1780,14 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             </div>
         </div>
     </footer>
-    <!-- ========== Footer End ========== -->
 
     </div>
-    <!-- ==================================================== -->
-    <!-- End Page Content -->
-    <!-- ==================================================== -->
+
 
     </div>
     <script>
-        // Delete a project by ID
         function deleteProject(id) {
             if (!confirm("Are you sure you want to delete this project?")) return;
-
             fetch('delete_project.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -1895,13 +1804,11 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 });
         }
 
-        // Toggle the edit form visibility
         function toggleEditForm(id) {
             const form = document.getElementById('edit-form-' + id);
             if (form) form.classList.toggle('d-none');
         }
 
-        // Update a project
         function updateProject(id) {
             const title = document.getElementById('title-' + id).value;
             const location = document.getElementById('location-' + id).value;
@@ -1922,11 +1829,8 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                     }
                 });
         }
-    </script>
 
-    <script>
         window.addEventListener('DOMContentLoaded', () => {
-            // Restore previously opened content box
             const savedBoxId = localStorage.getItem('selectedBoxId');
             if (savedBoxId) {
                 document.querySelectorAll('.ptn_box_open').forEach(div => {
@@ -1934,19 +1838,16 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 });
             }
 
-            // Button click to toggle box visibility
             document.querySelectorAll('.xyxbtn123').forEach(button => {
                 button.onclick = () => {
                     const id = button.dataset.id;
                     localStorage.setItem('selectedBoxId', id);
-
                     document.querySelectorAll('.ptn_box_open').forEach(div => {
                         div.style.display = (div.id === id && div.style.display !== 'block') ? 'block' : 'none';
                     });
                 };
             });
 
-            // Sidebar toggle handling
             const body = document.querySelector("body");
             const sidebar = body.querySelector("nav");
             const toggleBtn = body.querySelector(".sidebar-toggle");
@@ -1960,42 +1861,28 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 sidebar.classList.toggle("close");
                 localStorage.setItem("status", sidebar.classList.contains("close") ? "close" : "open");
             });
-        });
-    </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
             const tableBody = document.querySelector("tbody");
-            const rowCount = tableBody.querySelectorAll("tr").length;
-            console.log("Total Visitors:", rowCount);
-
-            // لو حابب تعرضها في مكان معين في الصفحة مثلاً:
-            document.getElementById("visitorCount").textContent = + rowCount;
-        });
-    </script>
-    <script>
-        window.addEventListener('DOMContentLoaded', function () {
-            // اختار tbody المحدد
-            const tbody = document.getElementById("countriesTableBody");
-
-            // حساب عدد الصفوف اللي الـ ID بتاعها بيبدأ بـ row- داخل هذا الـ tbody فقط
-            const rowCount = tbody.querySelectorAll("tr[id^='row-']").length;
-
-            // عنصر عرض العدد
-            const countElement = document.getElementById("countryCount");
-            if (countElement) {
-                countElement.textContent = rowCount;
+            if (tableBody) {
+                const rowCount = tableBody.querySelectorAll("tr").length;
+                const visitorCount = document.getElementById("visitorCount");
+                if (visitorCount) {
+                    visitorCount.textContent = rowCount;
+                }
             }
 
-            console.log("عدد الدول:", rowCount);
+            const countriesTableBody = document.getElementById("countriesTableBody");
+            if (countriesTableBody) {
+                const rowCount = countriesTableBody.querySelectorAll("tr[id^='row-']").length;
+                const countElement = document.getElementById("countryCount");
+                if (countElement) {
+                    countElement.textContent = rowCount;
+                }
+            }
         });
     </script>
 
-
-
     <script src="assets/js/vendor.js"></script>
-
-
     <script src="assets/js/pages/dashboard.js"></script>
 
 </body>
