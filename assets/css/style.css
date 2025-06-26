@@ -400,7 +400,7 @@ button.btn.btn-primary.send_info {
 
 @media screen and (max-width: 992px) {
   .section-3d {
-        height: 35vh;
+    height: 35vh;
   }
 
   .cover_img_product.mt-5.rounded-3 {
@@ -417,4 +417,10 @@ button.btn.btn-primary.send_info {
   img#img3d {
     display: none;
   }
+}
+
+.highlight-card.text-center {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }

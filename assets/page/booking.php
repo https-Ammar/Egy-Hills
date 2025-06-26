@@ -17,7 +17,6 @@ if (!$project) {
     die('Project not found.');
 }
 
-// جلب بيانات info_blocks كاملة
 $info_blocks = [];
 $result = $conn->query("SELECT * FROM info_blocks ORDER BY id DESC");
 while ($row = $result->fetch_assoc()) {
@@ -99,227 +98,240 @@ if (isset($_GET['status'])) {
 }
 ?>
 
-<!-- ✅ عرض معلومات البلوكات -->
-<div class="container my-4">
-    <h3 class="mb-3">Info Blocks</h3>
-    <div class="row">
-        <?php foreach ($info_blocks as $block): ?>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <?php if (!empty($block['image']) && file_exists("uploads/{$block['image']}")): ?>
-                        <img src="uploads/<?= htmlspecialchars($block['image']) ?>" class="card-img-top" alt="Block Image">
-                    <?php endif; ?>
-                    <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($block['username']) ?> -
-                            <?= htmlspecialchars($block['phone']) ?></h5>
-                        <p class="mb-1"><strong>Amount:</strong> <?= htmlspecialchars(number_format($block['amount'], 2)) ?>
-                        </p>
-                        <p class="mb-1"><strong>Payment Method:</strong> <?= htmlspecialchars($block['payment_method']) ?>
-                        </p>
-                        <p class="mb-2">
-                            <strong>Description:</strong><br><?= nl2br(htmlspecialchars($block['description'])) ?></p>
-                        <?php if (!empty($block['background_image']) && file_exists("uploads/{$block['background_image']}")): ?>
-                            <img src="uploads/<?= htmlspecialchars($block['background_image']) ?>"
-                                class="img-fluid mt-2 rounded" alt="Background Image">
-                        <?php endif; ?>
-                        <small class="text-muted d-block mt-2">Added at: <?= $block['created_at'] ?></small>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
-</div>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($project['title']) ?> - Booking</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/booking.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/booking.css">
+    <script
+        src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/jquery.min.js?ver=2.2.4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <style>
+        .card-box {
+            background-color: #f9f9f9;
+            border: 2px solid #eee;
+            border-radius: 20px;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 600px;
+        }
 
+        .card-number {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 28px;
+            font-weight: 500;
+            color: #555;
+            flex-grow: 1;
+        }
+
+        .mastercard-logo {
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        .copy-icon {
+            cursor: pointer;
+            font-size: 22px;
+            color: #333;
+        }
+
+
+
+        .bg-light.p-3.rounded {
+            padding: 25px !important;
+            border-radius: 10px !important;
+        }
+
+        input.form-control {
+            padding: 15px;
+            border: 2px solid #eeeeee;
+        }
+
+        button.btn.btn-secondary.mt-3 {
+            padding: 15px;
+            border-radius: 46px;
+            background: black;
+            border: navajowhite;
+            letter-spacing: 0;
+        }
+
+        .d-flex.justify-content-end.mb-4.gap-2 {
+            justify-content: start !important;
+        }
+
+        button.btn.btn-primary.booking-btn {
+            background: #f8f9fa;
+            border: navajowhite;
+            padding: 10px 40px;
+            border-radius: 30px;
+            color: black;
+            font-weight: bold;
+            letter-spacing: 0;
+        }
+
+        label {
+            margin-bottom: 1.5vh;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <?php if (isset($_GET['status'])): ?>
-        <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content <?= $booking_class ?>">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="bookingModalLabel">Booking Status</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <?= htmlspecialchars($booking_message) ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
-
     <?php include './header.php'; ?>
     <?php include './loging.php'; ?>
 
     <section class="site-banner site-banner--bg site-banner--page" style="background-image:url(../img/cover.jpg);">
         <div class="site-banner__txt section section--medium txt-center post-styles">
-            <h1 class="site-banner__title"><a href="#" data-translate>About</a> / <a href="#" data-translate>Home</a>
+            <h1 class="site-banner__title">
+                <a href="#" data-translate>booking</a> /
+                <a href="#" data-translate>Home</a>
             </h1>
             <h2 class="site-banner__subtitle" data-translate>Homes that move you</h2>
         </div>
     </section>
 
-    <article class="card mt-5">
+    <article class="card mt-5 mb-5">
         <div class="container">
             <div class="card-body no-rtl">
                 <div class="card-title">
                     <h2 data-translate>Payment</h2>
                 </div>
-                <div class="payment-type">
-                    <h4 data-translate> Choose payment method below</h4>
-                    <div class="types flex justify-space-between">
-                        <?php if ($info_blocks): ?>
-                            <?php foreach ($info_blocks as $info): ?>
-                                <div class="type selected">
-                                    <div class="text">
-                                        <p data-translate><?= htmlspecialchars($info['title']) ?></p>
-                                        <p data-translate><?= nl2br(htmlspecialchars($info['text'])) ?></p>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <p data-translate>No general info blocks found.</p>
-                        <?php endif; ?>
-                    </div>
+
+                <div class="payment-type mb-4">
+                    <h4 data-translate>Choose a payment method below</h4>
+                    <div class="types flex justify-space-between flex-wrap"></div>
                 </div>
 
-                <div class="payment-info flex justify-space-between">
-                    <div class="column billing">
-                        <div class="title">
-                            <div class="num">1</div>
-                            <h4 data-translate> data-translateBooking Info</h4>
-                        </div>
-                        <div class="flex-end">
-                            <button type="button" class="button booking-btn" data-type="inquiry"
-                                data-translate>Inquiry</button>
-                            <button type="button" class="button booking-btn" data-type="visit"
-                                data-translate>Visit</button>
-                        </div>
-                        <form method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="booking_type" id="booking_type">
-                            <div class="field full">
-                                <label data-translate>Full Name</label>
-                                <input type="text" name="client_name" placeholder="Full Name" required>
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-12 col-md-6">
+                            <div class="d-flex justify-content-end mb-4 gap-2">
+                                <button type="button" class="btn btn-primary booking-btn" data-type="inquiry"
+                                    data-translate>Inquiry</button>
+                                <button type="button" class="btn btn-primary booking-btn" data-type="visit"
+                                    data-translate>Visit</button>
                             </div>
-                            <div class="field full">
-                                <label data-translate>Phone Number</label>
-                                <input type="tel" name="client_phone" placeholder="Phone Number" required>
-                            </div>
-                            <div id="visit_fields" style="display:none;">
-                                <div class="field full">
-                                    <label data-translate>Booking Date</label>
-                                    <input type="date" name="visit_date">
-                                </div>
-                                <div class="field full">
-                                    <label data-translate>Booking Time</label>
-                                    <input type="time" name="visit_time">
-                                </div>
-                                <div class="field full">
-                                    <label data-translate>Amount</label>
-                                    <input type="number" name="amount" step="1" min="1">
-                                </div>
-                                <div class="field full">
-                                    <label data-translate>Upload Payment Receipt</label>
-                                    <input type="file" name="receipt" accept=".jpg,.jpeg,.png,.pdf">
-                                </div>
-                            </div>
-                            <button class="button button-secondary" type="submit" name="book_project"
-                                data-translate>Submit
-                                Booking</button>
-                        </form>
-                    </div>
 
-                    <div class="cccc">
-                        <div class="row">
-                            <div class="title mb-3">
-                                <div class="num">2</div>
-                                <h4 data-translate>card info</h4>
-                            </div>
-                            <div class="col-12 mb-4">
-                                <a href="project_details.php?id=<?= $project['id'] ?>">
-                                    <div class="property-card">
-                                        <div class="cover_card"
-                                            style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($project['image']) ?>');">
-                                        </div>
-                                        <div class="property-card-content">
-                                            <p class="property-card-location">
-                                                <?= htmlspecialchars($project['location'] ?? 'No Location') ?>
-                                            </p>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <h3 class="property-card-title">
-                                                    <?= htmlspecialchars($project['title']) ?>
-                                                </h3>
-                                                <h3 class="property-card-title">
-                                                    <?= htmlspecialchars($project['price']) ?>
-                                                </h3>
-                                            </div>
-                                            <div class="property-card-features">
-                                                <div class="property-card-feature" data-translate>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="lucide lucide-bed">
-                                                        <path d="M2 9V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"></path>
-                                                        <path d="M2 11v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9"></path>
-                                                        <path d="M2 14h20"></path>
-                                                        <path
-                                                            d="M4 9h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2Z">
-                                                        </path>
-                                                    </svg> <?= htmlspecialchars($project['beds']) ?> Beds
-                                                </div>
-                                                <div class="property-card-feature" data-translate>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="lucide lucide-bath">
-                                                        <path
-                                                            d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5">
-                                                        </path>
-                                                        <line x1="10" x2="8" y1="5" y2="7"></line>
-                                                        <line x1="2" x2="22" y1="12" y2="12"></line>
-                                                        <line x1="7" x2="7" y1="19" y2="21"></line>
-                                                        <line x1="17" x2="17" y1="19" y2="21"></line>
-                                                    </svg> <?= htmlspecialchars($project['baths']) ?> Baths
-                                                </div>
-                                                <div class="property-card-feature" data-translate>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="lucide lucide-square">
-                                                        <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                    </svg>
-                                                    <?= htmlspecialchars($project['area']) ?> sqm
-                                                </div>
-                                            </div>
-                                        </div>
+                            <?php if ($booking_message): ?>
+                                <div class="<?= htmlspecialchars($booking_class) ?> mb-3">
+                                    <?= htmlspecialchars($booking_message) ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <form method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="booking_type" id="booking_type">
+
+                                <div class="mb-3">
+                                    <label data-translate>Full Name</label>
+                                    <input type="text" name="client_name" placeholder="Full Name" class="form-control"
+                                        required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label data-translate>Phone Number</label>
+                                    <input type="tel" name="client_phone" placeholder="Phone Number"
+                                        class="form-control" required>
+                                </div>
+
+                                <div id="visit_fields" style="display:none;">
+                                    <div class="mb-3">
+                                        <label data-translate>Booking Date</label>
+                                        <input type="date" name="visit_date" class="form-control" required>
                                     </div>
-                                </a>
+
+                                    <div class="mb-3">
+                                        <label data-translate>Booking Time</label>
+                                        <input type="time" name="visit_time" class="form-control" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label data-translate>Amount</label>
+                                        <input type="number" name="amount" step="1" class="form-control" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label data-translate>Upload Payment Receipt</label>
+                                        <input type="file" name="receipt" accept=".jpg,.jpeg,.png,.pdf"
+                                            class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-secondary mt-3" type="submit" name="book_project" data-translate>
+                                    Submit Booking
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <div class="bg-light p-3 rounded">
+                                <?php if (!empty($info_blocks)): ?>
+                                    <?php
+                                    // عرض أول مبلغ موجود (غير صفر)
+                                    foreach ($info_blocks as $block) {
+                                        if (!empty($block['amount']) && $block['amount'] != 0) {
+                                            echo '<h2 class="mb-3">' . number_format($block['amount'], 2) . '<sub style="font-size: small;"> EGP</sub></h2>';
+                                            break;
+                                        }
+                                    }
+                                    ?>
+                                    <div class="row">
+                                        <?php foreach ($info_blocks as $block): ?>
+                                            <div class="card-box d-flex justify-content-between align-items-center mb-3">
+                                                <div class="d-flex align-items-center">
+                                                    <?php
+                                                    $imagePath = !empty($block['image'])
+                                                        ? $_SERVER['DOCUMENT_ROOT'] . "/Egy-Hills/uploads/{$block['image']}"
+                                                        : null;
+                                                    ?>
+
+                                                    <?php if ($imagePath && file_exists($imagePath)): ?>
+                                                        <img src="/Egy-Hills/uploads/<?= htmlspecialchars($block['image']) ?>"
+                                                            alt="MasterCard" class="me-2" width="50">
+                                                    <?php endif; ?>
+
+                                                    <?php if (!empty($block['phone'])): ?>
+                                                        <span class="number-text"><?= htmlspecialchars($block['phone']) ?></span>
+                                                    <?php endif; ?>
+
+                                                    <span class="number-text">
+                                                        <?= htmlspecialchars($block['username'] ?? $block['title'] ?? '') ?>
+                                                    </span>
+                                                </div>
+                                                <i class="bi bi-clipboard copy-icon" onclick="copyCardNumber(this)"
+                                                    title="Copy"></i>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php else: ?>
+                                    <p class="text-danger">No payment information found.</p>
+                                <?php endif; ?>
                             </div>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>
         </div>
     </article>
 
-    <section id="footer"></section>
+    <?php include './footer.php'; ?>
+    <script src="../script/app.js"></script>
 
     <script>
         const buttons = document.querySelectorAll('.booking-btn');
@@ -327,11 +339,10 @@ if (isset($_GET['status'])) {
         const visitFields = document.getElementById('visit_fields');
 
         bookingType.value = 'inquiry';
-        visitFields.style.display = 'none';
 
-        buttons.forEach(btn => {
-            if (btn.dataset.type === 'inquiry') {
-                btn.classList.add('selected');
+        buttons.forEach(b => {
+            if (b.dataset.type === 'inquiry') {
+                b.classList.add('selected');
             }
         });
 
@@ -339,39 +350,26 @@ if (isset($_GET['status'])) {
             btn.addEventListener('click', () => {
                 const type = btn.dataset.type;
                 bookingType.value = type;
-                visitFields.style.display = (type === 'visit') ? 'block' : 'none';
+
+                if (type === 'visit') {
+                    visitFields.style.display = 'block';
+                } else {
+                    visitFields.style.display = 'none';
+                }
+
                 buttons.forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
             });
         });
-    </script>
 
-    <script src="../script/app.js"></script>
-
-    <style>
-        @media screen and (max-width:992px) {
-            .payment-info.flex.justify-space-between {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
+        function copyCardNumber(iconElement) {
+            const cardBox = iconElement.closest('.card-box');
+            const numberText = cardBox.querySelector('.number-text').innerText.trim();
+            navigator.clipboard.writeText(numberText).then(() => {
+                alert("Card number copied!");
+            });
         }
-    </style>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <?php if (isset($_GET['status'])): ?>
-        <script>
-            const bookingModal = new bootstrap.Modal(document.getElementById('bookingModal'));
-            bookingModal.show();
-
-            if (window.history.replaceState) {
-                const url = new URL(window.location.href);
-                url.searchParams.delete('status');
-                window.history.replaceState({}, document.title, url.toString());
-            }
-        </script>
-    <?php endif; ?>
+    </script>
 </body>
 
 </html>

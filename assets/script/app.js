@@ -1,35 +1,48 @@
 const manualTranslations = {
-  ar: {
-    home: "الرئيسية",
-    about: "من نحن",
-    contact: "اتصل بنا",
-    services: "خدماتنا",
-  },
   en: {
+    home: "Home",
+    about: "About",
+    contact: "Contact",
+    services: "Services",
     الرئيسية: "Home",
     "من نحن": "About",
     "اتصل بنا": "Contact",
     خدماتنا: "Services",
   },
+  ar: {
+    home: "الرئيسية",
+    about: "من نحن",
+    contact: "اتصل بنا",
+    services: "خدماتنا",
+    Home: "الرئيسية",
+    About: "من نحن",
+    Contact: "اتصل بنا",
+    Services: "خدماتنا",
+  },
 };
 
 async function translateText(text, targetLang) {
-  const lowerText = text.trim().toLowerCase();
+  const trimmedText = text.trim();
+
   if (
     manualTranslations[targetLang] &&
-    manualTranslations[targetLang][lowerText]
+    manualTranslations[targetLang][trimmedText]
   ) {
-    return manualTranslations[targetLang][lowerText];
+    return manualTranslations[targetLang][trimmedText];
   }
 
-  const res = await fetch(
-    "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=" +
-      targetLang +
-      "&dt=t&q=" +
-      encodeURIComponent(text)
-  );
-  const data = await res.json();
-  return data[0][0][0];
+  try {
+    const res = await fetch(
+      `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLang}&dt=t&q=${encodeURIComponent(
+        trimmedText
+      )}`
+    );
+    const data = await res.json();
+    return data[0][0][0];
+  } catch (error) {
+    console.error("Translation error:", error);
+    return trimmedText;
+  }
 }
 
 async function translatePage(lang) {
@@ -58,7 +71,7 @@ async function translatePage(lang) {
     document.documentElement.dir = "rtl";
   } else {
     document.body.classList.remove("arabic");
-    document.documentElement.lang = lang;
+    document.documentElement.lang = "en";
     document.documentElement.dir = "ltr";
   }
 

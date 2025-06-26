@@ -104,13 +104,13 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
     </section>
 
     <section class="timeline-container " id="timeline-container" data-aos="fade-up" data-aos-duration="1000">
-        <div class="text  mb-4">
+        <div class="text  mb-4 ">
             <h2 data-translate>Our Journey Through the Years</h2>
             <p data-translate>From our humble beginnings to remarkable milestones, each year has shaped our legacy of
                 excellence and innovation.</p>
 
         </div>
-        <div class="timeline" id="timeline">
+        <div class="timeline " id="timeline">
             <?php $i = 0;
             while ($card = $team_cards->fetch_assoc()):
                 $i++; ?>
@@ -158,7 +158,8 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                     <div class="content-column col-md-6 col-sm-12" data-aos="fade-left" data-aos-duration="1000">
                         <div class="inner-column">
                             <div class="sec-title">
-                                <div class="title" data-translate>Director</div>
+                                <div class="title" data-translate>The Founders
+                                </div>
                                 <h2 data-translate><?= htmlspecialchars($director_card['title']) ?></h2>
                             </div>
                             <div class="text" data-translate><?= nl2br(htmlspecialchars($director_card['text'])) ?></div>
@@ -178,15 +179,29 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                 <div class="row align-items-center mb-5 flex-md-row<?= $even ? '-reverse' : '' ?>" data-aos="fade-up"
                     data-aos-delay="<?= $i * 100 ?>">
                     <div class="col-md-6">
-                        <h2 class="csr-title" data-translate>CSR <span class="csr-subtitle" data-translate>Full at Badya
-                                University</span></h2>
+                        <h2 class="csr-title" data-translate> Initiatives</h2>
                         <p class="mt-3"><?= $i ?> - <?= $i + 1 ?></p>
-                        <h4 class="fw-bold" data-translate><?= htmlspecialchars($initiative['title']) ?></h4>
+                        <h4 class="fw-bold mb-5 mt-5" data-translate><?= htmlspecialchars($initiative['title']) ?></h4>
+
                         <p class="text-muted fw-semibold" data-translate><?= htmlspecialchars($initiative['name']) ?></p>
                         <?php if (!empty($initiative['link'])): ?>
                             <div class="d-flex align-items-center mt-4">
                                 <a href="<?= htmlspecialchars($initiative['link']) ?>" class="me-4">
-                                    <div class="learn-more"></div>
+
+
+                                    <svg width="72" height="41" viewBox="0 0 72 41" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M0 20.0945L50.8326 18.9316L52.0806 20.2117L50.8326 21.4277L0 20.0945Z"
+                                            fill="#2C2A26" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M54.2126 20.1758L38.4414 5.18115L51.5818 20.2021L38.4414 35.223L54.2126 20.1758Z"
+                                            fill="#2C2A26" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M71.009 20.1759L49.7852 0L66.8189 20.2065L49.7895 40.4043L71.009 20.1759Z"
+                                            fill="#2C2A26" />
+                                    </svg>
+
                                 </a>
                             </div>
                         <?php endif; ?>
@@ -204,7 +219,7 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
     <section class="spacing-small bg-dark no-rtl " data-aos="zoom-in-up" data-aos-duration="1000">
         <ul class="usp-list section section--large grid">
             <li class="usp-list__item grid__col grid__col--4 txt-center">
-                <a class="usp-list__link" href="/investors">
+                <a class="usp-list__link" href="#">
                     <div class="usp-list__icon-outer">
                         <img class="usp-list__icon"
                             src="https://www.rj-investments.co.uk/wp-content/uploads/2018/02/package.svg" alt="">
@@ -214,7 +229,7 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                 </a>
             </li>
             <li class="usp-list__item grid__col grid__col--4 txt-center">
-                <a class="usp-list__link" href="/property-type/accomodation">
+                <a class="usp-list__link" href="#">
                     <div class="usp-list__icon-outer">
                         <img class="usp-list__icon"
                             src="https://www.rj-investments.co.uk/wp-content/uploads/2018/02/accommodation.svg" alt="">
@@ -224,7 +239,7 @@ $initiatives = $conn->query("SELECT * FROM about_initiatives");
                 </a>
             </li>
             <li class="usp-list__item grid__col grid__col--4 txt-center">
-                <a class="usp-list__link" href="/pandora-homes/">
+                <a class="usp-list__link" href="#">
                     <div class="usp-list__icon-outer">
                         <img class="usp-list__icon"
                             src="https://www.rj-investments.co.uk/wp-content/uploads/2018/02/development.svg" alt="">

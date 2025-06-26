@@ -14,12 +14,12 @@ function uploadFile($file)
         if (!in_array($file['type'], $allowedTypes)) {
             die("Unsupported file type: " . htmlspecialchars($file['type']));
         }
-        if (!is_dir('uploads')) {
-            mkdir('uploads', 0755, true);
+        $uploadDir = '/Applications/MAMP/htdocs/Egy-Hills/uploads';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
         }
         $name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '', basename($file['name']));
-        $target = __DIR__ . '/../uploads/' . $name;
-
+        $target = $uploadDir . '/' . $name;
         if (move_uploaded_file($file['tmp_name'], $target)) {
             return $name;
         } else {
@@ -29,10 +29,27 @@ function uploadFile($file)
     return null;
 }
 
+
 $message = '';
 if (isset($_GET['success'])) {
     $message = "✅ Project added successfully!";
 }
+
+// عرف المتغيرات الفارغة قبل أي شيء
+$title = '';
+$location = '';
+$area = '';
+$beds = 0;
+$baths = 0;
+$size = '0';
+$price = '';
+$subtitle = '';
+$description = '';
+$details = '';
+$extra_title = '';
+$extra_text = '';
+$last_title = '';
+$last_text = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cover_image = uploadFile($_FILES['cover_image']);
@@ -131,14 +148,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>إضافة مشروع</title>
     <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
@@ -172,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <script>
             setTimeout(function () {
                 document.querySelector('.alert-auto-close').style.display = 'none';
-            }, 3000); // 3 ثواني ثم تختفي
+            }, 3000);
         </script>
     <?php endif; ?>
 
@@ -181,9 +197,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="post" enctype="multipart/form-data" class="mt-5">
                 <div class="row">
                     <div class="col-12">
-
-
-
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Basic Information</h4>
@@ -193,12 +206,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <div class="col-lg-6 mb-3">
                                         <label for="product-name-1" class="form-label">Project Title</label>
                                         <input type="text" name="title" id="product-name-1" class="form-control"
-                                            placeholder="Project Title">
+                                            placeholder="Project Title" required
+                                            value="<?= htmlspecialchars($title) ?>">
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <label for="product-name-2" class="form-label">Location</label>
                                         <input type="text" name="location" id="product-name-2" class="form-control"
-                                            placeholder="Project Location">
+                                            placeholder="Project Location" required
+                                            value="<?= htmlspecialchars($location) ?>">
                                     </div>
                                 </div>
                             </div>
@@ -213,27 +228,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <div class="col-lg-4 mb-3">
                                         <label for="product-area" class="form-label">Area</label>
                                         <input type="number" name="area" id="product-area" class="form-control"
-                                            placeholder="Area in sqm">
+                                            placeholder="Area in sqm" value="<?= htmlspecialchars($area) ?>">
                                     </div>
                                     <div class="col-lg-4 mb-3">
                                         <label for="product-beds" class="form-label">Number of Rooms</label>
                                         <input type="number" name="beds" id="product-beds" class="form-control"
-                                            placeholder="e.g. 3">
+                                            placeholder="e.g. 3" value="<?= htmlspecialchars($beds) ?>">
                                     </div>
                                     <div class="col-lg-4 mb-3">
                                         <label for="product-baths" class="form-label">Number of Baths</label>
                                         <input type="number" name="baths" id="product-baths" class="form-control"
-                                            placeholder="e.g. 2">
+                                            placeholder="e.g. 2" value="<?= htmlspecialchars($baths) ?>">
                                     </div>
                                     <div class="col-lg-4 mb-3">
                                         <label for="product-size" class="form-label">Size (sqm)</label>
                                         <input type="number" name="size" id="product-size" class="form-control"
-                                            placeholder="e.g. 120">
+                                            placeholder="e.g. 120" value="<?= htmlspecialchars($size) ?>">
                                     </div>
                                     <div class="col-lg-4 mb-3">
                                         <label for="product-price-input" class="form-label">Price</label>
                                         <input type="number" name="price" id="product-price-input" class="form-control"
-                                            placeholder="e.g. 100000">
+                                            placeholder="e.g. 100000" value="<?= htmlspecialchars($price) ?>">
                                     </div>
                                 </div>
                             </div>
@@ -281,31 +296,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="row">
                                     <div class="col-12 mb-3">
                                         <label class="form-label">Intro Title</label>
-                                        <input type="text" name="intro_title" class="form-control">
+                                        <input type="text" name="intro_title" class="form-control"
+                                            value="<?= htmlspecialchars($subtitle) ?>">
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label class="form-label">Intro Description</label>
-                                        <textarea name="intro_text" rows="3" class="form-control"></textarea>
+                                        <textarea name="intro_text" rows="3"
+                                            class="form-control"><?= htmlspecialchars($description) ?></textarea>
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label class="form-label">Details (one point per line)</label>
-                                        <textarea name="list_text" rows="3" class="form-control"></textarea>
+                                        <textarea name="list_text" rows="3"
+                                            class="form-control"><?= htmlspecialchars($details) ?></textarea>
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label class="form-label">Additional Section Title</label>
-                                        <input type="text" name="section_title" class="form-control">
+                                        <input type="text" name="section_title" class="form-control"
+                                            value="<?= htmlspecialchars($extra_title) ?>">
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label class="form-label">Additional Section Text</label>
-                                        <textarea name="section_text" rows="3" class="form-control"></textarea>
+                                        <textarea name="section_text" rows="3"
+                                            class="form-control"><?= htmlspecialchars($extra_text) ?></textarea>
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label class="form-label">Final Section Title</label>
-                                        <input type="text" name="last_title" class="form-control">
+                                        <input type="text" name="last_title" class="form-control"
+                                            value="<?= htmlspecialchars($last_title) ?>">
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label class="form-label">Final Section Text</label>
-                                        <textarea name="last_text" rows="3" class="form-control"></textarea>
+                                        <textarea name="last_text" rows="3"
+                                            class="form-control"><?= htmlspecialchars($last_text) ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -317,44 +339,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                             <div class="card-body">
                                 <div class="col-12 mb-3">
-
                                     <div id="table-container" class="row g-2"></div>
-                                    <button type="button" class="btn btn btn-primary  mb-3 mt-3" onclick="addRow()">Add
+                                    <button type="button" class="btn btn-primary mb-3 mt-3" onclick="addRow()">Add
                                         Row</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Pricing Information</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-4 mb-3">
-                                        <label for="product-price" class="form-label">Price</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text fs-20"><i class="bx bx-dollar"></i></span>
-                                            <input type="number" id="product-price" class="form-control"
-                                                placeholder="000">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 mb-3">
-                                        <label for="product-discount" class="form-label">Discount</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text fs-20"><i class="bx bxs-discount"></i></span>
-                                            <input type="number" id="product-discount" class="form-control"
-                                                placeholder="000">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 mb-3">
-                                        <label for="product-tax" class="form-label">Tax</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text fs-20"><i class="bx bxs-file-txt"></i></span>
-                                            <input type="number" id="product-tax" class="form-control"
-                                                placeholder="000">
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -362,11 +349,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="p-3 bg-light mb-3 rounded">
                             <div class="row justify-content-end g-2">
                                 <div class="col-lg-2">
-                                    <button type="submit" class="btn btn-outline-secondary w-100">Create
-                                        Project</button>
-                                </div>
-                                <div class="col-lg-2">
-                                    <button type="reset" class="btn btn-primary w-100">Cancel</button>
+                                    <button type="submit" class="btn btn-primary w-100">Create Project</button>
                                 </div>
                             </div>
                         </div>
@@ -379,10 +362,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="assets/js/vendor.js"></script>
     <script src="assets/js/app.js"></script>
-    <script src="assets/vendor/jsvectormap/js/jsvectormap.min.js"></script>
-    <script src="assets/vendor/jsvectormap/maps/world-merc.js"></script>
-    <script src="assets/vendor/jsvectormap/maps/world.js"></script>
-    <script src="assets/js/pages/dashboard.js"></script>
 
     <script>
         function addRow() {
@@ -402,8 +381,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             container.appendChild(row);
         }
+
         setTimeout(function () {
-            document.querySelector('.alert-auto-close').style.display = 'none';
+            const alert = document.querySelector('.alert-auto-close');
+            if (alert) alert.style.display = 'none';
         }, 3000);
     </script>
 

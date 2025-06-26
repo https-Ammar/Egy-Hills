@@ -83,36 +83,51 @@ function e($value)
 
                 <h2 class="elementor-heading-title elementor-size-default pb-3"><?= e($project['title']) ?></h2>
                 <hr>
-
                 <div class="d-flex align-items-center justify-content-between mt-5 animate__animated animate__fadeInUp">
-                    <div class="d-flex align-items-center gap-3">
-                        <span class="icon_span"><i class="fa-solid fa-chart-area"></i></span>
-                        <span>
-                            <p class="titel_project" data-translate>Project Area</p>
-                            <p class="des_project"><?= e($project['area']) ?></p>
-                        </span>
-                    </div>
-                    <div class="d-flex align-items-center gap-3">
-                        <span class="icon_span"><i class="fa-solid fa-bed"></i></span>
-                        <span>
-                            <p class="titel_project" data-translate>Number of rooms</p>
-                            <p class="des_project"><?= (int) $project['beds'] ?></p>
-                        </span>
-                    </div>
-                    <div class="d-flex align-items-center gap-3">
-                        <span class="icon_span"><i class="fa-regular fa-calendar"></i></span>
-                        <span>
-                            <p class="titel_project" data-translate>Baths</p>
-                            <p class="des_project"><?= (int) $project['baths'] ?></p>
-                        </span>
-                    </div>
-                    <div class="d-flex align-items-center gap-3">
-                        <span class="icon_span"><i class="fa-solid fa-dollar-sign"></i></span>
-                        <span>
-                            <p class="titel_project" data-translate>Price</p>
-                            <p class="des_project"><?= e($project['price']) ?></p>
-                        </span>
-                    </div>
+                    <?php if (!empty($project['area'])): ?>
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="icon_span"><i class="fa-solid fa-chart-area"></i></span>
+                            <span>
+                                <p class="titel_project" data-translate>Project Area</p>
+                                <p class="des_project"><?= e($project['area']) ?></p>
+                            </span>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (!empty($project['beds']) && (int) $project['beds'] > 0): ?>
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="icon_span">
+
+                                <i class="fa-solid fa-bed"></i>
+
+
+                            </span>
+                            <span>
+                                <p class="titel_project" data-translate>Number of rooms</p>
+                                <p class="des_project"><?= (int) $project['beds'] ?></p>
+                            </span>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (!empty($project['baths']) && (int) $project['baths'] > 0): ?>
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="icon_span"><i class="fa-solid fa-bath"></i></span>
+                            <span>
+                                <p class="titel_project" data-translate>Baths</p>
+                                <p class="des_project"><?= (int) $project['baths'] ?></p>
+                            </span>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (!empty($project['price'])): ?>
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="icon_span"><i class="fa-solid fa-dollar-sign"></i></span>
+                            <span>
+                                <p class="titel_project" data-translate>Price</p>
+                                <p class="des_project"><?= e($project['price']) ?> <sub>EGP</sub></p>
+                            </span>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
                 <?php if (!empty($project['image'])): ?>

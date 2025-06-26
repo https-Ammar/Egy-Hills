@@ -7,18 +7,23 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+$uploadDir = '/Applications/MAMP/htdocs/Egy-Hills/uploads';
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0755, true);
+}
+
 if (isset($_GET['delete'])) {
     $id = (int) $_GET['delete'];
-
     $result = $conn->query("SELECT image FROM new_services WHERE id = $id");
     if ($result && $row = $result->fetch_assoc()) {
-        $imagePath = __DIR__ . "/uploads/" . $row['image'];
+        $imagePath = $uploadDir . "/" . $row['image'];
         if (file_exists($imagePath)) {
             unlink($imagePath);
         }
     }
-
     $conn->query("DELETE FROM new_services WHERE id = $id");
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -27,18 +32,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
     $link = $_POST['link'];
 
-    $image = $_FILES['image']['name'];
-    $target = __DIR__ . "/uploads/" . basename($image);
-    move_uploaded_file($_FILES['image']['tmp_name'], $target);
+    if (!empty($_FILES['image']['name'])) {
+        $imageName = time() . '_' . basename($_FILES['image']['name']);
+        $target = $uploadDir . "/" . $imageName;
+        move_uploaded_file($_FILES['image']['tmp_name'], $target);
 
-    $stmt = $conn->prepare("INSERT INTO new_services (type, title, description, link, image) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $type, $title, $description, $link, $image);
-    $stmt->execute();
+        $stmt = $conn->prepare("INSERT INTO new_services (type, title, description, link, image) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $type, $title, $description, $link, $imageName);
+        $stmt->execute();
+        $stmt->close();
+    }
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
     <script src="assets/js/config.js"></script>
 </head>
+
 <body>
     <div class="container mt-5">
         <div class="card mb-4">
@@ -70,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </th>
                                 <th> &amp; Product </th>
                                 <th>Name</th>
-                                <th>tect</th>
+                                <th>text</th>
                                 <th>Category</th>
                                 <th>Action</th>
                             </tr>
@@ -89,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </td>
                                     <td>
                                         <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                            style="background-image: url('uploads/<?= htmlspecialchars($row['image']); ?>'); background-size: cover;">
+                                            style="background-image: url('/Egy-Hills/uploads/<?= htmlspecialchars($row['image']); ?>'); background-size: cover;">
                                         </div>
                                     </td>
                                     <td><?= htmlspecialchars($row['title']); ?></td>

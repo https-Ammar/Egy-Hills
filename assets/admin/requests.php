@@ -48,8 +48,32 @@ $result = $conn->query("
     LEFT JOIN projects p ON v.project_id = p.id 
     ORDER BY v.id DESC
 ") or die("Error fetching visitors: " . $conn->error);
-?>
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['receipt'])) {
+    $upload_message = '';
+    $receipt = null;
+
+    if ($_FILES['receipt']['error'] === UPLOAD_ERR_OK) {
+        $ext = strtolower(pathinfo($_FILES['receipt']['name'], PATHINFO_EXTENSION));
+        $allowed = ['jpg', 'jpeg', 'png', 'pdf'];
+        if (in_array($ext, $allowed)) {
+            $newName = time() . '_' . basename($_FILES['receipt']['name']);
+            $destination = '/Applications/MAMP/htdocs/Egy-Hills/uploads/' . $newName;
+
+            if (move_uploaded_file($_FILES['receipt']['tmp_name'], $destination)) {
+                $receipt = $newName;
+                $upload_message = "✅ File uploaded successfully.";
+            } else {
+                $upload_message = "❌ Failed to move uploaded file.";
+            }
+        } else {
+            $upload_message = "❌ Invalid file type. Allowed: JPG, PNG, PDF.";
+        }
+    } else {
+        $upload_message = "❌ File upload error.";
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -77,6 +101,19 @@ $result = $conn->query("
             color: #ffc107;
             font-weight: bold;
         }
+
+        .avatar-md.bg-soft-primary.rounded {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* font-size: smaller; */
+        }
+
+        .avatar-md.bg-soft-primary.rounded svg {
+            width: 35px;
+            height: 35px;
+            color: #ff6c30;
+        }
     </style>
     <script src="assets/js/config.js"></script>
 </head>
@@ -93,8 +130,17 @@ $result = $conn->query("
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="avatar-md bg-soft-primary rounded">
-                                                <iconify-icon icon="solar:cart-5-bold-duotone"
-                                                    class="avatar-title fs-32 text-primary"></iconify-icon>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                                    viewBox="0 0 48 48">
+                                                    <g fill="none" stroke="currentColor" stroke-linejoin="round"
+                                                        stroke-width="4">
+                                                        <path
+                                                            d="M37 44a4 4 0 1 0 0-8a4 4 0 0 0 0 8ZM11 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8Zm0 32a4 4 0 1 0 0-8a4 4 0 0 0 0 8Z" />
+                                                        <path stroke-linecap="round"
+                                                            d="M11 12v24m13-26h9a4 4 0 0 1 4 4v22" />
+                                                        <path stroke-linecap="round" d="m30 16l-6-6l6-6" />
+                                                    </g>
+                                                </svg>
                                             </div>
                                         </div>
                                         <div class="col-6 text-end">
@@ -112,7 +158,17 @@ $result = $conn->query("
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="avatar-md bg-soft-primary rounded">
-                                                <i class="bx bx-check-circle avatar-title fs-24 text-primary"></i>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                                    viewBox="0 0 48 48">
+                                                    <g fill="currentColor">
+                                                        <path
+                                                            d="M32.707 22.707a1 1 0 0 0-1.414-1.414L24 28.586l-3.293-3.293a1 1 0 0 0-1.414 1.414L24 31.414z" />
+                                                        <path fill-rule="evenodd"
+                                                            d="M38 15v21a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h11zm-10 1a1 1 0 0 1-1-1V7H17a1 1 0 0 0-1 1v28a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V16zm1-7.172L34.172 14H29z"
+                                                            clip-rule="evenodd" />
+                                                        <path d="M12 11v27a3 3 0 0 0 3 3h19v2H15a5 5 0 0 1-5-5V11z" />
+                                                    </g>
+                                                </svg>
                                             </div>
                                         </div>
                                         <div class="col-6 text-end">
@@ -130,7 +186,11 @@ $result = $conn->query("
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="avatar-md bg-soft-primary rounded">
-                                                <i class="bx bx-x-circle avatar-title text-primary fs-24"></i>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                        d="M6 18H4q-.425 0-.712-.288T3 17t.288-.712T4 16h3q.425 0 .713.288T8 17v3q0 .425-.288.713T7 21t-.712-.288T6 20zm12 0v2q0 .425-.288.713T17 21t-.712-.288T16 20v-3q0-.425.288-.712T17 16h3q.425 0 .713.288T21 17t-.288.713T20 18zM6 6V4q0-.425.288-.712T7 3t.713.288T8 4v3q0 .425-.288.713T7 8H4q-.425 0-.712-.288T3 7t.288-.712T4 6zm12 0h2q.425 0 .713.288T21 7t-.288.713T20 8h-3q-.425 0-.712-.288T16 7V4q0-.425.288-.712T17 3t.713.288T18 4z" />
+                                                </svg>
                                             </div>
                                         </div>
                                         <div class="col-6 text-end">
@@ -148,7 +208,16 @@ $result = $conn->query("
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="avatar-md bg-soft-primary rounded">
-                                                <i class="bx bx-time-five avatar-title text-primary fs-24"></i>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24">
+                                                    <g fill="none" stroke="currentColor" stroke-width="1.5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M10.568 2.975a2.06 2.06 0 0 0-.73 1.27a1 1 0 0 1-.2.42a1 1 0 0 1-.36.3l-.79.38a5.1 5.1 0 0 0-1.65 1.29c-1.4 1.67-1.4 2.42-1.4 5.27c0 1.29-1.37 2.46-1.73 3.62c-.22.69-.34 2.25 1.48 2.25h13.58a1.6 1.6 0 0 0 .77-.16a1.64 1.64 0 0 0 .6-.51c.148-.218.24-.469.27-.73a1.6 1.6 0 0 0-.13-.78c-.36-1.09-1.79-2.39-1.79-3.68v-2.13" />
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M15.228 17.775c.003.427-.075.851-.23 1.25a3.4 3.4 0 0 1-.71 1.06a3.2 3.2 0 0 1-2.33.94a3.2 3.2 0 0 1-1.26-.25a3.3 3.3 0 0 1-1.77-1.77a3.2 3.2 0 0 1-.23-1.23" />
+                                                        <circle cx="15.228" cy="5.475" r="2.5" />
+                                                    </g>
+                                                </svg>
                                             </div>
                                         </div>
                                         <div class="col-6 text-end">
@@ -218,8 +287,8 @@ $result = $conn->query("
                                             <td><?= safe($row['amount']) ?></td>
                                             <td>
                                                 <?php if (!empty($row['payment_receipt'])): ?>
-                                                    <a href="uploads/<?= safe($row['payment_receipt']) ?>" target="_blank"
-                                                        class="btn btn-sm btn-primary">View</a>
+                                                    <a href="/Egy-Hills/uploads/<?= safe($row['payment_receipt']) ?>"
+                                                        target="_blank" class="btn btn-sm btn-primary">View</a>
                                                 <?php else: ?>
                                                     None
                                                 <?php endif; ?>
@@ -277,7 +346,6 @@ $result = $conn->query("
                                                     <div class="modal-body">
                                                         <p><strong>Name:</strong> <?= safe($row['name']) ?></p>
                                                         <p><strong>Phone:</strong> <?= safe($row['phone']) ?></p>
-                                                        <p><strong>Email:</strong> <?= safe($row['email']) ?></p>
                                                         <p><strong>Project:</strong>
                                                             <?= safe($row['project_title']) ?: '(Deleted)' ?></p>
                                                         <p><strong>Visit Date:</strong> <?= safe($row['visit_date']) ?></p>
@@ -285,7 +353,7 @@ $result = $conn->query("
                                                         <p><strong>Amount:</strong> <?= safe($row['amount']) ?></p>
                                                         <p><strong>Payment Receipt:</strong><br>
                                                             <?php if (!empty($row['payment_receipt'])): ?>
-                                                                <a href="uploads/<?= safe($row['payment_receipt']) ?>"
+                                                                <a href="/Egy-Hills/uploads/<?= safe($row['payment_receipt']) ?>"
                                                                     target="_blank" class="btn btn-primary btn-sm">View
                                                                     Receipt</a>
                                                             <?php else: ?>

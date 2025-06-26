@@ -135,6 +135,7 @@ section#timeline-container .text {
   align-items: center;
   will-change: transform;
   user-select: none;
+  margin-top: 15vh;
 }
 
 .timeline-item {
@@ -178,7 +179,6 @@ section#timeline-container .text {
   background-position: center center;
   padding: 10px;
   margin: auto;
-  filter: brightness(20%);
 }
 
 .about-sec p {
@@ -187,6 +187,19 @@ section#timeline-container .text {
   color: var(--text-color);
   margin: 0;
   text-align: center;
+}
+.rool_sec .about-sec p {
+  width: inherit;
+  height: 100%;
+  background: #000000b5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
 .about-sec p .color-red {
@@ -221,13 +234,19 @@ section#timeline-container .text {
 }
 
 .csr-img {
-  height: 75vh;
+  height: 85vh;
   object-fit: cover;
   border: 1px solid var(--secondary-color);
   border-radius: 50% 50% 0 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 992px) {
+  .csr-img {
+    height: 65vh;
+  }
 }
 
 /* ===================== Buttons ===================== */
@@ -676,7 +695,6 @@ body {
 .landing_page .icons-container {
   max-width: 450px;
   display: flex;
-  justify-content: space-evenly;
 }
 
 .landing_page .img {
@@ -910,4 +928,69 @@ body.arabic {
 .no-rtl {
   direction: ltr !important;
   text-align: left !important;
+}
+
+/* service */
+.card-img-top,
+.services_img {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 200px;
+  border-radius: 6px;
+}
+
+.article-featured {
+  margin-bottom: 2rem;
+}
+
+.article-recent {
+  margin-bottom: 1.5rem;
+}
+
+aside.sidebar {
+  padding-left: 1rem;
+  border-left: 1px solid #ddd;
+}
+
+aside.sidebar .article-recent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+aside.sidebar .services_img {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 6px;
+}
+
+.site-banner__txt {
+  text-align: center;
+  color: white;
+  padding: 4rem 1rem;
+}
+
+.card-img-top.mb-3.mt-3 {
+  height: 65vh;
+}
+
+@media screen and (max-width: 992px) {
+  .card-img-top.mb-3.mt-3 {
+    height: 35vh;
+  }
+
+  article.article-recent.col-12.col-md-12.gap-3 {
+    gap: 0;
+  }
+}
+
+.icons-container a.share-icon svg {
+  width: 35px;
+  height: 35px;
+  color: white;
+  margin: 0 15px;
+  cursor: pointer;
 }

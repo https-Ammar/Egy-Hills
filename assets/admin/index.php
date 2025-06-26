@@ -269,14 +269,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
         <div class="main-nav">
             <div class="logo-box">
-                <a href="index.html" class="logo-dark">
-                    <img src="assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
-                    <img src="assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
-                </a>
-                <a href="index.html" class="logo-light">
-                    <img src="assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
-                    <img src="assets/images/logo-light.png" class="logo-lg" alt="logo light">
-                </a>
+           
             </div>
 
             <button type="button" class="button-sm-hover" aria-label="Show Full Sidebar">
@@ -703,7 +696,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
 
 
-
                                             <?php if ($result && $result->num_rows > 0): ?>
                                                 <?php while ($row = $result->fetch_assoc()): ?>
                                                     <tr id="row-<?= $row['id'] ?>">
@@ -718,12 +710,14 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                         <td>
                                                             <div class="d-flex align-items-center gap-2">
                                                                 <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center"
-                                                                    style="background-image: url('/Egy-Hills/assets/uploads/<?= urlencode(htmlspecialchars($row['image'])) ?>')">
                                                                     <?php if (!empty($row['image'])): ?>
-
+                                                                        style="background-image: url('/Egy-Hills/uploads/<?= urlencode(htmlspecialchars($row['image'])) ?>'); background-size: cover; background-position: center;"
                                                                     <?php else: ?>
+                                                                        style="background-color: #e9ecef; width: 80px; height: 80px;"
+                                                                    <?php endif; ?>>
+                                                                    <?php if (empty($row['image'])): ?>
                                                                         <div class="bg-secondary rounded"
-                                                                            style="width: 80px; height: 80px; "></div>
+                                                                            style="width: 80px; height: 80px;"></div>
                                                                     <?php endif; ?>
                                                                 </div>
                                                                 <div>
@@ -745,6 +739,11 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                                     <iconify-icon icon="solar:trash-bin-minimalistic-2-broken"
                                                                         class="align-middle fs-18"></iconify-icon>
                                                                 </button>
+
+
+
+
+
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -754,7 +753,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                                     <td colspan="7" class="text-center">No projects added yet.</td>
                                                 </tr>
                                             <?php endif; ?>
-
 
 
                                         </tbody>
@@ -1391,7 +1389,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                         </td>
 
 
-                                        <td><?= htmlspecialchars($row['category'] ?? 'Real Estate') ?></td>
+                                        <td><?= htmlspecialchars($row['question'] ?? 'Real Estate') ?></td>
 
 
                                         <td>
@@ -1443,8 +1441,9 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr id="row-10">
-                                    <?php while ($row = $services->fetch_assoc()): ?>
+                                <?php while ($row = $services->fetch_assoc()): ?>
+                                    <tr id="row-10">
+
 
                                         <td>
                                             <div class="form-check ms-1">
@@ -1486,7 +1485,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
                                     <?php endwhile; ?>
 
-
+                                </tr>
 
                             </tbody>
                         </table>

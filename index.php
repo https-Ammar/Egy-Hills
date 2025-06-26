@@ -179,7 +179,6 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                         <?php if ($i % 2 == 0): ?>
 
 
-                            <!-- الصورة يمين، المحتوى شمال -->
                             <div class="image-column col-md-6 col-sm-12 order-md-1" data-aos="fade-right">
                                 <div class="inner-column" data-wow-delay="0ms" data-wow-duration="1500ms">
                                     <div class="image">
@@ -196,8 +195,9 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                                         <h2 data-translate><?= htmlspecialchars($row['title']) ?></h2>
                                     </div>
                                     <div class="text" data-translate>
-                                        <?= htmlspecialchars($row['description']) ?>
+                                        <?= html_entity_decode($row['description']) ?>
                                     </div>
+
                                     <div class="email">
                                         Request a Quote: <span class="theme_color">EGY-HILLS@gmail.com</span>
                                     </div>
@@ -256,7 +256,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                 </div>
                 <div class="row">
                     <?php while ($row = $highlights->fetch_assoc()): ?>
-                        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="col-12 col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
                             <div class="highlight-card text-center"
                                 style="background-image: url(uploads/<?= htmlspecialchars($row['image']) ?>);">
                                 <div class="card_text_blur text-center">
@@ -267,6 +267,8 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                         </div>
                     <?php endwhile; ?>
                 </div>
+
+
             </div>
         </section>
 
@@ -290,6 +292,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
             </div>
         </section>
 
+
         <section class="mt-5 mb-5" data-aos="zoom-in">
             <div class="video_phot text-center">
                 <?php
@@ -307,10 +310,12 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 
                         if (!empty($video_id)) {
                             echo '
-                        <a class="mt-addons-video-popup-vimeo-youtube" href="https://www.youtube.com/watch?v=' . $video_id . '">
+                    <div class="video-popup-container">
+                        <div class="video-thumbnail" onclick="openFullscreenPopup(\'https://www.youtube.com/embed/' . $video_id . '\')">
                             <img decoding="async" class="mt-addons-video-buton-image"
                                 src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/play-button.svg" alt="Watch Video">
-                        </a>
+                        </div>
+                    </div>
                     ';
                         } else {
                             echo '<p>Invalid YouTube URL</p>';
@@ -318,17 +323,21 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                     } elseif (strpos($video['url'], 'vimeo.com') !== false) {
                         $video_id = substr(parse_url($video['url'], PHP_URL_PATH), 1);
                         echo '
-                    <a class="mt-addons-video-popup-vimeo-youtube" href="https://vimeo.com/' . $video_id . '">
+                <div class="video-popup-container">
+                    <div class="video-thumbnail" onclick="openFullscreenPopup(\'https://player.vimeo.com/video/' . $video_id . '\')">
                         <img decoding="async" class="mt-addons-video-buton-image"
                             src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/play-button.svg" alt="Watch Video">
-                    </a>
+                    </div>
+                </div>
                 ';
                     } else {
                         echo '
-                    <a class="mt-addons-video-popup-vimeo-youtube" href="' . htmlspecialchars($video['url']) . '">
+                <div class="video-popup-container">
+                    <div class="video-thumbnail" onclick="openFullscreenPopup(\'' . htmlspecialchars($video['url']) . '\')">
                         <img decoding="async" class="mt-addons-video-buton-image"
                             src="https://skyhaus.modeltheme.com/wp-content/uploads/2023/05/play-button.svg" alt="Watch Video">
-                    </a>
+                    </div>
+                </div>
                 ';
                     }
                 } else {
@@ -337,6 +346,122 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                 ?>
             </div>
         </section>
+
+        <!-- Popup HTML -->
+        <div id="fullscreenPopup" class="fullscreen-popup">
+            <div class="fullscreen-popup-content">
+                <span class="fullscreen-close-btn" onclick="closeFullscreenPopup()">&times;</span>
+                <div class="video-container">
+                    <iframe id="fullscreenVideoFrame" width="100%" height="100%" frameborder="0"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .fullscreen-popup {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .fullscreen-popup-content {
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
+
+            .video-container {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .fullscreen-close-btn {
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                color: white;
+                font-size: 40px;
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 10000;
+                background: rgba(0, 0, 0, 0.5);
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+            }
+
+            .fullscreen-close-btn:hover {
+                background: rgba(255, 255, 255, 0.3);
+            }
+
+            .video-thumbnail {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+            }
+
+            .video-thumbnail:hover img {
+                opacity: 0.8;
+            }
+
+            /* Responsive video sizing */
+            @media (min-aspect-ratio: 16/9) {
+                #fullscreenVideoFrame {
+                    width: 90vw;
+                    height: calc(90vw * 9 / 16);
+                }
+            }
+
+            @media (max-aspect-ratio: 16/9) {
+                #fullscreenVideoFrame {
+                    width: calc(90vh * 16 / 9);
+                    height: 90vh;
+                }
+            }
+        </style>
+
+        <script>
+            function openFullscreenPopup(videoUrl) {
+                document.getElementById('fullscreenVideoFrame').src = videoUrl;
+                document.getElementById('fullscreenPopup').style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeFullscreenPopup() {
+                document.getElementById('fullscreenPopup').style.display = 'none';
+                document.getElementById('fullscreenVideoFrame').src = '';
+                document.body.style.overflow = 'auto';
+            }
+
+            // Close popup when clicking outside the video
+            document.getElementById('fullscreenPopup').addEventListener('click', function (e) {
+                if (e.target === this) {
+                    closeFullscreenPopup();
+                }
+            });
+
+            // Close with ESC key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    closeFullscreenPopup();
+                }
+            });
+        </script>
 
         <section class="about-section bg_color mt-5">
             <div class="container">
@@ -439,46 +564,57 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
                                                         <sub>EGP</sub>
                                                     </h3>
                                                 </div>
+
+
                                                 <div class="property-card-features">
-                                                    <div class="property-card-feature" data-translate>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                            class="lucide lucide-bed">
-                                                            <path d="M2 9V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"></path>
-                                                            <path d="M2 11v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9"></path>
-                                                            <path d="M2 14h20"></path>
-                                                            <path
-                                                                d="M4 9h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2Z">
-                                                            </path>
-                                                        </svg>
-                                                        <?= (int) $row['beds'] ?> Beds
-                                                    </div>
-                                                    <div class="property-card-feature" data-translate>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                            class="lucide lucide-bath">
-                                                            <path
-                                                                d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5">
-                                                            </path>
-                                                            <line x1="10" x2="8" y1="5" y2="7"></line>
-                                                            <line x1="2" x2="22" y1="12" y2="12"></line>
-                                                            <line x1="7" x2="7" y1="19" y2="21"></line>
-                                                            <line x1="17" x2="17" y1="19" y2="21"></line>
-                                                        </svg>
-                                                        <?= (int) $row['baths'] ?> Baths
-                                                    </div>
-                                                    <div class="property-card-feature" data-translate>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                            class="lucide lucide-square">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                        </svg>
-                                                        <?= htmlspecialchars($row['size']) ?>
-                                                    </div>
+                                                    <?php if (!empty($row['beds']) && (int) $row['beds'] > 0): ?>
+                                                        <div class="property-card-feature">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-bed">
+                                                                <path d="M2 9V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"></path>
+                                                                <path d="M2 11v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9"></path>
+                                                                <path d="M2 14h20"></path>
+                                                                <path
+                                                                    d="M4 9h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2Z">
+                                                                </path>
+                                                            </svg>
+                                                            <span data-translate><?= (int) $row['beds'] ?> Beds</span>
+                                                        </div>
+                                                    <?php endif; ?>
+
+                                                    <?php if (!empty($row['baths']) && (int) $row['baths'] > 0): ?>
+                                                        <div class="property-card-feature">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-bath">
+                                                                <path
+                                                                    d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5">
+                                                                </path>
+                                                                <line x1="10" x2="8" y1="5" y2="7"></line>
+                                                                <line x1="2" x2="22" y1="12" y2="12"></line>
+                                                                <line x1="7" x2="7" y1="19" y2="21"></line>
+                                                                <line x1="17" x2="17" y1="19" y2="21"></line>
+                                                            </svg>
+                                                            <span data-translate><?= (int) $row['baths'] ?> Baths</span>
+                                                        </div>
+                                                    <?php endif; ?>
+
+                                                    <?php if (!empty($row['size'])): ?>
+                                                        <div class="property-card-feature">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-square">
+                                                                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                                            </svg>
+                                                            <span data-translate><?= htmlspecialchars($row['size']) ?></span>
+                                                        </div>
+                                                    <?php endif; ?>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </a>
@@ -506,14 +642,14 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
 
                             <!-- Description and Tabs -->
                             <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
-                                <h2 class="fw-bold mb-3 mt-3" data-translate>Plan and Room<br>Dimensions</h2>
+                                <h2 class="fw-bold mb-3 mt-3" data-translate><?= htmlspecialchars($row['title']) ?></h2>
 
                                 <div class="mb-3">
                                     <button class="tab-btn active" onclick="showFloor(1)">FLOOR 1</button>
 
                                 </div>
 
-                                <p class="text-muted" data-translate><?= htmlspecialchars($row['title']) ?></p>
+
 
                                 <div class="mt-addons-tab-content-v2" data-translate>
                                     <?= nl2br(htmlspecialchars($row['description'])) ?>
