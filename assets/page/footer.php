@@ -1,4 +1,8 @@
 <footer>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <div class="container">
         <div class="row">
             <!-- Company Info Column -->
@@ -48,8 +52,17 @@
                     <a href="#" class="social-icon" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
+                    <a href="#" class="social-icon" aria-label="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
                     <a href="#" class="social-icon" aria-label="Twitter">
                         <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="tel:+201234567890" class="social-icon" aria-label="Phone">
+                        <i class="fas fa-phone"></i>
+                    </a>
+                    <a href="https://wa.me/201234567890" target="_blank" class="social-icon" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
                     </a>
                 </div>
             </div>

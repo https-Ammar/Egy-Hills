@@ -269,7 +269,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
         <div class="main-nav">
             <div class="logo-box">
-           
+
             </div>
 
             <button type="button" class="button-sm-hover" aria-label="Show Full Sidebar">
