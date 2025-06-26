@@ -191,6 +191,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
         label {
             margin-bottom: 1.5vh;
         }
+
+        @media screen and (max-width:767px) {
+            .row.g-4 {
+                flex-direction: column-reverse;
+            }
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>

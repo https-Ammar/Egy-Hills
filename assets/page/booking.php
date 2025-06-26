@@ -186,6 +186,12 @@ if (isset($_GET['status'])) {
         label {
             margin-bottom: 1.5vh;
         }
+
+        @media screen and (max-width:767px) {
+            .row.g-4 {
+                flex-direction: column-reverse;
+            }
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
