@@ -230,6 +230,7 @@ if (isset($_GET['status'])) {
                                 <div class="<?= htmlspecialchars($booking_class) ?> mb-3">
                                     <?= htmlspecialchars($booking_message) ?>
                                 </div>
+
                             <?php endif; ?>
 
                             <form method="post" enctype="multipart/form-data">
@@ -283,7 +284,7 @@ if (isset($_GET['status'])) {
                                     // عرض أول مبلغ موجود (غير صفر)
                                     foreach ($info_blocks as $block) {
                                         if (!empty($block['amount']) && $block['amount'] != 0) {
-                                            echo '<h2 class="mb-3">' . number_format($block['amount'], 2) . '<sub style="font-size: small;"> EGP</sub></h2>';
+                                            echo '<h2 class="mb-3">' . number_format($block['amount'], 2) . '<sub style="font-size: small;"> EGP</sub></h2>            <hr class="mb-3">';
                                             break;
                                         }
                                     }

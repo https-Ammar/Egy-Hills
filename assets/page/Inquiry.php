@@ -283,7 +283,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_project'])) {
                                             <?php if (!empty($block['amount']) && $block['amount'] != 0): ?>
                                                 <h2 class="mb-3"> . <?= number_format($block['amount'], 2) ?> <sub
                                                         style="font-size: small;">EGP</sub></h2>
+                                                <hr class="mb-3">
                                             <?php endif; ?>
+
+
 
                                             <div class="card-box d-flex justify-content-between align-items-center mb-3">
                                                 <div class="d-flex align-items-center">
