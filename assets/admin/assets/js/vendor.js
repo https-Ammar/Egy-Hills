@@ -4,12 +4,12 @@ var dates = [];
 var dataSeries = [
   [],
   Array.from({ length: 120 }, () => ({
-    value: Math.floor(Math.random() * 50000000 + 20000000), // بين 20 و70 مليون
+    value: Math.floor(Math.random() * 50000000 + 20000000),
   })),
 ];
 
 for (var i = 0; i < 120; i++) {
-  ts2 += 86400000; // يوم بالمللي ثانية
+  ts2 += 86400000;
   var innerArr = [ts2, dataSeries[1][i].value];
   dates.push(innerArr);
 }
@@ -58,7 +58,7 @@ var options = {
     max: 250000000,
     labels: {
       formatter: function (val) {
-        return (val / 1000000).toFixed(0);
+        return (val / 1000000).toFixed(0) + "M";
       },
     },
     title: {
@@ -72,7 +72,7 @@ var options = {
     shared: false,
     y: {
       formatter: function (val) {
-        return (val / 1000000).toFixed(0);
+        return (val / 1000000).toFixed(0) + "M";
       },
     },
   },
@@ -80,3 +80,5 @@ var options = {
 
 var chart = new ApexCharts(document.querySelector("#chart"), options);
 chart.render();
+
+window.addEventListener("touchstart", function () {}, { passive: true });

@@ -240,7 +240,8 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             height: 35px;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
 
 </head>
@@ -1893,6 +1894,8 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
         });
     </script>
     <script src="assets/js/vendor.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+
 </body>
 
 </html>
