@@ -216,8 +216,23 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password TEXT NOT NULL,
+    role VARCHAR(20) DEFAULT 'user',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+);
+
+INSERT INTO
+    users (
+        username,
+        email,
+        password,
+        role
+    )
+VALUES (
+        'admin',
+        'admin@example.com',
+        '$2y$10$qwAnquVu0UV0NRKhv7Qm/eaIvTTpHddN0AgZZSl63EvgyA6PN6RiK',
+        'admin'
+    );
 
 DROP TABLE IF EXISTS plan_and_room;
 

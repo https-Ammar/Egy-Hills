@@ -492,14 +492,14 @@ body {
 .form-control {
   background-color: #f3f3f3;
   border: none;
-  color: black !important;
+  color: #aab8c5 !important;
   padding: 20px;
   color: white;
 }
 
 .form-control:focus {
   background-color: #f3f3f3;
-  color: black !important;
+  color: #aab8c5 !important;
 
   box-shadow: none;
 }

@@ -1,8 +1,8 @@
 <?php
-include 'db.php';
 session_start();
+include 'db.php';
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['username']) || !isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
     exit();
 }
@@ -104,6 +104,7 @@ if (isset($_GET['msg'])) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

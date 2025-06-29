@@ -116,6 +116,7 @@ if (isset($_GET['status'])) {
     <script
         src="https://www.rj-investments.co.uk/wp-content/themes/rj-investments/assets/js/min/jquery.min.js?ver=2.2.4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+
     <style>
         .card-box {
             background-color: #f9f9f9;
@@ -193,6 +194,9 @@ if (isset($_GET['status'])) {
             }
         }
     </style>
+
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
@@ -257,23 +261,23 @@ if (isset($_GET['status'])) {
                                 <div id="visit_fields" style="display:none;">
                                     <div class="mb-3">
                                         <label data-translate>Booking Date</label>
-                                        <input type="date" name="visit_date" class="form-control" required>
+                                        <input type="date" name="visit_date" class="form-control">
                                     </div>
 
                                     <div class="mb-3">
                                         <label data-translate>Booking Time</label>
-                                        <input type="time" name="visit_time" class="form-control" required>
+                                        <input type="time" name="visit_time" class="form-control">
                                     </div>
 
                                     <div class="mb-3">
                                         <label data-translate>Amount</label>
-                                        <input type="number" name="amount" step="1" class="form-control" required>
+                                        <input type="number" name="amount" step="1" class="form-control">
                                     </div>
 
                                     <div class="mb-3">
                                         <label data-translate>Upload Payment Receipt</label>
                                         <input type="file" name="receipt" accept=".jpg,.jpeg,.png,.pdf"
-                                            class="form-control" required>
+                                            class="form-control">
                                     </div>
                                 </div>
 

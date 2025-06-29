@@ -7,6 +7,8 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+
+
 function uploadFile($file)
 {
     if (!empty($file['name'])) {

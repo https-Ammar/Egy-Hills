@@ -7,26 +7,39 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 function safe($value)
 {
     return htmlspecialchars($value ?? '');
 }
 
-if (isset($_GET['action']) && isset($_GET['id'])) {
-    $id = intval($_GET['id']);
-    if ($_GET['action'] === 'accept') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_POST['id'])) {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die("Invalid CSRF token");
+    }
+
+    $id = intval($_POST['id']);
+    $action = $_POST['action'];
+
+    if ($action === 'accept') {
         $status = 'accepted';
         $stmt = $conn->prepare("UPDATE visitors SET status = ? WHERE id = ?");
         $stmt->bind_param("si", $status, $id);
         $stmt->execute();
         $stmt->close();
-    } elseif ($_GET['action'] === 'reject') {
+    } elseif ($action === 'reject') {
         $status = 'rejected';
         $stmt = $conn->prepare("UPDATE visitors SET status = ? WHERE id = ?");
         $stmt->bind_param("si", $status, $id);
         $stmt->execute();
         $stmt->close();
-    } elseif ($_GET['action'] === 'delete') {
+    } elseif ($action === 'delete') {
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+            die("Unauthorized action");
+        }
         $stmt = $conn->prepare("DELETE FROM visitors WHERE id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -54,9 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['receipt'])) {
     $receipt = null;
 
     if ($_FILES['receipt']['error'] === UPLOAD_ERR_OK) {
-        $ext = strtolower(pathinfo($_FILES['receipt']['name'], PATHINFO_EXTENSION));
-        $allowed = ['jpg', 'jpeg', 'png', 'pdf'];
-        if (in_array($ext, $allowed)) {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_file($finfo, $_FILES['receipt']['tmp_name']);
+        finfo_close($finfo);
+
+        $allowed_mimes = ['image/jpeg', 'image/png', 'application/pdf'];
+        if (in_array($mime, $allowed_mimes)) {
+            $ext = strtolower(pathinfo($_FILES['receipt']['name'], PATHINFO_EXTENSION));
             $newName = time() . '_' . basename($_FILES['receipt']['name']);
             $destination = '/Applications/MAMP/htdocs/Egy-Hills/uploads/' . $newName;
 
@@ -74,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['receipt'])) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -322,13 +340,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['receipt'])) {
                                                     </a>
                                                 <?php endif; ?>
 
-                                                <a href="?action=delete&id=<?= safe($row['id']) ?>">
-                                                    <button
-                                                        onclick="return confirm('Are you sure you want to delete this item?');"
-                                                        class="btn btn-soft-danger btn-sm">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </a>
+                                                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                                    <a href="?action=delete&id=<?= safe($row['id']) ?>">
+                                                        <button
+                                                            onclick="return confirm('Are you sure you want to delete this item?');"
+                                                            class="btn btn-soft-danger btn-sm">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </a>
+                                                <?php endif; ?>
+
                                             </td>
 
 

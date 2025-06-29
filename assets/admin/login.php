@@ -14,13 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = trim($_POST['password']);
 
     if (filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($password)) {
-        $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE email = ?");
+        $stmt = $conn->prepare("SELECT id, username, password, role FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows === 1) {
-            $stmt->bind_result($id, $username, $hashed_password);
+            $stmt->bind_result($id, $username, $hashed_password, $role);
             $stmt->fetch();
 
             if (password_verify($password, $hashed_password)) {
@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['verify_email'] = $email;
                 $_SESSION['temp_user_id'] = $id;
                 $_SESSION['temp_username'] = $username;
+                $_SESSION['role'] = $role;
 
                 $mail = new PHPMailer(true);
                 try {
@@ -41,9 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $mail->Port = 587;
 
                     $mail->setFrom(MAIL_FROM, MAIL_FROM_NAME);
-                    $mail->addAddress($email);
+                    $mail->addAddress('ammar132004@gmail.com');
                     $mail->Subject = 'Your verification code';
-                    $mail->Body = "Your verification code is: $code";
+                    $mail->Body = "Verification code for user $email is: $code";
                     $mail->send();
 
                     header("Location: verify.php");
@@ -63,6 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,7 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         <p class="mt-3">Not registered? <a href="register.php">Create an account</a></p>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
