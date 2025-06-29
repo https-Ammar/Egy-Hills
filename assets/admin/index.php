@@ -240,6 +240,9 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
             height: 35px;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
 </head>
 
 <body>
@@ -570,24 +573,11 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                     <div class="col-xxl-7">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h4 class="card-title">Performance</h4>
-                                    <div>
-                                        <button type="button" class="btn btn-sm btn-outline-light">ALL</button>
-                                        <button type="button" class="btn btn-sm btn-outline-light">1M</button>
-                                        <button type="button" class="btn btn-sm btn-outline-light">6M</button>
-                                        <button type="button" class="btn btn-sm btn-outline-light active">1Y</button>
-                                    </div>
-                                </div> <!-- end card-title-->
-
-                                <div dir="ltr">
-                                    <div id="dash-performance-chart" class="apex-charts"></div>
-                                </div>
+                                <div id="chart"></div>
                             </div> <!-- end card body -->
                         </div> <!-- end card -->
                     </div> <!-- end col -->
                 </div> <!-- end row -->
-
 
                 <div class="row ptn_box_open" id="box1">
                     <div class="col">
@@ -1903,7 +1893,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
         });
     </script>
     <script src="assets/js/vendor.js"></script>
-    <script src="assets/js/dashboard.js"></script>
 </body>
 
 </html>
