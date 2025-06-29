@@ -205,8 +205,8 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights");
 $visitors = $conn->query("SELECT id, name, phone, created_at FROM visitors ORDER BY id DESC");
 $logs = $conn->query("SELECT * FROM logs ORDER BY created_at DESC");
 $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY date DESC");
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark" data-menu-color="dark" data-bs-theme="dark ">
 
@@ -1845,7 +1845,6 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                 });
         }
     </script>
-
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const savedBoxId = localStorage.getItem('selectedBoxId');
@@ -1854,31 +1853,35 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
                     div.style.display = (div.id === savedBoxId) ? 'block' : 'none';
                 });
             }
+
             document.querySelectorAll('.xyxbtn123').forEach(button => {
-                button.onclick = () => {
+                button.addEventListener('click', () => {
                     const id = button.dataset.id;
                     localStorage.setItem('selectedBoxId', id);
-
                     document.querySelectorAll('.ptn_box_open').forEach(div => {
                         div.style.display = (div.id === id && div.style.display !== 'block') ? 'block' : 'none';
                     });
-                };
+                });
             });
+
             const body = document.querySelector("body");
             const sidebar = body.querySelector("nav");
             const toggleBtn = body.querySelector(".sidebar-toggle");
 
-            const sidebarStatus = localStorage.getItem("status");
-            if (sidebarStatus === "close") {
-                sidebar.classList.add("close");
-            }
+            if (sidebar && toggleBtn) {
+                const sidebarStatus = localStorage.getItem("status");
+                if (sidebarStatus === "close") {
+                    sidebar.classList.add("close");
+                }
 
-            toggleBtn.addEventListener("click", () => {
-                sidebar.classList.toggle("close");
-                localStorage.setItem("status", sidebar.classList.contains("close") ? "close" : "open");
-            });
+                toggleBtn.addEventListener("click", () => {
+                    sidebar.classList.toggle("close");
+                    localStorage.setItem("status", sidebar.classList.contains("close") ? "close" : "open");
+                });
+            }
         });
     </script>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -1900,7 +1903,7 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
         });
     </script>
     <script src="assets/js/vendor.js"></script>
-    <script src="assets/js/pages/dashboard.js"></script>
+    <script src="assets/js/dashboard.js"></script>
 </body>
 
 </html>

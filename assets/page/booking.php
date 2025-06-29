@@ -104,6 +104,7 @@ if (isset($_GET['status'])) {
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($project['title']) ?> - Booking</title>
+    <link rel="icon" href="../img/logo.jpeg" type="image/png">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/style.css">

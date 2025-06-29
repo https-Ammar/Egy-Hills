@@ -8,7 +8,7 @@
             <!-- Company Info Column -->
             <div class="col-md-4 footer-column mb-4 mb-md-0">
                 <div class="footer-logo">
-                    <span>E</span>
+                    <span><img src="../img/main_logo.jpeg" alt="logo"></span>
                 </div>
                 <p data-translate>Discover your dream property with EGY-HILLS. Modern, professional real estate services
                     across Egypt

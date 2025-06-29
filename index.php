@@ -99,6 +99,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EGY-HILLS | Best Real Estate Properties for Sale and Rent in Egypt</title>
+    <link rel="icon" href="./assets/img/logo.jpeg" type="image/png">
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
@@ -807,7 +808,7 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
     <?php include './assets/page/footer.php'; ?>
     <script>
         const paths = {
-            home: "/index.php",
+            home: "./index.php",
             about: "./assets/page/About.php",
             projects: "./assets/page/projects.php",
             services: "./assets/page/services.php",
@@ -833,8 +834,19 @@ $property_highlights = $conn->query("SELECT * FROM property_highlights ORDER BY 
             var visitorModal = new bootstrap.Modal(document.getElementById('visitorModal'));
             visitorModal.show();
         });
+
+
     </script>
 
-</body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const logo = document.querySelector(".footer-logo img");
+            if (logo) {
+                logo.src = "./assets/img/main_logo.jpeg";
+            }
+        });
+    </script>
 
+
+</body>
 </html>

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP Loader</title>
+    <link rel="icon" href="../img/logo.jpeg" type="image/png">
     <style>
         .dot-spinner {
             --uib-size: 2.8rem;

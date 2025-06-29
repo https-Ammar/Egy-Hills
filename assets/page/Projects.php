@@ -10,6 +10,8 @@ $result = $conn->query("SELECT * FROM projects");
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title data-translate>Featured Properties</title>
+    <link rel="icon" href="../img/logo.jpeg" type="image/png">
+
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -96,7 +98,8 @@ $result = $conn->query("SELECT * FROM projects");
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <h3 class="property-card-title"><?= htmlspecialchars($row['title']) ?></h3>
                                                 <h3 class="property-card-title"><?= htmlspecialchars($row['price']) ?>
-                                                    <sub>EGP</sub></h3>
+                                                    <sub>EGP</sub>
+                                                </h3>
                                             </div>
                                             <div class="property-card-features">
                                                 <div class="property-card-feature">

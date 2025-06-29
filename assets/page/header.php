@@ -1,9 +1,5 @@
-
-<!-- Header -->
 <header class="site-header">
     <div class="d-flex align-items-center no-rtl"></div>
-
-    <!-- Menu Icon -->
     <a class="menu-icon js-toggle-menu" href="#">
         <div class="menu-icon__txt">Menu</div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 40">
@@ -14,7 +10,6 @@
     </a>
 </header>
 
-<!-- Navigation -->
 <nav class="site-menu">
     <div class="site-menu__inner">
 
@@ -23,7 +18,6 @@
             style="background-image: url(https://www.rj-investments.co.uk/wp-content/uploads/2018/02/Menu-1000x1200.jpg);">
         </div>
 
-        <!-- Language Switcher -->
         <ul class="example-1">
             <li class="icon-content"><a href="#" aria-label="Telegram" data-social="telegram" class="link"
                     data-lang="en">En</a></li>
@@ -58,7 +52,6 @@
     </div>
 </nav>
 
-<!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

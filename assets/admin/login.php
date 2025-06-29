@@ -64,8 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="./assets/css/dashboard.css">
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
     <link href="assets/css/vendor.min.css" rel="stylesheet" />
     <link href="assets/css/icons.min.css" rel="stylesheet" />
     <link href="assets/css/app.min.css" rel="stylesheet" />
@@ -85,15 +82,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="w-100" style="max-width: 400px;">
         <h3 class="mb-3">Egy-Hills</h3>
         <p class="mb-4">Welcome to Neo<br>Please sign in to your account.</p>
+
         <?php if ($error): ?>
             <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
-        <form method="POST" action="">
+
+        <form method="POST" action="" autocomplete="on">
             <div class="mb-3">
-                <input type="email" class="form-control" placeholder="Email address" name="email" required />
+                <input type="email" class="form-control" placeholder="Email address" name="email" required
+                    autocomplete="username" />
             </div>
             <div class="mb-3">
-                <input type="password" class="form-control" placeholder="Password" name="password" required />
+                <input type="password" class="form-control" placeholder="Password" name="password" required
+                    autocomplete="current-password" />
             </div>
             <div class="form-check text-start mb-3">
                 <input class="form-check-input" type="checkbox" id="checkMeOut">
@@ -101,6 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button type="submit" class="btn btn-primary w-100 mb-3">Sign In</button>
         </form>
+
         <p class="mt-3">Not registered? <a href="register.php">Create an account</a></p>
     </div>
 </body>
