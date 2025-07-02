@@ -1898,4 +1898,4 @@ $plan_and_room_logs = $conn->query("SELECT * FROM plan_and_room_logs ORDER BY da
 
 </body>
 
-</html>
+</html
